@@ -56,7 +56,7 @@ val Typography = Typography(
         fontWeight = FontWeight.SemiBold
     ),
     titleLarge = TextStyle( // 본문1
-        fontSize = 16.sp,
+        fontSize = 24.sp,
         fontFamily = pretendard,
         fontWeight = FontWeight.SemiBold
     ),
