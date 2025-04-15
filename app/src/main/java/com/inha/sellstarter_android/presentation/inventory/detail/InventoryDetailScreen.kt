@@ -24,6 +24,7 @@ import com.inha.sellstarter_android.ui.theme.Purple200
 @Composable
 fun InventoryDetailScreen(
     inventory: Inventory,
+    onClickPicking : () -> Unit,
     modifier: Modifier,
 ) {
     Column(
@@ -85,7 +86,7 @@ fun InventoryDetailScreen(
             buttonBackgroundColor = Purple200,
             fontColor = Grey0,
             enabled = true,
-            onClick = { },
+            onClick = onClickPicking,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(24.dp)
@@ -101,6 +102,7 @@ fun PreviewInventoryDetailScreen() {
 
     InventoryDetailScreen(
         inventory = Inventory(1, "사과", 10, "aa", true, "2022-10-13", "2022-10-13"),
+        onClickPicking = { },
         modifier = Modifier.fillMaxSize()
     )
 
