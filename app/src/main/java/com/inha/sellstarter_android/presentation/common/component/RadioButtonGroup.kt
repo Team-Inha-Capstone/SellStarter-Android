@@ -75,7 +75,7 @@ fun RadioButtonGroupPreview() {
             options = ShoppingMallType.values(),
             selectedOption = selected,
             onOptionSelected = { selected = it },
-            labelMapper = { it.category},
+            labelMapper = { it.displayName},
             title = "쇼핑몰 카테고리 선택"
         )
     }
