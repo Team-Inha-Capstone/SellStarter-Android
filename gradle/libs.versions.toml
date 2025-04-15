@@ -21,6 +21,7 @@ material = "1.7.4"
 appcompat = "1.7.0"
 paging3 = "3.3.2"
 composeFoundation = "1.7.5"
+coil = "2.7.0"
 
 
 [libraries]
@@ -62,6 +63,9 @@ paging-common = { group = "androidx.paging", name = "paging-common", version.ref
 paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging3" }
 
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "composeFoundation" }
+
+# Coil
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 [bundles]
 coroutines = ["coroutines-android", "coroutines-core"]
