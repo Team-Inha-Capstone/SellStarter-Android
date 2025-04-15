@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -18,7 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.domain.Inventory
@@ -88,14 +86,14 @@ fun PreviewInventoryGridScreen() {
 
     InventoryGridScreen(
         inventoryList = listOf(
-            Inventory(1, "사과", 10, "aa", true, "2022.10.13"),
-            Inventory(2, "오렌지", 10, "aa", false, "2022.10.13"),
-            Inventory(3, "레몬", 10, "aa", false, "2022.10.13"),
-            Inventory(4, "초콜릿", 10, "aa", true, "2022.10.13"),
-            Inventory(5, "옷", 10, "aa", false, "2022.10.13"),
-            Inventory(6, "휴지", 10, "aa", true, "2022.10.13"),
-            Inventory(7, "레몬수", 10, "aa", false, "2022.10.13"),
-            Inventory(8, "마우스", 10, "aa", false, "2022.10.13")
+            Inventory(1, "사과", 10, "aa", true, "2022-10-13", "2022-10-13"),
+            Inventory(2, "오렌지", 10, "aa", false, "2022-10-13", "2022-10-13"),
+            Inventory(3, "레몬", 10, "aa", false, "2022-10-13", "2022-10-13"),
+            Inventory(4, "초콜릿", 10, "aa", true, "2022-10-13", "2022-10-13"),
+            Inventory(5, "옷", 10, "aa", false, "2022-10-13", "2022-10-13"),
+            Inventory(6, "휴지", 10, "aa", true, "2022-10-13", "2022-10-13"),
+            Inventory(7, "레몬수", 10, "aa", false, "2022-10-13", "2022-10-13"),
+            Inventory(8, "마우스", 10, "aa", false, "2022-10-13", "2022-10-13"),
 
         ),
         modifier = Modifier.fillMaxSize()

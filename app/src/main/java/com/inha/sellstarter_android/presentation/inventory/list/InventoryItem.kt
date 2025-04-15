@@ -109,7 +109,7 @@ fun InventoryItem(
 @Composable
 fun PreviewInventoryItem() {
     InventoryItem(
-        inventory = Inventory(1, "사과", 10,"aa",true,"2022.10.13"),
+        inventory = Inventory(1, "사과", 10,"aa",true,"2022-10-13", "2022-10-13"),
         modifier = Modifier.size(500.dp)
     )
 }

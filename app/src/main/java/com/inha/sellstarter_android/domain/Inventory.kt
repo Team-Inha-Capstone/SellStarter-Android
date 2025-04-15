@@ -6,5 +6,6 @@ data class Inventory(
     val quantity: Int,
     val image : String,
     val isSoldOut : Boolean,
+    val expirationDate : String,
     val updatedAt : String
 )
