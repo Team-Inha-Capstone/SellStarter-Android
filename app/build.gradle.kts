@@ -1,11 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
+    id("com.google.dagger.hilt.android")
 }
 
 android {
     namespace = "com.inha.sellstarter_android"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.inha.sellstarter_android"
@@ -50,7 +54,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -59,6 +62,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,4 +70,26 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.viewmodel.compose)
+    implementation(libs.androidx.navigation.navigation.compose)
+
+
+    // coroutine, okhttp, retrofit, serialization
+    implementation(libs.bundles.coroutines)
+    implementation(libs.bundles.okhttp)
+    implementation(libs.bundles.retrofit)
+    implementation(libs.bundles.serialization)
+
+    // hilt (Dependency Injection)
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+
+    // paging
+    implementation(libs.bundles.paging)
+    testImplementation(libs.paging.common)
+
+    implementation(libs.androidx.compose.material.meterial)
+    implementation(libs.compose.foundation)
 }
