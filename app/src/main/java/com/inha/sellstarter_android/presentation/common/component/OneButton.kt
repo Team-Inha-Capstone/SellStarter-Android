@@ -29,7 +29,7 @@ fun OneButton(
     fontColor: Color = Grey0,
     fontStyle: TextStyle = Typography.headlineMedium,
     buttonBackgroundColor: Color = Purple200,
-    radius: Int = 20,
+    radius: Int = 10,
     width: Int = 10,
     height: Int = 60,
     enabled : Boolean,
