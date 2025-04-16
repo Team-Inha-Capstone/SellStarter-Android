@@ -7,5 +7,6 @@ data class Inventory(
     val image : String,
     val isSoldOut : Boolean,
     val expirationDate : String,
-    val updatedAt : String
+    val updatedAt : String,
+    val location : String = "2층 선반 두번째"
 )
