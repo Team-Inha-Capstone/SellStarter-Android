@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.presentation.inventory.detail
+package com.inha.sellstarter_android.presentation.common.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -15,7 +15,7 @@ import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Typography
 
 @Composable
-fun InventoryDetailText(
+fun TitleAndText(
     titleText : String,
     contentText : String,
     isAvailableEdit : Boolean = false,
