@@ -1,7 +1,6 @@
 package com.inha.sellstarter_android.presentation.inventory.detail
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,11 +13,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.inha.sellstarter_android.domain.Inventory
+import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.component.TitleScreen
 import com.inha.sellstarter_android.ui.theme.Grey0
-import com.inha.sellstarter_android.ui.theme.Grey900
-import com.inha.sellstarter_android.ui.theme.Purple100
 import com.inha.sellstarter_android.ui.theme.Purple200
 
 @Composable
@@ -49,13 +47,13 @@ fun InventoryDetailScreen(
                     .height(250.dp)
             )
 
-            InventoryDetailText(
+            TitleAndText(
                 titleText = "상품명",
                 contentText = inventory.name,
                 modifier = Modifier
             )
 
-            InventoryDetailText(
+            TitleAndText(
                 titleText = "보유재고",
                 contentText = "${inventory.quantity}개",
                 isAvailableEdit = true,
@@ -63,13 +61,19 @@ fun InventoryDetailScreen(
                 modifier = Modifier
             )
 
-            InventoryDetailText(
+            TitleAndText(
                 titleText = "바코드번호",
                 contentText = "${inventory.id}",
                 modifier = Modifier
             )
 
-            InventoryDetailText(
+            TitleAndText(
+                titleText = "재고 위치",
+                contentText = inventory.location,
+                modifier = Modifier
+            )
+
+            TitleAndText(
                 titleText = "재고 유통기한",
                 contentText = inventory.expirationDate,
                 modifier = Modifier
