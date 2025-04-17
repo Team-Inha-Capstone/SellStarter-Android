@@ -1,20 +1,18 @@
 package com.inha.sellstarter_android.presentation.common.component
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.ui.theme.Blue200
 import com.inha.sellstarter_android.ui.theme.Grey100
-import com.inha.sellstarter_android.ui.theme.Red200
+import com.inha.sellstarter_android.ui.theme.Typography
 
 @Composable
 fun DefaultTextField(
@@ -22,7 +20,7 @@ fun DefaultTextField(
     onValueChange: (String) -> Unit,
     innerTextFieldStyle: TextStyle,
     singleLine: Boolean,
-    borderColor : Color,
+    borderColor: Color,
     modifier: Modifier
 ) {
     BasicTextField(
@@ -36,5 +34,20 @@ fun DefaultTextField(
                 color = borderColor,
                 shape = RoundedCornerShape(10.dp)
             )
+            .padding(12.dp),
+    )
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewTextField() {
+    DefaultTextField(
+        value = "무엇이든 물어보세요",
+        onValueChange = {},
+        innerTextFieldStyle = Typography.labelSmall,
+        borderColor = Grey100,
+        singleLine = false,
+        modifier = Modifier
     )
 }
