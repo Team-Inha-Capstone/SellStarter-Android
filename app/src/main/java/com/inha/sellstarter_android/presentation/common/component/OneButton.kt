@@ -11,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.contentcapture.ContentCaptureManager.Companion.isEnabled
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -19,7 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
-import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Purple200
 import com.inha.sellstarter_android.ui.theme.Typography
 
@@ -49,7 +47,7 @@ fun OneButton(
         Text(
             text = text,
             style = fontStyle,
-            color =  if (enabled) fontColor else Grey900,
+            color =  if (enabled) fontColor else fontColor,
             modifier = Modifier.align(Alignment.Center)
         )
     }
