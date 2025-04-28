@@ -10,9 +10,9 @@ import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.domain.ShoppingMallType
 import com.inha.sellstarter_android.domain.Users
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
-import com.inha.sellstarter_android.presentation.mypage.help.HelpSection
+import com.inha.sellstarter_android.presentation.mypage.help.HelpContent
 import com.inha.sellstarter_android.presentation.mypage.help.helpItems
-import com.inha.sellstarter_android.presentation.mypage.storemanage.MyPageStoreAPISection
+import com.inha.sellstarter_android.presentation.mypage.storemanage.MyPageStoreAPIContent
 
 @Composable
 fun MyPageScreen(
@@ -26,30 +26,30 @@ fun MyPageScreen(
             title = "마이페이지"
         )
 
-        MyPageProfileSection(
+        MyPageProfileContent(
             users = users,
             modifier = Modifier.padding(
-                vertical = 8.dp,
+                vertical = 12.dp,
                 horizontal = 12.dp)
         )
 
-        MyPageStoreAPISection(
+        MyPageStoreAPIContent(
             users = users,
             onClickAddKey = { },
             onClickModifyKey = { },
             modifier = Modifier.padding(
-                vertical = 8.dp,
+                vertical = 12.dp,
                 horizontal = 24.dp)
         )
 
-        AppFontSizeSection(
+        AppFontSizeContent(
             onClickEdit = { },
             modifier = Modifier.padding(
-                vertical = 8.dp,
+                vertical = 12.dp,
                 horizontal = 24.dp)
         )
 
-        HelpSection(
+        HelpContent(
             items = helpItems,
             modifier = Modifier.padding(
                 vertical = 8.dp,

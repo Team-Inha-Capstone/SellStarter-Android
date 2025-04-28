@@ -17,7 +17,7 @@ import com.inha.sellstarter_android.domain.Users
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 
 @Composable
-fun MyPageProfileSection(
+fun MyPageProfileContent(
     users: Users,
     modifier: Modifier
 ) {
@@ -44,7 +44,7 @@ fun MyPageProfileSection(
 @Preview(showBackground = true)
 @Composable
 fun PreviewMyPageProfileSection() {
-    MyPageProfileSection(
+    MyPageProfileContent(
         users = Users(1, "듀가나디 잡화점", ShoppingMallType.HOUSEHOLD_GOODS),
         modifier = Modifier
     )

@@ -19,7 +19,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -34,13 +33,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.domain.ShoppingMallPlatform
 import com.inha.sellstarter_android.domain.ShoppingMallType
 import com.inha.sellstarter_android.domain.Users
 import com.inha.sellstarter_android.presentation.common.component.DefaultTextField
 import com.inha.sellstarter_android.presentation.common.component.OneButton
-import com.inha.sellstarter_android.presentation.common.component.OutlinedTextField
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
@@ -48,7 +45,7 @@ import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Typography
 
 @Composable
-fun MyPageStoreAPISection(
+fun MyPageStoreAPIContent(
     users: Users,
     onClickAddKey: () -> Unit,
     onClickModifyKey: () -> Unit,
@@ -213,7 +210,7 @@ fun MyPageStoreAPISection(
 @Preview(showBackground = true)
 @Composable
 fun PreviewMyPageStoreAPISection() {
-    MyPageStoreAPISection(
+    MyPageStoreAPIContent(
         users = Users(1, "듀가나디 잡화점", ShoppingMallType.HOUSEHOLD_GOODS),
         onClickAddKey = { },
         onClickModifyKey = { },

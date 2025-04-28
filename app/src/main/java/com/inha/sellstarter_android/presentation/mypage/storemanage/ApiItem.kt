@@ -46,7 +46,6 @@ fun ApiKeyItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
             .clickable { onEditClick },
         verticalAlignment = Alignment.CenterVertically
     ) {
