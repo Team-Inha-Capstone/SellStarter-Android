@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 
 @Composable
-fun AppFontSizeSection(
+fun AppFontSizeContent(
     onClickEdit: () -> Unit,
     modifier: Modifier
 ) {

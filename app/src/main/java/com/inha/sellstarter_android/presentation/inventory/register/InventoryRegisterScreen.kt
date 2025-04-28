@@ -66,7 +66,7 @@ fun InventoryRegisterScreen(
                 modifier = Modifier
             )
 
-            InventoryExpirationDateSection(
+            InventoryExpirationDateContent(
                 modifier = Modifier
             )
 

@@ -15,7 +15,7 @@ import java.util.Date
 import java.util.Locale
 
 @Composable
-fun InventoryExpirationDateSection(
+fun InventoryExpirationDateContent(
     modifier: Modifier = Modifier
 ) {
 

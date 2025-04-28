@@ -24,7 +24,7 @@ import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Typography
 
 @Composable
-fun HelpSection(
+fun HelpContent(
     items: List<HelpItem>,
     modifier: Modifier
 ) {
@@ -78,7 +78,7 @@ fun HelpItemRow(item: HelpItem) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewHelpSection() {
-    HelpSection(
+    HelpContent(
         modifier = Modifier,
         items = helpItems
     )
