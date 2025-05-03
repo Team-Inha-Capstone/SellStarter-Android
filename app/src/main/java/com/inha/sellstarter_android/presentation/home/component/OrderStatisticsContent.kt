@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.presentation.home
+package com.inha.sellstarter_android.presentation.home.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row

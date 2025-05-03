@@ -10,9 +10,11 @@ import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.domain.ShoppingMallType
 import com.inha.sellstarter_android.domain.Users
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
-import com.inha.sellstarter_android.presentation.mypage.help.HelpContent
-import com.inha.sellstarter_android.presentation.mypage.help.helpItems
-import com.inha.sellstarter_android.presentation.mypage.storemanage.MyPageStoreAPIContent
+import com.inha.sellstarter_android.presentation.mypage.component.AppFontSizeContent
+import com.inha.sellstarter_android.presentation.mypage.component.MyPageProfileContent
+import com.inha.sellstarter_android.presentation.mypage.component.help.HelpContent
+import com.inha.sellstarter_android.presentation.mypage.component.help.helpItems
+import com.inha.sellstarter_android.presentation.mypage.component.storemanage.MyPageStoreAPIContent
 
 @Composable
 fun MyPageScreen(

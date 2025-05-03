@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.presentation.inventory.list
+package com.inha.sellstarter_android.presentation.inventory.list.component
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable

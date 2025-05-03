@@ -15,6 +15,7 @@ import coil.compose.AsyncImage
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.component.TitleAndPurplelinedTextField
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
+import com.inha.sellstarter_android.presentation.inventory.register.component.InventoryExpirationDateContent
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple200
 

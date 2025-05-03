@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.presentation.mypage.storemanage
+package com.inha.sellstarter_android.presentation.mypage.component.storemanage
 
 data class ApiKey(
     val key: String,
