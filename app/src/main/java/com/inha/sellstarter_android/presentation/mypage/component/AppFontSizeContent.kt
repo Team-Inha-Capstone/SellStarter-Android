@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.presentation.mypage
+package com.inha.sellstarter_android.presentation.mypage.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.presentation.mypage.help
+package com.inha.sellstarter_android.presentation.mypage.component.help
 
 import android.content.Intent
 import android.net.Uri
