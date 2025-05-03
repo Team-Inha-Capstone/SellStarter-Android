@@ -28,7 +28,6 @@ import com.inha.sellstarter_android.ui.theme.Blue200
 fun OrderDetailScreen(
     modifier: Modifier = Modifier
 ) {
-
     val pickedItems = listOf(
         PickedItem("미니 드레스 0A92 / 2", "0134Ad234"),
         PickedItem("파란 니트 032Z / 1", "085Ad145"),
@@ -39,55 +38,55 @@ fun OrderDetailScreen(
         PickedItem("미니 드레스 0A92 / 2", "0134Ad234"),
         PickedItem("파란 니트 032Z / 1", "085Ad145")
     )
-        Column(modifier = Modifier.fillMaxSize()) {
-            TitleScreen(title = "주문 상세 확인")
-            Spacer(modifier = Modifier.height(16.dp))
+    Column(modifier = Modifier.fillMaxSize()) {
+        TitleScreen(title = "주문 상세 확인")
+        Spacer(modifier = Modifier.height(16.dp))
 
-            LazyColumn(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(horizontal = 24.dp),
-                contentPadding = PaddingValues(bottom = 20.dp),
-                verticalArrangement = Arrangement.spacedBy(24.dp)
-            ) {
-                item {
-                    OrderInfoContent(
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-
-                item {
-                    PickingInfoContent(
-                        pickedItems = pickedItems,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .heightIn(max = 300.dp)
-                    )
-                }
-
-                item {
-                    BuyerInfoContent(
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-
-                item {
-                    BuyerInfoContent(
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
+        LazyColumn(
+            modifier = Modifier
+                .weight(1f)
+                .padding(horizontal = 24.dp),
+            contentPadding = PaddingValues(bottom = 20.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            item {
+                OrderInfoContent(
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
 
-            OneButton(
-                text = "전체 피킹 완료",
-                buttonBackgroundColor = Blue200,
-                onClick = { },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-                enabled = pickedItems.isNotEmpty()
-            )
+            item {
+                PickingInfoContent(
+                    pickedItems = pickedItems,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(max = 300.dp)
+                )
+            }
+
+            item {
+                BuyerInfoContent(
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            item {
+                BuyerInfoContent(
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
+
+        OneButton(
+            text = "전체 피킹 완료",
+            buttonBackgroundColor = Blue200,
+            onClick = { },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
+            enabled = pickedItems.isNotEmpty()
+        )
+    }
 }
 
 
