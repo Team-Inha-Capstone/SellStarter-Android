@@ -39,7 +39,7 @@ fun OneButtonDialog(
             modifier =
             Modifier
                 .fillMaxWidth()
-                .padding(48.dp),
+                .padding(24.dp),
             textAlign = TextAlign.Center,
             style = Typography.headlineMedium,
             text = contentText,
