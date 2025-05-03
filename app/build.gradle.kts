@@ -96,4 +96,7 @@ dependencies {
 
     // coil
     implementation(libs.coil.compose)
+
+    //zxing
+    implementation(libs.bundles.zxing)
 }

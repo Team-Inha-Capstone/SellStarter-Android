@@ -22,6 +22,8 @@ appcompat = "1.7.0"
 paging3 = "3.3.2"
 composeFoundation = "1.7.5"
 coil = "2.7.0"
+zxingAndroid = "4.1.0"
+zxingCore = "3.5.3"
 
 
 [libraries]
@@ -67,12 +69,18 @@ compose-foundation = { group = "androidx.compose.foundation", name = "foundation
 # Coil
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
+# Zxing
+zxing-android-embedded = { group = "com.journeyapps", name = "zxing-android-embedded", version.ref = "zxingAndroid" }
+zxing-core = {group ="com.google.zxing", name ="core", version.ref ="zxingCore"}
+
+
 [bundles]
 coroutines = ["coroutines-android", "coroutines-core"]
 okhttp = ["squareup-okhttp3-okhttp", "squareup-okhttp3-logging-interceptor"]
 retrofit = ["squareup-retrofit2-retrofit"]
 serialization = ["json-serialization", "kotlin-serialization-converter"]
 paging = ["paging-runtime", "paging-compose"]
+zxing = ["zxing-core", "zxing-android-embedded"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
