@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.data.local
+package com.inha.sellstarter_android.data.datasource.local
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit

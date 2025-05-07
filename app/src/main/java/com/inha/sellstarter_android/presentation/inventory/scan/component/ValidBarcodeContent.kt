@@ -11,9 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.domain.Inventory
+import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.ui.theme.Grey900
-import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun ValidBarcodeContent(

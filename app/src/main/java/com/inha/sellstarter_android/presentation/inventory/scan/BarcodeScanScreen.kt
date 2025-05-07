@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.zxing.BarcodeFormat
-import com.inha.sellstarter_android.domain.Inventory
+import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.presentation.inventory.scan.component.InvalidBarcodeDialog
 import com.inha.sellstarter_android.presentation.inventory.scan.component.ValidBarcodeDialog
 import com.journeyapps.barcodescanner.DecoratedBarcodeView

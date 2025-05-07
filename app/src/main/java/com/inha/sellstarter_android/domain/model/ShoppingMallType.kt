@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.domain
+package com.inha.sellstarter_android.domain.model
 
 enum class ShoppingMallType(val displayName: String) {
     GROCERY("식료품점"),

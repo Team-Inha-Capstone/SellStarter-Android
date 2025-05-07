@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.domain
+package com.inha.sellstarter_android.domain.model
 
 data class Inventory(
     val id: Int,

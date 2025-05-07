@@ -13,8 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.inha.sellstarter_android.domain.ShoppingMallType
-import com.inha.sellstarter_android.domain.Users
+import com.inha.sellstarter_android.domain.model.ShoppingMallType
+import com.inha.sellstarter_android.domain.model.Users
 import com.inha.sellstarter_android.presentation.mypage.FontSizeViewModel
 import com.inha.sellstarter_android.presentation.mypage.MyPageScreen
 import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
