@@ -28,7 +28,7 @@ val appTitle = TextStyle(
     fontWeight = FontWeight.Bold
 )
 
-val Typography = Typography(
+val AppTypography = Typography(
 
     // Display 계열 (가장 큰 제목 영역)
     displayLarge = TextStyle( // 30sp → H1 / 앱 홈 타이틀 등
