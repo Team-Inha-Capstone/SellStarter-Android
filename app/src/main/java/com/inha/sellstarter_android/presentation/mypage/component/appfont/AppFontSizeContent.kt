@@ -3,7 +3,6 @@ package com.inha.sellstarter_android.presentation.mypage.component.appfont
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
-import com.inha.sellstarter_android.presentation.mypage.FontScaleViewModel
 
 @Composable
 fun AppFontSizeContent(

@@ -7,7 +7,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-object FontScaleDataStore {
+object FontSizeDataStore {
     private val Context.fontScaleDataStore by preferencesDataStore(name = "font_settings")
     private val FONT_SCALE_KEY = floatPreferencesKey("font_scale")
 

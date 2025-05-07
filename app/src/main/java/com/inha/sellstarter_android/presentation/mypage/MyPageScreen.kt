@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.inha.sellstarter_android.domain.ShoppingMallType
 import com.inha.sellstarter_android.domain.Users
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
@@ -31,8 +30,8 @@ fun MyPageScreen(
     onFontScaleChanged: (Float) -> Unit,
     modifier: Modifier,
 ) {
-    val fontScaleViewModel: FontScaleViewModel = hiltViewModel()
-    val fontScale by fontScaleViewModel.fontScale.collectAsState()
+    val fontSizeViewModel: FontSizeViewModel = hiltViewModel()
+    val fontScale by fontSizeViewModel.fontScale.collectAsState()
     val currentFontSizeType = FontSizeType.fromScale(fontScale)
     var isFontDialogVisible by remember { mutableStateOf(false) }
 
