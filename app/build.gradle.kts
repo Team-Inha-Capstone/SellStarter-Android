@@ -18,6 +18,10 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a")
+        }
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -75,7 +79,6 @@ dependencies {
     implementation(libs.viewmodel.compose)
     implementation(libs.androidx.navigation.navigation.compose)
 
-
     // coroutine, okhttp, retrofit, serialization
     implementation(libs.bundles.coroutines)
     implementation(libs.bundles.okhttp)
@@ -99,4 +102,11 @@ dependencies {
 
     //zxing
     implementation(libs.bundles.zxing)
+
+    //DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    //Filament
+   // implementation("com.google.android.filament:filament-android:1.33.1")
+   // implementation("com.google.android.filament:gltfio-android:1.33.1")
 }
