@@ -13,8 +13,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.domain.Order
-import com.inha.sellstarter_android.domain.OrderStatus
+import com.inha.sellstarter_android.domain.model.Order
+import com.inha.sellstarter_android.domain.model.OrderStatus
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
 import com.inha.sellstarter_android.presentation.order.confim.component.OrderPager
 import com.inha.sellstarter_android.presentation.order.confim.component.OrderTabRow

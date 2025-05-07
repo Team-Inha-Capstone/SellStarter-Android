@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.inha.sellstarter_android.domain.Inventory
+import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen

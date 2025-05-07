@@ -23,7 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.inha.sellstarter_android.domain.Inventory
+import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.presentation.common.component.chip.Chip
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100

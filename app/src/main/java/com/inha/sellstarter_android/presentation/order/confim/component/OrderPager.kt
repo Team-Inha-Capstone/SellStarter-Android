@@ -6,8 +6,8 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.domain.Order
-import com.inha.sellstarter_android.domain.OrderStatus
+import com.inha.sellstarter_android.domain.model.Order
+import com.inha.sellstarter_android.domain.model.OrderStatus
 
 @Composable
 fun OrderPager(

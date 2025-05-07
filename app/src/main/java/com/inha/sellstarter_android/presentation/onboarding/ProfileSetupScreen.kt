@@ -19,13 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.inha.sellstarter_android.domain.ShoppingMallType
+import com.inha.sellstarter_android.domain.model.ShoppingMallType
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.component.OutlinedTextField
 import com.inha.sellstarter_android.presentation.common.component.RadioButtonGroup
 import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Purple100
-import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun ProfileSetupScreen(

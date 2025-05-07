@@ -12,8 +12,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.R
-import com.inha.sellstarter_android.domain.ShoppingMallType
-import com.inha.sellstarter_android.domain.Users
+import com.inha.sellstarter_android.domain.model.ShoppingMallType
+import com.inha.sellstarter_android.domain.model.Users
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 
 @Composable

@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.domain.Order
+import com.inha.sellstarter_android.domain.model.Order
 
 @Composable
 fun OrderPageContent(

@@ -3,7 +3,7 @@ package com.inha.sellstarter_android.presentation.mypage
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.inha.sellstarter_android.data.local.FontSizeDataStore
+import com.inha.sellstarter_android.data.datasource.local.FontSizeDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.SharingStarted

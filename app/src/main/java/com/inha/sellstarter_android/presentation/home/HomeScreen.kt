@@ -26,15 +26,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.domain.ShoppingMallType
-import com.inha.sellstarter_android.domain.Users
+import com.inha.sellstarter_android.domain.model.ShoppingMallType
+import com.inha.sellstarter_android.domain.model.Users
 import com.inha.sellstarter_android.presentation.home.component.HomeFeatureContent
 import com.inha.sellstarter_android.presentation.home.component.OrderStatisticsContent
 import com.inha.sellstarter_android.presentation.home.component.OrderSummaryContent
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Purple200
-import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun HomeScreen(

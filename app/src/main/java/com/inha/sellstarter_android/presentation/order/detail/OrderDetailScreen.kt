@@ -1,7 +1,6 @@
 package com.inha.sellstarter_android.presentation.order.detail
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -12,11 +11,10 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.domain.PickedItem
+import com.inha.sellstarter_android.domain.model.PickedItem
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
 import com.inha.sellstarter_android.presentation.order.detail.component.BuyerInfoContent
