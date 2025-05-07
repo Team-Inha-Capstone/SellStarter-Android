@@ -9,13 +9,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun HomeFeatureContent(
@@ -61,14 +62,14 @@ fun HomeFeatureCard(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                title, style = Typography.headlineMedium,
+                title, style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Start,
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 description,
-                style = Typography.bodySmall,
+                style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Start,
                 modifier = Modifier.fillMaxWidth()
             )

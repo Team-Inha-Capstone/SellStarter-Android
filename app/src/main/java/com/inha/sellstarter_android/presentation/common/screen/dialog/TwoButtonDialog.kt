@@ -21,7 +21,7 @@ import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Purple200
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun TwoButtonDialog(
@@ -79,7 +79,7 @@ fun PreviewTwoButtonDialogScreen() {
         content = {
             Text(
                 text = "컨텐츠내용",
-                style = Typography.headlineMedium,
+                style = AppTypography.headlineMedium,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )

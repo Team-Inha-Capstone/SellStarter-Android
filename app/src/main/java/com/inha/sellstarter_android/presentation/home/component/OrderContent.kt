@@ -12,6 +12,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,14 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun OrderSummaryContent(modifier : Modifier) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
             text = "오늘의 주문 확인",
-            style = Typography.headlineMedium,
+            style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold
         )
         Icon(
@@ -75,12 +76,12 @@ fun OrderSummaryItem(title: String, count: String, modifier: Modifier) {
     ) {
         Text(
             text = title,
-            style = Typography.bodySmall
+            style = MaterialTheme.typography.bodySmall
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = count,
-            style = Typography.titleMedium
+            style = MaterialTheme.typography.titleMedium
         )
     }
 }

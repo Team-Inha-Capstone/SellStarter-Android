@@ -1,25 +1,17 @@
 package com.inha.sellstarter_android.presentation.chatbot
 
-import android.annotation.SuppressLint
-import android.widget.ImageButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -35,13 +27,11 @@ import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.presentation.common.component.DefaultTextField
 import com.inha.sellstarter_android.presentation.common.component.ImageIconButton
-import com.inha.sellstarter_android.presentation.common.component.OneButton
-import com.inha.sellstarter_android.presentation.common.component.OutlinedTextField
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
 import com.inha.sellstarter_android.presentation.model.ChatMessage
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 
 @Composable
@@ -87,7 +77,7 @@ fun ChatbotScreen(
             DefaultTextField(
                 value = messageText,
                 onValueChange = { messageText = it },
-                innerTextFieldStyle = Typography.bodyMedium,
+                innerTextFieldStyle = AppTypography.bodyMedium,
                 singleLine = true,
                 borderColor = Color.Transparent,
                 modifier = Modifier

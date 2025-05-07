@@ -5,20 +5,21 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.ui.theme.Purple200
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun OrderInfoContent(
     modifier: Modifier,
 ) {
     Column(modifier = modifier) {
-        Text("주문 정보", style = Typography.headlineMedium)
+        Text("주문 정보", style = MaterialTheme.typography.headlineMedium)
         Divider(modifier = Modifier.padding(vertical = 8.dp))
 
         InfoRow(label = "주문번호", value = "AD12453WE")

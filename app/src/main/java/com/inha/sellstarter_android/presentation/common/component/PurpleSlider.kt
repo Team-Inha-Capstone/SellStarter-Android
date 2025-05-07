@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderColors
 import androidx.compose.material3.Text
@@ -16,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Grey50
 import com.inha.sellstarter_android.ui.theme.Grey900
+import com.inha.sellstarter_android.ui.theme.Orange100
 import com.inha.sellstarter_android.ui.theme.Orange200
 import com.inha.sellstarter_android.ui.theme.Purple200
 
@@ -37,6 +39,7 @@ fun PurpleSlider(
         Text(
             text = text,
             color = fontColor,
+            style = MaterialTheme.typography.labelMedium,
             fontSize = fontSize.sp,
             modifier = Modifier.padding(6.dp)
         )

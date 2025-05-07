@@ -10,7 +10,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.R
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun InventoryDetailGraph(
@@ -19,7 +19,7 @@ fun InventoryDetailGraph(
 ) {
     Text(
         text = titleText,
-        style = Typography.headlineSmall,
+        style = AppTypography.headlineSmall,
         modifier = Modifier.padding(top = 24.dp, bottom = 12.dp)
     )
 

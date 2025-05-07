@@ -5,14 +5,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.ui.theme.Grey100
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun DefaultTextField(
@@ -45,7 +44,7 @@ fun PreviewTextField() {
     DefaultTextField(
         value = "무엇이든 물어보세요",
         onValueChange = {},
-        innerTextFieldStyle = Typography.labelSmall,
+        innerTextFieldStyle = AppTypography.labelSmall,
         borderColor = Grey100,
         singleLine = false,
         modifier = Modifier

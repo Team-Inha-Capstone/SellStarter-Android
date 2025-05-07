@@ -3,13 +3,14 @@ package com.inha.sellstarter_android.presentation.common.component
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Purple200
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun TitleAndPurplelinedTextField(
@@ -20,14 +21,14 @@ fun TitleAndPurplelinedTextField(
 ) {
     Text(
         text = titleText,
-        style = Typography.headlineSmall,
+        style = MaterialTheme.typography.headlineSmall,
         modifier = Modifier.padding(top = 24.dp)
     )
 
     DefaultTextField(
         value = value,
         onValueChange = onValueChange,
-        innerTextFieldStyle = Typography.bodyMedium.copy(color = Grey900),
+        innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
         singleLine = true,
         borderColor = Purple200,
         modifier = modifier

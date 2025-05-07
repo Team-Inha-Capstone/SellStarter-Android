@@ -18,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,7 +34,7 @@ import com.inha.sellstarter_android.presentation.home.component.OrderSummaryCont
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Purple200
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun HomeScreen(
@@ -57,7 +58,7 @@ fun HomeScreen(
             ) {
                 Text(
                     text = "스토어 ${users.storeName}",
-                    style = Typography.headlineSmall,
+                    style = MaterialTheme.typography.headlineSmall,
                     modifier = Modifier.weight(1f)
                 )
 
@@ -107,7 +108,7 @@ fun HomeScreen(
             Text(
                 text = "AI\n챗봇",
                 color = Grey0,
-                style = Typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center
             )
         }

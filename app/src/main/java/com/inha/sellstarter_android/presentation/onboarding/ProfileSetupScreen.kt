@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,7 +25,7 @@ import com.inha.sellstarter_android.presentation.common.component.OutlinedTextFi
 import com.inha.sellstarter_android.presentation.common.component.RadioButtonGroup
 import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Purple100
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun ProfileSetupScreen(
@@ -44,7 +45,7 @@ fun ProfileSetupScreen(
 
         Text(
             text = "쇼핑몰 이름을 입력해주세요.",
-            style = Typography.headlineMedium,
+            style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(24.dp)
         )
 

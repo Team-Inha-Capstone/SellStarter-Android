@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,7 +43,7 @@ import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Grey900
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun MyPageStoreAPIContent(
@@ -102,7 +103,7 @@ fun MyPageStoreAPIContent(
                             .border(1.dp, Grey100, RoundedCornerShape(6.dp))
                             .padding(12.dp)
                     ) {
-                        Text("새 API Key 등록", style = Typography.bodySmall)
+                        Text("새 API Key 등록", style = MaterialTheme.typography.bodySmall)
                         Spacer(modifier = Modifier.height(8.dp))
 
                         // ✅ 플랫폼 선택 드롭다운
@@ -125,7 +126,7 @@ fun MyPageStoreAPIContent(
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
                                     text = selectedPlatform.displayName,
-                                    style = Typography.bodyMedium,
+                                    style = MaterialTheme.typography.bodyMedium,
                                     color = Grey900
                                 )
                                 Spacer(modifier = Modifier.weight(1f))
@@ -166,7 +167,7 @@ fun MyPageStoreAPIContent(
                         DefaultTextField(
                             value = newKeyText,
                             onValueChange = { newKeyText = it },
-                            innerTextFieldStyle = Typography.bodyMedium.copy(color = Grey900),
+                            innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
                             singleLine = true,
                             borderColor = Grey100,
                             modifier = Modifier.fillMaxWidth()
@@ -178,7 +179,7 @@ fun MyPageStoreAPIContent(
                         OneButton(
                             text = "저장",
                             fontColor = Grey0,
-                            fontStyle = Typography.bodyLarge,
+                            fontStyle = MaterialTheme.typography.bodyLarge,
                             onClick = {
                                 val newApiKey = ApiKey(
                                     key = newKeyText,

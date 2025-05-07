@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 import com.inha.sellstarter_android.ui.theme.Grey900
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun HelpContent(
@@ -67,7 +68,7 @@ fun HelpItemRow(item: HelpItem) {
         Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = item.title,
-            style = Typography.labelLarge.copy(
+            style = MaterialTheme.typography.labelLarge.copy(
                 textDecoration = TextDecoration.Underline
             ),
             color = Grey900,
