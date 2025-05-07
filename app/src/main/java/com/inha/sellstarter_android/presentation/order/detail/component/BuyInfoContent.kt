@@ -6,18 +6,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun BuyerInfoContent(
     modifier: Modifier
 ) {
     Column(modifier = modifier) {
-        Text("구매자 정보", style = Typography.headlineMedium)
+        Text("구매자 정보", style = MaterialTheme.typography.headlineMedium)
         Divider(modifier = Modifier.padding(vertical = 8.dp))
 
         InfoRow(label = "구매자 이름", value = "OOO")

@@ -5,13 +5,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.ui.theme.Grey900
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun InfoRow(
@@ -26,11 +27,11 @@ fun InfoRow(
     ) {
         Text(
             text = label,
-            style = Typography.headlineSmall
+            style = MaterialTheme.typography.headlineSmall
         )
         Text(
             text = value,
-            style = Typography.bodyLarge,
+            style = MaterialTheme.typography.bodyLarge,
             color = valueTextColor,
             textAlign = TextAlign.End
         )

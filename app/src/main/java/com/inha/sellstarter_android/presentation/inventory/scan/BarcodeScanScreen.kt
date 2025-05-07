@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,7 +22,6 @@ import com.google.zxing.BarcodeFormat
 import com.inha.sellstarter_android.domain.Inventory
 import com.inha.sellstarter_android.presentation.inventory.scan.component.InvalidBarcodeDialog
 import com.inha.sellstarter_android.presentation.inventory.scan.component.ValidBarcodeDialog
-import com.inha.sellstarter_android.ui.theme.Typography
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import kotlinx.coroutines.launch
@@ -76,7 +76,7 @@ fun BarcodeScannerScreen(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(24.dp),
-            style = Typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium
         )
 
         // 유효한 바코드 → 수량 입력 Dialog

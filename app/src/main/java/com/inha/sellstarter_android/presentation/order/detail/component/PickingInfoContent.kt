@@ -9,12 +9,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.domain.PickedItem
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 
 @Composable
@@ -23,7 +24,7 @@ fun PickingInfoContent(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
-        Text("피킹 정보", style = Typography.headlineMedium)
+        Text("피킹 정보", style = MaterialTheme.typography.headlineMedium)
         Divider(modifier = Modifier.padding(vertical = 8.dp))
 
         InfoRow(label = "상품목록 (이름/수량)", value = "바코드번호")

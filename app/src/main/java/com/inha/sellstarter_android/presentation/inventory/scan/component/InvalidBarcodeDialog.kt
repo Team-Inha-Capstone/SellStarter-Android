@@ -25,7 +25,8 @@ fun InvalidBarcodeDialog(onDismiss: () -> Unit) {
             buttonEnabled = true,
             buttonText = "확인",
             onButtonClick = onDismiss,
-            modifier = Modifier.padding(24.dp)
+            modifier = Modifier.padding(24.dp),
+            content = { }
         )
     }
 }

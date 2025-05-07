@@ -8,13 +8,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.ui.theme.Grey100
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 
 @Composable
 fun TitleAndText(
@@ -29,12 +30,12 @@ fun TitleAndText(
     ) {
         Text(
             text = titleText,
-            style = Typography.headlineSmall,
+            style = MaterialTheme.typography.headlineSmall,
         )
         Row {
             Text(
                 text = contentText,
-                style = Typography.labelLarge,
+                style = MaterialTheme.typography.labelLarge,
             )
             if (isAvailableEdit) {
                 IconButton(
@@ -58,9 +59,11 @@ fun TitleAndText(
 @Preview(showBackground = true)
 @Composable
 fun PreviewTitleAndText() {
-    TitleAndText(
-        titleText = "가나디 잡화점",
-        contentText = "업종",
-        modifier = Modifier.padding(vertical = 24.dp)
-    )
+    SellStarterAndroidTheme {
+        TitleAndText(
+            titleText = "가나디 잡화점",
+            contentText = "업종",
+            modifier = Modifier.padding(vertical = 24.dp)
+        )
+    }
 }

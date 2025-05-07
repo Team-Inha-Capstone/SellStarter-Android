@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,7 +26,7 @@ import com.inha.sellstarter_android.presentation.common.component.chip.ChipGroup
 import com.inha.sellstarter_android.presentation.model.ChipState
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple100
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun OrderStatisticsContent(modifier: Modifier){
@@ -41,7 +42,7 @@ fun OrderStatisticsContent(modifier: Modifier){
     ) {
         Text(
             text = "스토어 주문 추이",
-            style = Typography.headlineMedium,
+            style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.weight(1f)
         )

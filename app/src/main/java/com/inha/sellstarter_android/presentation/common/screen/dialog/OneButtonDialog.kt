@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,12 +19,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.presentation.common.component.OneButton
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun OneButtonDialog(
     modifier: Modifier = Modifier,
     contentText: String = "",
+    content: @Composable () -> Unit,
     buttonText: String,
     buttonEnabled: Boolean = false,
     onButtonClick: () -> Unit,
@@ -41,9 +43,11 @@ fun OneButtonDialog(
                 .fillMaxWidth()
                 .padding(24.dp),
             textAlign = TextAlign.Center,
-            style = Typography.headlineMedium,
+            style = MaterialTheme.typography.headlineMedium,
             text = contentText,
         )
+
+        content()
 
         Row(
             modifier = Modifier.padding(start = 24.dp, end = 24.dp, top = 4.dp, bottom = 24.dp),
@@ -67,6 +71,7 @@ fun OneButtonDialog(
 fun ButtonDialogPreview() {
     OneButtonDialog(
         modifier = Modifier.wrapContentSize(),
+        content = { },
         contentText =
         "해당 재고의 바코드가 아닙니다.\n올바른 바코드를 스캔해주세요.",
         buttonText = "예",

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,7 +30,6 @@ import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Purple100
 import com.inha.sellstarter_android.ui.theme.Red200
-import com.inha.sellstarter_android.ui.theme.Typography
 
 @Composable
 fun InventoryItem(
@@ -69,7 +69,7 @@ fun InventoryItem(
                     selectedColor = Red200,
                     text = "재고 품절",
                     fontColor = Grey0,
-                    fontStyle = Typography.headlineSmall,
+                    fontStyle = MaterialTheme.typography.headlineSmall,
                     modifier = Modifier
                         .padding(vertical = 1.dp)
                         .wrapContentWidth(),
@@ -80,21 +80,21 @@ fun InventoryItem(
 
         Text(
             text = inventory.name,
-            style = Typography.headlineSmall,
+            style = MaterialTheme.typography.headlineSmall,
             color = Grey900,
             modifier = Modifier.padding(horizontal = 24.dp)
         )
 
         Text(
             text = "보유 수량: ${inventory.quantity}개",
-            style = Typography.bodyLarge,
+            style = MaterialTheme.typography.bodyLarge,
             color = Grey900,
             modifier = Modifier.padding(horizontal = 24.dp)
         )
 
         Text(
             text = "최근 수정일 2022.10.15",
-            style = Typography.bodySmall,
+            style = MaterialTheme.typography.bodySmall,
             color = Grey100,
             modifier = Modifier.padding(horizontal = 24.dp)
         )

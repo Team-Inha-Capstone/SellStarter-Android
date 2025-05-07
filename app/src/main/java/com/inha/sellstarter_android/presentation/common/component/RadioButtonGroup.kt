@@ -16,7 +16,7 @@ import com.inha.sellstarter_android.domain.ShoppingMallType
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Orange200
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun <T : Enum<T>> RadioButtonGroup(
@@ -31,7 +31,7 @@ fun <T : Enum<T>> RadioButtonGroup(
         title?.let {
             Text(
                 text = it,
-                style = Typography.headlineMedium,
+                style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
         }
@@ -56,7 +56,7 @@ fun <T : Enum<T>> RadioButtonGroup(
                 )
                 Text(
                     text = labelMapper(option),
-                    style = Typography.bodyLarge,
+                    style = AppTypography.bodyLarge,
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }

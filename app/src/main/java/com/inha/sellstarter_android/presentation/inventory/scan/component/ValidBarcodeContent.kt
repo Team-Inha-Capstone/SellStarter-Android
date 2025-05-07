@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,7 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.domain.Inventory
 import com.inha.sellstarter_android.ui.theme.Grey900
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun ValidBarcodeContent(
@@ -25,14 +26,14 @@ fun ValidBarcodeContent(
 
         Text(
             text = "상품 이름 : ${inventory.name}",
-            style = Typography.headlineSmall,
+            style = MaterialTheme.typography.headlineSmall,
             color = Grey900
         )
 
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = "상품 위치 : ${inventory.location}",
-            style = Typography.headlineSmall,
+            style = MaterialTheme.typography.headlineSmall,
             color = Grey900
         )
         Spacer(modifier = Modifier.height(12.dp))
@@ -53,7 +54,7 @@ fun ValidBarcodeContent(
 
         Text(
             text = "재고를 차감하겠습니까?",
-            style = Typography.headlineMedium,
+            style = MaterialTheme.typography.headlineMedium,
             color = Grey900,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center

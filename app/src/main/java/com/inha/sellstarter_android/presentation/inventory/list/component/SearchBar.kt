@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +25,6 @@ import com.inha.sellstarter_android.presentation.common.component.DefaultTextFie
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Grey50
 import com.inha.sellstarter_android.ui.theme.Grey900
-import com.inha.sellstarter_android.ui.theme.Typography
 
 @Composable
 fun SearchBar(
@@ -63,7 +63,7 @@ fun SearchBar(
                 DefaultTextField(
                     value = value,
                     onValueChange = onValueChange,
-                    innerTextFieldStyle = Typography.bodyMedium.copy(color = Grey900),
+                    innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
                     singleLine = true,
                     borderColor = Color.Transparent,
                     modifier = Modifier

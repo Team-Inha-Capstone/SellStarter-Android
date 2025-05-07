@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.Canvas
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.presentation.model.ChatMessage
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Purple200
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun ChatMessageItem(chatMessage: ChatMessage) {
@@ -43,7 +43,7 @@ fun ChatMessageItem(chatMessage: ChatMessage) {
                 Text(
                     text = chatMessage.message,
                     color = Color.White,
-                    style = Typography.labelSmall,
+                    style = MaterialTheme.typography.labelSmall,
                     modifier = Modifier.padding(8.dp)
                 )
             }

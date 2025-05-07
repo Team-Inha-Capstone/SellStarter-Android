@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,13 +20,13 @@ import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Purple200
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun OneButton(
     text: String,
     fontColor: Color = Grey0,
-    fontStyle: TextStyle = Typography.headlineMedium,
+    fontStyle: TextStyle = MaterialTheme.typography.headlineMedium,
     buttonBackgroundColor: Color = Purple200,
     radius: Int = 10,
     width: Int = 10,
@@ -59,7 +60,7 @@ fun PreviewStockMindDefaultButton() {
        OneButton(
             text = "다음으로",
             fontColor = Grey0,
-            fontStyle = Typography.headlineMedium,
+            fontStyle = AppTypography.headlineMedium,
             buttonBackgroundColor = Purple200,
             radius = 10,
             width = 330,

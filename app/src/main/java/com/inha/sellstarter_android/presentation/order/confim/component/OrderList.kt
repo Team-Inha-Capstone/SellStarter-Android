@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.domain.Order
-import com.inha.sellstarter_android.ui.theme.Typography
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 
 @Composable
@@ -51,21 +52,21 @@ fun OrderList(
                             text = order.storeTag,
                             color = Color.Green,
                             fontWeight = FontWeight.Bold,
-                            style = Typography.bodySmall
+                            style = MaterialTheme.typography.bodySmall
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(order.productName, style = Typography.bodyMedium)
+                        Text(order.productName, style = MaterialTheme.typography.bodyMedium)
                     }
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = "옵션: ${order.optionDetail}",
                         color = Color.Red,
-                        style = Typography.bodySmall
+                        style = MaterialTheme.typography.bodySmall
                     )
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = "주문 날짜: ${order.orderDate}",
-                        style = Typography.bodySmall
+                        style = MaterialTheme.typography.bodySmall
                     )
                 }
             }
