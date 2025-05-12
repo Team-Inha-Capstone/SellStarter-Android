@@ -1,5 +1,11 @@
 package com.inha.sellstarter_android.di
 
+import com.inha.sellstarter_android.domain.repository.MyPageRepository
+import com.inha.sellstarter_android.domain.usecase.mypage.MyPageUseCases
+import com.inha.sellstarter_android.domain.usecase.mypage.MyPageUserInfoUseCase
+import com.inha.sellstarter_android.domain.usecase.mypage.UserApiDeleteUseCase
+import com.inha.sellstarter_android.domain.usecase.mypage.UserApiUpdateUseCase
+import com.inha.sellstarter_android.domain.usecase.mypage.UserApiUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,15 +19,14 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideMyPageUseCases(
-        //repository: UserRepository
-    ) {
-
+        myPageRepository: MyPageRepository
+    ): MyPageUseCases {
+        return MyPageUseCases(
+            userApiUseCase = UserApiUseCase(myPageRepository),
+            userApiUpdateUseCase = UserApiUpdateUseCase(myPageRepository),
+            userApiDeleteUseCase = UserApiDeleteUseCase(myPageRepository),
+            userInfoUseCase = MyPageUserInfoUseCase(myPageRepository)
+        )
     }
-//    : MyPageUseCases {
-//        return MyPageUseCases(
-//            updateNickname = UpdateNicknameUseCase(repository),
-//            getUserProfile = GetUserProfileUseCase(repository),
-//            logout = LogoutUseCase(repository)
-//        )
-//    }
+
 }

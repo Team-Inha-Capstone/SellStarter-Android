@@ -47,9 +47,11 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideHttpClient(
+        @HeaderInterceptorQualifier headerInterceptor: Interceptor,
         @LoggingInterceptorQualifier loggingInterceptor: HttpLoggingInterceptor,
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(headerInterceptor)
             .addInterceptor(loggingInterceptor)
             .build()
     }
@@ -69,6 +71,20 @@ object NetworkModule {
         }
     }
 
+    @Provides
+    @Singleton
+    @HeaderInterceptorQualifier
+    fun provideHeaderInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            val originalRequest = chain.request()
+            val userId = "4"
+            val requestWithHeader = originalRequest.newBuilder()
+                .addHeader("x-user-id", userId)
+                .build()
+            chain.proceed(requestWithHeader)
+        }
+    }
+
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class AuthInterceptorQualifier
@@ -76,4 +92,8 @@ object NetworkModule {
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class LoggingInterceptorQualifier
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class HeaderInterceptorQualifier
 }

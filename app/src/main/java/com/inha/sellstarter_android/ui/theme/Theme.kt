@@ -10,7 +10,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.inha.sellstarter_android.util.scaledBy
+import com.inha.sellstarter_android.util.extension.scaledBy
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,

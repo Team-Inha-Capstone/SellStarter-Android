@@ -26,6 +26,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -34,36 +36,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.inha.sellstarter_android.data.model.request.mypage.UserApiDeleteRequestDto
+import com.inha.sellstarter_android.data.model.request.mypage.UserApiRequestDto
+import com.inha.sellstarter_android.data.model.request.mypage.UserApiUpdateRequest
 import com.inha.sellstarter_android.domain.model.ShoppingMallPlatform
 import com.inha.sellstarter_android.domain.model.ShoppingMallType
+import com.inha.sellstarter_android.domain.model.UserInfo
 import com.inha.sellstarter_android.domain.model.Users
 import com.inha.sellstarter_android.presentation.common.component.DefaultTextField
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
+import com.inha.sellstarter_android.presentation.mypage.MyPageViewModel
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Grey900
 
 @Composable
 fun MyPageStoreAPIContent(
-    users: Users,
-    onClickAddKey: () -> Unit,
-    onClickModifyKey: () -> Unit,
-    modifier: Modifier
+    users: UserInfo,
+    modifier: Modifier = Modifier,
+    viewModel: MyPageViewModel = hiltViewModel()
 ) {
-
-    var apiKeyList by remember {
-        mutableStateOf(
-            listOf(
-                ApiKey(
-                    "123", ShoppingMallPlatform.NAVER.displayName, ShoppingMallPlatform.NAVER.displayImage
-                ),
-            )
-        )
-    }
-
     var isAdding by remember { mutableStateOf(false) }
     var newKeyText by remember { mutableStateOf("") }
+    val editingApiIds = remember { mutableStateListOf<Int>() }
 
     Column(modifier = modifier) {
         TitleAndText(
@@ -74,25 +71,79 @@ fun MyPageStoreAPIContent(
             modifier = Modifier
         )
 
+        val editingKeyMap = remember { mutableStateMapOf<Int, String>() }
+
         LazyColumn(
             contentPadding = PaddingValues(vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(apiKeyList) { apiKey ->
-                ApiKeyItem(
-                    apiKey = apiKey,
-                    onEditClick = {
+            items(users.apiKey) { apiKey ->
+                val isEditing = editingKeyMap.contains(apiKey.apiId)
+                val editingKey = editingKeyMap[apiKey.apiId] ?: apiKey.key
 
-                    },
-                    onDeleteClick = {
+                if (isEditing) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .border(1.dp, Grey100, RoundedCornerShape(6.dp))
+                            .padding(12.dp)
+                    ) {
+                        Text("API Key 수정", style = MaterialTheme.typography.bodySmall)
+                        Spacer(modifier = Modifier.height(8.dp))
 
+                        DefaultTextField(
+                            value = editingKey,
+                            onValueChange = { editingKeyMap[apiKey.apiId] = it },
+                            innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
+                            singleLine = true,
+                            borderColor = Grey100,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        OneButton(
+                            text = "수정 완료",
+                            fontColor = Grey0,
+                            fontStyle = MaterialTheme.typography.bodyLarge,
+                            onClick = {
+                                viewModel.updateApiKey(
+                                    request = UserApiUpdateRequest(
+                                        userId = 4,
+                                        apiId = apiKey.apiId,
+                                        channelId = apiKey.channelId,
+                                        key = editingKey
+                                    )
+                                )
+                                editingKeyMap.remove(apiKey.apiId)
+                            },
+                            width = 100,
+                            height = 40,
+                            radius = 20,
+                            enabled = editingKey.isNotBlank(),
+                            modifier = Modifier.align(Alignment.End)
+                        )
                     }
-                )
+                } else {
+                    ApiKeyItem(
+                        apiKey = apiKey,
+                        onEditClick = {
+                            editingKeyMap[apiKey.apiId] = apiKey.key // 편집 시작
+                        },
+                        onDeleteClick = {
+                            viewModel.deleteApiKey(
+                                request = UserApiDeleteRequestDto(
+                                    userId = 4,
+                                    apiId = apiKey.apiId
+                                )
+                            )
+                        }
+                    )
+                }
             }
 
             if (isAdding) {
                 item {
-                    // 상태들
                     var expanded by remember { mutableStateOf(false) }
                     var selectedPlatform by remember { mutableStateOf(ShoppingMallPlatform.NAVER) }
 
@@ -105,7 +156,6 @@ fun MyPageStoreAPIContent(
                         Text("새 API Key 등록", style = MaterialTheme.typography.bodySmall)
                         Spacer(modifier = Modifier.height(8.dp))
 
-                        // ✅ 플랫폼 선택 드롭다운
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -139,9 +189,7 @@ fun MyPageStoreAPIContent(
                                 ShoppingMallPlatform.values().forEach { platform ->
                                     DropdownMenuItem(
                                         text = {
-                                            Row(
-                                                verticalAlignment = Alignment.CenterVertically
-                                            ) {
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
                                                 Image(
                                                     painter = painterResource(platform.displayImage),
                                                     contentDescription = null,
@@ -162,7 +210,6 @@ fun MyPageStoreAPIContent(
 
                         Spacer(modifier = Modifier.height(12.dp))
 
-                        // ✅ API Key 입력 필드
                         DefaultTextField(
                             value = newKeyText,
                             onValueChange = { newKeyText = it },
@@ -174,20 +221,18 @@ fun MyPageStoreAPIContent(
 
                         Spacer(modifier = Modifier.height(12.dp))
 
-                        // ✅ 저장 버튼
                         OneButton(
                             text = "저장",
                             fontColor = Grey0,
                             fontStyle = MaterialTheme.typography.bodyLarge,
                             onClick = {
-                                val newApiKey = ApiKey(
-                                    key = newKeyText,
-                                    platform = selectedPlatform.displayName,
-                                    platformImage = selectedPlatform.displayImage
+                                viewModel.createApiKey(
+                                    UserApiRequestDto(
+                                        userId = 4,
+                                        channelId = selectedPlatform.channelId,
+                                        key = newKeyText
+                                    )
                                 )
-
-                                // 👇 API 통신 로직 자리 (예: viewModel.addApiKey(...))
-                                apiKeyList = apiKeyList + newApiKey
                                 newKeyText = ""
                                 isAdding = false
                             },
@@ -201,19 +246,11 @@ fun MyPageStoreAPIContent(
                 }
             }
         }
-
     }
-
-
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewMyPageStoreAPISection() {
-    MyPageStoreAPIContent(
-        users = Users(1, "듀가나디 잡화점", ShoppingMallType.HOUSEHOLD_GOODS),
-        onClickAddKey = { },
-        onClickModifyKey = { },
-        modifier = Modifier
-    )
 }

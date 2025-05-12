@@ -24,20 +24,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.domain.model.ApiKeys
 import com.inha.sellstarter_android.domain.model.ShoppingMallPlatform
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 
 @Composable
 fun ApiKeyItem(
-    apiKey: ApiKey,
+    apiKey: ApiKeys,
     onEditClick: () -> Unit,
     onDeleteClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onEditClick },
+            .clickable { onEditClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
@@ -47,7 +48,7 @@ fun ApiKeyItem(
                 .border(width = 1.dp, color = Grey100, shape = RoundedCornerShape(4.dp))
         ) {
             Image(
-                painter = painterResource(apiKey.platformImage),
+                painter = painterResource(apiKey.channelImage),
                 contentDescription = "platformImage",
                 modifier = Modifier
                     .size(50.dp)
@@ -80,24 +81,12 @@ fun ApiKeyItem(
         }
 
         IconButton(
-            onClick = onDeleteClick,
+            onClick = onEditClick,
             modifier = Modifier.weight(0.1f)
         ) {
-            Icon(Icons.Default.Edit, contentDescription = "Delete")
+            Icon(Icons.Default.Edit, contentDescription = "Edit")
         }
     }
 
 }
 
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewApiItem() {
-    ApiKeyItem(
-        apiKey = ApiKey(
-            "123", ShoppingMallPlatform.NAVER.displayName, ShoppingMallPlatform.NAVER.displayImage
-        ),
-        onDeleteClick = { },
-        onEditClick = { },
-    )
-}

@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.util
+package com.inha.sellstarter_android.util.extension
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
