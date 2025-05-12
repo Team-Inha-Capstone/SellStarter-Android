@@ -13,12 +13,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.domain.model.ShoppingMallType
+import com.inha.sellstarter_android.domain.model.UserInfo
 import com.inha.sellstarter_android.domain.model.Users
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 
 @Composable
 fun MyPageProfileContent(
-    users: Users,
+    users: UserInfo,
     modifier: Modifier
 ) {
     Row(
@@ -34,8 +35,8 @@ fun MyPageProfileContent(
         )
 
         TitleAndText(
-            titleText = users.storeName,
-            contentText = "업종 : ${users.category.displayName}",
+            titleText = users.userName,
+            contentText = "업종 : ${users.shoppingCategory}",
             modifier = Modifier
         )
     }
@@ -44,8 +45,4 @@ fun MyPageProfileContent(
 @Preview(showBackground = true)
 @Composable
 fun PreviewMyPageProfileSection() {
-    MyPageProfileContent(
-        users = Users(1, "듀가나디 잡화점", ShoppingMallType.HOUSEHOLD_GOODS),
-        modifier = Modifier
-    )
 }
