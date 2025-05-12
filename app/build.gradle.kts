@@ -106,6 +106,8 @@ dependencies {
     //DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
+    // moshi
+    implementation(libs.bundles.moshi)
     //Filament
    // implementation("com.google.android.filament:filament-android:1.33.1")
    // implementation("com.google.android.filament:gltfio-android:1.33.1")
