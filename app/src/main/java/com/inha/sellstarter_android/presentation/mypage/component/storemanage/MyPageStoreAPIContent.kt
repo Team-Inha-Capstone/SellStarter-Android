@@ -26,6 +26,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -58,6 +60,7 @@ fun MyPageStoreAPIContent(
 ) {
     var isAdding by remember { mutableStateOf(false) }
     var newKeyText by remember { mutableStateOf("") }
+    val editingApiIds = remember { mutableStateListOf<Int>() }
 
     Column(modifier = modifier) {
         TitleAndText(
@@ -68,13 +71,15 @@ fun MyPageStoreAPIContent(
             modifier = Modifier
         )
 
+        val editingKeyMap = remember { mutableStateMapOf<Int, String>() }
+
         LazyColumn(
             contentPadding = PaddingValues(vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(users.apiKey) { apiKey ->
-                var editingKey by remember { mutableStateOf(apiKey.key) }
-                var isEditing by remember { mutableStateOf(false) }
+                val isEditing = editingKeyMap.contains(apiKey.apiId)
+                val editingKey = editingKeyMap[apiKey.apiId] ?: apiKey.key
 
                 if (isEditing) {
                     Column(
@@ -88,7 +93,7 @@ fun MyPageStoreAPIContent(
 
                         DefaultTextField(
                             value = editingKey,
-                            onValueChange = { editingKey = it },
+                            onValueChange = { editingKeyMap[apiKey.apiId] = it },
                             innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
                             singleLine = true,
                             borderColor = Grey100,
@@ -110,7 +115,7 @@ fun MyPageStoreAPIContent(
                                         key = editingKey
                                     )
                                 )
-                                isEditing = false
+                                editingKeyMap.remove(apiKey.apiId)
                             },
                             width = 100,
                             height = 40,
@@ -123,7 +128,7 @@ fun MyPageStoreAPIContent(
                     ApiKeyItem(
                         apiKey = apiKey,
                         onEditClick = {
-                            isEditing = true
+                            editingKeyMap[apiKey.apiId] = apiKey.key // 편집 시작
                         },
                         onDeleteClick = {
                             viewModel.deleteApiKey(

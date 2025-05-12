@@ -38,7 +38,7 @@ fun ApiKeyItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onEditClick },
+            .clickable { onEditClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
@@ -81,10 +81,10 @@ fun ApiKeyItem(
         }
 
         IconButton(
-            onClick = onDeleteClick,
+            onClick = onEditClick,
             modifier = Modifier.weight(0.1f)
         ) {
-            Icon(Icons.Default.Edit, contentDescription = "Delete")
+            Icon(Icons.Default.Edit, contentDescription = "Edit")
         }
     }
 
