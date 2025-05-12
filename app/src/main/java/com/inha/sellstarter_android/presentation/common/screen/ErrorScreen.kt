@@ -19,14 +19,16 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.ui.theme.Grey100
+import com.inha.sellstarter_android.ui.theme.Red200
 
 @Composable
 fun ErrorScreen(
     errorText: String,
-    errorTextColor: Color,
-    errorIcon: ImageVector,
-    iconTint: Color,
-    modifier: Modifier,
+    errorTextColor: Color = Grey100,
+    errorIcon: ImageVector = Icons.Default.Warning,
+    iconTint: Color = Red200,
+    modifier: Modifier = Modifier.fillMaxSize(),
 ) {
     Column(
         modifier = modifier,
