@@ -18,10 +18,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.presentation.model.ChatMessage
+import com.inha.sellstarter_android.domain.model.ChatMessage
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Purple200
-import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun ChatMessageItem(chatMessage: ChatMessage) {

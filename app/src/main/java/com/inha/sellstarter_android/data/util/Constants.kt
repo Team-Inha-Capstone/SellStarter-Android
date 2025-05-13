@@ -12,4 +12,9 @@ object Constants {
     const val UPDATE = "update"
 
 
+    // 챗봇
+    const val CHAT_START = "chat_start"
+    const val CHAT = "chat"
+    const val CHAT_END = "chat_end"
+
 }

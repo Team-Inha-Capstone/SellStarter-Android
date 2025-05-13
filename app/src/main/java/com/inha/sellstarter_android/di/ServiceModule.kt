@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.di
 
+import com.inha.sellstarter_android.data.service.ChatbotService
 import com.inha.sellstarter_android.data.service.MyPageService
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,16 @@ object ServiceModule {
 
     @Singleton
     @Provides
-    fun provideMyPageService(retrofit: Retrofit): MyPageService =
+    fun provideMyPageService(
+        @NetworkModule.MainRetrofit retrofit: Retrofit
+    ): MyPageService =
         retrofit.create(MyPageService::class.java)
 
+
+    @Singleton
+    @Provides
+    fun provideChatbotService(
+        @NetworkModule.PythonRetrofit retrofit: Retrofit
+    ): ChatbotService =
+        retrofit.create(ChatbotService::class.java)
 }
