@@ -28,7 +28,7 @@ import com.inha.sellstarter_android.presentation.common.component.chip.Chip
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Grey900
-import com.inha.sellstarter_android.ui.theme.Purple100
+import com.inha.sellstarter_android.ui.theme.Purple50
 import com.inha.sellstarter_android.ui.theme.Red200
 
 @Composable
@@ -41,7 +41,7 @@ fun InventoryItem(
             contentColor = Grey0,
             containerColor = Grey0
         ),
-        border = BorderStroke(1.dp, Purple100),
+        border = BorderStroke(1.dp, Purple50),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         modifier = modifier
             .background(Grey0)

@@ -18,10 +18,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.presentation.model.ChatMessage
+import com.inha.sellstarter_android.domain.model.ChatMessage
+import com.inha.sellstarter_android.ui.theme.Blue100
+import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
+import com.inha.sellstarter_android.ui.theme.Grey900
+import com.inha.sellstarter_android.ui.theme.Purple100
 import com.inha.sellstarter_android.ui.theme.Purple200
-import com.inha.sellstarter_android.ui.theme.AppTypography
+import com.inha.sellstarter_android.ui.theme.Purple50
 
 @Composable
 fun ChatMessageItem(chatMessage: ChatMessage) {
@@ -36,13 +40,13 @@ fun ChatMessageItem(chatMessage: ChatMessage) {
             Box(
                 modifier = Modifier
                     .background(
-                        if (chatMessage.isUser) Purple200 else Grey100,
+                        if (chatMessage.isUser) Purple50 else Purple200,
                         shape = RoundedCornerShape(12.dp)
                     )
             ) {
                 Text(
                     text = chatMessage.message,
-                    color = Color.White,
+                    color = if (chatMessage.isUser) Grey900 else Grey0,
                     style = MaterialTheme.typography.labelSmall,
                     modifier = Modifier.padding(8.dp)
                 )
@@ -51,20 +55,22 @@ fun ChatMessageItem(chatMessage: ChatMessage) {
                 modifier = Modifier
                     .padding(end = 16.dp)
                     .align(Alignment.End),
-                isUser = true
+                isUser = true,
+                color = Purple50
             )
             else TriangleArrow(
                 modifier = Modifier
                     .padding(start = 12.dp)
                     .align(Alignment.Start),
-                isUser = false
+                isUser = false,
+                color = Purple200
             )
         }
     }
 }
 
 @Composable
-fun TriangleArrow(modifier: Modifier, isUser: Boolean) {
+fun TriangleArrow(modifier: Modifier, isUser: Boolean, color: Color) {
     Canvas(modifier = modifier.padding(bottom = 4.dp)) {
         val path = Path().apply {
             if (isUser) {
@@ -78,7 +84,7 @@ fun TriangleArrow(modifier: Modifier, isUser: Boolean) {
                 close()
             }
         }
-        drawPath(path, color = if (isUser) Purple200 else Grey100) // 꼬리 색상
+        drawPath(path, color = color) // 꼬리 색상
     }
 }
 

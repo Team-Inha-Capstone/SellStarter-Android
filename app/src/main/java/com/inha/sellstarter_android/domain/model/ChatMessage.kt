@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.presentation.model
+package com.inha.sellstarter_android.domain.model
 
 data class ChatMessage(
     val message: String,

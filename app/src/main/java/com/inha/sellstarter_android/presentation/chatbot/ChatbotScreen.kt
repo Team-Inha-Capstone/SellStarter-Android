@@ -13,6 +13,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -24,11 +27,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.presentation.common.component.DefaultTextField
 import com.inha.sellstarter_android.presentation.common.component.ImageIconButton
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
-import com.inha.sellstarter_android.presentation.model.ChatMessage
+import com.inha.sellstarter_android.domain.model.ChatMessage
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.AppTypography
@@ -36,32 +40,44 @@ import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun ChatbotScreen(
-    modifier: Modifier
+    modifier: Modifier,
+    viewModel: ChatbotViewModel = hiltViewModel()
 ) {
-    var messageText by remember { mutableStateOf("무엇이든 물어보세요.\nex)파란 니트 재고 위치 알려줘.") }
-    val chatMessages = remember {
-        mutableStateListOf<ChatMessage>()
-            .apply {
-                addAll(
-                    listOf(
-                        ChatMessage("안녕하세요! 무엇을 도와드릴까요?", isUser = false),
-                        ChatMessage("파란 니트 재고 알려주세요.", isUser = true),
-                        ChatMessage("네! 노란 선반 2번째에 있습니다.\n더 필요한게 있다면 말씀해주세요.\n언제든지 물어봐주셔도 됩니다! 저는 챗봇입니다.", isUser = false)
-                    )
-                )
-            }
+
+    var messageText by remember { mutableStateOf("") }
+    val chatMessages by viewModel.chatMessages.collectAsState()
+    val isTyping by viewModel.isBotTyping.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.startChatbot()
+        // 진입 시 챗봇 시작 api 호출
     }
 
-    Column(
-        modifier = modifier
-    ) {
+    DisposableEffect(Unit) {
+        onDispose {
+            viewModel.endChatbot()
+        } // 챗봇 나갈 때 종료 api 호출 필요
+    }
+
+    Column(modifier = modifier.fillMaxSize()) {
         TitleScreen(title = "채팅")
+
         LazyColumn(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth(),
             reverseLayout = true
         ) {
-            items(chatMessages.reversed()) { chatMessages ->
-                ChatMessageItem(chatMessage = chatMessages)
+            items(chatMessages.reversed()) { chatMessage ->
+                ChatMessageItem(chatMessage = chatMessage)
+            }
+
+            if (isTyping) {
+                item {
+                    ChatMessageItem(
+                        chatMessage = ChatMessage("챗 봇 타이핑 중...", isUser = false)
+                    )
+                }
             }
         }
 
@@ -90,13 +106,13 @@ fun ChatbotScreen(
                 text = "",
                 imagePainter = painterResource(R.drawable.ic_send_white),
                 onClick = {
-                    if (messageText.isNotEmpty()) {
-                        chatMessages.add(ChatMessage(messageText, isUser = true))
-                        messageText = "" // 입력 필드 비우기
+                    if (messageText.isNotBlank()) {
+                        viewModel.sendMessage(messageText)
+                        messageText = ""
                     }
                 },
                 radius = 100,
-                enabled = true,
+                enabled = messageText.isNotBlank(),
                 imageSize = 24,
                 width = 60,
                 height = 60,
@@ -104,9 +120,9 @@ fun ChatbotScreen(
                     .padding(vertical = 24.dp, horizontal = 12.dp)
             )
         }
-
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

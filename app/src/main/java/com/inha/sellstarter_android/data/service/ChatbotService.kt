@@ -1,0 +1,31 @@
+package com.inha.sellstarter_android.data.service
+
+import com.inha.sellstarter_android.data.model.request.chatbot.ChatbotMessageRequestDto
+import com.inha.sellstarter_android.data.model.response.chatbot.ChatbotEndResponseDto
+import com.inha.sellstarter_android.data.model.response.chatbot.ChatbotResponseDto
+import com.inha.sellstarter_android.data.util.Constants.CHAT
+import com.inha.sellstarter_android.data.util.Constants.CHAT_END
+import com.inha.sellstarter_android.data.util.Constants.CHAT_START
+import com.inha.sellstarter_android.util.base.BaseResponseDto
+import retrofit2.http.Body
+import retrofit2.http.POST
+import retrofit2.http.Path
+
+interface ChatbotService {
+    @POST("$CHAT_START/{userId}")
+    suspend fun postChatStart(
+        @Path("userId") userId : Int = 4
+    ): BaseResponseDto<ChatbotResponseDto>
+
+    @POST("$CHAT/{userId}")
+    suspend fun postChatMessage(
+        @Path("userId") userId : Int =4,
+        @Body chatbotMessageRequestDto: ChatbotMessageRequestDto
+    ): BaseResponseDto<ChatbotResponseDto>
+
+    @POST("$CHAT_END/{userId}")
+    suspend fun postChatEnd(
+        @Path("userId") userId : Int =4,
+    ): ChatbotEndResponseDto
+
+}

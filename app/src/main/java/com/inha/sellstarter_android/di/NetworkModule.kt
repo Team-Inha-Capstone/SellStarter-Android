@@ -19,9 +19,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
     @Provides
     @Singleton
-    fun provideRetrofit(
+    @MainRetrofit
+    fun provideMainRetrofit(
         client: OkHttpClient,
         jsonConverter: Converter.Factory,
     ): Retrofit =
@@ -30,6 +32,21 @@ object NetworkModule {
             .client(client)
             .addConverterFactory(jsonConverter)
             .build()
+
+
+    @Provides
+    @Singleton
+    @PythonRetrofit
+    fun providePythonRetrofit(
+        client: OkHttpClient,
+        jsonConverter: Converter.Factory,
+    ): Retrofit =
+        Retrofit.Builder()
+            .baseUrl("")
+            .client(client)
+            .addConverterFactory(jsonConverter)
+            .build()
+
 
     @Provides
     @Singleton
@@ -87,13 +104,17 @@ object NetworkModule {
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class AuthInterceptorQualifier
-
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
     annotation class LoggingInterceptorQualifier
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class HeaderInterceptorQualifier
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class MainRetrofit
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class PythonRetrofit
 }

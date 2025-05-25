@@ -25,8 +25,7 @@ import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.presentation.common.component.chip.ChipGroup
 import com.inha.sellstarter_android.presentation.model.ChipState
 import com.inha.sellstarter_android.ui.theme.Grey0
-import com.inha.sellstarter_android.ui.theme.Purple100
-import com.inha.sellstarter_android.ui.theme.AppTypography
+import com.inha.sellstarter_android.ui.theme.Purple50
 
 @Composable
 fun OrderStatisticsContent(modifier: Modifier){
@@ -55,7 +54,7 @@ fun OrderStatisticsContent(modifier: Modifier){
                     chipState.isSelected.value = i == index
                 }
             },
-            selectedColor = Purple100,
+            selectedColor = Purple50,
             unselectedColor = Grey0,
             chipModifier = Modifier.padding(horizontal = 4.dp)
         )

@@ -20,8 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.ui.theme.Grey900
-import com.inha.sellstarter_android.ui.theme.Purple100
-import com.inha.sellstarter_android.ui.theme.AppTypography
+import com.inha.sellstarter_android.ui.theme.Purple50
 
 @Composable
 fun OnboardingScreen(
@@ -61,7 +60,7 @@ fun OnboardingScreen(
 
         OneButton(
             text = "시작하기",
-            buttonBackgroundColor = Purple100,
+            buttonBackgroundColor = Purple50,
             fontColor = Grey900,
             enabled = true,
             onClick = { },

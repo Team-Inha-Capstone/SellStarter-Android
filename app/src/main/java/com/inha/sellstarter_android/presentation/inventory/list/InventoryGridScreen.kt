@@ -25,7 +25,7 @@ import com.inha.sellstarter_android.presentation.inventory.list.component.Invent
 import com.inha.sellstarter_android.presentation.inventory.list.component.SearchBar
 import com.inha.sellstarter_android.presentation.inventory.list.component.SoldOutFilterChips
 import com.inha.sellstarter_android.ui.theme.Grey0
-import com.inha.sellstarter_android.ui.theme.Purple100
+import com.inha.sellstarter_android.ui.theme.Purple50
 
 @Composable
 fun InventoryGridScreen(
@@ -56,7 +56,7 @@ fun InventoryGridScreen(
         Spacer(modifier = Modifier.size(12.dp))
 
         SoldOutFilterChips(
-            selectedColor = Purple100,
+            selectedColor = Purple50,
             unSelectedColor = Grey0,
             onChipSelected = { selected, filterType ->  },
             modifier = Modifier.fillMaxWidth()

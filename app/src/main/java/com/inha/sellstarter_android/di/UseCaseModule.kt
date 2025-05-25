@@ -1,6 +1,11 @@
 package com.inha.sellstarter_android.di
 
+import com.inha.sellstarter_android.domain.repository.ChatbotRepository
 import com.inha.sellstarter_android.domain.repository.MyPageRepository
+import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotEndUseCase
+import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotMessageUseCase
+import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotStartUseCase
+import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotUseCases
 import com.inha.sellstarter_android.domain.usecase.mypage.MyPageUseCases
 import com.inha.sellstarter_android.domain.usecase.mypage.MyPageUserInfoUseCase
 import com.inha.sellstarter_android.domain.usecase.mypage.UserApiDeleteUseCase
@@ -28,5 +33,18 @@ object UseCaseModule {
             userInfoUseCase = MyPageUserInfoUseCase(myPageRepository)
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideChatbotUseCases(
+        chatbotRepository: ChatbotRepository
+    ): ChatbotUseCases {
+        return ChatbotUseCases(
+            chatStartUseCase = ChatbotStartUseCase(chatbotRepository),
+            chatbotMessageUseCase = ChatbotMessageUseCase(chatbotRepository),
+            chatEndUseCase = ChatbotEndUseCase(chatbotRepository)
+        )
+    }
+
 
 }
