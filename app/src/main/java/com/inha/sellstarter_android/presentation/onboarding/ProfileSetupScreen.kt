@@ -24,7 +24,7 @@ import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.component.OutlinedTextField
 import com.inha.sellstarter_android.presentation.common.component.RadioButtonGroup
 import com.inha.sellstarter_android.ui.theme.Grey900
-import com.inha.sellstarter_android.ui.theme.Purple100
+import com.inha.sellstarter_android.ui.theme.Purple50
 
 @Composable
 fun ProfileSetupScreen(
@@ -77,7 +77,7 @@ fun ProfileSetupScreen(
 
         OneButton(
             text = "회원가입 완료",
-            buttonBackgroundColor = Purple100,
+            buttonBackgroundColor = Purple50,
             fontColor = Grey900,
             enabled = isButtonEnabled,
             onClick = { },

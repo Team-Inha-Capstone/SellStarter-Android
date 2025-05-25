@@ -1,6 +1,5 @@
 package com.inha.sellstarter_android.presentation.mypage
 
-import android.net.http.HttpException
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.inha.sellstarter_android.data.model.request.mypage.UserApiDeleteRequestDto
