@@ -1,5 +1,14 @@
 package com.inha.sellstarter_android.data.model.response.chatbot
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class ChatbotResponseDto(
-    val message: String
+    val response: String
+)
+
+@Serializable
+data class ChatbotEndResponseDto(
+    val success : Boolean,
+    val message : String
 )

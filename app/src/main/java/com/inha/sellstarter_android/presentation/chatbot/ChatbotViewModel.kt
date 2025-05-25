@@ -3,8 +3,6 @@ package com.inha.sellstarter_android.presentation.chatbot
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.inha.sellstarter_android.data.model.request.chatbot.ChatbotMessageRequestDto
-import com.inha.sellstarter_android.data.model.request.chatbot.ChatbotRequestDto
-import com.inha.sellstarter_android.data.model.response.chatbot.ChatbotResponseDto
 import com.inha.sellstarter_android.domain.model.ChatMessage
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotUseCases
 import com.inha.sellstarter_android.util.base.UiState
@@ -33,7 +31,7 @@ class ChatbotViewModel @Inject constructor(
                 onStart = {},
                 onError = { it.logHttpError("chatbotStart") },
                 apiCall = {
-                    chatbotUseCases.chatStartUseCase.invoke(ChatbotRequestDto(userId = 4))
+                    chatbotUseCases.chatStartUseCase.invoke()
                 }
             ).let { result ->
                 handleBotResponse(result)
@@ -50,7 +48,7 @@ class ChatbotViewModel @Inject constructor(
                 onError = { it.logHttpError("chatbotSend") },
                 apiCall = {
                     chatbotUseCases.chatbotMessageUseCase.invoke(
-                        ChatbotMessageRequestDto(userId = 4, message = message)
+                        ChatbotMessageRequestDto(message = message)
                     )
                 }
             ).let { result ->
@@ -62,7 +60,7 @@ class ChatbotViewModel @Inject constructor(
 
     fun endChatbot() {
         viewModelScope.launch {
-            chatbotUseCases.chatEndUseCase.invoke(ChatbotRequestDto(userId = 4))
+            chatbotUseCases.chatEndUseCase.invoke()
             _chatMessages.value = emptyList() // 대화 종료 시 리스트 초기화
         }
     }

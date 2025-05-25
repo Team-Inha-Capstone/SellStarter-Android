@@ -1,8 +1,9 @@
 package com.inha.sellstarter_android.data.datasource.remote.impl
 
+import android.util.Log
 import com.inha.sellstarter_android.data.datasource.remote.ChatbotDataSource
 import com.inha.sellstarter_android.data.model.request.chatbot.ChatbotMessageRequestDto
-import com.inha.sellstarter_android.data.model.request.chatbot.ChatbotRequestDto
+import com.inha.sellstarter_android.data.model.response.chatbot.ChatbotEndResponseDto
 import com.inha.sellstarter_android.data.model.response.chatbot.ChatbotResponseDto
 import com.inha.sellstarter_android.data.service.ChatbotService
 import com.inha.sellstarter_android.util.base.BaseResponseDto
@@ -11,15 +12,16 @@ import javax.inject.Inject
 class ChatbotDataSourceImpl @Inject constructor(
     private val chatbotService: ChatbotService
 ) : ChatbotDataSource {
-    override suspend fun postChatStart(chatbotRequestDto: ChatbotRequestDto): BaseResponseDto<ChatbotResponseDto> {
-        return chatbotService.postChatStart(chatbotRequestDto)
+    override suspend fun postChatStart(): BaseResponseDto<ChatbotResponseDto> {
+        Log.e("hyeon", chatbotService.postChatStart().toString());
+        return chatbotService.postChatStart()
     }
 
     override suspend fun postChatMessage(chatbotMessageRequestDto: ChatbotMessageRequestDto): BaseResponseDto<ChatbotResponseDto> {
-        return chatbotService.postChatMessage(chatbotMessageRequestDto)
+        return chatbotService.postChatMessage(chatbotMessageRequestDto = chatbotMessageRequestDto)
     }
 
-    override suspend fun postChatEnd(chatbotRequestDto: ChatbotRequestDto): BaseResponseDto<ChatbotResponseDto> {
-        return chatbotService.postChatEnd(chatbotRequestDto)
+    override suspend fun postChatEnd(): ChatbotEndResponseDto {
+        return chatbotService.postChatEnd()
     }
 }
