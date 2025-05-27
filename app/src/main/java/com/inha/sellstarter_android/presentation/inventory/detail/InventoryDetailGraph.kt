@@ -24,7 +24,7 @@ fun InventoryDetailGraph(
     )
 
     Image(
-        painter = painterResource(R.drawable.ic_placeholder),
+        painter = painterResource(R.drawable.ic_graph),
         contentDescription = "dummyGraph",
         contentScale = ContentScale.FillBounds,
         modifier = modifier.height(200.dp)

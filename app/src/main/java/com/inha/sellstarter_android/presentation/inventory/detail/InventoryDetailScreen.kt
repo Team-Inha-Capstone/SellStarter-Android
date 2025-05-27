@@ -8,6 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,8 +27,12 @@ import com.inha.sellstarter_android.ui.theme.Purple200
 fun InventoryDetailScreen(
     inventory: Inventory,
     onClickPicking : () -> Unit,
+    onBack: () -> Unit,
+    onClickEditCount: (Int) -> Unit,
     modifier: Modifier,
 ) {
+    var showEditDialog by remember { mutableStateOf(false) }
+
     Column(
         modifier = modifier.fillMaxSize()
     ) {
@@ -40,7 +48,7 @@ fun InventoryDetailScreen(
         ) {
 
             AsyncImage(
-                model = inventory.image,
+                model = inventory.imageUrl,
                 contentDescription = "inventoryDetailImage",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -57,7 +65,7 @@ fun InventoryDetailScreen(
                 titleText = "보유재고",
                 contentText = "${inventory.quantity}개",
                 isAvailableEdit = true,
-                onClickEdit = { },
+                onClickEdit = { showEditDialog = true },
                 modifier = Modifier
             )
 
@@ -75,7 +83,7 @@ fun InventoryDetailScreen(
 
             TitleAndText(
                 titleText = "재고 유통기한",
-                contentText = inventory.expirationDate,
+                contentText = inventory.expiration,
                 modifier = Modifier
             )
 
@@ -95,7 +103,17 @@ fun InventoryDetailScreen(
                 .fillMaxWidth()
                 .padding(24.dp)
         )
+    }
 
+    if (showEditDialog) {
+        InventoryCountEditDialog(
+            currentCount = inventory.quantity,
+            onDismiss = { showEditDialog = false },
+            onConfirm = { newCount ->
+                onClickEditCount(newCount)
+                showEditDialog = false
+            }
+        )
     }
 }
 
@@ -103,11 +121,5 @@ fun InventoryDetailScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewInventoryDetailScreen() {
-
-    InventoryDetailScreen(
-        inventory = Inventory(1, "사과", 10, "aa", true, "2022-10-13", "2022-10-13"),
-        onClickPicking = { },
-        modifier = Modifier.fillMaxSize()
-    )
 
 }
