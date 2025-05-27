@@ -7,11 +7,13 @@ object Constants {
     const val CORE = "core"
 
     const val USER = "user"
+    const val LIST = "list"
     const val SEARCH = "search"
 
     // 재고
     const val INVENTORY = "inventory"
     const val PICK = "pick"
+    const val COUNT = "count"
 
 
     // 마이페이지
