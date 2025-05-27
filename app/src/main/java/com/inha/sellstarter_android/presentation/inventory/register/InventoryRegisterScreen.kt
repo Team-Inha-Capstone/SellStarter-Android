@@ -1,90 +1,91 @@
 package com.inha.sellstarter_android.presentation.inventory.register
 
+import android.content.Context
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
 import com.inha.sellstarter_android.presentation.common.component.OneButton
-import com.inha.sellstarter_android.presentation.common.component.TitleAndPurplelinedTextField
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
-import com.inha.sellstarter_android.presentation.inventory.register.component.InventoryExpirationDateContent
+import com.inha.sellstarter_android.presentation.inventory.InventoryViewModel
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple200
+import com.inha.sellstarter_android.util.barcode.BarcodeUtils
 
 @Composable
 fun InventoryRegisterScreen(
-    onClickRegister: () -> Unit,
-    modifier: Modifier
+    modifier: Modifier = Modifier,
+    viewModel: InventoryViewModel = hiltViewModel(),
+    context: Context = LocalContext.current,
+    onClickRegisterSuccess: () -> Unit
 ) {
-    Column(
-        modifier = modifier.fillMaxSize()
-    ) {
-        TitleScreen(
-            title = "재고 등록하기"
+    var name by remember { mutableStateOf("") }
+    var count by remember { mutableStateOf("") }
+    var location by remember { mutableStateOf("") }
+    var expiration by remember { mutableStateOf("") }
+    var option by remember { mutableStateOf("") }
+    var imageUri by remember { mutableStateOf<Uri?>(null) }
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent(),
+        onResult = { uri -> if (uri != null) imageUri = uri }
+    )
+
+    Column(modifier = modifier.fillMaxSize()) {
+        TitleScreen(title = "재고 등록하기")
+
+        InventoryForm(
+            name = name,
+            onNameChange = { name = it },
+            count = count,
+            onCountChange = { count = it },
+            location = location,
+            onLocationChange = { location = it },
+            option = option,
+            onOptionChange = { option = it },
+            expiration = expiration,
+            onExpirationChange = { expiration = it },
+            imageUri = imageUri,
+            onImageClick = { launcher.launch("image/*") },
+            modifier = Modifier.weight(1f)
         )
-
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 24.dp)
-        ) {
-
-            AsyncImage(
-                model = "",
-                contentDescription = "inventoryRegisterImage",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(250.dp)
-            )
-
-            TitleAndPurplelinedTextField(
-                value = "",
-                onValueChange = { },
-                titleText = "상품명",
-                modifier = Modifier
-            )
-
-            TitleAndPurplelinedTextField(
-                value = "",
-                onValueChange = { },
-                titleText = "재고수량",
-                modifier = Modifier
-            )
-
-            TitleAndPurplelinedTextField(
-                value = "",
-                onValueChange = { },
-                titleText = "재고위치",
-                modifier = Modifier
-            )
-
-            InventoryExpirationDateContent(
-                modifier = Modifier
-            )
-
-
-        }
 
         OneButton(
             text = "재고등록",
             buttonBackgroundColor = Purple200,
             fontColor = Grey0,
-            enabled = true,
-            onClick = onClickRegister,
+            enabled = name.isNotBlank() && count.isNotBlank() && location.isNotBlank(),
+            onClick = {
+                val barcodeId = BarcodeUtils.generateBarcodeId()
+                val dto = InventoryCreateRequestDto(
+                    inventoryName = name,
+                    inventoryCount = count.toIntOrNull() ?: 0,
+                    inventoryLocation = location,
+                    expiration = expiration,
+                    inventoryOption = option,
+                    barcodeId = barcodeId
+                )
+                viewModel.saveDraft(dto, imageUri)
+                onClickRegisterSuccess()
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(24.dp)
         )
-
     }
 }
 
@@ -92,9 +93,5 @@ fun InventoryRegisterScreen(
 @Composable
 fun PreviewInventoryRegisterScreen() {
 
-    InventoryRegisterScreen(
-        onClickRegister = { },
-        modifier = Modifier.fillMaxSize()
-    )
 
 }

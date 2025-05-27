@@ -82,7 +82,7 @@ fun BarcodeScannerScreen(
         // 유효한 바코드 → 수량 입력 Dialog
         if (showValidDialog && scannedBarcode != null) {
             ValidBarcodeDialog(
-                inventory = Inventory(1, "사과", 10, "aa", true, "2022-10-13", "2022-10-13"),
+                inventory = Inventory("1", "사과", 10, "aa", expiration = "2022-01-01", false, location = "위치", option = "option"),
                 quantity = selectedQty,
                 onQuantityChange = { selectedQty = it },
                 onDismiss = {

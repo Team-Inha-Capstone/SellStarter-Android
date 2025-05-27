@@ -24,7 +24,7 @@ fun InventoryExpirationDateContent(
 
     val selectedDateText = remember(selectedDateMillis) {
         selectedDateMillis?.let {
-            val formatter = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
+            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             formatter.format(Date(it))
         } ?: "날짜를 선택해주세요"
     }

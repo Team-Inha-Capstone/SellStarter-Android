@@ -1,6 +1,7 @@
 package com.inha.sellstarter_android.presentation.inventory.list.component
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -52,6 +53,9 @@ fun SearchBar(
                 contentDescription = "Search",
                 tint = Grey900,
                 modifier = Modifier.padding(start = 8.dp)
+                    .clickable {
+                    onSearch()
+                }
             )
 
             Box(

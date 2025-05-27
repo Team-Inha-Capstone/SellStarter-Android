@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.inha.sellstarter_android.domain.model.Inventory
+import com.inha.sellstarter_android.domain.model.InventoryItem
 import com.inha.sellstarter_android.presentation.common.component.chip.Chip
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
@@ -33,7 +34,7 @@ import com.inha.sellstarter_android.ui.theme.Red200
 
 @Composable
 fun InventoryItem(
-    inventory : Inventory,
+    inventory : InventoryItem,
     modifier: Modifier
 ) {
     Card(
@@ -55,7 +56,7 @@ fun InventoryItem(
                 .align(Alignment.CenterHorizontally)
         ) {
             AsyncImage(
-            model = inventory.image,
+            model = inventory.imageUrl,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
@@ -93,7 +94,7 @@ fun InventoryItem(
         )
 
         Text(
-            text = "최근 수정일 2022.10.15",
+            text = "옵션 : ${inventory.option}",
             style = MaterialTheme.typography.bodySmall,
             color = Grey100,
             modifier = Modifier.padding(horizontal = 24.dp)
@@ -107,7 +108,14 @@ fun InventoryItem(
 @Composable
 fun PreviewInventoryItem() {
     InventoryItem(
-        inventory = Inventory(1, "사과", 10,"aa",true,"2022-10-13", "2022-10-13"),
+        inventory =  InventoryItem(
+            id = "4",
+            name = "오렌지",
+            quantity = 5,
+            isSoldOut = false,
+            option = "",
+            imageUrl = "dd"
+        ),
         modifier = Modifier.size(500.dp)
     )
 }

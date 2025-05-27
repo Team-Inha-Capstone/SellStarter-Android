@@ -1,6 +1,11 @@
 package com.inha.sellstarter_android.presentation.inventory.list.component
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -10,32 +15,39 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.presentation.common.component.chip.ChipGroup
 import com.inha.sellstarter_android.presentation.model.ChipState
+import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun SoldOutFilterChips(
-    onChipSelected: (selected: Boolean, filterType: String) -> Unit,
-    selectedColor : Color,
-    unSelectedColor : Color,
-    modifier: Modifier
+    selectedIndex: Int,
+    onChipSelected: (index: Int, filterType: String) -> Unit,
+    selectedColor: Color,
+    unSelectedColor: Color,
+    modifier: Modifier = Modifier
 ) {
-    val chipList = remember {
-        mutableStateListOf(
-            ChipState("전체재고", mutableStateOf(true)),
-            ChipState("품절재고", mutableStateOf(false))
-        )
-    }
+    val chipItems = listOf("전체재고", "품절재고")
 
-    ChipGroup(
-        elements = chipList,
-        chipFontSize = 14,
+    Row(
         modifier = modifier,
-        selectedColor = selectedColor,
-        unselectedColor = unSelectedColor,
-        chipModifier = Modifier.padding(end = 8.dp),
-        onChipClick = { text, currentState, index ->
-            val newState = !currentState
-            chipList[index].isSelected.value = newState
-            onChipSelected(newState, text)
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        chipItems.forEachIndexed { index, label ->
+            FilterChip(
+                selected = selectedIndex == index,
+                onClick = {
+                    onChipSelected(index, label)
+                },
+                label = {
+                    Text(
+                        text = label,
+                        style = AppTypography.bodyMedium
+                    )
+                },
+                colors = FilterChipDefaults.filterChipColors(
+                    selectedContainerColor = selectedColor,
+                    containerColor = unSelectedColor
+                )
+            )
         }
-    )
+    }
 }

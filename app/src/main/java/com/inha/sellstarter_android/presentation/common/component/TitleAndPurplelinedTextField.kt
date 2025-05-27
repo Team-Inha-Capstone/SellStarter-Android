@@ -14,10 +14,10 @@ import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
 fun TitleAndPurplelinedTextField(
-    titleText : String,
-    value : String,
-    onValueChange : (String) -> Unit,
-    modifier: Modifier
+    titleText: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Text(
         text = titleText,

@@ -1,5 +1,7 @@
 package com.inha.sellstarter_android.util.base
 
+import android.util.Log
+
 suspend fun <T> safeApiCall(
     onStart: (() -> Unit)? = null,
     onError: ((Throwable) -> Unit)? = null,
