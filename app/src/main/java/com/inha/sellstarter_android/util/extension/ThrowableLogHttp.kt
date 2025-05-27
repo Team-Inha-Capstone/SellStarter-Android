@@ -3,7 +3,7 @@ package com.inha.sellstarter_android.util.extension
 import android.util.Log
 import retrofit2.HttpException
 
-fun Throwable.logHttpError(tag: String = "Hyeon") {
+fun Throwable.logHttpError(tag: String = "hyeon") {
     when (this) {
         is HttpException -> {
             val errorBody = this.response()?.errorBody()?.string()
