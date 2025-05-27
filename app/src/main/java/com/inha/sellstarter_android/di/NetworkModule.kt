@@ -28,7 +28,7 @@ object NetworkModule {
         jsonConverter: Converter.Factory,
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://rvi4vmqy07.execute-api.us-east-1.amazonaws.com/prod/")
             .client(client)
             .addConverterFactory(jsonConverter)
             .build()
@@ -42,7 +42,7 @@ object NetworkModule {
         jsonConverter: Converter.Factory,
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("http://13.218.96.94:8000/")
             .client(client)
             .addConverterFactory(jsonConverter)
             .build()

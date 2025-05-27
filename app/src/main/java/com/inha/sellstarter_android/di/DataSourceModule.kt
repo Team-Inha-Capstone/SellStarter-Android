@@ -1,8 +1,10 @@
 package com.inha.sellstarter_android.di
 
 import com.inha.sellstarter_android.data.datasource.remote.ChatbotDataSource
+import com.inha.sellstarter_android.data.datasource.remote.InventoryDataSource
 import com.inha.sellstarter_android.data.datasource.remote.MyPageDataSource
 import com.inha.sellstarter_android.data.datasource.remote.impl.ChatbotDataSourceImpl
+import com.inha.sellstarter_android.data.datasource.remote.impl.InventoryDataSourceImpl
 import com.inha.sellstarter_android.data.datasource.remote.impl.MyPageDataSourceImpl
 import dagger.Binds
 import dagger.Module
@@ -22,4 +24,9 @@ abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun bindChatbotRemoteDataSource(chatbotRemoteDataSourceImpl: ChatbotDataSourceImpl): ChatbotDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindInventoryRemoteDataSource(inventoryRemoteDataSourceImpl: InventoryDataSourceImpl) : InventoryDataSource
+
 }
