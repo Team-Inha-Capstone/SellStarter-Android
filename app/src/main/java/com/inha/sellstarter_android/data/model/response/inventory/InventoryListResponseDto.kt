@@ -11,8 +11,8 @@ data class InventoryListResponseDto (
     val page: Int,
     @SerialName("size")
     val size: Int,
-    @SerialName("totalElements")
+    @SerialName("total_elements")
     val totalElements: Int,
-    @SerialName("totalPages")
+    @SerialName("total_pages")
     val totalPages: Int
 )

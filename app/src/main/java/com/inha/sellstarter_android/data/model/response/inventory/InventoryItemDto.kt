@@ -11,6 +11,8 @@ data class InventoryItemDto(
     val inventoryName: String,
     @SerialName("inventory_count")
     val inventoryCount: Int,
+    @SerialName("option")
+    val option : String?,
     @SerialName("image_url")
-    val imageUrl: String
+    val imageUrl: String?
 )

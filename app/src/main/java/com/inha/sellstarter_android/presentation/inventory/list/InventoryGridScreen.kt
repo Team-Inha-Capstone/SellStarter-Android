@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.inventory.list
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,36 +22,39 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.domain.model.Inventory
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.inha.sellstarter_android.domain.model.InventoryItem
+import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
+import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
+import com.inha.sellstarter_android.presentation.inventory.InventoryViewModel
 import com.inha.sellstarter_android.presentation.inventory.list.component.InventoryItem
 import com.inha.sellstarter_android.presentation.inventory.list.component.SearchBar
 import com.inha.sellstarter_android.presentation.inventory.list.component.SoldOutFilterChips
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple50
+import com.inha.sellstarter_android.util.base.UiState
 
 @Composable
 fun InventoryGridScreen(
-    inventoryList: List<Inventory>,
-    modifier: Modifier
+    inventoryUiState: UiState<List<InventoryItem>>,
+    searchText: String,
+    selectedChipIndex: Int,
+    onSearchTextChanged: (String) -> Unit,
+    onSearch: () -> Unit,
+    onChipSelected: (Int) -> Unit,
+    onItemClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-    ) {
-        TitleScreen(
-            title = "스토어 재고 확인"
-        )
-
-        val hint = "ex) 재고를 검색해보세요."
-        var text by remember { mutableStateOf(hint) }
+    Column(modifier = modifier.fillMaxSize()) {
+        TitleScreen(title = "스토어 재고 확인")
 
         SearchBar(
-            value = text,
-            onValueChange = {},
-            onSearch = {},
-            modifier = Modifier.fillMaxWidth()
+            value = searchText,
+            onValueChange = onSearchTextChanged,
+            onSearch = onSearch,
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = 12.dp)
                 .height(50.dp)
         )
@@ -56,50 +62,88 @@ fun InventoryGridScreen(
         Spacer(modifier = Modifier.size(12.dp))
 
         SoldOutFilterChips(
+            selectedIndex = selectedChipIndex,
+            onChipSelected = { index, _ -> onChipSelected(index) },
             selectedColor = Purple50,
             unSelectedColor = Grey0,
-            onChipSelected = { selected, filterType ->  },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = 12.dp)
         )
 
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            content = {
-                items(inventoryList, key = { it.id }) { item ->
-                    InventoryItem(
-                        inventory = item,
-                        modifier = Modifier
-                            .height(300.dp)
-                    )
-                }
-            },
-            modifier = Modifier.padding(12.dp)
-        )
+        Spacer(modifier = Modifier.size(12.dp))
 
+        when (val state = inventoryUiState) {
+            is UiState.Loading -> {
+                LoadingScreen(
+                    loadingText = "정보를 가져오고 있습니다.",
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
 
+            is UiState.Success -> {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 12.dp),
+                    content = {
+                        items(state.data, key = { it.id }) { item ->
+                            InventoryItem(
+                                inventory = item,
+                                modifier = Modifier
+                                    .height(300.dp)
+                                    .clickable {
+                                        onItemClick(item.id)
+                                    }
+                            )
+                        }
+                    }
+                )
+            }
+
+            is UiState.Failure -> {
+                ErrorScreen(errorText = "재고 정보를 가져오는 데 실패했습니다.")
+            }
+        }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewInventoryGridScreen() {
-
-    InventoryGridScreen(
-        inventoryList = listOf(
-            Inventory(1, "사과", 10, "aa", true, "2022-10-13", "2022-10-13"),
-            Inventory(2, "오렌지", 10, "aa", false, "2022-10-13", "2022-10-13"),
-            Inventory(3, "레몬", 10, "aa", false, "2022-10-13", "2022-10-13"),
-            Inventory(4, "초콜릿", 10, "aa", true, "2022-10-13", "2022-10-13"),
-            Inventory(5, "옷", 10, "aa", false, "2022-10-13", "2022-10-13"),
-            Inventory(6, "휴지", 10, "aa", true, "2022-10-13", "2022-10-13"),
-            Inventory(7, "레몬수", 10, "aa", false, "2022-10-13", "2022-10-13"),
-            Inventory(8, "마우스", 10, "aa", false, "2022-10-13", "2022-10-13"),
-
-        ),
-        modifier = Modifier.fillMaxSize()
-    )
-
+//    InventoryGridScreen(
+//        inventoryList = listOf(
+//            InventoryItem(
+//                id = "1",
+//                name = "사과",
+//                quantity = 10,
+//                isSoldOut = false,
+//                imageUrl = "aa"
+//            ),
+//    InventoryItem(
+//        id = "2",
+//        name = "바나나",
+//        quantity = 0,
+//        isSoldOut = true,
+//        imageUrl = "bb"
+//    ),
+//    InventoryItem(
+//        id = "3",
+//        name = "포도",
+//        quantity = 3,
+//        isSoldOut = false,
+//        imageUrl = "cc"
+//    ),
+//    InventoryItem(
+//        id = "4",
+//        name = "오렌지",
+//        quantity = 5,
+//        isSoldOut = false,
+//        imageUrl = "dd"
+//    )),
+//    modifier = Modifier.fillMaxSize())
 }
