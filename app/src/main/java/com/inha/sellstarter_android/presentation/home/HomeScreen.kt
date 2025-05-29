@@ -27,6 +27,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,6 +43,7 @@ import com.inha.sellstarter_android.presentation.home.component.OrderStatisticsC
 import com.inha.sellstarter_android.presentation.home.component.OrderSummaryContent
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
+import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Purple100
 import com.inha.sellstarter_android.ui.theme.Purple200
 import com.inha.sellstarter_android.ui.theme.Purple50
@@ -139,14 +141,27 @@ fun HomeScreen(
                         .align(Alignment.BottomEnd)
                         .size(90.dp),
                     shape = CircleShape,
-                    backgroundColor = Purple200
+                    backgroundColor = Purple200,
                 ) {
-                    Text(
-                        text = "AI\n챗봇",
-                        color = Grey0,
-                        style = MaterialTheme.typography.titleLarge,
-                        textAlign = TextAlign.Center
-                    )
+                    Column {
+                        Image(
+                            painter = painterResource(R.drawable.ic_chatbot),
+                            contentDescription = "chatbot image",
+                            modifier = Modifier
+                                .size(30.dp)
+                                .align(Alignment.CenterHorizontally),
+                            colorFilter = ColorFilter.tint(Grey0)
+                        )
+
+                        Spacer(modifier = Modifier.size(4.dp))
+
+                        Text(
+                            text = "AI 챗봇",
+                            color = Grey0,
+                            style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
             }
         }
