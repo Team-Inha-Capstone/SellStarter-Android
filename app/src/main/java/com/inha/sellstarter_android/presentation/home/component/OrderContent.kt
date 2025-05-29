@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -34,20 +35,22 @@ fun OrderSummaryContent(
     homeInfo: HomeInfo,
     modifier: Modifier
 ) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            text = "오늘의 주문 확인",
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold
+        )
+        Icon(
+            imageVector = Icons.Default.KeyboardArrowRight,
+            contentDescription = "이동",
+            modifier = Modifier.padding(start = 4.dp)
+        )
+    }
+
+    Spacer(modifier = Modifier.height(12.dp))
+
     Box(modifier = modifier) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = "오늘의 주문 확인",
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold
-            )
-            Icon(
-                imageVector = Icons.Default.PlayArrow,
-                contentDescription = "이동",
-                modifier = Modifier.padding(start = 4.dp)
-            )
-        }
-        Spacer(modifier = Modifier.height(12.dp))
         OrderSummaryCard(
             homeInfo = homeInfo,
             modifier = Modifier

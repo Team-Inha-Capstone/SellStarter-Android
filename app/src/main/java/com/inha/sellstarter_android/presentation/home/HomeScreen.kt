@@ -113,6 +113,8 @@ fun HomeScreen(
                         modifier = Modifier
                     )
 
+                    Spacer(modifier = Modifier.height(16.dp))
+
                     HomeFeatureContent(
                         isDataAnalyticsSubscribed = homeInfo.analysisSubscribed,
                         onClickInventoryRegister = onClickInventoryRegister,
