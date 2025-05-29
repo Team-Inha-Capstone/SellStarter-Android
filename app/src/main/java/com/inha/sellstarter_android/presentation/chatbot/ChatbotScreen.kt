@@ -66,18 +66,18 @@ fun ChatbotScreen(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(),
-            reverseLayout = true
+            reverseLayout = true,
         ) {
-            items(chatMessages.reversed()) { chatMessage ->
-                ChatMessageItem(chatMessage = chatMessage)
-            }
-
             if (isTyping) {
                 item {
                     ChatMessageItem(
                         chatMessage = ChatMessage("챗 봇 타이핑 중...", isUser = false)
                     )
                 }
+            }
+
+            items(chatMessages.reversed()) { chatMessage ->
+                ChatMessageItem(chatMessage = chatMessage)
             }
         }
 
