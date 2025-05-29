@@ -1,6 +1,5 @@
 package com.inha.sellstarter_android.presentation.onboarding
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.LocalTextStyle
@@ -31,6 +29,7 @@ import com.inha.sellstarter_android.presentation.common.component.OutlinedTextFi
 import com.inha.sellstarter_android.presentation.common.component.RadioButtonGroup
 import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Purple50
+import com.inha.sellstarter_android.util.extension.validateShopName
 
 @Composable
 fun ProfileSetupScreen(
@@ -100,10 +99,6 @@ fun ProfileSetupScreen(
     }
 }
 
-fun validateShopName(input: String): Boolean {
-    val regex = "^[가-힣a-zA-Z0-9 ]+$".toRegex()
-    return input.isNotBlank() && regex.matches(input)
-}
 
 @Preview(showBackground = true)
 @Composable

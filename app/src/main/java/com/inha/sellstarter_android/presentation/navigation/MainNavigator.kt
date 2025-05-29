@@ -1,7 +1,5 @@
 package com.inha.sellstarter_android.presentation.navigation
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,12 +18,15 @@ import com.inha.sellstarter_android.presentation.inventory.detail.InventoryDetai
 import com.inha.sellstarter_android.presentation.inventory.list.InventoryGridRoute
 import com.inha.sellstarter_android.presentation.inventory.register.barcode.BarcodeConfirmDialog
 import com.inha.sellstarter_android.presentation.inventory.register.InventoryRegisterRoute
+import com.inha.sellstarter_android.presentation.mypage.FontSizeViewModel
+import com.inha.sellstarter_android.presentation.mypage.MyPageScreen
 import com.inha.sellstarter_android.presentation.onboarding.OnboardingScreen
 import com.inha.sellstarter_android.presentation.onboarding.ProfileSetupScreen
 
 @Composable
-fun MainNavGraph(
-    navController: NavHostController = rememberNavController(),
+fun MainNavigator(
+    navController: NavHostController,
+    fontSizeViewModel: FontSizeViewModel,
     innerPadding: PaddingValues,
     modifier: Modifier = Modifier
         .fillMaxSize()
@@ -33,12 +34,12 @@ fun MainNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "onboarding"
+        startDestination = "home"
     ) {
 
         composable("onboarding") {
             OnboardingScreen(
-                onClickStart ={
+                onClickStart = {
                     navController.navigate("profile/setup")
                 },
                 modifier = Modifier
@@ -49,9 +50,9 @@ fun MainNavGraph(
 
         composable("profile/setup") {
             ProfileSetupScreen(
-                onClickNext ={
+                onClickNext = {
                     navController.navigate("home")
-                } ,
+                },
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
@@ -118,6 +119,15 @@ fun MainNavGraph(
                 onBack = { navController.popBackStack() },
                 onClickPicking = {},
                 modifier = modifier
+            )
+        }
+
+        composable("mypage") {
+            MyPageScreen(
+                modifier = modifier,
+                onFontScaleChanged = { scale ->
+                    fontSizeViewModel.updateFontScale(scale)
+                }
             )
         }
     }

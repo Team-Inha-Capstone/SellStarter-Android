@@ -1,12 +1,16 @@
 package com.inha.sellstarter_android.presentation.home.component
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -18,8 +22,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.domain.model.HomeInfo
 import com.inha.sellstarter_android.ui.theme.AppTypography
 
@@ -28,25 +34,35 @@ fun OrderSummaryContent(
     homeInfo: HomeInfo,
     modifier: Modifier
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = "오늘의 주문 확인",
-            style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold
+    Box(modifier = modifier) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = "오늘의 주문 확인",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold
+            )
+            Icon(
+                imageVector = Icons.Default.PlayArrow,
+                contentDescription = "이동",
+                modifier = Modifier.padding(start = 4.dp)
+            )
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+        OrderSummaryCard(
+            homeInfo = homeInfo,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(145.dp)
         )
-        Icon(
-            imageVector = Icons.Default.PlayArrow,
-            contentDescription = "이동",
-            modifier = Modifier.padding(start = 4.dp)
+        Image(
+            painter = painterResource(R.drawable.img_cart),
+            contentDescription = "card background image",
+            modifier = Modifier
+                .size(150.dp)
+                .padding(start = 30.dp)
+                .align(Alignment.BottomEnd)
         )
     }
-    Spacer(modifier = Modifier.height(12.dp))
-    OrderSummaryCard(
-        homeInfo = homeInfo,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(145.dp)
-    )
 }
 
 @Composable

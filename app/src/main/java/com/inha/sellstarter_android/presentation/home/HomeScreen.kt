@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,10 +26,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.domain.model.ShoppingMallType
 import com.inha.sellstarter_android.domain.model.Users
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
@@ -80,7 +83,7 @@ fun HomeScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = homeInfo.shopName,
+                            text = "스토어 : ${homeInfo.shopName}",
                             style = MaterialTheme.typography.headlineSmall,
                             modifier = Modifier.weight(1f)
                         )
@@ -109,8 +112,6 @@ fun HomeScreen(
                         homeInfo = homeInfo,
                         modifier = Modifier
                     )
-
-                    Spacer(modifier = Modifier.height(24.dp))
 
                     HomeFeatureContent(
                         isDataAnalyticsSubscribed = homeInfo.analysisSubscribed,
