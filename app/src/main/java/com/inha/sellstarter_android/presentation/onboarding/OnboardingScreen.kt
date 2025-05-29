@@ -24,6 +24,7 @@ import com.inha.sellstarter_android.ui.theme.Purple50
 
 @Composable
 fun OnboardingScreen(
+    onClickStart: () -> Unit,
     modifier: Modifier
 ) {
     Column(
@@ -63,7 +64,7 @@ fun OnboardingScreen(
             buttonBackgroundColor = Purple50,
             fontColor = Grey900,
             enabled = true,
-            onClick = { },
+            onClick = onClickStart,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(24.dp)
@@ -76,6 +77,7 @@ fun OnboardingScreen(
 @Composable
 fun PreviewOnboardingScreen() {
     OnboardingScreen(
+        onClickStart = { },
         modifier = Modifier.fillMaxSize()
     )
 }
