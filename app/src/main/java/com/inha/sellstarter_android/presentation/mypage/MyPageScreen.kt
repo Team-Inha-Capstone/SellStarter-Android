@@ -1,8 +1,10 @@
 package com.inha.sellstarter_android.presentation.mypage
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,6 +30,7 @@ import com.inha.sellstarter_android.presentation.mypage.component.appfont.FontSi
 import com.inha.sellstarter_android.presentation.mypage.component.help.HelpContent
 import com.inha.sellstarter_android.presentation.mypage.component.help.helpItems
 import com.inha.sellstarter_android.presentation.mypage.component.storemanage.MyPageStoreAPIContent
+import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.util.base.UiState
 
 @Composable
@@ -60,29 +63,39 @@ fun MyPageScreen(
 
         is UiState.Success -> {
             val userInfo = (userInfoState as UiState.Success).data
-            Column(modifier = modifier) {
+            Column(
+                modifier = modifier
+            ) {
+
                 TitleScreen(title = "마이페이지")
 
                 MyPageProfileContent(
                     users = userInfo, // 필요시 Mapper 만들어야 함
-                    modifier = Modifier.padding(vertical = 12.dp, horizontal = 12.dp)
+                    modifier = Modifier
+                        .padding(top = 24.dp, bottom = 12.dp)
+                        .fillMaxWidth()
                 )
 
                 MyPageStoreAPIContent(
                     users = userInfo,
-                    modifier = Modifier.padding(vertical = 12.dp, horizontal = 24.dp),
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    modifier = Modifier
+                        .padding(vertical = 8.dp)
+                        .fillMaxWidth()
                 )
 
                 AppFontSizeContent(
                     onClickEdit = { isFontDialogVisible = true },
                     fontScale = currentFontSizeType,
-                    modifier = Modifier.padding(vertical = 12.dp, horizontal = 24.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
                 )
 
                 HelpContent(
                     items = helpItems,
-                    modifier = Modifier.padding(vertical = 8.dp, horizontal = 24.dp)
+                    modifier = Modifier
+                        .padding(vertical = 8.dp)
+                        .fillMaxWidth()
                 )
             }
 
