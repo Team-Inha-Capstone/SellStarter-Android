@@ -20,6 +20,8 @@ import com.inha.sellstarter_android.presentation.inventory.detail.InventoryDetai
 import com.inha.sellstarter_android.presentation.inventory.list.InventoryGridRoute
 import com.inha.sellstarter_android.presentation.inventory.register.barcode.BarcodeConfirmDialog
 import com.inha.sellstarter_android.presentation.inventory.register.InventoryRegisterRoute
+import com.inha.sellstarter_android.presentation.onboarding.OnboardingScreen
+import com.inha.sellstarter_android.presentation.onboarding.ProfileSetupScreen
 
 @Composable
 fun MainNavGraph(
@@ -31,8 +33,30 @@ fun MainNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = "onboarding"
     ) {
+
+        composable("onboarding") {
+            OnboardingScreen(
+                onClickStart ={
+                    navController.navigate("profile/setup")
+                },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+            )
+        }
+
+        composable("profile/setup") {
+            ProfileSetupScreen(
+                onClickNext ={
+                    navController.navigate("home")
+                } ,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+            )
+        }
 
         composable("home") {
             HomeRoute(
