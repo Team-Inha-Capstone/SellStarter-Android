@@ -1,5 +1,7 @@
 package com.inha.sellstarter_android.presentation.home.component
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -7,18 +9,25 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.ui.theme.AppTypography
 import com.inha.sellstarter_android.ui.theme.Grey0
+import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 
 @Composable
 fun HomeFeatureContent(
@@ -34,6 +43,7 @@ fun HomeFeatureContent(
             title = "재고 등록",
             description = "새롭게 들어온\n물류의 재고를\n등록할 수 있습니다.",
             onClick = onClickInventoryRegister,
+            backgroundImg = R.drawable.img_box,
             modifier = Modifier
                 .weight(1f)
                 .height(130.dp)
@@ -42,7 +52,8 @@ fun HomeFeatureContent(
         HomeFeatureCard(
             title = "데이터 분석",
             description = "스토어의 재고와\n판매추이 등을\n분석할 수 있습니다.",
-            onClick = if(isDataAnalyticsSubscribed) onClickInventoryRegister else ({}),
+            onClick = if (isDataAnalyticsSubscribed) onClickInventoryRegister else ({}),
+            backgroundImg = R.drawable.img_purple_search,
             modifier = Modifier
                 .weight(1f)
                 .height(130.dp)
@@ -56,6 +67,8 @@ fun HomeFeatureCard(
     title: String,
     description: String,
     onClick: () -> Unit,
+    @DrawableRes
+    backgroundImg: Int,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -65,6 +78,19 @@ fun HomeFeatureCard(
         onClick = onClick,
         elevation = 4.dp
     ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Image(
+                painter = painterResource(backgroundImg),
+                contentDescription = "card background image",
+                modifier = Modifier
+                    .padding(vertical = 10.dp, horizontal = 4.dp)
+                    .size(100.dp)
+            )
+        }
+
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.Center
@@ -82,5 +108,21 @@ fun HomeFeatureCard(
                 modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewHomeFeatureCard() {
+    SellStarterAndroidTheme {
+        HomeFeatureCard(
+            title = "재고 등록",
+            description = "새롭게 들어온\n물류의 재고를\n등록할 수 있습니다.",
+            onClick = { /* 클릭 미리보기용 */ },
+            backgroundImg = R.drawable.img_purple_search,
+            modifier = Modifier
+                .padding(16.dp)
+        )
     }
 }
