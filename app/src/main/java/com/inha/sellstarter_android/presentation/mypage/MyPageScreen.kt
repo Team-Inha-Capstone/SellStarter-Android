@@ -72,7 +72,6 @@ fun MyPageScreen(
                 MyPageProfileContent(
                     users = userInfo, // 필요시 Mapper 만들어야 함
                     modifier = Modifier
-                        .padding(top = 24.dp, bottom = 12.dp)
                         .fillMaxWidth()
                 )
 

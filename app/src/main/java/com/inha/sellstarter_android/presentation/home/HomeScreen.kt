@@ -1,6 +1,7 @@
 package com.inha.sellstarter_android.presentation.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,7 +42,9 @@ import com.inha.sellstarter_android.presentation.home.component.OrderStatisticsC
 import com.inha.sellstarter_android.presentation.home.component.OrderSummaryContent
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
+import com.inha.sellstarter_android.ui.theme.Purple100
 import com.inha.sellstarter_android.ui.theme.Purple200
+import com.inha.sellstarter_android.ui.theme.Purple50
 import com.inha.sellstarter_android.util.base.UiState
 
 @Composable
@@ -56,7 +59,7 @@ fun HomeScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(24.dp)
+            .padding(vertical = 24.dp, horizontal = 16.dp)
     ) {
         when (val state = homeInfoState) {
             is UiState.Loading -> {
@@ -79,13 +82,16 @@ fun HomeScreen(
                         .verticalScroll(rememberScrollState())
                 ) {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             text = "스토어 : ${homeInfo.shopName}",
                             style = MaterialTheme.typography.headlineSmall,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 8.dp)
                         )
 
                         IconButton(onClick = { }) {
@@ -107,7 +113,6 @@ fun HomeScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // 전달된 홈 정보를 기반으로 요약 렌더링
                     OrderSummaryContent(
                         homeInfo = homeInfo,
                         modifier = Modifier
@@ -125,7 +130,7 @@ fun HomeScreen(
 
                     OrderStatisticsContent(modifier = Modifier.fillMaxWidth())
 
-                    Spacer(modifier = Modifier.height(30.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
                 }
 
                 FloatingActionButton(
@@ -139,7 +144,7 @@ fun HomeScreen(
                     Text(
                         text = "AI\n챗봇",
                         color = Grey0,
-                        style = MaterialTheme.typography.bodyLarge,
+                        style = MaterialTheme.typography.titleLarge,
                         textAlign = TextAlign.Center
                     )
                 }

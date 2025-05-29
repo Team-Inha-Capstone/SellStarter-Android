@@ -76,7 +76,7 @@ fun HomeFeatureCard(
         backgroundColor = Grey0,
         modifier = modifier,
         onClick = onClick,
-        elevation = 4.dp
+        elevation = 2.dp
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),

@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.inventory.list.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -32,7 +33,9 @@ fun SearchBar(
     value: String = "검색해 보세요.",
     onValueChange: (String) -> Unit,
     onSearch: () -> Unit,
-    modifier: Modifier = Modifier.height(45.dp)
+    modifier: Modifier =
+        Modifier
+            .height(45.dp)
 ) {
     Box(
         modifier = modifier
@@ -52,10 +55,11 @@ fun SearchBar(
                 imageVector = Icons.Default.Search,
                 contentDescription = "Search",
                 tint = Grey900,
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier
+                    .padding(start = 8.dp)
                     .clickable {
-                    onSearch()
-                }
+                        onSearch()
+                    }
             )
 
             Box(
@@ -103,7 +107,8 @@ fun PreviewSearchBar() {
         value = "재고를 검색해 보세요. ex) 사과",
         onValueChange = {},
         onSearch = {},
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(horizontal = 12.dp)
             .height(50.dp)
     )

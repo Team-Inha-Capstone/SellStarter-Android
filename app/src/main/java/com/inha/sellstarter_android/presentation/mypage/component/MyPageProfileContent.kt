@@ -34,17 +34,16 @@ fun MyPageProfileContent(
     Box(
         modifier = Modifier
             .background(Grey0)
-            .padding(horizontal = 12.dp)
     ) {
         Row(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier.padding(horizontal = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 painter = painterResource(R.drawable.ic_profile),
                 contentDescription = "profileImage",
                 modifier = Modifier
-                    .size(100.dp)
+                    .size(90.dp)
                     .padding(12.dp)
             )
 
