@@ -13,6 +13,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.inha.sellstarter_android.presentation.chatbot.ChatbotRoute
+import com.inha.sellstarter_android.presentation.home.HomeRoute
 import com.inha.sellstarter_android.presentation.inventory.InventoryViewModel
 import com.inha.sellstarter_android.presentation.inventory.detail.InventoryDetailRoute
 import com.inha.sellstarter_android.presentation.inventory.list.InventoryGridRoute
@@ -29,8 +31,31 @@ fun MainNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "inventory/register"
+        startDestination = "home"
     ) {
+
+        composable("home") {
+            HomeRoute(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                onNavigateToInventoryRegister = {
+                    navController.navigate("inventory/register")
+                },
+                onNavigateToChatbot = {
+                    navController.navigate("chatbot")
+                }
+            )
+        }
+
+        composable("chatbot") {
+            ChatbotRoute(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            )
+        }
+
         composable("inventory/register") {
             InventoryRegisterRoute(
                 onRegisterSuccess = { navController.navigate("inventory/confirm") },

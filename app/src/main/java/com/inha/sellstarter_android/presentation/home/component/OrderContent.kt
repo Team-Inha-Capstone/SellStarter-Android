@@ -20,10 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.domain.model.HomeInfo
 import com.inha.sellstarter_android.ui.theme.AppTypography
 
 @Composable
-fun OrderSummaryContent(modifier : Modifier) {
+fun OrderSummaryContent(
+    homeInfo: HomeInfo,
+    modifier: Modifier
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
             text = "오늘의 주문 확인",
@@ -38,14 +42,18 @@ fun OrderSummaryContent(modifier : Modifier) {
     }
     Spacer(modifier = Modifier.height(12.dp))
     OrderSummaryCard(
-       modifier = Modifier
-           .fillMaxWidth()
-           .height(145.dp)
-   )
+        homeInfo = homeInfo,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(145.dp)
+    )
 }
 
 @Composable
-fun OrderSummaryCard(modifier : Modifier){
+fun OrderSummaryCard(
+    homeInfo: HomeInfo,
+    modifier: Modifier
+) {
     Card(
         shape = RoundedCornerShape(16.dp),
         backgroundColor = Color.White, // 원하는 색으로 설정
@@ -54,14 +62,14 @@ fun OrderSummaryCard(modifier : Modifier){
     ) {
         Column(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                OrderSummaryItem("신규주문", "12", Modifier.weight(1f))
-                OrderSummaryItem("피킹완료", "12", Modifier.weight(1f))
-                OrderSummaryItem("출고완료", "12", Modifier.weight(1f))
+                OrderSummaryItem("신규주문", homeInfo.newOrder, Modifier.weight(1f))
+                OrderSummaryItem("피킹완료", homeInfo.pickingCompleted, Modifier.weight(1f))
+                OrderSummaryItem("출고완료", homeInfo.shippingCompleted, Modifier.weight(1f))
             }
             Spacer(modifier = Modifier.height(24.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                OrderSummaryItem("취소요청", "1", Modifier.weight(1f))
-                OrderSummaryItem("반품요청", "1", Modifier.weight(1f))
+                OrderSummaryItem("취소요청", homeInfo.cancelRequest, Modifier.weight(1f))
+                OrderSummaryItem("반품요청", homeInfo.returnRequest, Modifier.weight(1f))
                 Spacer(Modifier.weight(1f))
             }
         }
@@ -69,7 +77,7 @@ fun OrderSummaryCard(modifier : Modifier){
 }
 
 @Composable
-fun OrderSummaryItem(title: String, count: String, modifier: Modifier) {
+fun OrderSummaryItem(title: String, count: Int, modifier: Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -80,7 +88,7 @@ fun OrderSummaryItem(title: String, count: String, modifier: Modifier) {
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = count,
+            text = "$count",
             style = MaterialTheme.typography.titleMedium
         )
     }

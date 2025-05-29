@@ -1,12 +1,15 @@
 package com.inha.sellstarter_android.di
 
 import com.inha.sellstarter_android.domain.repository.ChatbotRepository
+import com.inha.sellstarter_android.domain.repository.HomeRepository
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import com.inha.sellstarter_android.domain.repository.MyPageRepository
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotEndUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotMessageUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotStartUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotUseCases
+import com.inha.sellstarter_android.domain.usecase.home.HomeInfoUseCase
+import com.inha.sellstarter_android.domain.usecase.home.HomeUseCases
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryDetailUseCase
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryEditCountUseCase
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryListUseCase
@@ -64,6 +67,16 @@ object UseCaseModule {
             inventorySearchUseCase = InventorySearchUseCase(inventoryRepository),
             inventoryEditCountUseCase = InventoryEditCountUseCase(inventoryRepository),
             inventoryRegisterUseCase = InventoryRegisterUseCase(inventoryRepository)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideHomeUseCase(
+        homeRepository: HomeRepository
+    ) : HomeUseCases {
+        return HomeUseCases(
+            homeInfoUseCase = HomeInfoUseCase(homeRepository)
         )
     }
 

@@ -21,105 +21,126 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.inha.sellstarter_android.domain.model.ShoppingMallType
 import com.inha.sellstarter_android.domain.model.Users
+import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
+import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
 import com.inha.sellstarter_android.presentation.home.component.HomeFeatureContent
 import com.inha.sellstarter_android.presentation.home.component.OrderStatisticsContent
 import com.inha.sellstarter_android.presentation.home.component.OrderSummaryContent
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Purple200
+import com.inha.sellstarter_android.util.base.UiState
 
 @Composable
 fun HomeScreen(
-    users: Users,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClickInventoryRegister: () -> Unit,
+    onClickChatbot: () -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
+    val homeInfoState by viewModel.homeInfoState.collectAsState()
 
     Box(
         modifier = modifier
             .fillMaxSize()
             .padding(24.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "스토어 ${users.storeName}",
-                    style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.weight(1f)
+        when (val state = homeInfoState) {
+            is UiState.Loading -> {
+                LoadingScreen(
+                    loadingText = "홈 정보를 불러오는 중입니다...",
+                    modifier = modifier.fillMaxSize()
                 )
+            }
 
-                IconButton(onClick = { /* 알림 클릭 로직 */ }) {
-                    Icon(
-                        imageVector = Icons.Default.Notifications,
-                        contentDescription = "알림",
-                        tint = Purple200
+            is UiState.Failure -> {
+                ErrorScreen("홈 정보를 불러오는데 실패했습니다.")
+            }
+
+            is UiState.Success -> {
+                val homeInfo = state.data
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = homeInfo.shopName,
+                            style = MaterialTheme.typography.headlineSmall,
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        IconButton(onClick = { }) {
+                            Icon(
+                                imageVector = Icons.Default.Notifications,
+                                contentDescription = "알림",
+                                tint = Purple200
+                            )
+                        }
+
+                        IconButton(onClick = { }) {
+                            Icon(
+                                imageVector = Icons.Default.Settings,
+                                contentDescription = "설정",
+                                tint = Grey100
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // 전달된 홈 정보를 기반으로 요약 렌더링
+                    OrderSummaryContent(
+                        homeInfo = homeInfo,
+                        modifier = Modifier
                     )
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    HomeFeatureContent(
+                        isDataAnalyticsSubscribed = homeInfo.analysisSubscribed,
+                        onClickInventoryRegister = onClickInventoryRegister,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    OrderStatisticsContent(modifier = Modifier.fillMaxWidth())
+
+                    Spacer(modifier = Modifier.height(80.dp))
                 }
 
-                IconButton(onClick = { /* 설정 클릭 로직 */ }) {
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = "설정",
-                        tint = Grey100
+                FloatingActionButton(
+                    onClick = onClickChatbot,
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .size(90.dp),
+                    shape = CircleShape,
+                    backgroundColor = Purple200
+                ) {
+                    Text(
+                        text = "AI\n챗봇",
+                        color = Grey0,
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center
                     )
                 }
             }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            OrderSummaryContent(modifier = Modifier)
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            HomeFeatureContent(
-                isDataAnalyticsSubscribed = false,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            OrderStatisticsContent(modifier = Modifier.fillMaxWidth())
-
-            Spacer(modifier = Modifier.height(80.dp)) // FAB 가려지지 않도록 여유 padding
-        }
-
-        FloatingActionButton(
-            onClick = { /*챗봇이동*/ },
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .size(90.dp),
-            shape = CircleShape,
-            backgroundColor = Purple200
-        ) {
-            Text(
-                text = "AI\n챗봇",
-                color = Grey0,
-                style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center
-            )
         }
     }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewHomeScreen() {
-    HomeScreen(
-        users = Users(1, "듀가나디 잡화점", ShoppingMallType.HOUSEHOLD_GOODS),
-        modifier = Modifier.fillMaxSize()
-    )
 }

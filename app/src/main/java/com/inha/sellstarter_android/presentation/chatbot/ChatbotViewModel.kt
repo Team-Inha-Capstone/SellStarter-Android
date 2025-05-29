@@ -22,7 +22,7 @@ class ChatbotViewModel @Inject constructor(
     private val _chatMessages = MutableStateFlow<List<ChatMessage>>(emptyList())
     val chatMessages: StateFlow<List<ChatMessage>> = _chatMessages
 
-    private val _isBotTyping = MutableStateFlow(false)
+    private val _isBotTyping = MutableStateFlow(true)
     val isBotTyping: StateFlow<Boolean> = _isBotTyping
 
     fun startChatbot() {
@@ -34,6 +34,7 @@ class ChatbotViewModel @Inject constructor(
                     chatbotUseCases.chatStartUseCase.invoke()
                 }
             ).let { result ->
+                _isBotTyping.value = false
                 handleBotResponse(result)
             }
         }
