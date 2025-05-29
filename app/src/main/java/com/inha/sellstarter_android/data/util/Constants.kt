@@ -10,6 +10,9 @@ object Constants {
     const val LIST = "list"
     const val SEARCH = "search"
 
+    // 홈
+    const val HOME ="home"
+
     // 재고
     const val INVENTORY = "inventory"
     const val PICK = "pick"

@@ -1,6 +1,7 @@
 package com.inha.sellstarter_android.di
 
 import com.inha.sellstarter_android.data.service.ChatbotService
+import com.inha.sellstarter_android.data.service.HomeService
 import com.inha.sellstarter_android.data.service.InventoryService
 import com.inha.sellstarter_android.data.service.MyPageService
 import dagger.Module
@@ -35,4 +36,11 @@ object ServiceModule {
         @NetworkModule.MainRetrofit retrofit: Retrofit
     ): InventoryService =
         retrofit.create(InventoryService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideHomeService(
+        @NetworkModule.MainRetrofit retrofit: Retrofit
+    ) : HomeService =
+        retrofit.create(HomeService::class.java)
 }
