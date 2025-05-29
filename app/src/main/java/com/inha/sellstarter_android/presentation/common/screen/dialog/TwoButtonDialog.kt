@@ -39,7 +39,6 @@ fun TwoButtonDialog(
     leftButtonEnabled: Boolean = true,
     rightButtonEnabled: Boolean = true
 ) {
-
     Box(
         modifier = modifier
             .fillMaxSize()
