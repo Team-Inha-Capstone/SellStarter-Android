@@ -12,12 +12,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.domain.model.ChatMessage
 import com.inha.sellstarter_android.ui.theme.Blue100
 import com.inha.sellstarter_android.ui.theme.Grey0
@@ -29,14 +33,25 @@ import com.inha.sellstarter_android.ui.theme.Purple50
 
 @Composable
 fun ChatMessageItem(chatMessage: ChatMessage) {
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
         horizontalArrangement = if (chatMessage.isUser) Arrangement.End else Arrangement.Start
     ) {
-        Column {
+        if (!chatMessage.isUser) {
+            Image(
+                painter = painterResource(R.drawable.ic_chatbot),
+                contentDescription = "chatbot image",
+                modifier = Modifier
+                    .size(32.dp)
+                    .align(Alignment.CenterVertically)
+            )
+        }
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+        ) {
             Box(
                 modifier = Modifier
                     .background(
