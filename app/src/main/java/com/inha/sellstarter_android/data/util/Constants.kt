@@ -14,6 +14,7 @@ object Constants {
     const val HOME ="home"
 
     // 재고
+    const val CHART = "chart"
     const val INVENTORY = "inventory"
     const val PICK = "pick"
     const val COUNT = "count"

@@ -1,6 +1,7 @@
 package com.inha.sellstarter_android.di
 
 import com.inha.sellstarter_android.domain.repository.ChatbotRepository
+import com.inha.sellstarter_android.domain.repository.DataAnalysisRepository
 import com.inha.sellstarter_android.domain.repository.HomeRepository
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import com.inha.sellstarter_android.domain.repository.MyPageRepository
@@ -8,6 +9,8 @@ import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotEndUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotMessageUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotStartUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotUseCases
+import com.inha.sellstarter_android.domain.usecase.dataanalysis.DataAnalysisUseCases
+import com.inha.sellstarter_android.domain.usecase.dataanalysis.InventoryFlowGraphUseCase
 import com.inha.sellstarter_android.domain.usecase.home.HomeInfoUseCase
 import com.inha.sellstarter_android.domain.usecase.home.HomeUseCases
 import com.inha.sellstarter_android.domain.usecase.home.WeeklySalesUseCase
@@ -62,13 +65,23 @@ object UseCaseModule {
     @Singleton
     fun provideInventoryUseCase(
         inventoryRepository: InventoryRepository
-    ) : InventoryUseCases {
+    ): InventoryUseCases {
         return InventoryUseCases(
             inventoryListUseCase = InventoryListUseCase(inventoryRepository),
             inventoryDetailUseCase = InventoryDetailUseCase(inventoryRepository),
             inventorySearchUseCase = InventorySearchUseCase(inventoryRepository),
             inventoryEditCountUseCase = InventoryEditCountUseCase(inventoryRepository),
-            inventoryRegisterUseCase = InventoryRegisterUseCase(inventoryRepository)
+            inventoryRegisterUseCase = InventoryRegisterUseCase(inventoryRepository),
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideDataAnalysisUseCase(
+        dataAnalysisRepository: DataAnalysisRepository
+    ): DataAnalysisUseCases{
+        return DataAnalysisUseCases(
+            inventoryFlowGraphUseCase = InventoryFlowGraphUseCase(dataAnalysisRepository)
         )
     }
 
@@ -76,7 +89,7 @@ object UseCaseModule {
     @Singleton
     fun provideHomeUseCase(
         homeRepository: HomeRepository
-    ) : HomeUseCases {
+    ): HomeUseCases {
         return HomeUseCases(
             homeInfoUseCase = HomeInfoUseCase(homeRepository),
             weeklySalesUseCase = WeeklySalesUseCase(homeRepository),

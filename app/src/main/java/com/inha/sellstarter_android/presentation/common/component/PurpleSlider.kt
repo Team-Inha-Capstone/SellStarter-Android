@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,7 +27,7 @@ import com.inha.sellstarter_android.ui.theme.Purple200
 fun PurpleSlider(
     text: String,
     fontColor: Color,
-    fontSize: Int,
+    fontStyle: TextStyle,
     step: Int,
     currentValue: Float,
     valueRange: ClosedFloatingPointRange<Float>,
@@ -39,8 +41,7 @@ fun PurpleSlider(
         Text(
             text = text,
             color = fontColor,
-            style = MaterialTheme.typography.labelMedium,
-            fontSize = fontSize.sp,
+            style = fontStyle,
             modifier = Modifier.padding(6.dp)
         )
 
@@ -70,13 +71,13 @@ fun PurpleSlider(
 @Preview(showBackground = true)
 @Composable
 fun PreviewSlider() {
-        PurpleSlider (
-            text = "글자크기",
-            fontColor = Grey900,
-            fontSize = 16,
-            valueRange = 1f..3f,
-            step = 1,
-            currentValue = 2f,
-            onSliderChange = { },
-        )
+    PurpleSlider(
+        text = "글자크기",
+        fontColor = Grey900,
+        fontStyle = MaterialTheme.typography.headlineMedium,
+        valueRange = 1f..3f,
+        step = 1,
+        currentValue = 2f,
+        onSliderChange = { },
+    )
 }

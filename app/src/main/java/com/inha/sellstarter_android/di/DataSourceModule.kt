@@ -1,10 +1,12 @@
 package com.inha.sellstarter_android.di
 
 import com.inha.sellstarter_android.data.datasource.remote.ChatbotDataSource
+import com.inha.sellstarter_android.data.datasource.remote.DataAnalysisDataSource
 import com.inha.sellstarter_android.data.datasource.remote.HomeDataSource
 import com.inha.sellstarter_android.data.datasource.remote.InventoryDataSource
 import com.inha.sellstarter_android.data.datasource.remote.MyPageDataSource
 import com.inha.sellstarter_android.data.datasource.remote.impl.ChatbotDataSourceImpl
+import com.inha.sellstarter_android.data.datasource.remote.impl.DataAnalysisDataSourceImpl
 import com.inha.sellstarter_android.data.datasource.remote.impl.HomeDataSourceImpl
 import com.inha.sellstarter_android.data.datasource.remote.impl.InventoryDataSourceImpl
 import com.inha.sellstarter_android.data.datasource.remote.impl.MyPageDataSourceImpl
@@ -29,9 +31,13 @@ abstract class DataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun bindInventoryRemoteDataSource(inventoryRemoteDataSourceImpl: InventoryDataSourceImpl) : InventoryDataSource
+    abstract fun bindInventoryRemoteDataSource(inventoryRemoteDataSourceImpl: InventoryDataSourceImpl): InventoryDataSource
 
     @Binds
     @Singleton
-    abstract fun bindHomeRemoteDataSource(homeDataSourceImpl: HomeDataSourceImpl) : HomeDataSource
+    abstract fun bindHomeRemoteDataSource(homeDataSourceImpl: HomeDataSourceImpl): HomeDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindDataRemoteDataSource(dataAnalysisDataSourceImpl: DataAnalysisDataSourceImpl): DataAnalysisDataSource
 }

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -93,7 +94,6 @@ fun HomeScreen(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                 ) {
-                    // 상단 스토어명 + 아이콘
                     Row(
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -126,10 +126,9 @@ fun HomeScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // 주문 현황 요약
                     OrderSummaryContent(
                         homeInfo = homeInfo,
-                        modifier = Modifier
+                        modifier = Modifier.wrapContentHeight()
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -137,7 +136,9 @@ fun HomeScreen(
                     HomeFeatureContent(
                         isDataAnalyticsSubscribed = homeInfo.analysisSubscribed,
                         onClickInventoryRegister = onClickInventoryRegister,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight()
                     )
 
                     Spacer(modifier = Modifier.height(24.dp))
@@ -154,10 +155,9 @@ fun HomeScreen(
                 }
 
                 Box(
-                    modifier = Modifier.
-                    align(Alignment.BottomEnd)
+                    modifier = Modifier.align(Alignment.BottomEnd)
                 ) {
-                    ChatbotFloatingButton (
+                    ChatbotFloatingButton(
                         onClickChatbot = onClickChatbot,
                         modifier = Modifier
                             .size(90.dp),

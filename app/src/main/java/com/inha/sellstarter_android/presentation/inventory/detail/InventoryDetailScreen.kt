@@ -1,11 +1,14 @@
 package com.inha.sellstarter_android.presentation.inventory.detail
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -13,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -26,7 +30,8 @@ import com.inha.sellstarter_android.ui.theme.Purple200
 @Composable
 fun InventoryDetailScreen(
     inventory: Inventory,
-    onClickPicking : () -> Unit,
+    graphUrl: String,
+    onClickPicking: () -> Unit,
     onBack: () -> Unit,
     onClickEditCount: (Int) -> Unit,
     modifier: Modifier,
@@ -34,7 +39,9 @@ fun InventoryDetailScreen(
     var showEditDialog by remember { mutableStateOf(false) }
 
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
         TitleScreen(
             title = "재고 상세확인"
@@ -46,13 +53,12 @@ fun InventoryDetailScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 24.dp)
         ) {
-
             AsyncImage(
                 model = inventory.imageUrl,
                 contentDescription = "inventoryDetailImage",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(250.dp)
+                    .height(200.dp)
             )
 
             TitleAndText(
@@ -89,20 +95,13 @@ fun InventoryDetailScreen(
 
             InventoryDetailGraph(
                 titleText = "재고 주문 추이 및 예측",
-                modifier = Modifier.fillMaxWidth()
+                graphUrl = graphUrl,
+                modifier = Modifier
+                    .fillMaxWidth()
             )
-        }
 
-        OneButton(
-            text = "재고피킹",
-            buttonBackgroundColor = Purple200,
-            fontColor = Grey0,
-            enabled = true,
-            onClick = onClickPicking,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp)
-        )
+            Spacer(modifier = Modifier.size(16.dp))
+        }
     }
 
     if (showEditDialog) {

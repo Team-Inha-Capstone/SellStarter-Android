@@ -36,13 +36,26 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    @PythonRetrofit
-    fun providePythonRetrofit(
+    @PythonChatbotRetrofit
+    fun providePythonChatbotRetrofit(
         client: OkHttpClient,
         jsonConverter: Converter.Factory,
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("http://13.218.96.94:8000/")
+            .baseUrl("http://$pythonBaseUrl:8000/")
+            .client(client)
+            .addConverterFactory(jsonConverter)
+            .build()
+
+    @Provides
+    @Singleton
+    @PythonDataRetrofit
+    fun providePythonDataRetrofit(
+        client: OkHttpClient,
+        jsonConverter: Converter.Factory,
+    ): Retrofit =
+        Retrofit.Builder()
+            .baseUrl("http://$pythonBaseUrl:8001/")
             .client(client)
             .addConverterFactory(jsonConverter)
             .build()
@@ -116,5 +129,9 @@ object NetworkModule {
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class PythonRetrofit
+    annotation class PythonChatbotRetrofit
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class PythonDataRetrofit
 }

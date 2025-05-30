@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.inventory.detail
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -22,14 +23,17 @@ fun InventoryDetailRoute(
     modifier: Modifier,
 ) {
     val state by viewModel.inventoryDetailState.collectAsState()
+    val graph by viewModel.inventoryGraphState.collectAsState()
 
     LaunchedEffect(barcodeId) {
+        viewModel.getInventoryFlowGraph(barcodeId)
         viewModel.getInventoryDetail(barcodeId)
     }
 
     when (val uiState = state) {
         is UiState.Success -> InventoryDetailScreen(
             inventory = uiState.data,
+            graphUrl = graph,
             onBack = onBack,
             onClickPicking = onClickPicking,
             modifier = modifier,

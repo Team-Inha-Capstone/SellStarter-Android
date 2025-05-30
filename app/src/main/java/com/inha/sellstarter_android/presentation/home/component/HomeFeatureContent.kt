@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
@@ -46,7 +47,7 @@ fun HomeFeatureContent(
             backgroundImg = R.drawable.img_box,
             modifier = Modifier
                 .weight(1f)
-                .height(130.dp)
+                .wrapContentHeight()
         )
 
         HomeFeatureCard(
@@ -56,7 +57,7 @@ fun HomeFeatureContent(
             backgroundImg = R.drawable.img_purple_search,
             modifier = Modifier
                 .weight(1f)
-                .height(130.dp)
+                .wrapContentHeight()
         )
     }
 }
