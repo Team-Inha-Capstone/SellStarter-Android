@@ -10,6 +10,8 @@ import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotStartUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotUseCases
 import com.inha.sellstarter_android.domain.usecase.home.HomeInfoUseCase
 import com.inha.sellstarter_android.domain.usecase.home.HomeUseCases
+import com.inha.sellstarter_android.domain.usecase.home.WeeklySalesUseCase
+import com.inha.sellstarter_android.domain.usecase.home.YearlySalesUseCase
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryDetailUseCase
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryEditCountUseCase
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryListUseCase
@@ -76,7 +78,9 @@ object UseCaseModule {
         homeRepository: HomeRepository
     ) : HomeUseCases {
         return HomeUseCases(
-            homeInfoUseCase = HomeInfoUseCase(homeRepository)
+            homeInfoUseCase = HomeInfoUseCase(homeRepository),
+            weeklySalesUseCase = WeeklySalesUseCase(homeRepository),
+            yearlySalesUseCase = YearlySalesUseCase(homeRepository)
         )
     }
 
