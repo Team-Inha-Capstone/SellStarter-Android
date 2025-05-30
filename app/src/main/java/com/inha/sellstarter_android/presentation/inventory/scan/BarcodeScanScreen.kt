@@ -1,6 +1,8 @@
 package com.inha.sellstarter_android.presentation.inventory.scan
 
 import android.content.Intent
+import android.util.Log
+import android.view.View
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,17 +21,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.zxing.BarcodeFormat
+import com.google.zxing.ResultPoint
 import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.presentation.inventory.scan.component.InvalidBarcodeDialog
 import com.inha.sellstarter_android.presentation.inventory.scan.component.ValidBarcodeDialog
+import com.journeyapps.barcodescanner.BarcodeCallback
+import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import kotlinx.coroutines.launch
 
 @Composable
 fun BarcodeScannerScreen(
+    barcodeId: String,
     onBack: () -> Unit,
-    onSubmitPicking: (String, Int) -> Unit,
+    onSubmitPicking: (String) -> Unit,
     modifier: Modifier,
 ) {
     val context = LocalContext.current
@@ -40,78 +46,55 @@ fun BarcodeScannerScreen(
 
     var selectedQty by remember { mutableStateOf(1) }
 
-    val scope = rememberCoroutineScope()
-
     Box(modifier = modifier) {
         AndroidView(
-            modifier = Modifier.fillMaxSize(),
             factory = { ctx ->
-                DecoratedBarcodeView(ctx).apply {
-                    barcodeView.decoderFactory = DefaultDecoderFactory(
-                        listOf(BarcodeFormat.CODE_39, BarcodeFormat.CODE_128)
-                    )
-                    initializeFromIntent(Intent())
-                    resume()
-                    decodeSingle { result ->
-                        val content = result.text
-                        scannedBarcode = content
-                        // 서버 api로 유효한 코드인지 확인
-                        scope.launch {
-                            val isValid =
-                                true //
-                            // view모델 메서드로 넣은 validateBarcodeFromServer(content) -> return Inventory
-                            if (isValid) {
-                                showValidDialog = true
-                            } else {
-                                showInvalidDialog = true
-                            }
-                        }
+                val barcodeView =
+                    DecoratedBarcodeView(ctx).apply {
+                        setDecoderFactory(
+                            DefaultDecoderFactory(
+                                listOf(
+                                    BarcodeFormat.CODE_39,
+                                    BarcodeFormat.CODE_128
+                                )
+                            )
+                        )
+                        resume() // 카메라 시작
+                        this.statusView.visibility = View.GONE // Zxing 아래 텍스트 지우기
+                        decodeContinuous(
+                            object : BarcodeCallback {
+                                override fun barcodeResult(result: BarcodeResult) {
+                                    if (result.toString() == barcodeId) {
+                                        onSubmitPicking(barcodeId)
+                                    } else {
+                                        onBack()
+                                    }
+                                    pause() // 중복 방지
+                                }
+
+                                override fun possibleResultPoints(resultPoints: List<ResultPoint>) {}
+                            },
+                        )
                     }
-                }
-            }
+                barcodeView // DecoratedBarcodeView 반환
+            },
+            modifier = modifier,
         )
+
 
         Text(
             text = "재고 바코드를 화면에 스캔해주세요.",
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(24.dp),
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyLarge
         )
-
-        // 유효한 바코드 → 수량 입력 Dialog
-        if (showValidDialog && scannedBarcode != null) {
-            ValidBarcodeDialog(
-                inventory = Inventory("1", "사과", 10, "aa", expiration = "2022-01-01", false, location = "위치", option = "option"),
-                quantity = selectedQty,
-                onQuantityChange = { selectedQty = it },
-                onDismiss = {
-                    showValidDialog = false
-                    scannedBarcode = null
-                },
-                onConfirm = {
-                    onSubmitPicking(scannedBarcode!!, selectedQty)
-                    showValidDialog = false
-                    scannedBarcode = null
-                }
-            )
-        }
-
-        if (showInvalidDialog) {
-            InvalidBarcodeDialog(
-                onDismiss = onBack
-            )
-        }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewBarcodeScanScreen() {
-    BarcodeScannerScreen(
-        modifier = Modifier.fillMaxSize(),
-        onBack = { },
-        onSubmitPicking = { _, _ -> }
-    )
 }
+
 

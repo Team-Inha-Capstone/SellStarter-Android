@@ -14,21 +14,14 @@ import com.inha.sellstarter_android.presentation.common.screen.dialog.OneButtonD
 
 @Composable
 fun InvalidBarcodeDialog(onDismiss: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.5f)),
-        contentAlignment = Alignment.Center
-    ) {
-        OneButtonDialog(
-            contentText = "존재하지 않는 재고입니다.\n올바른 바코드를 스캔해주세요.",
-            buttonEnabled = true,
-            buttonText = "확인",
-            onButtonClick = onDismiss,
-            modifier = Modifier.padding(24.dp),
-            content = { }
-        )
-    }
+    OneButtonDialog(
+        contentText = "존재하지 않는 재고입니다.\n올바른 바코드를 스캔해주세요.",
+        buttonEnabled = true,
+        buttonText = "확인",
+        onButtonClick = onDismiss,
+        modifier = Modifier.fillMaxSize(),
+        content = { }
+    )
 }
 
 @Preview(showBackground = true)

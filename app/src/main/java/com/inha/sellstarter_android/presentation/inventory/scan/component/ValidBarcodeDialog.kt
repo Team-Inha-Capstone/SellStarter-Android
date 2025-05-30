@@ -23,37 +23,39 @@ fun ValidBarcodeDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.5f)),
-        contentAlignment = Alignment.Center
-    ) {
-        TwoButtonDialog(
-            content = {
-                ValidBarcodeContent(
-                    inventory = inventory,
-                    onQuantityChange = onQuantityChange,
-                    quantity = quantity
-                )
-            },
-            leftButtonText = "취소",
-            rightButtonText = "완료",
-            leftButtonColor = Grey100,
-            rightButtonColor = Purple200,
-            onLeftClick = onDismiss,
-            onRightClick = onConfirm,
-            rightButtonEnabled = quantity > 0,
-            modifier = Modifier.padding(24.dp)
-        )
-    }
+    TwoButtonDialog(
+        content = {
+            ValidBarcodeContent(
+                inventory = inventory,
+                quantity = quantity,
+                onQuantityChange = onQuantityChange
+            )
+        },
+        leftButtonText = "취소",
+        rightButtonText = "완료",
+        leftButtonColor = Grey100,
+        rightButtonColor = Purple200,
+        onLeftClick = onDismiss,
+        onRightClick = onConfirm,
+        rightButtonEnabled = quantity > 0,
+        modifier = Modifier.fillMaxSize()
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewValidBarcodeDialog() {
     ValidBarcodeDialog(
-        inventory = Inventory("1", "사과", 10, "aa", expiration = "2022-01-01", false, location = "위치", option = "option"),
+        inventory = Inventory(
+            "1",
+            "사과",
+            10,
+            "aa",
+            expiration = "2022-01-01",
+            false,
+            location = "위치",
+            option = "option"
+        ),
         1,
         { },
         { },
