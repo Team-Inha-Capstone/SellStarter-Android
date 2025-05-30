@@ -25,6 +25,7 @@ coil = "2.7.0"
 zxingAndroid = "4.1.0"
 zxingCore = "3.5.3"
 moshi = "1.15.2"
+vicoChart = "1.12.0"
 
 
 [libraries]
@@ -78,12 +79,19 @@ zxing-core = {group ="com.google.zxing", name ="core", version.ref ="zxingCore"}
 squareup-moshi = { group = "com.squareup.moshi", name ="moshi", version.ref = "moshi"}
 squareup-moshi-kotlin =  {group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi"}
 
+#Vico
+vico-compose = {group = "com.patrykandpatrick.vico", name ="compose", version.ref = "vicoChart"}
+vico-compose-m3 = {group = "com.patrykandpatrick.vico", name ="compose-m3", version.ref = "vicoChart"}
+vico-core= {group = "com.patrykandpatrick.vico", name ="core", version.ref = "vicoChart"}
+vico-views= {group = "com.patrykandpatrick.vico", name ="views", version.ref = "vicoChart"}
+
 [bundles]
 coroutines = ["coroutines-android", "coroutines-core"]
 okhttp = ["squareup-okhttp3-okhttp", "squareup-okhttp3-logging-interceptor"]
 retrofit = ["squareup-retrofit2-retrofit"]
 serialization = ["json-serialization", "kotlin-serialization-converter"]
 paging = ["paging-runtime", "paging-compose"]
+vico = ["vico-compose","vico-compose-m3","vico-core","vico-views"]
 zxing = ["zxing-core", "zxing-android-embedded"]
 moshi = ["squareup-moshi", "squareup-moshi-kotlin"]
 
