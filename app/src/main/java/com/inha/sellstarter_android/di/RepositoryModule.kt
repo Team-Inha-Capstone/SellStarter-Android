@@ -1,10 +1,12 @@
 package com.inha.sellstarter_android.di
 
 import com.inha.sellstarter_android.data.repository.ChatbotRepositoryImpl
+import com.inha.sellstarter_android.data.repository.DataAnalysisRepositoryImpl
 import com.inha.sellstarter_android.data.repository.HomeRepositoryImpl
 import com.inha.sellstarter_android.data.repository.InventoryRepositoryImpl
 import com.inha.sellstarter_android.data.repository.MyPageRepositoryImpl
 import com.inha.sellstarter_android.domain.repository.ChatbotRepository
+import com.inha.sellstarter_android.domain.repository.DataAnalysisRepository
 import com.inha.sellstarter_android.domain.repository.HomeRepository
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import com.inha.sellstarter_android.domain.repository.MyPageRepository
@@ -32,5 +34,9 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindHomeRepository(homeRepositoryImpl: HomeRepositoryImpl) : HomeRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindDataAnalysisRepository(dataAnalysisRepositoryImpl: DataAnalysisRepositoryImpl) : DataAnalysisRepository
 
 }

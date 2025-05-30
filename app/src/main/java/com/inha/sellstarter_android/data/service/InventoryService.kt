@@ -8,7 +8,6 @@ import com.inha.sellstarter_android.data.util.Constants.CORE
 import com.inha.sellstarter_android.data.util.Constants.COUNT
 import com.inha.sellstarter_android.data.util.Constants.INVENTORY
 import com.inha.sellstarter_android.data.util.Constants.LIST
-import com.inha.sellstarter_android.data.util.Constants.USER
 import com.inha.sellstarter_android.util.base.BaseResponseDto
 import okhttp3.MultipartBody
 import retrofit2.http.Body
@@ -24,39 +23,39 @@ interface InventoryService {
     @Multipart
     @POST("$API/$CORE/$INVENTORY/{userId}")
     suspend fun postInventoryCreate(
-        @Path("userId") userId : Int = 4,
+        @Path("userId") userId: Int = 4,
         @Part("data") inventoryCreateRequest: InventoryCreateRequestDto,
-        @Part image : MultipartBody.Part?,
-    ) : BaseResponseDto<InventoryDetailResponseDto>
+        @Part image: MultipartBody.Part?,
+    ): BaseResponseDto<InventoryDetailResponseDto>
 
 
     @GET("$API/$CORE/$INVENTORY/{userId}/$LIST")
     suspend fun getInventoryList(
-        @Path("userId") userId : Int = 4,
-        @Query("status") status : Boolean,
-        @Query("page") page : Int,
-        @Query("size") size : Int,
+        @Path("userId") userId: Int = 4,
+        @Query("status") status: Boolean,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
     ): BaseResponseDto<InventoryListResponseDto>
 
     @GET("$API/$CORE/$INVENTORY/{userId}/{barcodeId}")
     suspend fun getInventoryDetail(
-        @Path("userId") userId : Int = 4,
-        @Path("barcodeId") barcodeId : String,
+        @Path("userId") userId: Int = 4,
+        @Path("barcodeId") barcodeId: String,
     ): BaseResponseDto<InventoryDetailResponseDto>
 
     @POST("$API/$CORE/$INVENTORY/{userId}/{barcodeId}/$COUNT")
     suspend fun postInventoryCount(
-        @Path("userId") userId : Int = 4,
-        @Path("barcodeId") barcodeId : String,
-        @Body inventoryCountRequest : InventoryCountRequestDto
-    ) : BaseResponseDto<InventoryDetailResponseDto>
+        @Path("userId") userId: Int = 4,
+        @Path("barcodeId") barcodeId: String,
+        @Body inventoryCountRequest: InventoryCountRequestDto
+    ): BaseResponseDto<InventoryDetailResponseDto>
 
     @GET("$API/$CORE/$INVENTORY/{userId}/$LIST")
     suspend fun getInventorySearch(
-        @Path("userId") userId : Int = 4,
-        @Query("searchStr") search : String,
-        @Query("status") status :Boolean,
-        @Query("page") page : Int,
-        @Query("size") size : Int
-    ) : BaseResponseDto<InventoryListResponseDto>
+        @Path("userId") userId: Int = 4,
+        @Query("searchStr") search: String,
+        @Query("status") status: Boolean,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): BaseResponseDto<InventoryListResponseDto>
 }

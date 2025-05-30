@@ -3,7 +3,9 @@ package com.inha.sellstarter_android.data.datasource.remote.impl
 import com.inha.sellstarter_android.data.datasource.remote.InventoryDataSource
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
+import com.inha.sellstarter_android.data.model.request.inventory.InventoryFlowGraphRequestDto
 import com.inha.sellstarter_android.data.model.response.inventory.InventoryDetailResponseDto
+import com.inha.sellstarter_android.data.model.response.inventory.InventoryFlowGraphResponseDto
 import com.inha.sellstarter_android.data.model.response.inventory.InventoryListResponseDto
 import com.inha.sellstarter_android.data.service.InventoryService
 import com.inha.sellstarter_android.util.base.BaseResponseDto

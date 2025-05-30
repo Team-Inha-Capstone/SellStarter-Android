@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
+import com.inha.sellstarter_android.data.model.request.inventory.InventoryFlowGraphRequestDto
 import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.domain.model.InventoryItem
+import com.inha.sellstarter_android.domain.usecase.dataanalysis.DataAnalysisUseCases
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryUseCases
 import com.inha.sellstarter_android.util.base.UiState
 import com.inha.sellstarter_android.util.base.safeApiCall
@@ -28,7 +30,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class InventoryViewModel @Inject constructor(
-    private val inventoryUseCases: InventoryUseCases
+    private val inventoryUseCases: InventoryUseCases,
+    private val dataAnalysisUseCases: DataAnalysisUseCases
 ) : ViewModel() {
 
     // 1. 전체 재고 리스트
@@ -39,6 +42,10 @@ class InventoryViewModel @Inject constructor(
     // 2. 재고 상세
     private val _inventoryDetailState = MutableStateFlow<UiState<Inventory>>(UiState.Loading)
     val inventoryDetailState: StateFlow<UiState<Inventory>> = _inventoryDetailState
+
+    private val _inventoryGraphState = MutableStateFlow<String>("")
+    val inventoryGraphState: StateFlow<String> = _inventoryGraphState
+
 
     // 3. 수량 수정
     private val _editCountState = MutableStateFlow<UiState<Inventory>>(UiState.Loading)
@@ -75,6 +82,19 @@ class InventoryViewModel @Inject constructor(
                     inventoryUseCases.inventoryDetailUseCase.invoke(barcodeId)
                 }
             )
+        }
+    }
+
+    fun getInventoryFlowGraph(barcodeId: String) {
+        viewModelScope.launch {
+            dataAnalysisUseCases.inventoryFlowGraphUseCase.invoke(
+                InventoryFlowGraphRequestDto(
+                    barcodeId = barcodeId
+                )
+            ).onSuccess { result ->
+                Log.e("hyeon", result)
+                _inventoryGraphState.value = result
+            }
         }
     }
 
@@ -134,7 +154,7 @@ class InventoryViewModel @Inject constructor(
                 }
             }
 
-           _registerState.value =  safeApiCall(
+            _registerState.value = safeApiCall(
                 onStart = { _registerState.value = UiState.Loading },
                 onError = { it.logHttpError("registerInventory") },
                 apiCall = {

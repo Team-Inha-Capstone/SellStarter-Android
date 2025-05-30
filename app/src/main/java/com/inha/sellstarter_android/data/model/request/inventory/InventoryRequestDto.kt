@@ -23,3 +23,18 @@ data class InventoryCreateRequestDto(
     @SerialName("barcode_id")
     val barcodeId: String
 )
+
+
+@Serializable
+data class InventoryCountRequestDto(
+    @SerialName("current_count")
+    val currentCount: Int,
+    @SerialName("inventory_count")
+    val inventoryCount: Int
+)
+
+@Serializable
+data class InventoryFlowGraphRequestDto(
+    @SerialName("barcode_id")
+    val barcodeId: String
+)

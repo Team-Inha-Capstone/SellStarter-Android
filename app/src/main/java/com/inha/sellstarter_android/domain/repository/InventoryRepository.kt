@@ -2,6 +2,7 @@ package com.inha.sellstarter_android.domain.repository
 
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
+import com.inha.sellstarter_android.data.model.request.inventory.InventoryFlowGraphRequestDto
 import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.domain.model.InventoryItem
 import okhttp3.MultipartBody
@@ -32,5 +33,5 @@ interface InventoryRepository {
     suspend fun postInventoryCreate(
         inventoryCreateRequest: InventoryCreateRequestDto,
         image: MultipartBody.Part?
-    ) : Result<Inventory>
+    ): Result<Inventory>
 }

@@ -1,6 +1,7 @@
 package com.inha.sellstarter_android.di
 
 import com.inha.sellstarter_android.data.service.ChatbotService
+import com.inha.sellstarter_android.data.service.DataAnalysisService
 import com.inha.sellstarter_android.data.service.HomeService
 import com.inha.sellstarter_android.data.service.InventoryService
 import com.inha.sellstarter_android.data.service.MyPageService
@@ -26,9 +27,16 @@ object ServiceModule {
     @Singleton
     @Provides
     fun provideChatbotService(
-        @NetworkModule.PythonRetrofit retrofit: Retrofit
+        @NetworkModule.PythonChatbotRetrofit retrofit: Retrofit
     ): ChatbotService =
         retrofit.create(ChatbotService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideDataAnalysisService(
+        @NetworkModule.PythonDataRetrofit retrofit: Retrofit
+    ): DataAnalysisService =
+        retrofit.create(DataAnalysisService::class.java)
 
     @Singleton
     @Provides
@@ -43,4 +51,6 @@ object ServiceModule {
         @NetworkModule.MainRetrofit retrofit: Retrofit
     ) : HomeService =
         retrofit.create(HomeService::class.java)
+
+
 }
