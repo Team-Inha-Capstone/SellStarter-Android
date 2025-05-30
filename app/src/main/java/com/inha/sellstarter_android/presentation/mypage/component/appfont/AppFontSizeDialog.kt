@@ -3,6 +3,7 @@ package com.inha.sellstarter_android.presentation.mypage.component.appfont
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,7 +42,7 @@ fun AppFontSizeDialog(
                 PurpleSlider(
                     text = "현재 글자 크기 : ${currentLimit.label}",
                     fontColor = Grey900,
-                    fontSize = 14,
+                    fontStyle = MaterialTheme.typography.headlineMedium,
                     step = 3, //  tep = 3, // 총 4 구간: 0.8, 1.0, 1.2, 1.5
                     currentValue = selectedLimit,
                     valueRange = 0.8f..1.5f,

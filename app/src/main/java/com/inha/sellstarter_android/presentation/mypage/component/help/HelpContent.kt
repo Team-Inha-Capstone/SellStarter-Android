@@ -30,35 +30,33 @@ import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.AppTypography
 import com.inha.sellstarter_android.ui.theme.Grey0
 
+
 @Composable
 fun HelpContent(
     items: List<HelpItem>,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
-    Box(
+    Column(
         modifier = modifier
             .background(Grey0)
-            .padding(vertical = 12.dp)
+            .padding(vertical = 12.dp, horizontal = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Column(modifier = modifier.padding(horizontal = 24.dp)) {
-            TitleAndText(
-                titleText = "도움말",
-                contentText = "필요시 가이드 문서를 참고하세요.",
-                modifier = Modifier
-            )
+        TitleAndText(
+            titleText = "도움말",
+            contentText = "필요시 가이드 문서를 참고하세요.",
+            modifier = Modifier.fillMaxWidth()
+        )
 
-            Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-            LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-                content = {
-                    items(items.size) { index ->
-                        val item = items[index]
-                        HelpItemRow(item)
-                    }
-                }
-            )
+        Column(
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            items.forEach { item ->
+                HelpItemRow(item)
+            }
         }
     }
 }

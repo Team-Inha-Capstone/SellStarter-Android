@@ -146,7 +146,7 @@ fun OrderStaticsGraph(
             Chart(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(300.dp)
+                    .height(250.dp)
                     .padding(horizontal = 8.dp, vertical = 8.dp),
                 chart = createColumnChart(),
                 chartModelProducer = chartModel,

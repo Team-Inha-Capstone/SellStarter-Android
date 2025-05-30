@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -65,12 +67,14 @@ fun MyPageScreen(
             val userInfo = (userInfoState as UiState.Success).data
             Column(
                 modifier = modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
             ) {
 
                 TitleScreen(title = "마이페이지")
 
                 MyPageProfileContent(
-                    users = userInfo, // 필요시 Mapper 만들어야 함
+                    users = userInfo,
                     modifier = Modifier
                         .fillMaxWidth()
                 )
