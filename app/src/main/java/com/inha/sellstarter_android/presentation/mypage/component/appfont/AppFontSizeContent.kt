@@ -1,8 +1,15 @@
 package com.inha.sellstarter_android.presentation.mypage.component.appfont
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
+import com.inha.sellstarter_android.ui.theme.Grey0
 
 @Composable
 fun AppFontSizeContent(
@@ -10,13 +17,18 @@ fun AppFontSizeContent(
     fontScale: FontSizeType,
     modifier: Modifier
 ) {
-
-    TitleAndText(
-        titleText = "앱 글자 크기 조정",
-        contentText = "현재 크기 : ${fontScale.label}",
-        isAvailableEdit = true,
-        onClickEdit = onClickEdit,
+    Box(
         modifier = modifier
-    )
+            .background(Grey0)
+            .padding(vertical = 12.dp)
+    ) {
+        TitleAndText(
+            titleText = "앱 글자 크기 조정",
+            contentText = "현재 크기 : ${fontScale.label}",
+            isAvailableEdit = true,
+            onClickEdit = onClickEdit,
+            modifier = Modifier.padding(horizontal = 24.dp)
+        )
+    }
 
 }

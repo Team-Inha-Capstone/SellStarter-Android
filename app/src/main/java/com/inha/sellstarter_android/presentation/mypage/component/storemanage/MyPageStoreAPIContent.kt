@@ -1,6 +1,7 @@
 package com.inha.sellstarter_android.presentation.mypage.component.storemanage
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.DropdownMenu
@@ -62,186 +64,191 @@ fun MyPageStoreAPIContent(
     var newKeyText by remember { mutableStateOf("") }
     val editingApiIds = remember { mutableStateListOf<Int>() }
 
-    Column(modifier = modifier) {
-        TitleAndText(
-            titleText = "스토어 관리",
-            contentText = "스토어 API Key 등록",
-            isAvailableEdit = true,
-            onClickEdit = { isAdding = !isAdding },
-            modifier = Modifier
-        )
+    Box(
+        modifier = modifier
+            .background(Grey0)
+            .padding(vertical = 12.dp, horizontal = 24.dp)
+    ) {
+        Column(modifier = modifier) {
+            TitleAndText(
+                titleText = "스토어 관리",
+                contentText = "스토어 API Key 등록",
+                isAvailableEdit = true,
+                onClickEdit = { isAdding = !isAdding },
+                modifier = Modifier
+            )
+            val editingKeyMap = remember { mutableStateMapOf<Int, String>() }
 
-        val editingKeyMap = remember { mutableStateMapOf<Int, String>() }
+            LazyColumn(
+                contentPadding = PaddingValues(vertical = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(users.apiKey) { apiKey ->
+                    val isEditing = editingKeyMap.contains(apiKey.apiId)
+                    val editingKey = editingKeyMap[apiKey.apiId] ?: apiKey.key
 
-        LazyColumn(
-            contentPadding = PaddingValues(vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(users.apiKey) { apiKey ->
-                val isEditing = editingKeyMap.contains(apiKey.apiId)
-                val editingKey = editingKeyMap[apiKey.apiId] ?: apiKey.key
-
-                if (isEditing) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .border(1.dp, Grey100, RoundedCornerShape(6.dp))
-                            .padding(12.dp)
-                    ) {
-                        Text("API Key 수정", style = MaterialTheme.typography.bodySmall)
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        DefaultTextField(
-                            value = editingKey,
-                            onValueChange = { editingKeyMap[apiKey.apiId] = it },
-                            innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
-                            singleLine = true,
-                            borderColor = Grey100,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        OneButton(
-                            text = "수정 완료",
-                            fontColor = Grey0,
-                            fontStyle = MaterialTheme.typography.bodyLarge,
-                            onClick = {
-                                viewModel.updateApiKey(
-                                    request = UserApiUpdateRequest(
-                                        userId = 4,
-                                        apiId = apiKey.apiId,
-                                        channelId = apiKey.channelId,
-                                        key = editingKey
-                                    )
-                                )
-                                editingKeyMap.remove(apiKey.apiId)
-                            },
-                            width = 100,
-                            height = 40,
-                            radius = 20,
-                            enabled = editingKey.isNotBlank(),
-                            modifier = Modifier.align(Alignment.End)
-                        )
-                    }
-                } else {
-                    ApiKeyItem(
-                        apiKey = apiKey,
-                        onEditClick = {
-                            editingKeyMap[apiKey.apiId] = apiKey.key // 편집 시작
-                        },
-                        onDeleteClick = {
-                            viewModel.deleteApiKey(
-                                request = UserApiDeleteRequestDto(
-                                    userId = 4,
-                                    apiId = apiKey.apiId
-                                )
-                            )
-                        }
-                    )
-                }
-            }
-
-            if (isAdding) {
-                item {
-                    var expanded by remember { mutableStateOf(false) }
-                    var selectedPlatform by remember { mutableStateOf(ShoppingMallPlatform.NAVER) }
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .border(1.dp, Grey100, RoundedCornerShape(6.dp))
-                            .padding(12.dp)
-                    ) {
-                        Text("새 API Key 등록", style = MaterialTheme.typography.bodySmall)
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        Box(
+                    if (isEditing) {
+                        Column(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .border(1.dp, Grey100, RoundedCornerShape(6.dp))
-                                .clickable { expanded = true }
                                 .padding(12.dp)
                         ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Image(
-                                    painter = painterResource(selectedPlatform.displayImage),
-                                    contentDescription = selectedPlatform.name,
-                                    modifier = Modifier.size(24.dp)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(
-                                    text = selectedPlatform.displayName,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = Grey900
-                                )
-                                Spacer(modifier = Modifier.weight(1f))
-                                Icon(Icons.Default.ArrowDropDown, contentDescription = null)
-                            }
+                            Text("API Key 수정", style = MaterialTheme.typography.bodySmall)
+                            Spacer(modifier = Modifier.height(8.dp))
 
-                            DropdownMenu(
-                                expanded = expanded,
-                                onDismissRequest = { expanded = false }
-                            ) {
-                                ShoppingMallPlatform.values().forEach { platform ->
-                                    DropdownMenuItem(
-                                        text = {
-                                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                                Image(
-                                                    painter = painterResource(platform.displayImage),
-                                                    contentDescription = null,
-                                                    modifier = Modifier.size(20.dp)
-                                                )
-                                                Spacer(modifier = Modifier.width(8.dp))
-                                                Text(text = platform.displayName)
-                                            }
-                                        },
-                                        onClick = {
-                                            selectedPlatform = platform
-                                            expanded = false
-                                        }
+                            DefaultTextField(
+                                value = editingKey,
+                                onValueChange = { editingKeyMap[apiKey.apiId] = it },
+                                innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
+                                singleLine = true,
+                                borderColor = Grey100,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            OneButton(
+                                text = "수정 완료",
+                                fontColor = Grey0,
+                                fontStyle = MaterialTheme.typography.bodyLarge,
+                                onClick = {
+                                    viewModel.updateApiKey(
+                                        request = UserApiUpdateRequest(
+                                            userId = 4,
+                                            apiId = apiKey.apiId,
+                                            channelId = apiKey.channelId,
+                                            key = editingKey
+                                        )
                                     )
+                                    editingKeyMap.remove(apiKey.apiId)
+                                },
+                                width = 100,
+                                height = 40,
+                                radius = 20,
+                                enabled = editingKey.isNotBlank(),
+                                modifier = Modifier.align(Alignment.End)
+                            )
+                        }
+                    } else {
+                        ApiKeyItem(
+                            apiKey = apiKey,
+                            onEditClick = {
+                                editingKeyMap[apiKey.apiId] = apiKey.key // 편집 시작
+                            },
+                            onDeleteClick = {
+                                viewModel.deleteApiKey(
+                                    request = UserApiDeleteRequestDto(
+                                        userId = 4,
+                                        apiId = apiKey.apiId
+                                    )
+                                )
+                            }
+                        )
+                    }
+                }
+
+                if (isAdding) {
+                    item {
+                        var expanded by remember { mutableStateOf(false) }
+                        var selectedPlatform by remember { mutableStateOf(ShoppingMallPlatform.NAVER) }
+
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .border(1.dp, Grey100, RoundedCornerShape(6.dp))
+                                .padding(12.dp)
+                        ) {
+                            Text("새 API Key 등록", style = MaterialTheme.typography.bodySmall)
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .border(1.dp, Grey100, RoundedCornerShape(6.dp))
+                                    .clickable { expanded = true }
+                                    .padding(12.dp)
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Image(
+                                        painter = painterResource(selectedPlatform.displayImage),
+                                        contentDescription = selectedPlatform.name,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text(
+                                        text = selectedPlatform.displayName,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = Grey900
+                                    )
+                                    Spacer(modifier = Modifier.weight(1f))
+                                    Icon(Icons.Default.ArrowDropDown, contentDescription = null)
+                                }
+
+                                DropdownMenu(
+                                    expanded = expanded,
+                                    onDismissRequest = { expanded = false }
+                                ) {
+                                    ShoppingMallPlatform.values().forEach { platform ->
+                                        DropdownMenuItem(
+                                            text = {
+                                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                                    Image(
+                                                        painter = painterResource(platform.displayImage),
+                                                        contentDescription = null,
+                                                        modifier = Modifier.size(20.dp)
+                                                    )
+                                                    Spacer(modifier = Modifier.width(8.dp))
+                                                    Text(text = platform.displayName)
+                                                }
+                                            },
+                                            onClick = {
+                                                selectedPlatform = platform
+                                                expanded = false
+                                            }
+                                        )
+                                    }
                                 }
                             }
-                        }
 
-                        Spacer(modifier = Modifier.height(12.dp))
+                            Spacer(modifier = Modifier.height(12.dp))
 
-                        DefaultTextField(
-                            value = newKeyText,
-                            onValueChange = { newKeyText = it },
-                            innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
-                            singleLine = true,
-                            borderColor = Grey100,
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                            DefaultTextField(
+                                value = newKeyText,
+                                onValueChange = { newKeyText = it },
+                                innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
+                                singleLine = true,
+                                borderColor = Grey100,
+                                modifier = Modifier.fillMaxWidth()
+                            )
 
-                        Spacer(modifier = Modifier.height(12.dp))
+                            Spacer(modifier = Modifier.height(12.dp))
 
-                        OneButton(
-                            text = "저장",
-                            fontColor = Grey0,
-                            fontStyle = MaterialTheme.typography.bodyLarge,
-                            onClick = {
-                                viewModel.createApiKey(
-                                    UserApiRequestDto(
-                                        userId = 4,
-                                        channelId = selectedPlatform.channelId,
-                                        key = newKeyText
+                            OneButton(
+                                text = "저장",
+                                fontColor = Grey0,
+                                fontStyle = MaterialTheme.typography.bodyLarge,
+                                onClick = {
+                                    viewModel.createApiKey(
+                                        UserApiRequestDto(
+                                            userId = 4,
+                                            channelId = selectedPlatform.channelId,
+                                            key = newKeyText
+                                        )
                                     )
-                                )
-                                newKeyText = ""
-                                isAdding = false
-                            },
-                            width = 80,
-                            height = 40,
-                            radius = 20,
-                            enabled = newKeyText.isNotBlank(),
-                            modifier = Modifier.align(Alignment.End)
-                        )
+                                    newKeyText = ""
+                                    isAdding = false
+                                },
+                                width = 80,
+                                height = 40,
+                                radius = 20,
+                                enabled = newKeyText.isNotBlank(),
+                                modifier = Modifier.align(Alignment.End)
+                            )
+                        }
                     }
                 }
             }

@@ -1,10 +1,19 @@
 package com.inha.sellstarter_android.presentation.mypage.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,29 +23,49 @@ import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.domain.model.UserInfo
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
+import com.inha.sellstarter_android.ui.theme.Grey0
+import com.inha.sellstarter_android.ui.theme.Grey100
 
 @Composable
 fun MyPageProfileContent(
     users: UserInfo,
     modifier: Modifier
 ) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+    Box(
+        modifier = Modifier
+            .background(Grey0)
     ) {
-        Image(
-            painter = painterResource(R.drawable.ic_profile),
-            contentDescription = "profileImage",
-            modifier = Modifier
-                .size(100.dp)
-                .padding(12.dp)
-        )
+        Row(
+            modifier = modifier.padding(horizontal = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(R.drawable.ic_profile),
+                contentDescription = "profileImage",
+                modifier = Modifier
+                    .size(90.dp)
+                    .padding(12.dp)
+            )
 
-        TitleAndText(
-            titleText = users.userName,
-            contentText = "업종 : ${users.shoppingCategory}",
+            TitleAndText(
+                titleText = "스토어 ${users.userName}님",
+                contentText = "업종 : ${users.shoppingCategory}",
+                modifier = Modifier
+            )
+        }
+
+        IconButton(
+            onClick = { },
             modifier = Modifier
-        )
+                .align(Alignment.CenterEnd)
+                .padding(end = 24.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Settings,
+                contentDescription = "설정",
+                tint = Grey100
+            )
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.inventory.list
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,8 +47,16 @@ fun InventoryGridScreen(
     onItemClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+    ) {
         TitleScreen(title = "스토어 재고 확인")
+
+        Spacer(
+            modifier = Modifier
+                .size(12.dp)
+        )
 
         SearchBar(
             value = searchText,
@@ -59,7 +68,10 @@ fun InventoryGridScreen(
                 .height(50.dp)
         )
 
-        Spacer(modifier = Modifier.size(12.dp))
+        Spacer(
+            modifier = Modifier
+                .size(12.dp)
+        )
 
         SoldOutFilterChips(
             selectedIndex = selectedChipIndex,

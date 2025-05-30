@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -27,32 +28,37 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.domain.model.HomeInfo
-import com.inha.sellstarter_android.ui.theme.AppTypography
+import com.inha.sellstarter_android.ui.theme.Grey0
 
 @Composable
 fun OrderSummaryContent(
     homeInfo: HomeInfo,
     modifier: Modifier
 ) {
+    Row(
+        modifier = Modifier.padding(horizontal = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "오늘의 주문 확인",
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold
+        )
+        Icon(
+            imageVector = Icons.Default.KeyboardArrowRight,
+            contentDescription = "이동",
+            modifier = Modifier.padding(start = 4.dp)
+        )
+    }
+
+    Spacer(modifier = Modifier.height(12.dp))
+
     Box(modifier = modifier) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = "오늘의 주문 확인",
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold
-            )
-            Icon(
-                imageVector = Icons.Default.PlayArrow,
-                contentDescription = "이동",
-                modifier = Modifier.padding(start = 4.dp)
-            )
-        }
-        Spacer(modifier = Modifier.height(12.dp))
         OrderSummaryCard(
             homeInfo = homeInfo,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(145.dp)
+                .height(150.dp)
         )
         Image(
             painter = painterResource(R.drawable.img_cart),
@@ -72,9 +78,9 @@ fun OrderSummaryCard(
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = Color.White, // 원하는 색으로 설정
+        backgroundColor = Grey0,
         modifier = modifier,
-        elevation = 4.dp // 카드의 elevation 설정
+        elevation = 2.dp // 카드의 elevation 설정
     ) {
         Column(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -100,12 +106,12 @@ fun OrderSummaryItem(title: String, count: Int, modifier: Modifier) {
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.bodySmall
+            style = MaterialTheme.typography.bodyMedium
         )
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(2.dp))
         Text(
             text = "$count",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }

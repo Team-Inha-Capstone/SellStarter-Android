@@ -2,15 +2,20 @@ package com.inha.sellstarter_android.presentation.mypage.component.help
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -23,32 +28,38 @@ import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.AppTypography
+import com.inha.sellstarter_android.ui.theme.Grey0
 
 @Composable
 fun HelpContent(
     items: List<HelpItem>,
     modifier: Modifier
 ) {
-    Column(modifier = modifier) {
-        TitleAndText(
-            titleText = "도움말",
-            contentText = "필요시 가이드 문서를 참고하세요.",
-            modifier = Modifier
-        )
+    Box(
+        modifier = modifier
+            .background(Grey0)
+            .padding(vertical = 12.dp)
+    ) {
+        Column(modifier = modifier.padding(horizontal = 24.dp)) {
+            TitleAndText(
+                titleText = "도움말",
+                contentText = "필요시 가이드 문서를 참고하세요.",
+                modifier = Modifier
+            )
 
-        Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(4.dp),
-            content = {
-                items(items.size) { index ->
-                    val item = items[index]
-                    HelpItemRow(item)
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                content = {
+                    items(items.size) { index ->
+                        val item = items[index]
+                        HelpItemRow(item)
+                    }
                 }
-            }
-        )
-
+            )
+        }
     }
 }
 

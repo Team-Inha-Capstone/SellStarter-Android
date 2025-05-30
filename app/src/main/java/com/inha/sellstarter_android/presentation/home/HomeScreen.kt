@@ -1,6 +1,9 @@
 package com.inha.sellstarter_android.presentation.home
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,8 +27,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,16 +41,22 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.domain.model.ShoppingMallType
 import com.inha.sellstarter_android.domain.model.Users
+import com.inha.sellstarter_android.presentation.chatbot.ChatbotScreen
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
+import com.inha.sellstarter_android.presentation.home.component.ChatbotFloatingButton
 import com.inha.sellstarter_android.presentation.home.component.HomeFeatureContent
 import com.inha.sellstarter_android.presentation.home.component.OrderStatisticsContent
 import com.inha.sellstarter_android.presentation.home.component.OrderSummaryContent
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
+import com.inha.sellstarter_android.ui.theme.Grey900
+import com.inha.sellstarter_android.ui.theme.Purple100
 import com.inha.sellstarter_android.ui.theme.Purple200
+import com.inha.sellstarter_android.ui.theme.Purple50
 import com.inha.sellstarter_android.util.base.UiState
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -52,17 +65,19 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeInfoState by viewModel.homeInfoState.collectAsState()
+    val weeklySalesState by viewModel.weeklySales.collectAsState()
+    val yearlySalesState by viewModel.yearlySales.collectAsState()
 
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(24.dp)
+            .padding(vertical = 24.dp, horizontal = 16.dp)
     ) {
         when (val state = homeInfoState) {
             is UiState.Loading -> {
                 LoadingScreen(
                     loadingText = "홈 정보를 불러오는 중입니다...",
-                    modifier = modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize()
                 )
             }
 
@@ -78,17 +93,21 @@ fun HomeScreen(
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                 ) {
+                    // 상단 스토어명 + 아이콘
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             text = "스토어 : ${homeInfo.shopName}",
                             style = MaterialTheme.typography.headlineSmall,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 8.dp)
                         )
 
-                        IconButton(onClick = { }) {
+                        IconButton(onClick = { /* TODO: 알림 */ }) {
                             Icon(
                                 imageVector = Icons.Default.Notifications,
                                 contentDescription = "알림",
@@ -96,7 +115,7 @@ fun HomeScreen(
                             )
                         }
 
-                        IconButton(onClick = { }) {
+                        IconButton(onClick = { /* TODO: 설정 */ }) {
                             Icon(
                                 imageVector = Icons.Default.Settings,
                                 contentDescription = "설정",
@@ -107,11 +126,13 @@ fun HomeScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // 전달된 홈 정보를 기반으로 요약 렌더링
+                    // 주문 현황 요약
                     OrderSummaryContent(
                         homeInfo = homeInfo,
                         modifier = Modifier
                     )
+
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     HomeFeatureContent(
                         isDataAnalyticsSubscribed = homeInfo.analysisSubscribed,
@@ -121,24 +142,25 @@ fun HomeScreen(
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    OrderStatisticsContent(modifier = Modifier.fillMaxWidth())
+                    if (weeklySalesState is UiState.Success && yearlySalesState is UiState.Success) {
+                        OrderStatisticsContent(
+                            weeklySales = (weeklySalesState as UiState.Success).data,
+                            yearlySales = (yearlySalesState as UiState.Success).data,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
 
-                    Spacer(modifier = Modifier.height(80.dp))
+                    Spacer(modifier = Modifier.height(90.dp))
                 }
 
-                FloatingActionButton(
-                    onClick = onClickChatbot,
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .size(90.dp),
-                    shape = CircleShape,
-                    backgroundColor = Purple200
+                Box(
+                    modifier = Modifier.
+                    align(Alignment.BottomEnd)
                 ) {
-                    Text(
-                        text = "AI\n챗봇",
-                        color = Grey0,
-                        style = MaterialTheme.typography.bodyLarge,
-                        textAlign = TextAlign.Center
+                    ChatbotFloatingButton (
+                        onClickChatbot = onClickChatbot,
+                        modifier = Modifier
+                            .size(90.dp),
                     )
                 }
             }

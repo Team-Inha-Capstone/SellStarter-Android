@@ -38,14 +38,13 @@ fun InventoryItem(
     modifier: Modifier
 ) {
     Card(
+        border = BorderStroke(1.dp, Purple50),
         colors = CardDefaults.cardColors(
             contentColor = Grey0,
             containerColor = Grey0
         ),
-        border = BorderStroke(1.dp, Purple50),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         modifier = modifier
-            .background(Grey0)
             .wrapContentSize()
     ) {
 

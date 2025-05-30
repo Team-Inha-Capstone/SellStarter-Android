@@ -1,9 +1,13 @@
 package com.inha.sellstarter_android.presentation.home
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.inha.sellstarter_android.domain.model.HomeInfo
-import com.inha.sellstarter_android.domain.usecase.home.HomeInfoUseCase
+import com.inha.sellstarter_android.domain.model.WeeklySales
+import com.inha.sellstarter_android.domain.model.YearlySales
+import com.inha.sellstarter_android.domain.usecase.home.HomeUseCases
 import com.inha.sellstarter_android.util.base.UiState
 import com.inha.sellstarter_android.util.base.safeApiCall
 import com.inha.sellstarter_android.util.extension.logHttpError
@@ -11,25 +15,70 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
+@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val homeInfoUseCase: HomeInfoUseCase
+    private val homeUseCases: HomeUseCases
 ) : ViewModel() {
 
     private val _homeInfoState = MutableStateFlow<UiState<HomeInfo>>(UiState.Loading)
     val homeInfoState: StateFlow<UiState<HomeInfo>> = _homeInfoState
 
+    private val _weeklySales = MutableStateFlow<UiState<WeeklySales>>(UiState.Loading)
+    val weeklySales: StateFlow<UiState<WeeklySales>> = _weeklySales
+
+    private val _yearlySales = MutableStateFlow<UiState<YearlySales>>(UiState.Loading)
+    val yearlySales: StateFlow<UiState<YearlySales>> = _yearlySales
+
     init {
+        val currentDate: String = "2025-05-11"
         getHomeInfo()
+        getWeeklySales(currentDate = currentDate)
+        getYearlySales(currentDate = currentDate)
     }
+
     fun getHomeInfo() {
         viewModelScope.launch {
             _homeInfoState.value = safeApiCall(
                 onStart = { _homeInfoState.value = UiState.Loading },
                 onError = { it.logHttpError("getHomeInfo") },
-                apiCall = { homeInfoUseCase.invoke() }
+                apiCall = { homeUseCases.homeInfoUseCase.invoke() }
+            )
+        }
+    }
+
+    private fun getWeeklySales(
+        currentDate: String
+    ) {
+        viewModelScope.launch {
+            _weeklySales.value = safeApiCall(
+                onStart = { _weeklySales.value = UiState.Loading },
+                onError = { it.logHttpError("getWeeklySales") },
+                apiCall = {
+                    homeUseCases.weeklySalesUseCase.invoke(
+                        currentDate = currentDate
+                    )
+                }
+            )
+        }
+    }
+
+    private fun getYearlySales(
+        currentDate: String
+    ) {
+        viewModelScope.launch {
+            _yearlySales.value = safeApiCall(
+                onStart = { _yearlySales.value = UiState.Loading },
+                onError = { it.logHttpError("getYearlySales") },
+                apiCall = {
+                    homeUseCases.yearlySalesUseCase.invoke(
+                        currentDate = currentDate
+                    )
+                }
             )
         }
     }
