@@ -1,12 +1,14 @@
 package com.inha.sellstarter_android.data.mapper
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.inha.sellstarter_android.data.model.response.home.WeeklySalesResponseDto
 import com.inha.sellstarter_android.data.model.response.home.YearlySalesResponseDto
 import com.inha.sellstarter_android.domain.model.WeeklySales
 import com.inha.sellstarter_android.domain.model.YearlySales
 import java.time.LocalDate
+import java.util.Calendar
 
 fun WeeklySalesResponseDto.toDomain(): WeeklySales {
     return WeeklySales(
@@ -44,9 +46,9 @@ fun WeeklySalesResponseDto.sum(): Int {
     return mon + tue + wed + thu + fri + sat + sun
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun YearlySalesResponseDto.currentMonthSum(): Int {
-    val currentMonth = LocalDate.now().monthValue
+    val calendar = Calendar.getInstance()
+    val currentMonth = calendar.get(Calendar.MONTH)
     return when (currentMonth) {
         1 -> jan
         2 -> feb
