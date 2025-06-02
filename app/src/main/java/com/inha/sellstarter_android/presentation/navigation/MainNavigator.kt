@@ -1,5 +1,8 @@
 package com.inha.sellstarter_android.presentation.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -33,8 +36,10 @@ import com.inha.sellstarter_android.presentation.mypage.FontSizeViewModel
 import com.inha.sellstarter_android.presentation.mypage.MyPageScreen
 import com.inha.sellstarter_android.presentation.onboarding.OnboardingScreen
 import com.inha.sellstarter_android.presentation.onboarding.ProfileSetupScreen
+import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.util.base.UiState
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainNavigator(
     navController: NavHostController,
@@ -75,7 +80,8 @@ fun MainNavigator(
             HomeRoute(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding),
+                    .padding(innerPadding)
+                    .background(Grey0),
                 onNavigateToInventoryRegister = {
                     navController.navigate("inventory/register")
                 },
@@ -193,7 +199,7 @@ fun MainNavigator(
             }
         }
 
-        composable("inventory/scan/error"){
+        composable("inventory/scan/error") {
             InvalidBarcodeDialog(
                 onDismiss = {
                     navController.navigate("inventory") {

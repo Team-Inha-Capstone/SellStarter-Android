@@ -14,6 +14,8 @@ interface DataAnalysisService {
     @POST("$INVENTORY/$CHART/{userId}")
     suspend fun getInventoryFlowGraph(
         @Path("userId") userId: Int = 4,
-        @Body inventoryFlowGraphRequest: InventoryFlowGraphRequestDto
+        @Body inventoryFlowGraphRequest: InventoryFlowGraphRequestDto = InventoryFlowGraphRequestDto(
+            barcodeId = "11111111"
+        )
     ): BaseResponseDto<InventoryFlowGraphResponseDto>
 }

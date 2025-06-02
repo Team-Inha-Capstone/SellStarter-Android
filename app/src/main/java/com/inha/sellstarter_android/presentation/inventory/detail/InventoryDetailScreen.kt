@@ -2,6 +2,7 @@ package com.inha.sellstarter_android.presentation.inventory.detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -98,6 +99,7 @@ fun InventoryDetailScreen(
                 graphUrl = graphUrl,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(1000.dp)
             )
 
             Spacer(modifier = Modifier.size(16.dp))

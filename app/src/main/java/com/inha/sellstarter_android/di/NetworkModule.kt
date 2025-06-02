@@ -16,6 +16,8 @@ import retrofit2.Retrofit
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
+const val pythonBaseUrl = "54.208.74.17"
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
