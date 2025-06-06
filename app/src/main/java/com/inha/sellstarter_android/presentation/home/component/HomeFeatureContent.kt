@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,6 +35,7 @@ import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 fun HomeFeatureContent(
     isDataAnalyticsSubscribed: Boolean,
     onClickInventoryRegister: () -> Unit,
+    onClickDataReport: () -> Unit,
     modifier: Modifier
 ) {
     Row(
@@ -50,10 +52,16 @@ fun HomeFeatureContent(
                 .wrapContentHeight()
         )
 
+        val uriHandler = LocalUriHandler.current
+        val subscribeWebUrl = "https://www.notion.so/ss99x2002/20a5e65acf338052b199d98cd0b323e5"
+
         HomeFeatureCard(
             title = "데이터 분석",
             description = "스토어의 재고와\n판매추이 등을\n분석할 수 있습니다.",
-            onClick = if (isDataAnalyticsSubscribed) onClickInventoryRegister else ({}),
+            onClick = {
+                if (isDataAnalyticsSubscribed) onClickDataReport
+                else uriHandler.openUri(subscribeWebUrl)
+            },
             backgroundImg = R.drawable.img_purple_search,
             modifier = Modifier
                 .weight(1f)
@@ -109,6 +117,19 @@ fun HomeFeatureCard(
                 modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeFeatureContent_Preview_False() {
+    SellStarterAndroidTheme {
+        HomeFeatureContent(
+            isDataAnalyticsSubscribed = false,
+            onClickInventoryRegister = {},
+            onClickDataReport = {},
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 

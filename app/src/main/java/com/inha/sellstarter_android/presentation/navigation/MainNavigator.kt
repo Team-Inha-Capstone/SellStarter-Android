@@ -22,6 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.inha.sellstarter_android.data.model.request.order.OrderInventoryPickingRequestDto
+import com.inha.sellstarter_android.presentation.analysis.AnalysisReportScreen
 import com.inha.sellstarter_android.presentation.chatbot.ChatbotRoute
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
@@ -89,6 +90,9 @@ fun MainNavigator(
                     .fillMaxSize()
                     .padding(innerPadding)
                     .background(Grey0),
+                onNavigateToReport = {
+                    navController.navigate("analysis/report")
+                },
                 onNavigateToInventoryRegister = {
                     navController.navigate("inventory/register")
                 },
@@ -265,6 +269,13 @@ fun MainNavigator(
                     fontSizeViewModel.updateFontScale(scale)
                 }
             )
+        }
+
+        composable("analysis/report") {
+           AnalysisReportScreen(
+               modifier = modifier,
+               onDownloadClicked = { }
+           )
         }
     }
 }

@@ -23,6 +23,10 @@ object Constants {
     // 주문
     const val ORDER = "order"
 
+    // 데이터 분석
+    const val ANALYSIS = "analysis"
+    const val REPORT ="report"
+
 
     // 마이페이지
     const val CREATE = "create"

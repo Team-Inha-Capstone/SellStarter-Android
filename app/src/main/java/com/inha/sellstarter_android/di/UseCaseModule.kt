@@ -11,6 +11,7 @@ import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotMessageUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotStartUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotUseCases
 import com.inha.sellstarter_android.domain.usecase.dataanalysis.DataAnalysisUseCases
+import com.inha.sellstarter_android.domain.usecase.dataanalysis.DataReportUseCase
 import com.inha.sellstarter_android.domain.usecase.dataanalysis.InventoryFlowGraphUseCase
 import com.inha.sellstarter_android.domain.usecase.home.HomeInfoUseCase
 import com.inha.sellstarter_android.domain.usecase.home.HomeUseCases
@@ -110,7 +111,8 @@ object UseCaseModule {
         dataAnalysisRepository: DataAnalysisRepository
     ): DataAnalysisUseCases {
         return DataAnalysisUseCases(
-            inventoryFlowGraphUseCase = InventoryFlowGraphUseCase(dataAnalysisRepository)
+            inventoryFlowGraphUseCase = InventoryFlowGraphUseCase(dataAnalysisRepository),
+            dataReportUseCase = DataReportUseCase(dataAnalysisRepository)
         )
     }
 
