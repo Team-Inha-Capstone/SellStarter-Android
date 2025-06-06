@@ -11,23 +11,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.domain.model.BuyerInfo
+import com.inha.sellstarter_android.domain.model.OrderDetailInfo
 import com.inha.sellstarter_android.ui.theme.AppTypography
+import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 
 @Composable
 fun BuyerInfoContent(
+    buyerInfo: BuyerInfo,
     modifier: Modifier
 ) {
     Column(modifier = modifier) {
-        Text("구매자 정보", style = MaterialTheme.typography.headlineMedium)
+        Text(
+            "구매자 정보",
+            style = MaterialTheme.typography.headlineMedium
+        )
+
         Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-        InfoRow(label = "구매자 이름", value = "OOO")
+        InfoRow(label = "구매자 이름", value = buyerInfo.purchaserName)
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(4.dp))
 
-        InfoRow(label = "배송주소", value = "인천광역시 미추홀구 인하로 100\n우편번호 : 22188")
+        InfoRow(label = "배송주소", value = buyerInfo.purchaserAddress)
 
-        InfoRow(label = "배송 요청사항",value = "경비실에 맡겨주세요.")
+        InfoRow(label = "배송 요청사항", value = buyerInfo.purchaserRequest)
 
     }
 }
@@ -35,7 +43,14 @@ fun BuyerInfoContent(
 @Preview(showBackground = true)
 @Composable
 fun PreviewBuyInfoContent() {
-    BuyerInfoContent(
-        modifier = Modifier.padding(horizontal = 24.dp)
-    )
+    SellStarterAndroidTheme {
+        BuyerInfoContent(
+            buyerInfo = BuyerInfo(
+                purchaserName = "홍길동",
+                purchaserAddress = "서울특별시 강남구 테헤란로 123",
+                purchaserRequest = "배송 전 연락 부탁드립니다."
+            ),
+            modifier = Modifier.padding(horizontal = 24.dp)
+        )
+    }
 }
