@@ -44,6 +44,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     onClickInventoryRegister: () -> Unit,
     onClickChatbot: () -> Unit,
+    onClickDataReport: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeInfoState by viewModel.homeInfoState.collectAsState()
@@ -117,6 +118,7 @@ fun HomeScreen(
                     HomeFeatureContent(
                         isDataAnalyticsSubscribed = homeInfo.analysisSubscribed,
                         onClickInventoryRegister = onClickInventoryRegister,
+                        onClickDataReport = onClickDataReport,
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentHeight()

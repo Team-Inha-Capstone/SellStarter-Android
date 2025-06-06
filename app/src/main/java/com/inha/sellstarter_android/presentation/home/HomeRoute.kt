@@ -10,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
+    onNavigateToReport: () -> Unit,
     onNavigateToInventoryRegister: () -> Unit,
     onNavigateToChatbot: () -> Unit,
     modifier: Modifier
@@ -18,6 +19,7 @@ fun HomeRoute(
         modifier = modifier,
         onClickInventoryRegister = onNavigateToInventoryRegister,
         onClickChatbot = onNavigateToChatbot,
+        onClickDataReport = onNavigateToReport,
         viewModel = viewModel
     )
 }

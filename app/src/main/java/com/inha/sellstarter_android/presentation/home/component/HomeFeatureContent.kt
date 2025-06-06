@@ -34,6 +34,7 @@ import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 fun HomeFeatureContent(
     isDataAnalyticsSubscribed: Boolean,
     onClickInventoryRegister: () -> Unit,
+    onClickDataReport: () -> Unit,
     modifier: Modifier
 ) {
     Row(
@@ -53,7 +54,7 @@ fun HomeFeatureContent(
         HomeFeatureCard(
             title = "데이터 분석",
             description = "스토어의 재고와\n판매추이 등을\n분석할 수 있습니다.",
-            onClick = if (isDataAnalyticsSubscribed) onClickInventoryRegister else ({}),
+            onClick =  onClickDataReport,
             backgroundImg = R.drawable.img_purple_search,
             modifier = Modifier
                 .weight(1f)

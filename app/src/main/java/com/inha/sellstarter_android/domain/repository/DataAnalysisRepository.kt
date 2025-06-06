@@ -6,4 +6,6 @@ interface DataAnalysisRepository {
     suspend fun getInventoryFlowGraph(
         inventoryFlowGraphRequestDto: InventoryFlowGraphRequestDto
     ): Result<String>
+
+    suspend fun fetchAnalysisReport(): Result<String>
 }
