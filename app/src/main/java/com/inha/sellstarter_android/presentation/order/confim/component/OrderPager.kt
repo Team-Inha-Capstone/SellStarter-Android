@@ -14,6 +14,7 @@ fun OrderPager(
     pagerState: PagerState,
     orders: List<Order>,
     selectedIds: Set<Int>,
+    onOrderItemClick : () -> Unit,
     onItemSelect: (Int) -> Unit,
     onSelectAll: (List<Order>) -> Unit
 ) {
@@ -29,7 +30,8 @@ fun OrderPager(
             orders = filteredOrders,
             selectedIds = selectedIds,
             onItemSelect = onItemSelect,
-            onSelectAll = { onSelectAll(filteredOrders) }
+            onSelectAll = { onSelectAll(filteredOrders) },
+            onOrderItemClick = onOrderItemClick
         )
     }
 }

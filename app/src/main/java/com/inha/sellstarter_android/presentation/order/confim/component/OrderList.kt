@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.order.confim.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +28,7 @@ import com.inha.sellstarter_android.domain.model.Order
 fun OrderList(
     orders: List<Order>,
     selectedIds: Set<Int>,
+    onOrderItemClick: () -> Unit,
     onItemSelect: (Int) -> Unit
 ) {
     LazyColumn(
@@ -37,6 +39,9 @@ fun OrderList(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
+                    .clickable {
+                        onOrderItemClick()
+                    }
             ) {
                 Checkbox(
                     checked = selectedIds.contains(order.id),
@@ -45,7 +50,7 @@ fun OrderList(
 
                 Spacer(modifier = Modifier.width(12.dp))
 
-                Column {
+                Column{
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = order.storeTag,
@@ -57,11 +62,6 @@ fun OrderList(
                         Text(order.productName, style = MaterialTheme.typography.bodyMedium)
                     }
                     Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = "옵션: ${order.optionDetail}",
-                        color = Color.Red,
-                        style = MaterialTheme.typography.bodySmall
-                    )
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = "주문 날짜: ${order.orderDate}",

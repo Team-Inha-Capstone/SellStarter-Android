@@ -13,7 +13,8 @@ fun OrderPageContent(
     orders: List<Order>,
     selectedIds: Set<Int>,
     onItemSelect: (Int) -> Unit,
-    onSelectAll: () -> Unit
+    onSelectAll: () -> Unit,
+    onOrderItemClick: () -> Unit,
 ) {
     Column {
         OrderActionButtons(
@@ -29,7 +30,8 @@ fun OrderPageContent(
         OrderList(
             orders = orders,
             selectedIds = selectedIds,
-            onItemSelect = onItemSelect
+            onItemSelect = onItemSelect,
+            onOrderItemClick = onOrderItemClick
         )
     }
 }

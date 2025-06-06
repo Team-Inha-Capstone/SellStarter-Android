@@ -18,18 +18,22 @@ import com.inha.sellstarter_android.domain.model.OrderStatus
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
 import com.inha.sellstarter_android.presentation.order.confim.component.OrderPager
 import com.inha.sellstarter_android.presentation.order.confim.component.OrderTabRow
+import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 
 @Composable
-fun OrderConfirmScreen(modifier: Modifier = Modifier) {
+fun OrderConfirmScreen(
+    modifier: Modifier = Modifier,
+    onOrderItemClick: () -> Unit,
+) {
     val pagerState = rememberPagerState(initialPage = 0) { 2 }
     var selectedTabIndex by remember { mutableStateOf(0) }
     val selectedIds = remember { mutableStateOf<Set<Int>>(emptySet()) }
 
     val dummyOrders = remember {
         listOf(
-            Order(1, "미니 드레스 032F", "블랙 / 2개", "2025.03.20", "N", OrderStatus.NEW),
-            Order(2, "미니 드레스 032F", "블랙 / 1개", "2025.03.27", "N", OrderStatus.NEW),
-            Order(3, "미니 드레스 032F", "블랙 / 5개", "2025.04.10", "N", OrderStatus.PICKED),
+            Order(1, "미니 드레스 032F, 후드집업 회색, 트렌치 코트", "", "2025.03.20", "N", OrderStatus.NEW),
+            Order(2, "미니 드레스 032F", "", "2025.03.27", "N", OrderStatus.NEW),
+            Order(3, "미니 드레스 032F", "", "2025.04.10", "N", OrderStatus.PICKED),
         )
     }
 
@@ -42,9 +46,11 @@ fun OrderConfirmScreen(modifier: Modifier = Modifier) {
     Column(modifier = modifier.fillMaxSize()) {
         TitleScreen(title = "주문 확인")
 
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 24.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 24.dp)
+        ) {
 
             OrderTabRow(
                 selectedIndex = selectedTabIndex,
@@ -62,7 +68,8 @@ fun OrderConfirmScreen(modifier: Modifier = Modifier) {
                 onItemSelect = onItemSelect,
                 onSelectAll = { filtered ->
                     selectedIds.value = filtered.map { it.id }.toSet()
-                }
+                },
+                onOrderItemClick = onOrderItemClick
             )
         }
     }
@@ -72,8 +79,7 @@ fun OrderConfirmScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewOrderConfirmScreen() {
-    OrderConfirmScreen(
-        modifier = Modifier.fillMaxSize()
-    )
+    SellStarterAndroidTheme {
+    }
 }
 

@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,6 +23,7 @@ import com.inha.sellstarter_android.presentation.order.detail.component.BuyerInf
 import com.inha.sellstarter_android.presentation.order.detail.component.OrderInfoContent
 import com.inha.sellstarter_android.presentation.order.detail.component.PickingInfoContent
 import com.inha.sellstarter_android.ui.theme.Blue200
+import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 
 @Composable
 fun OrderDetailScreen(
@@ -84,6 +87,8 @@ fun OrderDetailScreen(
                 .padding(24.dp),
             enabled = pickedItems.isNotEmpty()
         )
+
+        Spacer(modifier = Modifier.height(60.dp))
     }
 }
 
@@ -91,7 +96,9 @@ fun OrderDetailScreen(
 @Preview(showBackground = true, apiLevel = 33)
 @Composable
 fun PreviewOrderDetailScreen() {
-    OrderDetailScreen(
-        modifier = Modifier.fillMaxSize()
-    )
+    SellStarterAndroidTheme {
+        OrderDetailScreen(
+            modifier = Modifier.fillMaxSize()
+        )
+    }
 }
