@@ -5,6 +5,7 @@ import com.inha.sellstarter_android.domain.repository.DataAnalysisRepository
 import com.inha.sellstarter_android.domain.repository.HomeRepository
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import com.inha.sellstarter_android.domain.repository.MyPageRepository
+import com.inha.sellstarter_android.domain.repository.OrderRepository
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotEndUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotMessageUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotStartUseCase
@@ -26,6 +27,15 @@ import com.inha.sellstarter_android.domain.usecase.mypage.MyPageUserInfoUseCase
 import com.inha.sellstarter_android.domain.usecase.mypage.UserApiDeleteUseCase
 import com.inha.sellstarter_android.domain.usecase.mypage.UserApiUpdateUseCase
 import com.inha.sellstarter_android.domain.usecase.mypage.UserApiUseCase
+import com.inha.sellstarter_android.domain.usecase.order.CancelOrderUseCase
+import com.inha.sellstarter_android.domain.usecase.order.CompleteOrderPickingsUseCase
+import com.inha.sellstarter_android.domain.usecase.order.CompleteSinglePickingUseCase
+import com.inha.sellstarter_android.domain.usecase.order.ConfirmOrderShipmentUseCase
+import com.inha.sellstarter_android.domain.usecase.order.FetchCompletedPickingListUseCase
+import com.inha.sellstarter_android.domain.usecase.order.FetchOrderConfirmListUseCase
+import com.inha.sellstarter_android.domain.usecase.order.FetchOrderConfirmationDetailUseCase
+import com.inha.sellstarter_android.domain.usecase.order.IsPickingAvailableUseCase
+import com.inha.sellstarter_android.domain.usecase.order.OrderUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -77,9 +87,28 @@ object UseCaseModule {
 
     @Provides
     @Singleton
+    fun provideOrderUseCase(
+        orderRepository: OrderRepository
+    ): OrderUseCases {
+        return OrderUseCases(
+            fetchOrderConfirmListUseCase = FetchOrderConfirmListUseCase(orderRepository),
+            fetchOrderConfirmationDetailUseCase = FetchOrderConfirmationDetailUseCase(
+                orderRepository
+            ),
+            isPickingAvailableUseCase = IsPickingAvailableUseCase(orderRepository),
+            completeOrderPickingsUseCase = CompleteOrderPickingsUseCase(orderRepository),
+            completeSinglePickingUseCase = CompleteSinglePickingUseCase(orderRepository),
+            fetchCompletedPickingListUseCase = FetchCompletedPickingListUseCase(orderRepository),
+            confirmOrderShipmentUseCase = ConfirmOrderShipmentUseCase(orderRepository),
+            cancelOrderUseCase = CancelOrderUseCase(orderRepository)
+        )
+    }
+
+    @Provides
+    @Singleton
     fun provideDataAnalysisUseCase(
         dataAnalysisRepository: DataAnalysisRepository
-    ): DataAnalysisUseCases{
+    ): DataAnalysisUseCases {
         return DataAnalysisUseCases(
             inventoryFlowGraphUseCase = InventoryFlowGraphUseCase(dataAnalysisRepository)
         )

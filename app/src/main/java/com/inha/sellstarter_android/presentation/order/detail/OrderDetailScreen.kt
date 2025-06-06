@@ -1,5 +1,7 @@
 package com.inha.sellstarter_android.presentation.order.detail
 
+import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,33 +15,50 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.domain.model.PickedItem
+import com.inha.sellstarter_android.domain.model.OrderDetailInfo
+import com.inha.sellstarter_android.domain.model.OrderPickingInventory
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
 import com.inha.sellstarter_android.presentation.order.detail.component.BuyerInfoContent
+import com.inha.sellstarter_android.presentation.order.detail.component.OrderDetailBottomButton
 import com.inha.sellstarter_android.presentation.order.detail.component.OrderInfoContent
 import com.inha.sellstarter_android.presentation.order.detail.component.PickingInfoContent
 import com.inha.sellstarter_android.ui.theme.Blue200
+import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 
 @Composable
 fun OrderDetailScreen(
+    orderDetailInfo: OrderDetailInfo,
+    isFromCompletedTab: Boolean,
+    onNavigateToScan: (orderId: String, barcode: String) -> Unit,
+    onCompletePicking: () -> Unit,
+    onCompleteShipping: () -> Unit,
+    onCancelComplete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val pickedItems = listOf(
-        PickedItem("미니 드레스 0A92 / 2", "0134Ad234"),
-        PickedItem("파란 니트 032Z / 1", "085Ad145"),
-        PickedItem("미니 드레스 0A92 / 2", "0134Ad234"),
-        PickedItem("파란 니트 032Z / 1", "085Ad145"),
-        PickedItem("미니 드레스 0A92 / 2", "0134Ad234"),
-        PickedItem("파란 니트 032Z / 1", "085Ad145"),
-        PickedItem("미니 드레스 0A92 / 2", "0134Ad234"),
-        PickedItem("파란 니트 032Z / 1", "085Ad145")
-    )
-    Column(modifier = Modifier.fillMaxSize()) {
+    // 1) PickedItem 리스트로 매핑
+    //    이미 OrderPickingInventory 타입이므로, 그대로 사용
+    val pickedItems = remember(orderDetailInfo) {
+        orderDetailInfo.pickingInfo.items
+    }
+
+    // 2) “전체 피킹 완료” 버튼 활성 조건: DTO에서 내려온 allPicked 값을 그대로 사용
+    val allPicked = orderDetailInfo.pickingInfo.allPicked
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Grey0)
+    ) {
         TitleScreen(title = "주문 상세 확인")
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -52,53 +71,46 @@ fun OrderDetailScreen(
         ) {
             item {
                 OrderInfoContent(
+                    orderInfo = orderDetailInfo.orderInfo,
                     modifier = Modifier.fillMaxWidth()
                 )
             }
-
             item {
                 PickingInfoContent(
-                    pickedItems = pickedItems,
+                    pickingInfo = orderDetailInfo.pickingInfo,
+                    onItemClick = { barcode ->
+                        onNavigateToScan(orderDetailInfo.orderInfo.orderId, barcode)
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .heightIn(max = 300.dp)
                 )
             }
-
             item {
                 BuyerInfoContent(
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-
-            item {
-                BuyerInfoContent(
+                    buyerInfo = orderDetailInfo.buyerInfo,
                     modifier = Modifier.fillMaxWidth()
                 )
             }
         }
 
-        OneButton(
-            text = "전체 피킹 완료",
-            buttonBackgroundColor = Blue200,
-            onClick = { },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp),
-            enabled = pickedItems.isNotEmpty()
+        OrderDetailBottomButton(
+            isFromCompletedTab = isFromCompletedTab,
+            pickedItems = pickedItems,
+            allPicked = allPicked,
+            onCompletePicking = onCompletePicking,
+            onCompleteShipping = onCompleteShipping,
+            onCancelComplete = onCancelComplete
         )
 
-        Spacer(modifier = Modifier.height(60.dp))
+        Spacer(modifier = Modifier.height(70.dp))
     }
 }
-
 
 @Preview(showBackground = true, apiLevel = 33)
 @Composable
 fun PreviewOrderDetailScreen() {
     SellStarterAndroidTheme {
-        OrderDetailScreen(
-            modifier = Modifier.fillMaxSize()
-        )
+
     }
 }

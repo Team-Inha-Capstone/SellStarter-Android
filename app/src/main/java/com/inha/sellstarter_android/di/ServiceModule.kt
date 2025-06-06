@@ -5,6 +5,7 @@ import com.inha.sellstarter_android.data.service.DataAnalysisService
 import com.inha.sellstarter_android.data.service.HomeService
 import com.inha.sellstarter_android.data.service.InventoryService
 import com.inha.sellstarter_android.data.service.MyPageService
+import com.inha.sellstarter_android.data.service.OrderService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,6 +45,13 @@ object ServiceModule {
         @NetworkModule.MainRetrofit retrofit: Retrofit
     ): InventoryService =
         retrofit.create(InventoryService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideOrderService(
+        @NetworkModule.MainRetrofit retrofit: Retrofit
+    ): OrderService =
+        retrofit.create(OrderService::class.java)
 
     @Singleton
     @Provides

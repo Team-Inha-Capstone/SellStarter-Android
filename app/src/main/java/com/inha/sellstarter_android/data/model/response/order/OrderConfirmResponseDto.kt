@@ -12,16 +12,16 @@ data class OrderListResponseDto(
     val page: Int,
     @SerialName("size")
     val size: Int,
-    @SerialName("totalElements")
+    @SerialName("total_elements")
     val totalElements: Int,
-    @SerialName("totalPages")
+    @SerialName("total_pages")
     val totalPages: Int
 )
 
 @Serializable
 data class OrderItemDto(
     @SerialName("order_id")
-    val orderId: Int,
+    val orderId: String,
     @SerialName("order_date")
     val orderDate: String,
     @SerialName("channel_id")
@@ -29,7 +29,7 @@ data class OrderItemDto(
     @SerialName("channel_name")
     val channelName: String,
     @SerialName("inventory_item")
-    val inventoryItem: String
+    val inventoryItem: String?
 )
 
 @Serializable

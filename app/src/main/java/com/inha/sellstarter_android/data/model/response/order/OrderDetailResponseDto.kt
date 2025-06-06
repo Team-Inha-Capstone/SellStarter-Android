@@ -16,11 +16,11 @@ data class OrderDetailResponseDto(
     @SerialName("all_picked")
     val allPicked: Boolean,
     @SerialName("purchaser_name")
-    val purchaserName: String,
-    @SerialName("purchser_address")
-    val purchaserAddress: String,
+    val purchaserName: String?,
+    @SerialName("purchaser_address")
+    val purchaserAddress: String?,
     @SerialName("purchaser_request")
-    val purchaserRequest: String
+    val purchaserRequest: String?
 )
 
 @Serializable

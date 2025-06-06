@@ -107,12 +107,12 @@ fun OrderSummaryItem(title: String, count: Int, modifier: Modifier) {
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyLarge
         )
         Spacer(modifier = Modifier.height(2.dp))
         Text(
             text = "$count",
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.headlineMedium
         )
     }
 }
