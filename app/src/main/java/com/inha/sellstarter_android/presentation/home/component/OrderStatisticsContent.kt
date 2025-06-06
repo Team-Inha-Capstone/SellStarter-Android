@@ -198,11 +198,10 @@ fun GraphText(
     weeklySales: WeeklySales,
     yearlySales: YearlySales
 ) {
-
     val displayText = if (isMonthlySelected) {
-        "이번 달 주문량은 ${weeklySales.weeklySum}개입니다."
+        "이번 달 주문량은 ${yearlySales.currentMonthSum}개입니다."
     } else {
-        "이번 주 주문량은 ${yearlySales.currentMonthSum}개입니다."
+        "이번 주 주문량은 ${weeklySales.weeklySum}개입니다."
     }
     Text(
         text = displayText,

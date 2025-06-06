@@ -63,7 +63,8 @@ fun TwoButtonDialog(
                 OneButton(
                     modifier = Modifier
                         .weight(1f)
-                        .padding(end = 8.dp),
+                        .padding(end = 8.dp)
+                        .height(55.dp),
                     text = leftButtonText,
                     buttonBackgroundColor = leftButtonColor,
                     enabled = leftButtonEnabled,
@@ -73,7 +74,8 @@ fun TwoButtonDialog(
                 OneButton(
                     modifier = Modifier
                         .weight(1f)
-                        .padding(start = 8.dp),
+                        .padding(start = 8.dp)
+                        .height(55.dp),
                     text = rightButtonText,
                     buttonBackgroundColor = rightButtonColor,
                     enabled = rightButtonEnabled,

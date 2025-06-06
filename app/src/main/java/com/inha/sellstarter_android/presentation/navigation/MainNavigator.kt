@@ -1,5 +1,9 @@
 package com.inha.sellstarter_android.presentation.navigation
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,10 +17,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.inha.sellstarter_android.domain.model.Inventory
+import androidx.navigation.navArgument
+import com.inha.sellstarter_android.data.model.request.order.OrderInventoryPickingRequestDto
 import com.inha.sellstarter_android.presentation.chatbot.ChatbotRoute
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
@@ -33,8 +38,15 @@ import com.inha.sellstarter_android.presentation.mypage.FontSizeViewModel
 import com.inha.sellstarter_android.presentation.mypage.MyPageScreen
 import com.inha.sellstarter_android.presentation.onboarding.OnboardingScreen
 import com.inha.sellstarter_android.presentation.onboarding.ProfileSetupScreen
+import com.inha.sellstarter_android.presentation.order.confirm.OrderConfirmRoute
+import com.inha.sellstarter_android.presentation.order.confirm.OrderConfirmScreen
+import com.inha.sellstarter_android.presentation.order.detail.OrderDetailRoute
+import com.inha.sellstarter_android.presentation.order.detail.OrderDetailScreen
+import com.inha.sellstarter_android.presentation.order.detail.OrderDetailViewModel
+import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.util.base.UiState
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainNavigator(
     navController: NavHostController,
@@ -75,7 +87,8 @@ fun MainNavigator(
             HomeRoute(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding),
+                    .padding(innerPadding)
+                    .background(Grey0),
                 onNavigateToInventoryRegister = {
                     navController.navigate("inventory/register")
                 },
@@ -137,28 +150,35 @@ fun MainNavigator(
             )
         }
 
-        composable("inventory/scan/{barcodeId}") { backStackEntry ->
+        composable("inventory/scan/{orderId}/{barcodeId}") { backStackEntry ->
             val barcodeId = backStackEntry.arguments?.getString("barcodeId") ?: ""
+            val orderId = backStackEntry.arguments?.getString("orderId") ?: ""
             BarcodeScannerScreen(
                 barcodeId = barcodeId,
                 onBack = {
                     navController.navigate("inventory/scan/error")
                 },
                 onSubmitPicking = { barcodeId ->
-                    navController.navigate("inventory/scan/$barcodeId/dialog")
+                    navController.navigate("inventory/scan/$orderId/$barcodeId/dialog")
                 },
                 modifier = modifier
             )
         }
 
-        composable("inventory/scan/{barcodeId}/dialog") { backStackEntry ->
+        composable("inventory/scan/{orderId}/{barcodeId}/dialog") { backStackEntry ->
             val barcodeId = backStackEntry.arguments?.getString("barcodeId") ?: ""
-            val parentEntry = remember { navController.getBackStackEntry("inventory") }
-            val viewModel = hiltViewModel<InventoryViewModel>(parentEntry)
+            val orderId = backStackEntry.arguments?.getString("orderId") ?: ""
+            Log.e("hyeonbar", "barcodeId = ${barcodeId}")
+            Log.e("hyeonbar", "orderId = ${orderId}")
+            val parentRoute = "inventory/scan/$orderId/$barcodeId"
+            val parentEntry = remember { navController.getBackStackEntry(parentRoute) }
+
+            val inventoryViewModel = hiltViewModel<InventoryViewModel>(parentEntry)
+            val pickingViewmodel = hiltViewModel<OrderDetailViewModel>(parentEntry)
             LaunchedEffect(barcodeId) {
-                viewModel.getInventoryDetail(barcodeId)
+                inventoryViewModel.getInventoryDetail(barcodeId)
             }
-            val inventoryDetailState by viewModel.inventoryDetailState.collectAsState()
+            val inventoryDetailState by inventoryViewModel.inventoryDetailState.collectAsState()
             when (val state = inventoryDetailState) {
                 is UiState.Success -> {
                     val inventory = state.data
@@ -167,15 +187,20 @@ fun MainNavigator(
                         inventory = inventory,
                         quantity = inventory.quantity,
                         onQuantityChange = { updatedQuantity = it },
-                        onDismiss = { navController.popBackStack() },
+                        onDismiss = {
+                            navController.navigate("order") {
+                                popUpTo(0) { inclusive = true }
+                            }
+                        },
                         onConfirm = {
-                            viewModel.editInventoryCount(
-                                barcodeId,
-                                inventory.quantity,
-                                updatedQuantity
+                            pickingViewmodel.completeSinglePicking(
+                                orderId = orderId,
+                                request = OrderInventoryPickingRequestDto(barcodeId = barcodeId)
                             )
-                            navController.popBackStack()
-                            navController.popBackStack()
+
+                            navController.navigate("order") {
+                                popUpTo(0) { inclusive = true }
+                            }
                         }
                     )
                 }
@@ -193,16 +218,46 @@ fun MainNavigator(
             }
         }
 
-        composable("inventory/scan/error"){
+        composable("inventory/scan/error") {
             InvalidBarcodeDialog(
                 onDismiss = {
-                    navController.navigate("inventory") {
+                    navController.navigate("order") {
                         popUpTo(0) { inclusive = true }
-                        launchSingleTop = true
                     }
                 }
             )
         }
+
+        composable("order") {
+            OrderConfirmRoute(
+                onNavigateToDetail = { orderId, isFromCompleted ->
+                    navController.navigate("order/detail/$orderId/$isFromCompleted")
+                },
+                modifier = modifier
+            )
+        }
+
+        composable(
+            route = "order/detail/{orderId}/{isFromCompleted}",
+            arguments = listOf(
+                navArgument("orderId") { type = NavType.StringType },
+                navArgument("isFromCompleted") { type = NavType.BoolType }
+            )
+        ) { backStackEntry ->
+            val orderId = backStackEntry.arguments?.getString("orderId")!!
+            val isFromCompleted = backStackEntry.arguments?.getBoolean("isFromCompleted")!!
+            OrderDetailRoute(
+                orderId = orderId,
+                isFromCompleted = isFromCompleted,
+                onNavigateToScan = { id, barcode ->
+                    navController.navigate("inventory/scan/$orderId/$barcode")
+                },
+                onNavigateOrderList = {
+                    navController.navigate("order")
+                }
+            )
+        }
+
         composable("mypage") {
             MyPageScreen(
                 modifier = modifier,

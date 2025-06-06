@@ -13,7 +13,7 @@ data class Inventory(
 )
 
 // 리스트 내 inventory 도메인 모델
-data class InventoryItem(
+data class InventorySummary(
     val id : String,
     val name : String,
     val quantity : Int,

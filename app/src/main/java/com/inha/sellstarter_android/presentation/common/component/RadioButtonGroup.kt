@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.inha.sellstarter_android.domain.model.ShoppingMallType
+import com.inha.sellstarter_android.domain.model.type.ShoppingMallType
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Grey900
 import com.inha.sellstarter_android.ui.theme.Orange200

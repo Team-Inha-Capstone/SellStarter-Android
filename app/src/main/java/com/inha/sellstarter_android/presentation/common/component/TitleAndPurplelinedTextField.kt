@@ -21,8 +21,8 @@ fun TitleAndPurplelinedTextField(
 ) {
     Text(
         text = titleText,
-        style = MaterialTheme.typography.headlineSmall,
-        modifier = Modifier.padding(top = 24.dp)
+        style = MaterialTheme.typography.headlineMedium,
+        modifier = Modifier.padding(top = 16.dp)
     )
 
     DefaultTextField(

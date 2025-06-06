@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,7 +31,10 @@ fun InventoryDetailGraph(
     modifier: Modifier
 ) {
 
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxHeight()
+    ) {
         Text(
             text = titleText,
             style = AppTypography.headlineSmall,
@@ -40,12 +44,11 @@ fun InventoryDetailGraph(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(16f / 9f)
-                .height(500.dp)      // ← 원하는 높이
+                .height(1500.dp)
         ) {
             HtmlChartWebView(
                 url = graphUrl,
-                modifier = Modifier.matchParentSize()  // Box 전체를 채우도록
+                modifier = Modifier.fillMaxHeight()  // Box 전체를 채우도록
             )
         }
 
@@ -56,7 +59,8 @@ fun InventoryDetailGraph(
 fun HtmlChartWebView(url: String, modifier: Modifier = Modifier) {
     AndroidView(
         modifier = modifier
-            .clip(RoundedCornerShape(10.dp)),
+            .clip(RoundedCornerShape(10.dp))
+            .height(1000.dp),
         factory = { context ->
             WebView(context).apply {
                 settings.apply {

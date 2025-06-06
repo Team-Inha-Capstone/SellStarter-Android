@@ -1,7 +1,5 @@
 package com.inha.sellstarter_android.presentation.mypage
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,13 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.inha.sellstarter_android.domain.model.ShoppingMallType
-import com.inha.sellstarter_android.domain.model.Users
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
@@ -32,7 +27,6 @@ import com.inha.sellstarter_android.presentation.mypage.component.appfont.FontSi
 import com.inha.sellstarter_android.presentation.mypage.component.help.HelpContent
 import com.inha.sellstarter_android.presentation.mypage.component.help.helpItems
 import com.inha.sellstarter_android.presentation.mypage.component.storemanage.MyPageStoreAPIContent
-import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.util.base.UiState
 
 @Composable

@@ -16,7 +16,6 @@ import com.inha.sellstarter_android.data.util.Constants.USER
 import retrofit2.http.Body
 import retrofit2.http.Path
 
-
 interface MyPageService {
     @GET("$API/$APP/$USER/{userId}")
     suspend fun getUserDetail(

@@ -75,6 +75,11 @@ val AppTypography = Typography(
         fontFamily = Pretendard
     ),
 
+    titleSmall= TextStyle( // 16sp → 본문 세미볼드 / 키워드 등
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Bold,
+        fontFamily = Pretendard
+    ),
     // 본문
     bodyLarge = TextStyle( // 16sp → 일반 본문 텍스트
         fontSize = 16.sp,

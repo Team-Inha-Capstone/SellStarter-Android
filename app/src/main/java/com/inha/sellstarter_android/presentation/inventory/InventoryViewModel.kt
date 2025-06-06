@@ -12,7 +12,7 @@ import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountR
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryFlowGraphRequestDto
 import com.inha.sellstarter_android.domain.model.Inventory
-import com.inha.sellstarter_android.domain.model.InventoryItem
+import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.domain.usecase.dataanalysis.DataAnalysisUseCases
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryUseCases
 import com.inha.sellstarter_android.util.base.UiState
@@ -36,8 +36,8 @@ class InventoryViewModel @Inject constructor(
 
     // 1. 전체 재고 리스트
     private val _inventoryListState =
-        MutableStateFlow<UiState<List<InventoryItem>>>(UiState.Loading)
-    val inventoryListState: StateFlow<UiState<List<InventoryItem>>> = _inventoryListState
+        MutableStateFlow<UiState<List<InventorySummary>>>(UiState.Loading)
+    val inventoryListState: StateFlow<UiState<List<InventorySummary>>> = _inventoryListState
 
     // 2. 재고 상세
     private val _inventoryDetailState = MutableStateFlow<UiState<Inventory>>(UiState.Loading)
@@ -52,8 +52,8 @@ class InventoryViewModel @Inject constructor(
     val editCountState: StateFlow<UiState<Inventory>> = _editCountState
 
     // 4. 재고 검색
-    private val _searchResultState = MutableStateFlow<UiState<List<InventoryItem>>>(UiState.Loading)
-    val searchResultState: StateFlow<UiState<List<InventoryItem>>> = _searchResultState
+    private val _searchResultState = MutableStateFlow<UiState<List<InventorySummary>>>(UiState.Loading)
+    val searchResultState: StateFlow<UiState<List<InventorySummary>>> = _searchResultState
 
     var draft: InventoryCreateRequestDto? by mutableStateOf(null)
     var draftImageUri: Uri? by mutableStateOf(null)

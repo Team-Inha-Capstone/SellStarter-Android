@@ -4,14 +4,14 @@ import com.inha.sellstarter_android.data.model.response.inventory.InventoryDetai
 import com.inha.sellstarter_android.data.model.response.inventory.InventoryItemDto
 import com.inha.sellstarter_android.data.model.response.inventory.InventoryListResponseDto
 import com.inha.sellstarter_android.domain.model.Inventory
-import com.inha.sellstarter_android.domain.model.InventoryItem
+import com.inha.sellstarter_android.domain.model.InventorySummary
 
-fun InventoryListResponseDto.toDomain(): List<InventoryItem> {
+fun InventoryListResponseDto.toDomain(): List<InventorySummary> {
     return content.map { it.toDomain() }
 }
 
-fun InventoryItemDto.toDomain(): InventoryItem {
-    return InventoryItem(
+fun InventoryItemDto.toDomain(): InventorySummary {
+    return InventorySummary(
         id = this.barcodeId,
         name = this.inventoryName,
         quantity = this.inventoryCount,

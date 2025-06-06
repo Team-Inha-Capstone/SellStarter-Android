@@ -6,7 +6,6 @@ import com.inha.sellstarter_android.data.util.Constants.CHART
 import com.inha.sellstarter_android.data.util.Constants.INVENTORY
 import com.inha.sellstarter_android.util.base.BaseResponseDto
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 

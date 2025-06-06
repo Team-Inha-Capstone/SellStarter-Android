@@ -1,12 +1,11 @@
 package com.inha.sellstarter_android.data.repository
 
-import android.util.Log
 import com.inha.sellstarter_android.data.datasource.remote.InventoryDataSource
 import com.inha.sellstarter_android.data.mapper.toDomain
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
 import com.inha.sellstarter_android.domain.model.Inventory
-import com.inha.sellstarter_android.domain.model.InventoryItem
+import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import okhttp3.MultipartBody
 import javax.inject.Inject
@@ -18,7 +17,7 @@ class InventoryRepositoryImpl @Inject constructor(
         status: Boolean,
         page: Int,
         size: Int
-    ): Result<List<InventoryItem>> {
+    ): Result<List<InventorySummary>> {
         return runCatching {
             inventoryDataSource.getInventoryList(
                 status = status, page = page, size = size
@@ -49,7 +48,7 @@ class InventoryRepositoryImpl @Inject constructor(
         status: Boolean,
         page: Int,
         size: Int
-    ): Result<List<InventoryItem>> {
+    ): Result<List<InventorySummary>> {
         return runCatching {
             inventoryDataSource.getInventorySearch(
                 search = search, status = status, page = page, size = size

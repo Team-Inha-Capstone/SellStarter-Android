@@ -1,6 +1,7 @@
 package com.inha.sellstarter_android.data.util
 
 object Constants {
+
     // 공통
     const val API = "api"
     const val APP = "app"
@@ -14,10 +15,13 @@ object Constants {
     const val HOME ="home"
 
     // 재고
-    const val CHART = "chart"
     const val INVENTORY = "inventory"
     const val PICK = "pick"
+    const val CHART = "chart"
     const val COUNT = "count"
+
+    // 주문
+    const val ORDER = "order"
 
 
     // 마이페이지

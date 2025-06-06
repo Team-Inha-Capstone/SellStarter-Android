@@ -10,26 +10,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.inha.sellstarter_android.domain.model.InventoryItem
-import com.inha.sellstarter_android.presentation.common.component.OneButton
+import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
-import com.inha.sellstarter_android.presentation.inventory.InventoryViewModel
 import com.inha.sellstarter_android.presentation.inventory.list.component.InventoryItem
 import com.inha.sellstarter_android.presentation.inventory.list.component.SearchBar
 import com.inha.sellstarter_android.presentation.inventory.list.component.SoldOutFilterChips
@@ -39,7 +31,7 @@ import com.inha.sellstarter_android.util.base.UiState
 
 @Composable
 fun InventoryGridScreen(
-    inventoryUiState: UiState<List<InventoryItem>>,
+    inventoryUiState: UiState<List<InventorySummary>>,
     searchText: String,
     selectedChipIndex: Int,
     onSearchTextChanged: (String) -> Unit,
@@ -51,6 +43,7 @@ fun InventoryGridScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(Grey0)
     ) {
         TitleScreen(title = "스토어 재고 확인")
 
@@ -69,10 +62,7 @@ fun InventoryGridScreen(
                 .height(50.dp)
         )
 
-        Spacer(
-            modifier = Modifier
-                .size(12.dp)
-        )
+        Spacer(modifier = Modifier.size(4.dp))
 
         SoldOutFilterChips(
             selectedIndex = selectedChipIndex,
@@ -84,7 +74,7 @@ fun InventoryGridScreen(
                 .padding(horizontal = 12.dp)
         )
 
-        Spacer(modifier = Modifier.size(12.dp))
+        Spacer(modifier = Modifier.size(8.dp))
 
         when (val state = inventoryUiState) {
             is UiState.Loading -> {
@@ -107,7 +97,7 @@ fun InventoryGridScreen(
                             InventoryItem(
                                 inventory = item,
                                 modifier = Modifier
-                                    .height(300.dp)
+                                    .wrapContentHeight()
                                     .clickable {
                                         onItemClick(item.id)
                                     }

@@ -2,6 +2,7 @@ package com.inha.sellstarter_android.presentation.inventory.detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -57,14 +59,17 @@ fun InventoryDetailScreen(
                 model = inventory.imageUrl,
                 contentDescription = "inventoryDetailImage",
                 modifier = Modifier
+                    .clip(RoundedCornerShape(10.dp))
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .padding(vertical = 4.dp)
+                    .height(200.dp),
+                contentScale = ContentScale.Crop
             )
 
             TitleAndText(
                 titleText = "상품명",
                 contentText = inventory.name,
-                modifier = Modifier
+                modifier = Modifier.padding(vertical = 8.dp)
             )
 
             TitleAndText(
@@ -98,6 +103,7 @@ fun InventoryDetailScreen(
                 graphUrl = graphUrl,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(1000.dp)
             )
 
             Spacer(modifier = Modifier.size(16.dp))

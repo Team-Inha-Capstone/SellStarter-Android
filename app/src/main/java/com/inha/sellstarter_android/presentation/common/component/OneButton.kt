@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,9 +30,7 @@ fun OneButton(
     fontStyle: TextStyle = MaterialTheme.typography.headlineMedium,
     buttonBackgroundColor: Color = Purple200,
     radius: Int = 10,
-    width: Int = 10,
-    height: Int = 60,
-    enabled : Boolean,
+    enabled: Boolean,
     onClick: () -> Unit,
     modifier: Modifier
 ) {
@@ -41,14 +40,13 @@ fun OneButton(
             .background(
                 if (enabled) buttonBackgroundColor else Grey100
             )
-            .width(width.dp)
-            .height(height.dp)
+            .padding(8.dp)
             .clickable(enabled = enabled) { onClick() }
     ) {
         Text(
             text = text,
             style = fontStyle,
-            color =  if (enabled) fontColor else fontColor,
+            color = if (enabled) fontColor else fontColor,
             modifier = Modifier.align(Alignment.Center)
         )
     }
@@ -57,16 +55,14 @@ fun OneButton(
 @Preview(showBackground = true)
 @Composable
 fun PreviewStockMindDefaultButton() {
-       OneButton(
-            text = "다음으로",
-            fontColor = Grey0,
-            fontStyle = AppTypography.headlineMedium,
-            buttonBackgroundColor = Purple200,
-            radius = 10,
-            width = 330,
-            height = 60,
-            onClick = { },
-            enabled = true,
-            modifier = Modifier.wrapContentSize()
-        )
+    OneButton(
+        text = "다음으로",
+        fontColor = Grey0,
+        fontStyle = AppTypography.headlineMedium,
+        buttonBackgroundColor = Purple200,
+        radius = 10,
+        onClick = { },
+        enabled = true,
+        modifier = Modifier.wrapContentSize()
+    )
 }
