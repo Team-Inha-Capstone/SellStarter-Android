@@ -2,6 +2,7 @@ package com.inha.sellstarter_android.presentation.home
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -43,6 +44,7 @@ import com.inha.sellstarter_android.util.base.UiState
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onClickInventoryRegister: () -> Unit,
+    onClickOrderSummary: () -> Unit,
     onClickChatbot: () -> Unit,
     onClickDataReport: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
@@ -110,7 +112,12 @@ fun HomeScreen(
 
                     OrderSummaryContent(
                         homeInfo = homeInfo,
-                        modifier = Modifier.wrapContentHeight()
+                        onClickOrderSummary = onClickOrderSummary,
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .clickable {
+                                onClickOrderSummary()
+                            }
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))

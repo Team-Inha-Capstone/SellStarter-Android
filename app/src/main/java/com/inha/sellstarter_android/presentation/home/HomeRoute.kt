@@ -13,6 +13,7 @@ fun HomeRoute(
     onNavigateToReport: () -> Unit,
     onNavigateToInventoryRegister: () -> Unit,
     onNavigateToChatbot: () -> Unit,
+    onNavigateToOrder: () -> Unit,
     modifier: Modifier
 ) {
     HomeScreen(
@@ -20,6 +21,7 @@ fun HomeRoute(
         onClickInventoryRegister = onNavigateToInventoryRegister,
         onClickChatbot = onNavigateToChatbot,
         onClickDataReport = onNavigateToReport,
+        onClickOrderSummary = onNavigateToOrder,
         viewModel = viewModel
     )
 }

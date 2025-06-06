@@ -98,6 +98,9 @@ fun MainNavigator(
                 },
                 onNavigateToChatbot = {
                     navController.navigate("chatbot")
+                },
+                onNavigateToOrder = {
+                    navController.navigate("order")
                 }
             )
         }

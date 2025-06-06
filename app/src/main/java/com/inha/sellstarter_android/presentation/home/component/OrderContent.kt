@@ -2,6 +2,7 @@ package com.inha.sellstarter_android.presentation.home.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,7 +35,8 @@ import com.inha.sellstarter_android.ui.theme.Grey0
 @Composable
 fun OrderSummaryContent(
     homeInfo: HomeInfo,
-    modifier: Modifier
+    onClickOrderSummary: () -> Unit,
+    modifier: Modifier,
 ) {
     Row(
         modifier = Modifier.padding(horizontal = 4.dp),
@@ -48,7 +50,11 @@ fun OrderSummaryContent(
         Icon(
             imageVector = Icons.Default.KeyboardArrowRight,
             contentDescription = "이동",
-            modifier = Modifier.padding(start = 4.dp)
+            modifier = Modifier
+                .padding(start = 4.dp)
+                .clickable {
+                    onClickOrderSummary()
+                }
         )
     }
 
