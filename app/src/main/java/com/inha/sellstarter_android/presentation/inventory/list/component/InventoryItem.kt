@@ -1,14 +1,13 @@
 package com.inha.sellstarter_android.presentation.inventory.list.component
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -23,8 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.inha.sellstarter_android.domain.model.Inventory
-import com.inha.sellstarter_android.domain.model.InventoryItem
+import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.presentation.common.component.chip.Chip
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
@@ -34,7 +32,7 @@ import com.inha.sellstarter_android.ui.theme.Red200
 
 @Composable
 fun InventoryItem(
-    inventory : InventoryItem,
+    inventory: InventorySummary,
     modifier: Modifier
 ) {
     Card(
@@ -45,7 +43,7 @@ fun InventoryItem(
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         modifier = modifier
-            .wrapContentSize()
+            .fillMaxSize()
     ) {
 
         Box(
@@ -55,15 +53,15 @@ fun InventoryItem(
                 .align(Alignment.CenterHorizontally)
         ) {
             AsyncImage(
-            model = inventory.imageUrl,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp)
-                .clip(RoundedCornerShape(10.dp)),
-            contentScale = ContentScale.Crop,
-            contentDescription = "inventoryImages"
-        )
-            if(inventory.isSoldOut) {
+                model = inventory.imageUrl,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp)
+                    .clip(RoundedCornerShape(10.dp)),
+                contentScale = ContentScale.Crop,
+                contentDescription = "inventoryImages"
+            )
+            if (inventory.isSoldOut) {
                 Chip(
                     isSelected = true,
                     selectedColor = Red200,
@@ -80,9 +78,10 @@ fun InventoryItem(
 
         Text(
             text = inventory.name,
+            maxLines = 2,
             style = MaterialTheme.typography.headlineSmall,
             color = Grey900,
-            modifier = Modifier.padding(horizontal = 24.dp)
+            modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
         )
 
         Text(
@@ -107,7 +106,7 @@ fun InventoryItem(
 @Composable
 fun PreviewInventoryItem() {
     InventoryItem(
-        inventory =  InventoryItem(
+        inventory = InventorySummary(
             id = "4",
             name = "오렌지",
             quantity = 5,

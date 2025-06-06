@@ -2,9 +2,8 @@ package com.inha.sellstarter_android.domain.repository
 
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
-import com.inha.sellstarter_android.data.model.request.inventory.InventoryFlowGraphRequestDto
 import com.inha.sellstarter_android.domain.model.Inventory
-import com.inha.sellstarter_android.domain.model.InventoryItem
+import com.inha.sellstarter_android.domain.model.InventorySummary
 import okhttp3.MultipartBody
 
 interface InventoryRepository {
@@ -12,7 +11,7 @@ interface InventoryRepository {
         status: Boolean,
         page: Int,
         size: Int
-    ): Result<List<InventoryItem>>
+    ): Result<List<InventorySummary>>
 
     suspend fun getInventoryDetail(
         barcodeId: String
@@ -28,7 +27,7 @@ interface InventoryRepository {
         status: Boolean,
         page: Int,
         size: Int
-    ): Result<List<InventoryItem>>
+    ): Result<List<InventorySummary>>
 
     suspend fun postInventoryCreate(
         inventoryCreateRequest: InventoryCreateRequestDto,

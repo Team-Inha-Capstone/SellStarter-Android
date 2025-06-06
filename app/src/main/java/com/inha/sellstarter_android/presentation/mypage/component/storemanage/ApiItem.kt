@@ -22,10 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.domain.model.ApiKeys
-import com.inha.sellstarter_android.domain.model.ShoppingMallPlatform
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 

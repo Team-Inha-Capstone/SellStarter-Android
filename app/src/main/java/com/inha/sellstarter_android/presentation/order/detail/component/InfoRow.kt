@@ -31,7 +31,7 @@ fun InfoRow(
         )
         Text(
             text = value,
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.headlineSmall,
             color = valueTextColor,
             textAlign = TextAlign.End
         )

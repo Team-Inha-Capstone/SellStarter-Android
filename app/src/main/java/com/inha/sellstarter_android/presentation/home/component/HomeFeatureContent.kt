@@ -104,7 +104,7 @@ fun HomeFeatureCard(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 description,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Start,
                 modifier = Modifier.fillMaxWidth()
             )
