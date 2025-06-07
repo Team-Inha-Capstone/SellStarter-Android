@@ -1,7 +1,6 @@
 package com.inha.sellstarter_android.presentation.home
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +27,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.inha.sellstarter_android.domain.model.HomeInfo
+import com.inha.sellstarter_android.domain.model.WeeklySales
+import com.inha.sellstarter_android.domain.model.YearlySales
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
 import com.inha.sellstarter_android.presentation.home.component.ChatbotFloatingButton
@@ -38,25 +40,23 @@ import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Purple200
 import com.inha.sellstarter_android.util.base.UiState
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier,
-    onClickInventoryRegister: () -> Unit,
-    onClickChatbot: () -> Unit,
-    onClickDataReport: () -> Unit,
-    viewModel: HomeViewModel = hiltViewModel()
+    modifier: Modifier,
+    homeInfoState: UiState<HomeInfo>,
+    weeklySalesState: UiState<WeeklySales>,
+    yearlySalesState: UiState<YearlySales>,
+    onNavigateToInventoryRegister: () -> Unit,
+    onNavigateToChatbot: () -> Unit,
+    onNavigateToReport: () -> Unit,
+    onNavigateToOrder: () -> Unit
 ) {
-    val homeInfoState by viewModel.homeInfoState.collectAsState()
-    val weeklySalesState by viewModel.weeklySales.collectAsState()
-    val yearlySalesState by viewModel.yearlySales.collectAsState()
-
     Box(
         modifier = modifier
             .fillMaxSize()
             .padding(vertical = 24.dp, horizontal = 16.dp)
     ) {
-        when (val state = homeInfoState) {
+        when (homeInfoState) {
             is UiState.Loading -> {
                 LoadingScreen(
                     loadingText = "홈 정보를 불러오는 중입니다...",
@@ -65,20 +65,20 @@ fun HomeScreen(
             }
 
             is UiState.Failure -> {
-                ErrorScreen("홈 정보를 불러오는데 실패했습니다.")
+                ErrorScreen(
+                    errorText = "홈 정보를 불러오는데 실패했습니다.",
+                )
             }
 
             is UiState.Success -> {
-                val homeInfo = state.data
-
+                val homeInfo = homeInfoState.data
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                 ) {
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
@@ -110,15 +110,18 @@ fun HomeScreen(
 
                     OrderSummaryContent(
                         homeInfo = homeInfo,
-                        modifier = Modifier.wrapContentHeight()
+                        onClickOrderSummary = onNavigateToOrder,
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .clickable { onNavigateToOrder() }
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
 
                     HomeFeatureContent(
                         isDataAnalyticsSubscribed = homeInfo.analysisSubscribed,
-                        onClickInventoryRegister = onClickInventoryRegister,
-                        onClickDataReport = onClickDataReport,
+                        onClickInventoryRegister = onNavigateToInventoryRegister,
+                        onClickDataReport = onNavigateToReport,
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentHeight()
@@ -128,8 +131,8 @@ fun HomeScreen(
 
                     if (weeklySalesState is UiState.Success && yearlySalesState is UiState.Success) {
                         OrderStatisticsContent(
-                            weeklySales = (weeklySalesState as UiState.Success).data,
-                            yearlySales = (yearlySalesState as UiState.Success).data,
+                            weeklySales = weeklySalesState.data,
+                            yearlySales = yearlySalesState.data,
                             modifier = Modifier.fillMaxWidth()
                         )
                     }
@@ -137,13 +140,10 @@ fun HomeScreen(
                     Spacer(modifier = Modifier.height(90.dp))
                 }
 
-                Box(
-                    modifier = Modifier.align(Alignment.BottomEnd)
-                ) {
+                Box(modifier = Modifier.align(Alignment.BottomEnd)) {
                     ChatbotFloatingButton(
-                        onClickChatbot = onClickChatbot,
-                        modifier = Modifier
-                            .size(90.dp),
+                        onClickChatbot = onNavigateToChatbot,
+                        modifier = Modifier.size(90.dp)
                     )
                 }
             }

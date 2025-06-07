@@ -1,7 +1,5 @@
 package com.inha.sellstarter_android.presentation.home
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.inha.sellstarter_android.domain.model.HomeInfo
@@ -16,26 +14,25 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
-@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val homeUseCases: HomeUseCases
 ) : ViewModel() {
 
+    private val currentDate: String = LocalDate.now().toString()
+
     private val _homeInfoState = MutableStateFlow<UiState<HomeInfo>>(UiState.Loading)
     val homeInfoState: StateFlow<UiState<HomeInfo>> = _homeInfoState
 
-    private val _weeklySales = MutableStateFlow<UiState<WeeklySales>>(UiState.Loading)
-    val weeklySales: StateFlow<UiState<WeeklySales>> = _weeklySales
+    private val _weeklySalesState = MutableStateFlow<UiState<WeeklySales>>(UiState.Loading)
+    val weeklySalesState: StateFlow<UiState<WeeklySales>> = _weeklySalesState
 
-    private val _yearlySales = MutableStateFlow<UiState<YearlySales>>(UiState.Loading)
-    val yearlySales: StateFlow<UiState<YearlySales>> = _yearlySales
+    private val _yearlySalesState = MutableStateFlow<UiState<YearlySales>>(UiState.Loading)
+    val yearlySalesState: StateFlow<UiState<YearlySales>> = _yearlySalesState
 
     init {
-        val currentDate: String = "2025-05-11"
         getHomeInfo()
         getWeeklySales(currentDate = currentDate)
         getYearlySales(currentDate = currentDate)
@@ -55,8 +52,8 @@ class HomeViewModel @Inject constructor(
         currentDate: String
     ) {
         viewModelScope.launch {
-            _weeklySales.value = safeApiCall(
-                onStart = { _weeklySales.value = UiState.Loading },
+            _weeklySalesState.value = safeApiCall(
+                onStart = { _weeklySalesState.value = UiState.Loading },
                 onError = { it.logHttpError("getWeeklySales") },
                 apiCall = {
                     homeUseCases.weeklySalesUseCase.invoke(
@@ -71,8 +68,8 @@ class HomeViewModel @Inject constructor(
         currentDate: String
     ) {
         viewModelScope.launch {
-            _yearlySales.value = safeApiCall(
-                onStart = { _yearlySales.value = UiState.Loading },
+            _yearlySalesState.value = safeApiCall(
+                onStart = { _yearlySalesState.value = UiState.Loading },
                 onError = { it.logHttpError("getYearlySales") },
                 apiCall = {
                     homeUseCases.yearlySalesUseCase.invoke(

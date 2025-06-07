@@ -28,13 +28,10 @@ import com.inha.sellstarter_android.presentation.inventory.InventoryViewModel
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple200
 import com.inha.sellstarter_android.util.barcode.BarcodeUtils
-
 @Composable
 fun InventoryRegisterScreen(
     modifier: Modifier = Modifier,
-    viewModel: InventoryViewModel = hiltViewModel(),
-    context: Context = LocalContext.current,
-    onClickRegisterSuccess: () -> Unit
+    onRegister: (InventoryCreateRequestDto, Uri?) -> Unit
 ) {
     var name by remember { mutableStateOf("") }
     var count by remember { mutableStateOf("") }
@@ -74,25 +71,21 @@ fun InventoryRegisterScreen(
             fontColor = Grey0,
             enabled = name.isNotBlank() && count.isNotBlank() && location.isNotBlank(),
             onClick = {
-                val barcodeId = BarcodeUtils.generateBarcodeId()
                 val dto = InventoryCreateRequestDto(
                     inventoryName = name,
                     inventoryCount = count.toIntOrNull() ?: 0,
                     inventoryLocation = location,
                     expiration = expiration,
                     inventoryOption = option,
-                    barcodeId = barcodeId
+                    barcodeId = BarcodeUtils.generateBarcodeId()
                 )
-                viewModel.saveDraft(dto, imageUri)
-                onClickRegisterSuccess()
+                onRegister(dto, imageUri)
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(24.dp)
                 .height(55.dp)
         )
-
-        Spacer(modifier = Modifier.size(70.dp))
     }
 }
 

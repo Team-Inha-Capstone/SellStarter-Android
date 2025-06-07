@@ -1,8 +1,6 @@
-package com.inha.sellstarter_android.presentation.inventory.detail
+package com.inha.sellstarter_android.presentation.inventory.route
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -12,15 +10,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
 import com.inha.sellstarter_android.presentation.inventory.InventoryViewModel
+import com.inha.sellstarter_android.presentation.inventory.detail.InventoryDetailScreen
 import com.inha.sellstarter_android.util.base.UiState
 
 @Composable
 fun InventoryDetailRoute(
     barcodeId: String,
-    viewModel: InventoryViewModel = hiltViewModel(),
-    onClickPicking: () -> Unit,
     onBack: () -> Unit,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
+    viewModel: InventoryViewModel = hiltViewModel()
 ) {
     val state by viewModel.inventoryDetailState.collectAsState()
     val graph by viewModel.inventoryGraphState.collectAsState()
@@ -35,11 +33,10 @@ fun InventoryDetailRoute(
             inventory = uiState.data,
             graphUrl = graph,
             onBack = onBack,
-            onClickPicking = onClickPicking,
             modifier = modifier,
             onClickEditCount = { newCount ->
                 viewModel.editInventoryCount(
-                    barcodeId = uiState.data.id,
+                    barcodeId = barcodeId,
                     currentCount = uiState.data.quantity,
                     newCount = newCount
                 )
@@ -47,7 +44,7 @@ fun InventoryDetailRoute(
         )
 
         is UiState.Loading -> LoadingScreen(
-            loadingText = "정보를 가져오고 있습니다.",
+            loadingText = "재고 정보를 가져오고 있습니다.",
             modifier = Modifier.fillMaxSize()
         )
 

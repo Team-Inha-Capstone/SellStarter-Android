@@ -37,6 +37,10 @@ class MyPageViewModel @Inject constructor(
     private val _deleteApiKeyState = MutableStateFlow<UiState<UserInfo>>(UiState.Loading)
     val deleteApiKeyState: StateFlow<UiState<UserInfo>> = _deleteApiKeyState
 
+    init {
+        getUserInfo()
+    }
+
     fun getUserInfo() {
         viewModelScope.launch {
             _userInfoState.value = safeApiCall(

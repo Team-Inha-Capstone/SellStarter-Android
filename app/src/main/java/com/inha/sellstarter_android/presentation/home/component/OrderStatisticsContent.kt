@@ -57,7 +57,6 @@ import com.patrykandpatrick.vico.core.entry.composed.plus
 import com.patrykandpatrick.vico.core.entry.entryOf
 import java.time.LocalDate
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun OrderStatisticsContent(
     weeklySales: WeeklySales,
@@ -191,7 +190,6 @@ fun rememberChartStyle(columnChartColors: List<Color>): ChartStyle {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun GraphText(
     isMonthlySelected: Boolean,

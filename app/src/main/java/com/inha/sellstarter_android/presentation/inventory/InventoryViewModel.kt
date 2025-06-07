@@ -52,7 +52,8 @@ class InventoryViewModel @Inject constructor(
     val editCountState: StateFlow<UiState<Inventory>> = _editCountState
 
     // 4. 재고 검색
-    private val _searchResultState = MutableStateFlow<UiState<List<InventorySummary>>>(UiState.Loading)
+    private val _searchResultState =
+        MutableStateFlow<UiState<List<InventorySummary>>>(UiState.Loading)
     val searchResultState: StateFlow<UiState<List<InventorySummary>>> = _searchResultState
 
     var draft: InventoryCreateRequestDto? by mutableStateOf(null)
@@ -94,6 +95,8 @@ class InventoryViewModel @Inject constructor(
             ).onSuccess { result ->
                 Log.e("hyeon", result)
                 _inventoryGraphState.value = result
+            }.onFailure { result ->
+                Log.e("hyeon", result.toString())
             }
         }
     }

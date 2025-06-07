@@ -59,7 +59,7 @@ fun HomeFeatureContent(
             title = "데이터 분석",
             description = "스토어의 재고와\n판매추이 등을\n분석할 수 있습니다.",
             onClick = {
-                if (isDataAnalyticsSubscribed) onClickDataReport
+                if (isDataAnalyticsSubscribed) onClickDataReport()
                 else uriHandler.openUri(subscribeWebUrl)
             },
             backgroundImg = R.drawable.img_purple_search,

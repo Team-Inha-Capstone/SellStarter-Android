@@ -24,5 +24,5 @@ data class InventoryDetailResponseDto(
 @Serializable
 data class InventoryFlowGraphResponseDto(
     @SerialName("url")
-    val url: String
+    val url: String = ""
 )

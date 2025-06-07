@@ -17,6 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.inha.sellstarter_android.data.model.request.mypage.UserApiDeleteRequestDto
+import com.inha.sellstarter_android.data.model.request.mypage.UserApiRequestDto
+import com.inha.sellstarter_android.data.model.request.mypage.UserApiUpdateRequest
+import com.inha.sellstarter_android.domain.model.UserInfo
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
@@ -31,83 +35,61 @@ import com.inha.sellstarter_android.util.base.UiState
 
 @Composable
 fun MyPageScreen(
-    onFontScaleChanged: (Float) -> Unit,
     modifier: Modifier,
-    viewModel: MyPageViewModel = hiltViewModel()
+    userInfo: UserInfo,
+    fontScaleType: FontSizeType,
+    onFontScaleChanged: (Float) -> Unit,
+    onCreateApiKey: (UserApiRequestDto) -> Unit,
+    onUpdateApiKey: (UserApiUpdateRequest) -> Unit,
+    onDeleteApiKey: (UserApiDeleteRequestDto) -> Unit
 ) {
-    val fontSizeViewModel: FontSizeViewModel = hiltViewModel()
-    val fontScale by fontSizeViewModel.fontScale.collectAsState()
-    val currentFontSizeType = FontSizeType.fromScale(fontScale)
     var isFontDialogVisible by remember { mutableStateOf(false) }
 
-    val userInfoState by viewModel.userInfoState.collectAsState()
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+    ) {
+        TitleScreen(title = "마이페이지")
 
-    LaunchedEffect(Unit) {
-        viewModel.getUserInfo()
+        MyPageProfileContent(
+            users = userInfo,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        MyPageStoreAPIContent(
+            users = userInfo,
+            onCreateApiKey = onCreateApiKey,
+            onUpdateApiKey = onUpdateApiKey,
+            onDeleteApiKey = onDeleteApiKey,
+            modifier = Modifier
+                .padding(vertical = 8.dp)
+                .fillMaxWidth()
+        )
+
+        AppFontSizeContent(
+            onClickEdit = { isFontDialogVisible = true },
+            fontScale = fontScaleType,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        HelpContent(
+            items = helpItems,
+            modifier = Modifier
+                .padding(vertical = 8.dp)
+                .fillMaxWidth()
+        )
     }
-    when (userInfoState) {
-        is UiState.Loading -> {
-            LoadingScreen(
-                loadingText = "정보를 가져오고 있습니다.",
-                modifier = Modifier.fillMaxSize()
-            )
-        }
 
-        is UiState.Failure -> {
-            ErrorScreen(errorText = "사용자 정보를 가져오는데\n오류가 발생하였습니다.")
-        }
-
-        is UiState.Success -> {
-            val userInfo = (userInfoState as UiState.Success).data
-            Column(
-                modifier = modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
-            ) {
-
-                TitleScreen(title = "마이페이지")
-
-                MyPageProfileContent(
-                    users = userInfo,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
-
-                MyPageStoreAPIContent(
-                    users = userInfo,
-                    viewModel = viewModel,
-                    modifier = Modifier
-                        .padding(vertical = 8.dp)
-                        .fillMaxWidth()
-                )
-
-                AppFontSizeContent(
-                    onClickEdit = { isFontDialogVisible = true },
-                    fontScale = currentFontSizeType,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
-
-                HelpContent(
-                    items = helpItems,
-                    modifier = Modifier
-                        .padding(vertical = 8.dp)
-                        .fillMaxWidth()
-                )
-            }
-
-            if (isFontDialogVisible) {
-                AppFontSizeDialog(
-                    currentLimit = currentFontSizeType,
-                    onLimitSelected = { onFontScaleChanged(it) },
-                    onConfirm = { isFontDialogVisible = false },
-                    onDismiss = { isFontDialogVisible = false }
-                )
-            }
-        }
+    if (isFontDialogVisible) {
+        AppFontSizeDialog(
+            currentLimit = fontScaleType,
+            onLimitSelected = onFontScaleChanged,
+            onConfirm = { isFontDialogVisible = false },
+            onDismiss = { isFontDialogVisible = false }
+        )
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

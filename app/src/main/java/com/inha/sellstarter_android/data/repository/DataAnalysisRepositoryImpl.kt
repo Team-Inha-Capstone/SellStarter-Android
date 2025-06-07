@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.data.repository
 
+import android.util.Log
 import com.inha.sellstarter_android.data.datasource.remote.DataAnalysisDataSource
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryFlowGraphRequestDto
 import com.inha.sellstarter_android.domain.repository.DataAnalysisRepository
