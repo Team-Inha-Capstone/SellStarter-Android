@@ -1,8 +1,8 @@
 # 🛒셀스타터(Sell-Starter)
 
 <img
-  src="https://github.com/user-attachments/assets/2b0e8826-f031-4542-914a-761a14ea4081"
-  width="800"
+  src="https://github.com/user-attachments/assets/84124e16-cd7c-4e4b-91ef-3226b4896008"
+  width="850"
 />
 
 ## 목차
