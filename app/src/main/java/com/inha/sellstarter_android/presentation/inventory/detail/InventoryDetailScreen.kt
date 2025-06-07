@@ -33,7 +33,6 @@ import com.inha.sellstarter_android.ui.theme.Purple200
 fun InventoryDetailScreen(
     inventory: Inventory,
     graphUrl: String,
-    onClickPicking: () -> Unit,
     onBack: () -> Unit,
     onClickEditCount: (Int) -> Unit,
     modifier: Modifier,
