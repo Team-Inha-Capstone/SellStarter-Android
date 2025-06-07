@@ -37,28 +37,15 @@ import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.AppTypography
 
-
 @Composable
 fun ChatbotScreen(
     modifier: Modifier,
-    viewModel: ChatbotViewModel = hiltViewModel()
+    chatMessages: List<ChatMessage>,
+    isTyping: Boolean,
+    messageText: String,
+    onMessageTextChange: (String) -> Unit,
+    onSendClick: () -> Unit
 ) {
-
-    var messageText by remember { mutableStateOf("") }
-    val chatMessages by viewModel.chatMessages.collectAsState()
-    val isTyping by viewModel.isBotTyping.collectAsState()
-
-    LaunchedEffect(Unit) {
-        viewModel.startChatbot()
-        // 진입 시 챗봇 시작 api 호출
-    }
-
-    DisposableEffect(Unit) {
-        onDispose {
-            viewModel.endChatbot()
-        } // 챗봇 나갈 때 종료 api 호출 필요
-    }
-
     Column(modifier = modifier.fillMaxSize()) {
         TitleScreen(title = "채팅")
 
@@ -92,7 +79,7 @@ fun ChatbotScreen(
         ) {
             DefaultTextField(
                 value = messageText,
-                onValueChange = { messageText = it },
+                onValueChange = onMessageTextChange,
                 innerTextFieldStyle = AppTypography.bodyMedium,
                 singleLine = true,
                 borderColor = Color.Transparent,
@@ -105,12 +92,7 @@ fun ChatbotScreen(
             ImageIconButton(
                 text = "",
                 imagePainter = painterResource(R.drawable.ic_send_white),
-                onClick = {
-                    if (messageText.isNotBlank()) {
-                        viewModel.sendMessage(messageText)
-                        messageText = ""
-                    }
-                },
+                onClick = onSendClick,
                 radius = 100,
                 enabled = messageText.isNotBlank(),
                 imageSize = 24,
@@ -127,7 +109,4 @@ fun ChatbotScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewChatbotScreen() {
-    ChatbotScreen(
-        modifier = Modifier.fillMaxSize()
-    )
 }
