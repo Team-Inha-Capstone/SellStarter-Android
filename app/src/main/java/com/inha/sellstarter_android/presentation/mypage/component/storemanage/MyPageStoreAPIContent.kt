@@ -52,7 +52,9 @@ import com.inha.sellstarter_android.ui.theme.Grey900
 fun MyPageStoreAPIContent(
     users: UserInfo,
     modifier: Modifier = Modifier,
-    viewModel: MyPageViewModel = hiltViewModel()
+    onCreateApiKey: (UserApiRequestDto) -> Unit,
+    onUpdateApiKey: (UserApiUpdateRequest) -> Unit,
+    onDeleteApiKey: (UserApiDeleteRequestDto) -> Unit
 ) {
     var isAdding by remember { mutableStateOf(false) }
     var newKeyText by remember { mutableStateOf("") }
@@ -64,7 +66,6 @@ fun MyPageStoreAPIContent(
             .padding(vertical = 12.dp, horizontal = 24.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-
         TitleAndText(
             titleText = "스토어 관리",
             contentText = "스토어 API Key 등록",
@@ -101,9 +102,9 @@ fun MyPageStoreAPIContent(
                         OneButton(
                             text = "수정 완료",
                             onClick = {
-                                viewModel.updateApiKey(
+                                onUpdateApiKey(
                                     UserApiUpdateRequest(
-                                        userId = 4,
+                                        userId = 4, // TODO: 동적으로 처리할 여지 있음
                                         apiId = apiKey.apiId,
                                         channelId = apiKey.channelId,
                                         key = editingKey
@@ -113,8 +114,7 @@ fun MyPageStoreAPIContent(
                             },
                             fontStyle = MaterialTheme.typography.headlineSmall,
                             enabled = editingKey.isNotBlank(),
-                            modifier = Modifier
-                                .align(Alignment.End)
+                            modifier = Modifier.align(Alignment.End)
                         )
                     }
                 } else {
@@ -122,9 +122,9 @@ fun MyPageStoreAPIContent(
                         apiKey = apiKey,
                         onEditClick = { editingKeyMap[apiKey.apiId] = apiKey.key },
                         onDeleteClick = {
-                            viewModel.deleteApiKey(
-                                request = UserApiDeleteRequestDto(
-                                    userId = 4,
+                            onDeleteApiKey(
+                                UserApiDeleteRequestDto(
+                                    userId = 4, // TODO: 여기 역시 ViewModel에서 받은 ID 전달 권장
                                     apiId = apiKey.apiId
                                 )
                             )
@@ -134,7 +134,6 @@ fun MyPageStoreAPIContent(
             }
         }
 
-        // 3) 새 키 추가 폼
         if (isAdding) {
             var expanded by remember { mutableStateOf(false) }
             var selectedPlatform by remember { mutableStateOf(ChannelPlatform.NAVER) }
@@ -148,7 +147,6 @@ fun MyPageStoreAPIContent(
             ) {
                 Text("새 API Key 등록", style = MaterialTheme.typography.bodySmall)
 
-                // 플랫폼 드롭다운
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -174,6 +172,7 @@ fun MyPageStoreAPIContent(
                         Spacer(modifier = Modifier.weight(1f))
                         Icon(Icons.Default.ArrowDropDown, contentDescription = null)
                     }
+
                     DropdownMenu(
                         expanded = expanded,
                         onDismissRequest = { expanded = false }
@@ -212,9 +211,9 @@ fun MyPageStoreAPIContent(
                 OneButton(
                     text = "저장",
                     onClick = {
-                        viewModel.createApiKey(
+                        onCreateApiKey(
                             UserApiRequestDto(
-                                userId = 4,
+                                userId = 4, // TODO: 사용자 ID는 외부에서 받아 처리하는 게 안전함
                                 channelId = selectedPlatform.channelId,
                                 key = newKeyText
                             )
