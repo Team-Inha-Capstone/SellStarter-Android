@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 
 @Composable
-fun HtmlReportGraphWebView(url: String, modifier: Modifier = Modifier) {
+fun HtmlReportWebView(url: String, modifier: Modifier = Modifier) {
     AndroidView(
         modifier = modifier
             .clip(RoundedCornerShape(10.dp))
