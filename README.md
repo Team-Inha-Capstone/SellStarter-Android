@@ -17,19 +17,20 @@
 ## 서비스 소개
 **셀스타터(Sell-Starter)는** 
 <br>📦물류 창고가 없는 1인 스마트스토어를 위한 물류 관리와 예측,  주문 통합  관리 솔루션입니다.
-<br>2025-1년도 인하대학교 컴퓨터공학 종합설계 프로젝트로 진행하였습니다. 
+<br>(2025년 1학기 인하대학교 컴퓨터공학 종합설계 프로젝트로 진행하였습니다.)
 
 <div id="2"></div>
 
 ## 기술 스택
-- Jetpack Compose
-- MVVM, Clean Architecture, Single Activity Architecture
-- Retrofit, OkHttp
-- Hilt,Kotlin Serialization, UiState
-- Coroutine, Flow
-- Coil(Image), Zxing(Barcode), Vico(Graph)
-- ViewModel, Navigation
-- Webview
+|                            | Technology                                                  |
+|------------------------------------------|-------------------------------------------------------------|
+| **UI**                                   | Jetpack Compose                                             |
+| **Architecture**                         | MVVM, Clean Architecture, Single-Activity Architecture      |
+| **Android Jetpack**       | ViewModel, Navigation, WebView       |
+| **Networking**                           | Retrofit, OkHttp                                            |
+| **DI & Serialization & State**           | Hilt, Kotlin Serialization, UiState                         |
+| **Concurrency & Streams**                | Coroutine, Flow                                             |
+| **Imaging, Barcode & Charting**          | Coil (Image), Zxing (Barcode), Vico (Graph)                 |
 
 <div id="3"></div>
 
