@@ -1,15 +1,20 @@
-package com.inha.sellstarter_android.presentation.inventory.list
+package com.inha.sellstarter_android.presentation.inventory.route
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.inha.sellstarter_android.presentation.inventory.InventoryViewModel
+import com.inha.sellstarter_android.presentation.inventory.list.InventoryGridScreen
+
+const val STATUS_ALL = 0
+const val STATUS_OUT_OF_STOCK = 1
 
 @Composable
 fun InventoryGridRoute(
@@ -21,15 +26,16 @@ fun InventoryGridRoute(
     val searchResultState by viewModel.searchResultState.collectAsState()
 
     var searchText by remember { mutableStateOf("") }
-    var selectedChipIndex by remember { mutableStateOf(0) } // 0: 전체, 1: 품절
+    var selectedChipIndex by remember { mutableIntStateOf(STATUS_ALL) }
 
-    // 초기 진입 시 재고 요청
-    LaunchedEffect(Unit) {
-        viewModel.getInventoryList(status = (selectedChipIndex == 1))
+    LaunchedEffect(selectedChipIndex) {
+        viewModel.getInventoryList(status = (selectedChipIndex == STATUS_OUT_OF_STOCK))
     }
 
     // 보여줄 상태 결정
-    val displayState = if (searchText.isNotEmpty()) searchResultState else inventoryState
+    val displayState =
+        if (searchText.isNotEmpty()) searchResultState
+        else inventoryState
 
     InventoryGridScreen(
         modifier = modifier,
@@ -39,16 +45,16 @@ fun InventoryGridRoute(
         onSearchTextChanged = {
             searchText = it
             if (it.isEmpty()) {
-                viewModel.getInventoryList(status = (selectedChipIndex == 1))
+                viewModel.getInventoryList(status = (selectedChipIndex == STATUS_OUT_OF_STOCK))
             }
         },
         onSearch = {
-            viewModel.searchInventory(searchText, selectedChipIndex == 1)
+            viewModel.searchInventory(searchText, selectedChipIndex == STATUS_OUT_OF_STOCK)
         },
         onChipSelected = { index ->
             selectedChipIndex = index
             if (searchText.isEmpty()) {
-                viewModel.getInventoryList(status = (index == 1))
+                viewModel.getInventoryList(status = (index == STATUS_OUT_OF_STOCK))
             }
         },
         onItemClick = { barcodeId ->
