@@ -32,24 +32,19 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun OrderConfirmScreen(
-    // —— Pager & 탭 인덱스
+    //pager, 탭 인덱스
     selectedTabIndex: Int,
     pagerState: PagerState,
-
-    // —— 각각의 탭에서 보여줄 주문 목록 상태 (UiState<List<OrderSummary>>)
+    // 각각의 탭에서 보여줄 주문 목록 상태 (UiState<List<OrderSummary>>)
     newOrdersState: UiState<OrderListPage>,
     completedPickingsState: UiState<OrderListPage>,
-
-    // —— 체크박스 선택된 ID 세트
+    // 체크박스 선택된 ID 세트
     selectedIds: Set<String>,
-
-    // —— 콜백
     onTabSelected: (Int) -> Unit,
     onItemSelect: (orderId: String) -> Unit,
     onSelectAll: (allSummaries: List<OrderSummary>) -> Unit,
-    onOrderItemClick: (orderId: String, isFromCompleted: Boolean) -> Unit,
+    onOrderItemClick: (orderId: String) -> Unit,
     onClickCompleteSelected: () -> Unit,
-
     modifier: Modifier = Modifier
 ) {
 
@@ -86,8 +81,7 @@ fun OrderConfirmScreen(
 
                 // 항목 클릭 시 (상세 화면 이동)
                 onOrderItemClick = { id ->
-                    val isFromCompleted = (pagerState.currentPage == 1)
-                    onOrderItemClick(id, isFromCompleted)
+                    onOrderItemClick(id)
                 },
                 onClickCompleteSelected = {
                     onClickCompleteSelected()
