@@ -115,6 +115,9 @@ dependencies {
     //lottie
     implementation(libs.lottie)
 
+    // FCM
+    implementation("com.google.firebase:firebase-messaging:23.1.2")
+
 
     // implementation("com.google.android.filament:filament-android:1.33.1")
     // implementation("com.google.android.filament:gltfio-android:1.33.1")
