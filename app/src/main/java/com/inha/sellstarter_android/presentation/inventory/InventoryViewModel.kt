@@ -16,7 +16,7 @@ import com.inha.sellstarter_android.domain.model.InventoryListPage
 import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.domain.usecase.dataanalysis.DataAnalysisUseCases
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryUseCases
-import com.inha.sellstarter_android.util.base.PagingController
+import com.inha.sellstarter_android.util.paging.PagingController
 import com.inha.sellstarter_android.util.base.UiState
 import com.inha.sellstarter_android.util.base.safeApiCall
 import com.inha.sellstarter_android.util.extension.logHttpError
