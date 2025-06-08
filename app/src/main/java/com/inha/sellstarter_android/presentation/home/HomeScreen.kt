@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,7 @@ import com.inha.sellstarter_android.presentation.home.component.ChatbotFloatingB
 import com.inha.sellstarter_android.presentation.home.component.HomeFeatureContent
 import com.inha.sellstarter_android.presentation.home.component.OrderStatisticsContent
 import com.inha.sellstarter_android.presentation.home.component.OrderSummaryContent
+import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Purple200
 import com.inha.sellstarter_android.util.base.UiState
@@ -51,6 +53,7 @@ fun HomeScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
+            .background(Grey0)
             .padding(vertical = 24.dp, horizontal = 16.dp)
     ) {
         when (homeInfoState) {
@@ -79,7 +82,7 @@ fun HomeScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "스토어 : ${homeInfo.shopName}",
+                            text = "📦 스토어 : ${homeInfo.shopName}",
                             style = MaterialTheme.typography.headlineMedium,
                             modifier = Modifier
                                 .weight(1f)

@@ -46,8 +46,12 @@ fun ChatbotScreen(
     onMessageTextChange: (String) -> Unit,
     onSendClick: () -> Unit
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
-        TitleScreen(title = "채팅")
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = Grey0)
+    ) {
+        TitleScreen(title = "💬 채팅")
 
         LazyColumn(
             modifier = Modifier
@@ -71,7 +75,7 @@ fun ChatbotScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(12.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .background(Grey0)
                 .border(width = 1.dp, color = Grey100, shape = RoundedCornerShape(8.dp)),
@@ -85,8 +89,8 @@ fun ChatbotScreen(
                 borderColor = Color.Transparent,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(top = 8.dp, bottom = 8.dp, start = 8.dp)
-                    .height(90.dp)
+                    .padding(top = 4.dp, bottom = 4.dp, start = 8.dp)
+                    .height(70.dp)
             )
 
             ImageIconButton(
@@ -96,10 +100,10 @@ fun ChatbotScreen(
                 radius = 100,
                 enabled = messageText.isNotBlank(),
                 imageSize = 24,
-                width = 60,
-                height = 60,
+                width = 50,
+                height = 50,
                 modifier = Modifier
-                    .padding(vertical = 24.dp, horizontal = 12.dp)
+                    .padding(vertical = 12.dp, horizontal = 12.dp)
             )
         }
     }

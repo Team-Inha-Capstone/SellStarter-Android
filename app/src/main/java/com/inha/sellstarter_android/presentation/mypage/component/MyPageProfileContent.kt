@@ -31,10 +31,7 @@ fun MyPageProfileContent(
     users: UserInfo,
     modifier: Modifier
 ) {
-    Box(
-        modifier = Modifier
-            .background(Grey0)
-    ) {
+    Box {
         Row(
             modifier = modifier.padding(horizontal = 8.dp),
             verticalAlignment = Alignment.CenterVertically

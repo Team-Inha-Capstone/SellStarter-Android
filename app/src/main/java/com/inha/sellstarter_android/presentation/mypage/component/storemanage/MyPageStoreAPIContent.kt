@@ -67,7 +67,7 @@ fun MyPageStoreAPIContent(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         TitleAndText(
-            titleText = "스토어 관리",
+            titleText = "🛒 스토어 관리",
             contentText = "스토어 API Key 등록",
             isAvailableEdit = true,
             onClickEdit = { isAdding = !isAdding },

@@ -1,11 +1,14 @@
 package com.inha.sellstarter_android.presentation.mypage
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,6 +29,9 @@ import com.inha.sellstarter_android.presentation.mypage.component.appfont.FontSi
 import com.inha.sellstarter_android.presentation.mypage.component.help.HelpContent
 import com.inha.sellstarter_android.presentation.mypage.component.help.helpItems
 import com.inha.sellstarter_android.presentation.mypage.component.storemanage.MyPageStoreAPIContent
+import com.inha.sellstarter_android.ui.theme.Grey0
+import com.inha.sellstarter_android.ui.theme.Grey100
+import com.inha.sellstarter_android.ui.theme.Grey50
 
 @Composable
 fun MyPageScreen(
@@ -41,6 +47,7 @@ fun MyPageScreen(
 
     Column(
         modifier = modifier
+            .background(color = Grey0)
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
     ) {
@@ -49,6 +56,14 @@ fun MyPageScreen(
         MyPageProfileContent(
             users = userInfo,
             modifier = Modifier.fillMaxWidth()
+        )
+
+        Divider(
+            color = Grey50,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(0.7.dp)
+                .padding(horizontal = 20.dp)
         )
 
         MyPageStoreAPIContent(
@@ -61,10 +76,26 @@ fun MyPageScreen(
                 .fillMaxWidth()
         )
 
+        Divider(
+            color = Grey50,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(0.7.dp)
+                .padding( horizontal = 20.dp)
+        )
+
         AppFontSizeContent(
             onClickEdit = { isFontDialogVisible = true },
             fontScale = fontScaleType,
             modifier = Modifier.fillMaxWidth()
+        )
+
+        Divider(
+            color = Grey50,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(0.7.dp)
+                .padding(horizontal = 20.dp)
         )
 
         HelpContent(
