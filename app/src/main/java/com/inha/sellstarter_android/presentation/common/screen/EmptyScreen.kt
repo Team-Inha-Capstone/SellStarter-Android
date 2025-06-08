@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.common.screen
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,7 +29,8 @@ import com.inha.sellstarter_android.ui.theme.Grey100
 fun EmptyScreen(
     emptyText: String,
     emptyTextColor: Color = Grey100,
-    emptyIcon: ImageVector = Icons.Default.Warning,
+    @DrawableRes
+    emptyIcon: Int = R.drawable.ic_empty_box,
     modifier: Modifier = Modifier.fillMaxSize(),
 ) {
 
@@ -40,7 +42,7 @@ fun EmptyScreen(
     ) {
 
         Image(
-            painter = painterResource(R.drawable.ic_empty_box),
+            painter = painterResource(emptyIcon),
             contentDescription = "empty_screen_icon",
             modifier = Modifier.size(120.dp)
         )
