@@ -25,7 +25,6 @@ fun OrderPager(
     newOrdersState: UiState<OrderListPage>,
     completedPickingsState: UiState<OrderListPage>,
     onClickCompleteSelected: () -> Unit,
-    viewModel: OrderConfirmViewModel = hiltViewModel()
 ) {
     HorizontalPager(
         state = pagerState,
@@ -41,8 +40,7 @@ fun OrderPager(
                     )
 
                     is UiState.Failure -> ErrorScreen(
-                        errorText = newOrdersState.message
-                            ?: "신규 주문을 불러오는 중 오류가 발생했습니다."
+                        errorText = "신규 주문을 불러오는 중 오류가 발생했습니다.\n잠시후 다시 시도 해주세요."
                     )
 
                     is UiState.Success -> {
@@ -68,8 +66,7 @@ fun OrderPager(
                     )
 
                     is UiState.Failure -> ErrorScreen(
-                        errorText = completedPickingsState.message
-                            ?: "피킹 완료 주문을 불러오는 중 오류가 발생했습니다."
+                        errorText = "피킹 완료 주문을 불러오는 중 오류가 발생했습니다.\n잠시후 다시 시도 해주세요."
                     )
 
                     is UiState.Success -> {
