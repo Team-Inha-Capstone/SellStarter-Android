@@ -1,6 +1,5 @@
 package com.inha.sellstarter_android.presentation.inventory.list
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,19 +16,17 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.domain.model.InventoryListPage
-import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.presentation.common.component.LoadingItem
+import com.inha.sellstarter_android.presentation.common.screen.EmptyScreen
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
-import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
+import com.inha.sellstarter_android.presentation.common.screen.LoadingLottieScreen
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
 import com.inha.sellstarter_android.presentation.inventory.list.component.InventoryItem
 import com.inha.sellstarter_android.presentation.inventory.list.component.SearchBar
@@ -38,7 +35,6 @@ import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple50
 import com.inha.sellstarter_android.util.base.UiState
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 
 @Composable
@@ -113,43 +109,50 @@ fun InventoryGridScreen(
 
         when (val state = inventoryUiState) {
             is UiState.Loading -> {
-                LoadingScreen(
-                    loadingText = "정보를 가져오고 있습니다.",
+                LoadingLottieScreen(
+                    loadingText = "재고 정보를 가져오고 있습니다.",
                     modifier = Modifier.fillMaxSize()
                 )
             }
 
             is UiState.Success -> {
-                LazyVerticalGrid(
-                    state = gridState,
-                    columns = GridCells.Fixed(2),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 12.dp),
-                    content = {
-                        items(state.data.inventories, key = { it.id }) { item ->
-                            InventoryItem(
-                                inventory = item,
-                                modifier = Modifier
-                                    .wrapContentHeight()
-                                    .clickable {
-                                        onItemClick(item.id)
-                                    }
-                            )
-                        }
-                        if (isLoadingMore && hasNextPage) {
-                            item(span = { GridItemSpan(2) }) {
-                                Spacer(modifier = Modifier.height(12.dp))
-                                LoadingItem(
-                                    modifier = Modifier.size(24.dp)
+                if (state.data.inventories.isEmpty()) {
+                    EmptyScreen(
+                        emptyText = "검색한 재고가 없습니다.",
+                        modifier = Modifier.fillMaxSize()
+                    )
+                } else {
+                    LazyVerticalGrid(
+                        state = gridState,
+                        columns = GridCells.Fixed(2),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 12.dp),
+                        content = {
+                            items(state.data.inventories, key = { it.id }) { item ->
+                                InventoryItem(
+                                    inventory = item,
+                                    modifier = Modifier
+                                        .wrapContentHeight()
+                                        .clickable {
+                                            onItemClick(item.id)
+                                        }
                                 )
-                                Spacer(modifier = Modifier.height(12.dp))
+                            }
+                            if (isLoadingMore && hasNextPage) {
+                                item(span = { GridItemSpan(2) }) {
+                                    Spacer(modifier = Modifier.height(12.dp))
+                                    LoadingItem(
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                    Spacer(modifier = Modifier.height(12.dp))
+                                }
                             }
                         }
-                    }
-                )
+                    )
+                }
             }
 
             is UiState.Failure -> {
