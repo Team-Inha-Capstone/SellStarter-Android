@@ -11,6 +11,7 @@ import okhttp3.MultipartBody
 
 interface InventoryDataSource {
     suspend fun getInventoryList(
+        search: String?,
         status : Boolean,
         page : Int,
         size : Int

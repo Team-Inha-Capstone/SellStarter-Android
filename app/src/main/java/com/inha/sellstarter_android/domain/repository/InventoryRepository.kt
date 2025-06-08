@@ -3,15 +3,17 @@ package com.inha.sellstarter_android.domain.repository
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
 import com.inha.sellstarter_android.domain.model.Inventory
+import com.inha.sellstarter_android.domain.model.InventoryListPage
 import com.inha.sellstarter_android.domain.model.InventorySummary
 import okhttp3.MultipartBody
 
 interface InventoryRepository {
     suspend fun getInventoryList(
+        search: String?,
         status: Boolean,
         page: Int,
         size: Int
-    ): Result<List<InventorySummary>>
+    ): Result<InventoryListPage>
 
     suspend fun getInventoryDetail(
         barcodeId: String
@@ -27,7 +29,7 @@ interface InventoryRepository {
         status: Boolean,
         page: Int,
         size: Int
-    ): Result<List<InventorySummary>>
+    ): Result<InventoryListPage>
 
     suspend fun postInventoryCreate(
         inventoryCreateRequest: InventoryCreateRequestDto,

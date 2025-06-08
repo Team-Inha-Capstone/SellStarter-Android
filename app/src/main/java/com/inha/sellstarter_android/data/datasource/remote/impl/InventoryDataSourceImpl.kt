@@ -16,11 +16,13 @@ class InventoryDataSourceImpl @Inject constructor(
     private val inventoryService: InventoryService
 ) : InventoryDataSource {
     override suspend fun getInventoryList(
+        search: String?,
         status: Boolean,
         page: Int,
         size: Int
     ): BaseResponseDto<InventoryListResponseDto> {
         return inventoryService.getInventoryList(
+            search = search,
             status = status, page = page, size = size
         )
     }

@@ -1,4 +1,5 @@
 package com.inha.sellstarter_android.data.service
+
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
 import com.inha.sellstarter_android.data.model.response.inventory.InventoryDetailResponseDto
@@ -32,6 +33,7 @@ interface InventoryService {
     @GET("$API/$CORE/$INVENTORY/{userId}/$LIST")
     suspend fun getInventoryList(
         @Path("userId") userId: Int = 4,
+        @Query("searchStr") search: String?,
         @Query("status") status: Boolean,
         @Query("page") page: Int,
         @Query("size") size: Int,
@@ -53,7 +55,7 @@ interface InventoryService {
     @GET("$API/$CORE/$INVENTORY/{userId}/$LIST")
     suspend fun getInventorySearch(
         @Path("userId") userId: Int = 4,
-        @Query("searchStr") search: String,
+        @Query("searchStr") search: String? = null,
         @Query("status") status: Boolean,
         @Query("page") page: Int,
         @Query("size") size: Int
