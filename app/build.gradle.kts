@@ -112,6 +112,9 @@ dependencies {
     // vico
     implementation(libs.bundles.vico)
 
+    //lottie
+    implementation(libs.lottie)
+
 
     // implementation("com.google.android.filament:filament-android:1.33.1")
     // implementation("com.google.android.filament:gltfio-android:1.33.1")
