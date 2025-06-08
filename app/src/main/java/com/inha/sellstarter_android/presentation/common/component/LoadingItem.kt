@@ -5,6 +5,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.inha.sellstarter_android.ui.theme.Purple200
 
 @Composable
 fun LoadingItem(
@@ -14,6 +15,8 @@ fun LoadingItem(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        CircularProgressIndicator()
+        CircularProgressIndicator(
+            color = Purple200
+        )
     }
 }

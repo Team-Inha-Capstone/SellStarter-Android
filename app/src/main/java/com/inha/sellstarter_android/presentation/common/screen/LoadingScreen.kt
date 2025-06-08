@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.ui.theme.AppTypography
 import com.inha.sellstarter_android.ui.theme.Grey100
 
 @Composable
@@ -32,6 +33,15 @@ fun LoadingScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
+
+        Text(
+            text = "LOADING ..",
+            color = loadingTextColor,
+            style = AppTypography.titleLarge,
+            textAlign = TextAlign.Center
+        )
+
+
         Text(
             text = loadingText,
             color = loadingTextColor,
@@ -44,11 +54,11 @@ fun LoadingScreen(
 @Preview(showBackground = true)
 @Composable
 fun LoadingScreenPreview() {
-        LoadingScreen(
-            loadingText = "사진을 불러오는 중입니다.",
-            loadingTextColor = Color.Gray,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-        )
+    LoadingScreen(
+        loadingText = "사진을 불러오는 중입니다.",
+        loadingTextColor = Color.Gray,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+    )
 }

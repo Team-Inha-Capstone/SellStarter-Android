@@ -12,13 +12,16 @@ import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountR
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryFlowGraphRequestDto
 import com.inha.sellstarter_android.domain.model.Inventory
+import com.inha.sellstarter_android.domain.model.InventoryListPage
 import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.domain.usecase.dataanalysis.DataAnalysisUseCases
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryUseCases
+import com.inha.sellstarter_android.util.base.PagingController
 import com.inha.sellstarter_android.util.base.UiState
 import com.inha.sellstarter_android.util.base.safeApiCall
 import com.inha.sellstarter_android.util.extension.logHttpError
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -35,9 +38,16 @@ class InventoryViewModel @Inject constructor(
 ) : ViewModel() {
 
     // 1. 전체 재고 리스트
-    private val _inventoryListState =
-        MutableStateFlow<UiState<List<InventorySummary>>>(UiState.Loading)
-    val inventoryListState: StateFlow<UiState<List<InventorySummary>>> = _inventoryListState
+    private val _inventoryListState = MutableStateFlow<UiState<InventoryListPage>>(UiState.Loading)
+    val inventoryListState: StateFlow<UiState<InventoryListPage>> = _inventoryListState
+
+    private val paging = PagingController()
+    private val _allInventories = mutableListOf<InventorySummary>()
+
+    private var currentStatus: Boolean = false
+    private var currentSearch: String = ""
+    fun isLoadingMore(): Boolean = paging.isLoading
+    fun hasNextPage(): Boolean = paging.page < paging.totalPages
 
     // 2. 재고 상세
     private val _inventoryDetailState = MutableStateFlow<UiState<Inventory>>(UiState.Loading)
@@ -46,15 +56,14 @@ class InventoryViewModel @Inject constructor(
     private val _inventoryGraphState = MutableStateFlow<String>("")
     val inventoryGraphState: StateFlow<String> = _inventoryGraphState
 
-
     // 3. 수량 수정
     private val _editCountState = MutableStateFlow<UiState<Inventory>>(UiState.Loading)
     val editCountState: StateFlow<UiState<Inventory>> = _editCountState
 
     // 4. 재고 검색
     private val _searchResultState =
-        MutableStateFlow<UiState<List<InventorySummary>>>(UiState.Loading)
-    val searchResultState: StateFlow<UiState<List<InventorySummary>>> = _searchResultState
+        MutableStateFlow<UiState<InventoryListPage>>(UiState.Loading)
+    val searchResultState: StateFlow<UiState<InventoryListPage>> = _searchResultState
 
     var draft: InventoryCreateRequestDto? by mutableStateOf(null)
     var draftImageUri: Uri? by mutableStateOf(null)
@@ -62,15 +71,63 @@ class InventoryViewModel @Inject constructor(
     private val _registerState = MutableStateFlow<UiState<Inventory>>(UiState.Loading)
     val registerState: StateFlow<UiState<Inventory>> = _registerState
 
-    fun getInventoryList(status: Boolean, page: Int = 0, size: Int = 20) {
+    fun getInitialInventoryList(status: Boolean, search: String = "") {
+        paging.reset()
+        _inventoryListState.value = UiState.Loading
+        _allInventories.clear()
+        currentStatus = status
+        currentSearch = search.trim()
         viewModelScope.launch {
-            _inventoryListState.value = safeApiCall(
-                onStart = { _inventoryListState.value = UiState.Loading },
-                onError = { it.logHttpError("getInventoryList") },
+            delay(50)
+            loadMoreInventoryList()
+        }
+    }
+
+    fun loadMoreInventoryList() {
+        if (!paging.canLoadMore()) return
+        viewModelScope.launch {
+            paging.markLoading()
+
+            if (paging.page == 0) {
+                _inventoryListState.value = UiState.Loading
+            }
+
+            val result = safeApiCall(
+                onStart = {},
+                onError = { it.logHttpError("loadMoreInventoryList") },
                 apiCall = {
-                    inventoryUseCases.inventoryListUseCase.invoke(status, page, size)
+                    inventoryUseCases.inventoryListUseCase.invoke(
+                        search = currentSearch.ifBlank { null },
+                        status = currentStatus,
+                        page = paging.page,
+                        size = 20,
+                    )
                 }
             )
+
+            when (result) {
+                is UiState.Success -> {
+                    val pageData = result.data
+                    val mergedList = (_allInventories + pageData.inventories)
+                        .distinctBy { it.id }
+                    _allInventories.clear()
+                    _allInventories.addAll(mergedList)
+                    paging.complete(
+                        page = paging.page + 1,
+                        totalPages = pageData.totalPages
+                    )
+                    _inventoryListState.value = UiState.Success(
+                        pageData.copy(inventories = _allInventories.toList())
+                    )
+                }
+
+                is UiState.Failure -> {
+                    _inventoryListState.value = result
+                    paging.isLoading = false
+                }
+
+                else -> Unit
+            }
         }
     }
 
@@ -124,24 +181,6 @@ class InventoryViewModel @Inject constructor(
             )
         }
     }
-
-    fun searchInventory(search: String, status: Boolean) {
-        viewModelScope.launch {
-            _searchResultState.value = safeApiCall(
-                onStart = { _searchResultState.value = UiState.Loading },
-                onError = { it.logHttpError("searchInventory") },
-                apiCall = {
-                    inventoryUseCases.inventorySearchUseCase.invoke(
-                        search = search,
-                        status = status,
-                        page = 0,
-                        size = 10
-                    )
-                }
-            )
-        }
-    }
-
 
     fun registerInventory(
         imageUri: Uri?,

@@ -29,36 +29,49 @@ fun InventoryGridRoute(
     var selectedChipIndex by remember { mutableIntStateOf(STATUS_ALL) }
 
     LaunchedEffect(selectedChipIndex) {
-        viewModel.getInventoryList(status = (selectedChipIndex == STATUS_OUT_OF_STOCK))
+        viewModel.getInitialInventoryList(
+            status = (selectedChipIndex == STATUS_OUT_OF_STOCK),
+            search = searchText
+        )
     }
 
-    // 보여줄 상태 결정
-    val displayState =
-        if (searchText.isNotEmpty()) searchResultState
-        else inventoryState
-
     InventoryGridScreen(
-        modifier = modifier,
-        inventoryUiState = displayState,
+        inventoryUiState = inventoryState,
         searchText = searchText,
         selectedChipIndex = selectedChipIndex,
-        onSearchTextChanged = {
-            searchText = it
-            if (it.isEmpty()) {
-                viewModel.getInventoryList(status = (selectedChipIndex == STATUS_OUT_OF_STOCK))
-            }
+        onSearchTextChanged = { text ->
+            searchText = text
+            viewModel.getInitialInventoryList(
+                search = searchText,
+                status = (selectedChipIndex == STATUS_OUT_OF_STOCK)
+            )
         },
+
         onSearch = {
-            viewModel.searchInventory(searchText, selectedChipIndex == STATUS_OUT_OF_STOCK)
+            viewModel.getInitialInventoryList(
+                search = searchText,
+                status = (selectedChipIndex == STATUS_OUT_OF_STOCK)
+            )
         },
+
         onChipSelected = { index ->
             selectedChipIndex = index
             if (searchText.isEmpty()) {
-                viewModel.getInventoryList(status = (index == STATUS_OUT_OF_STOCK))
+                viewModel.getInitialInventoryList(
+                    status = (index == STATUS_OUT_OF_STOCK)
+                )
             }
         },
+
         onItemClick = { barcodeId ->
             onNavigateToDetail(barcodeId)
-        }
+        },
+
+        onLoadMore = {
+            viewModel.loadMoreInventoryList()
+        },
+        isLoadingMore = viewModel.isLoadingMore(),
+        hasNextPage = viewModel.hasNextPage(),
+        modifier = modifier
     )
 }

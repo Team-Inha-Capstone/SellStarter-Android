@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.inventory.list
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,13 +13,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.domain.model.InventoryListPage
 import com.inha.sellstarter_android.domain.model.InventorySummary
+import com.inha.sellstarter_android.presentation.common.component.LoadingItem
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
@@ -28,18 +37,44 @@ import com.inha.sellstarter_android.presentation.inventory.list.component.SoldOu
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple50
 import com.inha.sellstarter_android.util.base.UiState
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
 
 @Composable
 fun InventoryGridScreen(
-    inventoryUiState: UiState<List<InventorySummary>>,
+    inventoryUiState: UiState<InventoryListPage>,
     searchText: String,
     selectedChipIndex: Int,
     onSearchTextChanged: (String) -> Unit,
     onSearch: () -> Unit,
     onChipSelected: (Int) -> Unit,
     onItemClick: (String) -> Unit,
+    onLoadMore: () -> Unit,
+    isLoadingMore: Boolean,
+    hasNextPage: Boolean,
     modifier: Modifier = Modifier,
 ) {
+
+    val gridState = rememberLazyGridState()
+
+    LaunchedEffect(gridState) {
+        snapshotFlow { gridState.layoutInfo }
+            .mapNotNull { layoutInfo ->
+                val lastVisible = layoutInfo.visibleItemsInfo.lastOrNull()?.index
+                if (lastVisible != null) {
+                    lastVisible to layoutInfo.totalItemsCount
+                } else null
+            }
+            .distinctUntilChanged()
+            .collect { (lastVisible, totalItems) ->
+                if (lastVisible >= totalItems - 2) {
+                    onLoadMore()
+                }
+                //     Log.e("ScrollDebug", "lastVisible: $lastVisible / total: $totalItems")
+            }
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -86,6 +121,7 @@ fun InventoryGridScreen(
 
             is UiState.Success -> {
                 LazyVerticalGrid(
+                    state = gridState,
                     columns = GridCells.Fixed(2),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -93,7 +129,7 @@ fun InventoryGridScreen(
                         .fillMaxSize()
                         .padding(horizontal = 12.dp),
                     content = {
-                        items(state.data, key = { it.id }) { item ->
+                        items(state.data.inventories, key = { it.id }) { item ->
                             InventoryItem(
                                 inventory = item,
                                 modifier = Modifier
@@ -102,6 +138,15 @@ fun InventoryGridScreen(
                                         onItemClick(item.id)
                                     }
                             )
+                        }
+                        if (isLoadingMore && hasNextPage) {
+                            item(span = { GridItemSpan(2) }) {
+                                Spacer(modifier = Modifier.height(12.dp))
+                                LoadingItem(
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Spacer(modifier = Modifier.height(12.dp))
+                            }
                         }
                     }
                 )

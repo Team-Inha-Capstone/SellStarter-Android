@@ -87,7 +87,7 @@ fun OrderSummaryCard(
         shape = RoundedCornerShape(16.dp),
         backgroundColor = Grey0,
         modifier = modifier,
-        elevation = 2.dp // 카드의 elevation 설정
+        elevation = 2.dp
     ) {
         Column(modifier = Modifier.padding(vertical = 24.dp, horizontal = 16.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
