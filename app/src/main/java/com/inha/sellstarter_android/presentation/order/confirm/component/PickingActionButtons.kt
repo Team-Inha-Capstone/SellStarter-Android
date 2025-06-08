@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -17,7 +18,7 @@ import com.inha.sellstarter_android.ui.theme.Purple200
 import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 
 @Composable
-fun OrderActionButtons(
+fun PickingActionButtons(
     isEnabled: Boolean,
     currentTabIndex: Int,
     onSelectAll: () -> Unit,
@@ -25,7 +26,8 @@ fun OrderActionButtons(
 ) {
     Row(
         modifier = Modifier
-            .wrapContentWidth(),
+            .wrapContentWidth()
+            .padding(horizontal = 12.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         OneButton(
@@ -42,7 +44,7 @@ fun OrderActionButtons(
         Spacer(modifier = Modifier.width(8.dp))
 
         OneButton(
-            text = if(currentTabIndex == 0) "선택항목 피킹완료" else "선택항목 출고완료",
+            text = if (currentTabIndex == 0) "선택항목 피킹완료" else "선택항목 출고완료",
             onClick = onSubmit,
             fontStyle = MaterialTheme.typography.bodyMedium,
             buttonBackgroundColor = Purple200,
@@ -58,7 +60,7 @@ fun OrderActionButtons(
 @Composable
 private fun OrderActionButtonsPreviewDisabled() {
     SellStarterAndroidTheme {
-        OrderActionButtons(
+        PickingActionButtons(
             isEnabled = false,
             currentTabIndex = 1,
             onSelectAll = { },
