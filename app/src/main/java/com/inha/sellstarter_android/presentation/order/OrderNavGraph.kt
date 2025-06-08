@@ -15,12 +15,10 @@ fun NavGraphBuilder.orderNavGraph(
     // 주문 목록
     composable(route = AppRoute.Order.route) {
         OrderConfirmRoute(
-            modifier = modifier,
             onNavigateToDetail = { orderId, isFromCompleted ->
-                navController.navigate(
-                    AppRoute.OrderDetail.createRoute(orderId, isFromCompleted)
-                )
-            }
+                navController.navigate(AppRoute.OrderDetail.createRoute(orderId, isFromCompleted))
+            },
+            modifier = modifier
         )
     }
 

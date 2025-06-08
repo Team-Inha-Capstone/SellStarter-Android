@@ -2,6 +2,7 @@ package com.inha.sellstarter_android.presentation.order.route
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,80 +24,47 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun OrderConfirmRoute(
+    onNavigateToDetail: (String, Boolean) -> Unit,
     viewModel: OrderConfirmViewModel = hiltViewModel(),
-    onNavigateToDetail: (orderId: String, isFromCompletedTab: Boolean) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier
 ) {
-    val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
+    // 현재 탭 인덱스 및 PagerState (2개의 탭)
+    val selectedTabIndex by viewModel.selectedTab.collectAsState()
+    val pagerState: PagerState = rememberPagerState(
+        pageCount = { 2 },
+        initialPage = selectedTabIndex
+    )
 
-    // 탭 & pager 상태
-    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
-    val pagerState = rememberPagerState(initialPage = selectedTabIndex) { 2 }
+    // ViewModel 상태 수집
+    val newOrdersState by viewModel.newOrdersState.collectAsState()
+    val completedPickingsState by viewModel.doneOrdersState.collectAsState()
+    val newPage by viewModel.newPage.collectAsState()
+    val newTotalPages by viewModel.newTotalPages.collectAsState()
+    val donePage by viewModel.donePage.collectAsState()
+    val doneTotalPages by viewModel.doneTotalPages.collectAsState()
+    val selectedIds by viewModel.selectedIds.collectAsState()
 
-    // 주문 상태 구독
-    val newOrdersState by viewModel.newOrderListState.collectAsState()
-    val completedPickingsState by viewModel.completedPickingListState.collectAsState()
-    val batchState by viewModel.batchCompleteState.collectAsState()
-
-    // 선택된 주문 ID 상태
-    var selectedIds by rememberSaveable { mutableStateOf(setOf<String>()) }
-
-    LaunchedEffect(pagerState.currentPage) {
-        selectedTabIndex = pagerState.currentPage
-        when (selectedTabIndex) {
-            0 -> viewModel.loadNewOrders()
-            1 -> viewModel.loadCompletedPickings()
-        }
-    }
-
-    LaunchedEffect(batchState) {
-        when (batchState) {
-            is UiState.Failure -> {
-                val message = (batchState as UiState.Failure).message
-                Toast.makeText(
-                    context,
-                    if (message == "NotAllPicked") "아직 피킹이 다 안되었습니다."
-                    else "일괄 피킹 처리 중 오류가 발생했습니다.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                viewModel.resetBatchCompleteState()
-            }
-
-            is UiState.Success -> {
-                val count = (batchState as UiState.Success).data
-                Toast.makeText(context, "$count 건 피킹 완료 처리되었습니다.", Toast.LENGTH_SHORT).show()
-                viewModel.resetBatchCompleteState()
-            }
-
-            else -> Unit
-        }
+    // 탭 변경 시 Pager 동기화
+    LaunchedEffect(selectedTabIndex) {
+        pagerState.animateScrollToPage(selectedTabIndex)
     }
 
     OrderConfirmScreen(
-        modifier = modifier.fillMaxSize(),
         selectedTabIndex = selectedTabIndex,
         pagerState = pagerState,
         newOrdersState = newOrdersState,
         completedPickingsState = completedPickingsState,
+        newPage = newPage,
+        newTotalPages = newTotalPages,
+        donePage = donePage,
+        doneTotalPages = doneTotalPages,
         selectedIds = selectedIds,
-        onTabSelected = { index ->
-            coroutineScope.launch { pagerState.animateScrollToPage(index) }
-        },
-        onOrderItemClick = { orderId ->
-            val isFromCompleted = (selectedTabIndex == 1)
-            onNavigateToDetail(orderId, isFromCompleted)
-        },
-        onItemSelect = { orderId ->
-            selectedIds = selectedIds.toMutableSet().apply {
-                if (!add(orderId)) remove(orderId)
-            }
-        },
-        onClickCompleteSelected = {
-            viewModel.completeSelectedOrders(selectedIds.toList())
-        },
-        onSelectAll = { allOrders ->
-            selectedIds = allOrders.map { it.orderId }.toSet()
-        }
+        onTabSelected = viewModel::onTabSelected,
+        onLoadNew = viewModel::loadNewOrders,
+        onLoadDone = viewModel::loadDoneOrders,
+        onItemSelect = viewModel::onItemSelect,
+        onSelectAll = {},
+        onOrderItemClick = onNavigateToDetail,
+        modifier = modifier
     )
 }

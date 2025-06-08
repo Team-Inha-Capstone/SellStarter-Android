@@ -1,4 +1,4 @@
-package com.inha.sellstarter_android.util.base
+package com.inha.sellstarter_android.util.paging
 
 data class PagingController(
     var page: Int = 0,
