@@ -4,10 +4,17 @@ import com.inha.sellstarter_android.data.model.response.inventory.InventoryDetai
 import com.inha.sellstarter_android.data.model.response.inventory.InventoryItemDto
 import com.inha.sellstarter_android.data.model.response.inventory.InventoryListResponseDto
 import com.inha.sellstarter_android.domain.model.Inventory
+import com.inha.sellstarter_android.domain.model.InventoryListPage
 import com.inha.sellstarter_android.domain.model.InventorySummary
 
-fun InventoryListResponseDto.toDomain(): List<InventorySummary> {
-    return content.map { it.toDomain() }
+fun InventoryListResponseDto.toDomain(): InventoryListPage {
+    return InventoryListPage(
+        inventories = this.content.map { it.toDomain() },
+        page = this.page,
+        size = this.size,
+        totalElements = this.totalElements,
+        totalPages = this.totalPages
+    )
 }
 
 fun InventoryItemDto.toDomain(): InventorySummary {
@@ -20,9 +27,10 @@ fun InventoryItemDto.toDomain(): InventorySummary {
         isSoldOut = this.inventoryCount == 0
     )
 }
-fun InventoryDetailResponseDto.toDomain() : Inventory {
+
+fun InventoryDetailResponseDto.toDomain(): Inventory {
     return Inventory(
-        id =  this.barcodeId,
+        id = this.barcodeId,
         name = this.inventoryName,
         quantity = this.inventoryCount,
         imageUrl = this.imageUrl,

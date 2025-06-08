@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -19,11 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.presentation.common.component.chip.Chip
+import com.inha.sellstarter_android.ui.theme.AppTypography
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Grey900
@@ -76,13 +80,21 @@ fun InventoryItem(
             }
         }
 
-        Text(
-            text = inventory.name,
-            maxLines = 2,
-            style = MaterialTheme.typography.headlineSmall,
-            color = Grey900,
-            modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
-        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp, vertical = 4.dp)
+                .heightIn(min = 48.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Text(
+                text = inventory.name,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                style = AppTypography.headlineSmall,
+                color = Grey900,
+            )
+        }
 
         Text(
             text = "보유 수량: ${inventory.quantity}개",

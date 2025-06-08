@@ -5,6 +5,7 @@ import com.inha.sellstarter_android.data.mapper.toDomain
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
 import com.inha.sellstarter_android.domain.model.Inventory
+import com.inha.sellstarter_android.domain.model.InventoryListPage
 import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import okhttp3.MultipartBody
@@ -14,13 +15,14 @@ class InventoryRepositoryImpl @Inject constructor(
     private val inventoryDataSource: InventoryDataSource
 ) : InventoryRepository {
     override suspend fun getInventoryList(
+        search: String?,
         status: Boolean,
         page: Int,
         size: Int
-    ): Result<List<InventorySummary>> {
+    ): Result<InventoryListPage> {
         return runCatching {
             inventoryDataSource.getInventoryList(
-                status = status, page = page, size = size
+                search = search, status = status, page = page, size = size
             ).data.toDomain()
         }
     }
@@ -48,7 +50,7 @@ class InventoryRepositoryImpl @Inject constructor(
         status: Boolean,
         page: Int,
         size: Int
-    ): Result<List<InventorySummary>> {
+    ): Result<InventoryListPage> {
         return runCatching {
             inventoryDataSource.getInventorySearch(
                 search = search, status = status, page = page, size = size
