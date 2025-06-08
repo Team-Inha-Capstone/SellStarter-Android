@@ -9,7 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.inha.sellstarter_android.domain.model.OrderListPage
 import com.inha.sellstarter_android.domain.model.OrderSummary
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
-import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
+import com.inha.sellstarter_android.presentation.common.screen.LoadingLottieScreen
 import com.inha.sellstarter_android.presentation.order.confirm.OrderConfirmViewModel
 import com.inha.sellstarter_android.util.base.UiState
 
@@ -35,7 +35,7 @@ fun OrderPager(
             0 -> {
                 // “신규 주문” 탭
                 when (newOrdersState) {
-                    is UiState.Loading -> LoadingScreen(
+                    is UiState.Loading -> LoadingLottieScreen(
                         loadingText = "신규 주문 목록을 불러오는 중입니다...",
                         modifier = Modifier.fillMaxSize()
                     )
@@ -62,7 +62,7 @@ fun OrderPager(
             1 -> {
                 // “피킹 완료” 탭
                 when (completedPickingsState) {
-                    is UiState.Loading -> LoadingScreen(
+                    is UiState.Loading -> LoadingLottieScreen(
                         loadingText = "피킹 완료 주문 목록을 불러오는 중입니다...",
                         modifier = Modifier.fillMaxSize()
                     )

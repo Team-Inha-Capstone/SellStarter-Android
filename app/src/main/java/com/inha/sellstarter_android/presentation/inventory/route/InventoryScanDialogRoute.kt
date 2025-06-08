@@ -12,6 +12,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.inha.sellstarter_android.data.model.request.order.OrderInventoryPickingRequestDto
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
+import com.inha.sellstarter_android.presentation.common.screen.LoadingLottieScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
 import com.inha.sellstarter_android.presentation.inventory.InventoryViewModel
 import com.inha.sellstarter_android.presentation.inventory.scan.component.ValidBarcodeScanDialog
