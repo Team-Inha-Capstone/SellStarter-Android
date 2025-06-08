@@ -21,17 +21,14 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.inha.sellstarter_android.domain.model.HomeInfo
 import com.inha.sellstarter_android.domain.model.WeeklySales
 import com.inha.sellstarter_android.domain.model.YearlySales
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
-import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
+import com.inha.sellstarter_android.presentation.common.screen.LoadingLottieScreen
 import com.inha.sellstarter_android.presentation.home.component.ChatbotFloatingButton
 import com.inha.sellstarter_android.presentation.home.component.HomeFeatureContent
 import com.inha.sellstarter_android.presentation.home.component.OrderStatisticsContent
@@ -58,7 +55,7 @@ fun HomeScreen(
     ) {
         when (homeInfoState) {
             is UiState.Loading -> {
-                LoadingScreen(
+                LoadingLottieScreen(
                     loadingText = "홈 정보를 불러오는 중입니다...",
                     modifier = Modifier.fillMaxSize()
                 )

@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
+import com.inha.sellstarter_android.presentation.common.screen.LoadingLottieScreen
 import com.inha.sellstarter_android.presentation.common.screen.LoadingScreen
 import com.inha.sellstarter_android.presentation.mypage.FontSizeViewModel
 import com.inha.sellstarter_android.presentation.mypage.MyPageScreen
