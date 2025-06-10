@@ -44,6 +44,7 @@ import com.inha.sellstarter_android.presentation.common.component.DefaultTextFie
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 import com.inha.sellstarter_android.presentation.mypage.MyPageViewModel
+import com.inha.sellstarter_android.ui.theme.AppTypography
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Grey900
@@ -221,7 +222,7 @@ fun MyPageStoreAPIContent(
                         newKeyText = ""
                         isAdding = false
                     },
-                    fontStyle = MaterialTheme.typography.headlineSmall,
+                    fontStyle = AppTypography.headlineSmall,
                     enabled = newKeyText.isNotBlank(),
                     modifier = Modifier
                         .align(Alignment.End)
