@@ -86,7 +86,7 @@ fun OrderStatisticsContent(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = "스토어 주문 추이",
+                text = "🛒 스토어 주문 추이",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.weight(1f)

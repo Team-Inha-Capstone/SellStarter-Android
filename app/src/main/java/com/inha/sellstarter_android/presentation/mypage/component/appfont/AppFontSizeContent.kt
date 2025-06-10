@@ -23,7 +23,7 @@ fun AppFontSizeContent(
             .padding(vertical = 12.dp)
     ) {
         TitleAndText(
-            titleText = "앱 글자 크기 조정",
+            titleText = "🖋️ 앱 글자 크기 조정",
             contentText = "현재 크기 : ${fontScale.label}",
             isAvailableEdit = true,
             onClickEdit = onClickEdit,

@@ -43,12 +43,10 @@ fun HelpContent(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         TitleAndText(
-            titleText = "도움말",
+            titleText = "❓도움말",
             contentText = "필요시 가이드 문서를 참고하세요.",
             modifier = Modifier.fillMaxWidth()
         )
-
-        Spacer(modifier = Modifier.height(8.dp))
 
         Column(
             verticalArrangement = Arrangement.spacedBy(4.dp),

@@ -1,6 +1,6 @@
 package com.inha.sellstarter_android.di
 
-import com.google.zxing.client.android.BuildConfig
+import com.inha.sellstarter_android.BuildConfig
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -30,7 +30,7 @@ object NetworkModule {
         jsonConverter: Converter.Factory,
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://rvi4vmqy07.execute-api.us-east-1.amazonaws.com/prod/")
+            .baseUrl(BuildConfig.SPRING_API_BASE_URL)
             .client(client)
             .addConverterFactory(jsonConverter)
             .build()

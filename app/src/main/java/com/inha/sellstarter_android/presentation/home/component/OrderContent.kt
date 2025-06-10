@@ -43,7 +43,7 @@ fun OrderSummaryContent(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "오늘의 주문 확인",
+            text = "🗓️ 오늘의 주문 확인",
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold
         )
