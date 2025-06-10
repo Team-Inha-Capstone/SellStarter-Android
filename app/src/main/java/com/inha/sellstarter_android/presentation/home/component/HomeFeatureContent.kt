@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.BuildConfig
 import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.ui.theme.AppTypography
 import com.inha.sellstarter_android.ui.theme.Grey0
@@ -53,7 +54,7 @@ fun HomeFeatureContent(
         )
 
         val uriHandler = LocalUriHandler.current
-        val subscribeWebUrl = "https://www.notion.so/ss99x2002/20a5e65acf338052b199d98cd0b323e5"
+        val subscribeWebUrl = BuildConfig.SUBSCRIPTION_WEB_URL
 
         HomeFeatureCard(
             title = "데이터 분석",
@@ -122,7 +123,7 @@ fun HomeFeatureCard(
 
 @Preview(showBackground = true)
 @Composable
-fun HomeFeatureContent_Preview_False() {
+fun PreviewHomeFeatureContentFalse() {
     SellStarterAndroidTheme {
         HomeFeatureContent(
             isDataAnalyticsSubscribed = false,
