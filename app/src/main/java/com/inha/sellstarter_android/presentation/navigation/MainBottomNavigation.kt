@@ -35,7 +35,7 @@ fun MainBottomNavigation(navController: NavController) {
                 label = {
                     Text(text = stringResource(id = screen.resourceId))
                 },
-                selected = currentRoute?.startsWith(screen.rootRoute) == true,
+                selected = currentRoute == screen.startDestination,
                 onClick = {
                     navController.navigate(screen.startDestination) {
                         popUpTo(0) {
