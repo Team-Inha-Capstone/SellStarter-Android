@@ -17,7 +17,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.inha.sellstarter_android.domain.model.BuyerInfo
 import com.inha.sellstarter_android.domain.model.OrderDetailInfo
+import com.inha.sellstarter_android.domain.model.OrderInfo
+import com.inha.sellstarter_android.domain.model.OrderPickingInventory
+import com.inha.sellstarter_android.domain.model.PickingInfo
+import com.inha.sellstarter_android.domain.model.type.OrderStatusType
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
 import com.inha.sellstarter_android.presentation.order.detail.component.BuyerInfoContent
 import com.inha.sellstarter_android.presentation.order.detail.component.OrderDetailBottomButton
@@ -93,10 +98,53 @@ fun OrderDetailScreen(
     }
 }
 
-@Preview(showBackground = true, apiLevel = 33)
+@Preview(showBackground = true)
 @Composable
 fun PreviewOrderDetailScreen() {
-    SellStarterAndroidTheme {
+    val dummyOrderInfo = OrderInfo(
+        orderId = "ORD123456",
+        channelName = "shopify",
+        orderStatus = OrderStatusType.ORDER_COMPLETED
+    )
 
+    val dummyPickingInfo = PickingInfo(
+        items = listOf(
+            OrderPickingInventory(
+                inventoryName = "나일론 와샤 자켓",
+                barcodeId = "1234567890",
+                inventoryCount = 2,
+                isPicked = true
+            ),
+            OrderPickingInventory(
+                inventoryName = "aeae모자",
+                barcodeId = "0987654321",
+                inventoryCount = 1,
+                isPicked = true
+            )
+        ),
+        allPicked = true
+    )
+
+    val dummyBuyerInfo = BuyerInfo(
+        purchaserName = "홍길동",
+        purchaserAddress = "서울시 강남구 테헤란로 123",
+        purchaserRequest = "문 앞에 놔주세요."
+    )
+
+    val dummyDetailInfo = OrderDetailInfo(
+        orderInfo = dummyOrderInfo,
+        pickingInfo = dummyPickingInfo,
+        buyerInfo = dummyBuyerInfo
+    )
+
+    SellStarterAndroidTheme {
+        OrderDetailScreen(
+            orderDetailInfo = dummyDetailInfo,
+            isFromCompletedTab = false,
+            onNavigateToScan = { _, _ -> },
+            onCompletePicking = {},
+            onCompleteShipping = {},
+            onCancelComplete = {}
+        )
     }
 }
