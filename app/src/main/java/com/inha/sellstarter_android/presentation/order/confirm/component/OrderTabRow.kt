@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.order.confirm.component
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material3.Text
@@ -30,7 +31,7 @@ fun OrderTabRow(
                 text = {
                     Text(
                         text = title,
-                        style = AppTypography.titleMedium,
+                        style = MaterialTheme.typography.titleMedium,
                         color = if (selectedIndex == index) Purple200 else Grey100
                     )
                 }

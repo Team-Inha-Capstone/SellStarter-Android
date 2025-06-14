@@ -53,7 +53,7 @@ fun BarcodeContent(
                 contentDescription = null,
                 modifier = Modifier
                     .width(250.dp)
-                    .height(100.dp)
+                    .height(150.dp)
             )
         } ?: Text("바코드 생성 실패")
 

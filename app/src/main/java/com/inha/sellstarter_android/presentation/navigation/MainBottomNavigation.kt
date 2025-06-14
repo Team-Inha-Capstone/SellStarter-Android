@@ -1,6 +1,8 @@
 package com.inha.sellstarter_android.presentation.navigation
 
 import androidx.compose.foundation.content.MediaType.Companion.Text
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material3.Icon
@@ -25,7 +27,9 @@ import com.inha.sellstarter_android.ui.theme.Purple200
 @Composable
 fun MainBottomNavigation(navController: NavController) {
     BottomNavigation(
-        backgroundColor = Grey0
+        backgroundColor = Grey0,
+        modifier = Modifier
+            .navigationBarsPadding()
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route

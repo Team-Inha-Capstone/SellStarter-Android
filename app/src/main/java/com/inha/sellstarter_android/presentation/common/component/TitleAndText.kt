@@ -19,10 +19,10 @@ import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 
 @Composable
 fun TitleAndText(
-    titleText : String,
-    contentText : String,
-    isAvailableEdit : Boolean = false,
-    onClickEdit : () -> Unit = { },
+    titleText: String,
+    contentText: String,
+    isAvailableEdit: Boolean = false,
+    onClickEdit: () -> Unit = { },
     modifier: Modifier
 ) {
     Column(
@@ -30,17 +30,18 @@ fun TitleAndText(
     ) {
         Text(
             text = titleText,
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.headlineMedium,
         )
         Row {
             Text(
                 text = contentText,
-                style = MaterialTheme.typography.labelLarge,
+                style = MaterialTheme.typography.titleMedium,
             )
             if (isAvailableEdit) {
                 IconButton(
                     onClick = { onClickEdit() },
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier
+                        .size(24.dp)
                         .padding(start = 8.dp)
                 ) {
                     Icon(

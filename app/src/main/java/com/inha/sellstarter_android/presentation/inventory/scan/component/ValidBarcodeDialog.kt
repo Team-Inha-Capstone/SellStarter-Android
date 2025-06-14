@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -13,6 +14,7 @@ import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.presentation.common.screen.dialog.TwoButtonDialog
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.Purple200
+import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 
 @Composable
 fun ValidBarcodeEditDialog(
@@ -50,9 +52,9 @@ fun ValidBarcodeScanDialog(
 ) {
     TwoButtonDialog(
         content = {
-            Text("상품명: ${inventory.name}", style = MaterialTheme.typography.titleMedium)
-            Text("현재 수량: ${inventory.quantity}", style = MaterialTheme.typography.bodyMedium)
             Spacer(modifier = Modifier.height(16.dp))
+            Text("상품명: ${inventory.name}", style = MaterialTheme.typography.titleMedium)
+            Text("현재 수량: ${inventory.quantity}", style = MaterialTheme.typography.bodyLarge)
         },
         leftButtonText = "취소",
         rightButtonText = "완료",
@@ -67,21 +69,24 @@ fun ValidBarcodeScanDialog(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewValidBarcodeDialog() {
-    ValidBarcodeEditDialog(
-        inventory = Inventory(
-            "1",
-            "사과",
-            10,
-            "aa",
-            expiration = "2022-01-01",
-            false,
-            location = "위치",
-            option = "option"
-        ),
-        1,
-        { },
-        { },
-        { }
+fun PreviewValidBarcodeScanDialog() {
+    val dummyInventory = Inventory(
+        id = "1",
+        name = "샘플 상품",
+        quantity = 10,
+        imageUrl = "",
+        expiration = "2025-12-31",
+        isSoldOut = false,
+        option = "500ml",
+        location = "창고 A"
     )
+
+    SellStarterAndroidTheme {
+        ValidBarcodeScanDialog(
+            inventory = dummyInventory,
+            quantity = 20,
+            onDismiss = {},
+            onConfirm = {},
+        )
+    }
 }

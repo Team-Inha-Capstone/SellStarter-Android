@@ -49,6 +49,12 @@ fun OrderConfirmRoute(
         pagerState.animateScrollToPage(selectedTabIndex)
     }
 
+    LaunchedEffect(pagerState.currentPage) {
+        if (pagerState.currentPage != selectedTabIndex) {
+            viewModel.onTabSelected(pagerState.currentPage)
+        }
+    }
+
     OrderConfirmScreen(
         selectedTabIndex = selectedTabIndex,
         pagerState = pagerState,

@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +35,7 @@ fun OrderListItem(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
+            .wrapContentHeight()
             .clickable(onClick = onClick)
             .padding(vertical = 12.dp)
     ) {
@@ -57,17 +60,17 @@ fun OrderListItem(
             Text(
                 text = order.inventoryItem ?: "",
                 maxLines = 2,
-                style = AppTypography.titleSmall,
+                style = MaterialTheme.typography.titleMedium,
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = "주문번호 : ${order.orderId}",
-                style = AppTypography.bodyMedium,
+                style = MaterialTheme.typography.bodyMedium,
                 color = Grey100
             )
             Text(
                 text = "주문날짜 : ${order.orderDate}",
-                style = AppTypography.bodyMedium,
+                style = MaterialTheme.typography.bodyMedium,
                 color = Grey100
             )
         }

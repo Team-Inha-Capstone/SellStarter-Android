@@ -55,7 +55,7 @@ fun TwoButtonDialog(
             verticalArrangement = Arrangement.Center
         ) {
             content()
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween

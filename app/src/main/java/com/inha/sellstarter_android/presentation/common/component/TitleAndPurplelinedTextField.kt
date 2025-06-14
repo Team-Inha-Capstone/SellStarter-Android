@@ -1,6 +1,7 @@
 package com.inha.sellstarter_android.presentation.common.component
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -22,7 +23,7 @@ fun TitleAndPurplelinedTextField(
     Text(
         text = titleText,
         style = MaterialTheme.typography.headlineMedium,
-        modifier = Modifier.padding(top = 16.dp)
+        modifier = Modifier.padding(vertical = 8.dp,)
     )
 
     DefaultTextField(
@@ -31,9 +32,10 @@ fun TitleAndPurplelinedTextField(
         innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
         singleLine = true,
         borderColor = Purple200,
+        placeholder = "값을 입력해 주세요.",
         modifier = modifier
-            .padding(vertical = 12.dp)
-            .height(45.dp)
-            .fillMaxSize()
+            .padding(vertical = 4.dp)
+            .height(55.dp)
+            .fillMaxWidth()
     )
 }

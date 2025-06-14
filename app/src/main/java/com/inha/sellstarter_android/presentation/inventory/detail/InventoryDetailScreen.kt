@@ -1,6 +1,9 @@
 package com.inha.sellstarter_android.presentation.inventory.detail
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,14 +11,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -27,7 +34,7 @@ import com.inha.sellstarter_android.presentation.common.component.TitleAndText
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
 import com.inha.sellstarter_android.ui.theme.Grey0
-import com.inha.sellstarter_android.ui.theme.Purple200
+import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 
 @Composable
 fun InventoryDetailScreen(
@@ -43,6 +50,7 @@ fun InventoryDetailScreen(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .background(color = Grey0)
     ) {
         TitleScreen(
             title = "재고 상세확인"
@@ -54,34 +62,49 @@ fun InventoryDetailScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 24.dp)
         ) {
-            AsyncImage(
-                model = inventory.imageUrl,
-                contentDescription = "inventoryDetailImage",
+            Row(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(10.dp))
                     .fillMaxWidth()
-                    .padding(vertical = 4.dp)
-                    .height(200.dp),
-                contentScale = ContentScale.Crop
-            )
+                    .padding(vertical = 8.dp)
+            ) {
+                AsyncImage(
+                    model = inventory.imageUrl,
+                    contentDescription = "inventoryDetailImage",
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(20.dp))
+                        .size(160.dp),
+                    contentScale = ContentScale.Crop
+                )
 
-            TitleAndText(
-                titleText = "상품명",
-                contentText = inventory.name,
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .align(Alignment.CenterVertically)
+                        .padding(horizontal = 12.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
 
-            TitleAndText(
-                titleText = "보유재고",
-                contentText = "${inventory.quantity}개",
-                isAvailableEdit = true,
-                onClickEdit = { showEditDialog = true },
-                modifier = Modifier
-            )
+                    TitleAndText(
+                        titleText = "상품명",
+                        contentText = inventory.name,
+                        modifier = Modifier
+                    )
+
+                    TitleAndText(
+                        titleText = "보유재고",
+                        contentText = "${inventory.quantity}개",
+                        isAvailableEdit = true,
+                        onClickEdit = { showEditDialog = true },
+                        modifier = Modifier
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             TitleAndText(
                 titleText = "바코드번호",
-                contentText = "${inventory.id}",
+                contentText = inventory.id,
                 modifier = Modifier
             )
 
@@ -102,7 +125,7 @@ fun InventoryDetailScreen(
                 graphUrl = graphUrl,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(1000.dp)
+                    .wrapContentHeight()
             )
 
             Spacer(modifier = Modifier.size(16.dp))
@@ -125,5 +148,24 @@ fun InventoryDetailScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewInventoryDetailScreen() {
+    SellStarterAndroidTheme {
+        val sampleInventory = Inventory(
+            id = "1234567890123",
+            name = "샘플 상품",
+            quantity = 50,
+            imageUrl = "", // 임시 이미지
+            expiration = "2025-12-31",
+            isSoldOut = false,
+            option = "옵션 A",
+            location = "창고 1번 선반"
+        )
 
+        InventoryDetailScreen(
+            inventory = sampleInventory,
+            graphUrl = "", // 그래프용 임시 이미지
+            onBack = {},
+            onClickEditCount = {},
+            modifier = Modifier
+        )
+    }
 }

@@ -26,7 +26,7 @@ class OrderConfirmViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        private const val PAGE_SIZE = 10
+        private const val PAGE_SIZE = 5
     }
 
     // 탭 인덱스: 0=신규, 1=피킹완료
@@ -69,7 +69,7 @@ class OrderConfirmViewModel @Inject constructor(
         val result = safeApiCall(
             onStart = { _newState.value = UiState.Loading },
             onError = { it.logHttpError("loadNewOrders") },
-            apiCall = { fetchNewOrders(page, PAGE_SIZE) }
+            apiCall = { fetchNewOrders(page, 15) }
         )
         _newState.value = result
         if (result is UiState.Success) {

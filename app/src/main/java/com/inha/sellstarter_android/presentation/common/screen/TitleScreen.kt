@@ -1,6 +1,7 @@
 package com.inha.sellstarter_android.presentation.common.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -19,28 +20,41 @@ import com.inha.sellstarter_android.ui.theme.Grey0
 @Composable
 fun TitleScreen(
     title: String,
+    backGroundColor: Color = Grey0,
+    description: String = "",
     style: TextStyle = MaterialTheme.typography.headlineMedium,
     fontColor: Color = Grey900,
     modifier: Modifier = Modifier
         .fillMaxWidth()
         .statusBarsPadding()
+        .background(color = backGroundColor)
 ) {
-    Text(
-        text = title,
-        color = fontColor,
-        style = style,
+    Column(
         modifier = modifier
             .padding(
                 vertical = 16.dp,
                 horizontal = 24.dp
             ),
-    )
+    ) {
+        Text(
+            text = title,
+            color = fontColor,
+            style = style,
+        )
+        Text(
+            text = description,
+            color = fontColor,
+            style = MaterialTheme.typography.bodySmall,
+        )
+
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun TitleScreenPreview() {
     TitleScreen(
-        "마이페이지"
+        "마이페이지",
+        description = "랄라"
     )
 }

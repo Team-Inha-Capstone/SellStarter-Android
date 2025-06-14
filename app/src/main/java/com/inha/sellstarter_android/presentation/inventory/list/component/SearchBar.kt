@@ -35,7 +35,9 @@ fun SearchBar(
     onSearch: () -> Unit,
     modifier: Modifier =
         Modifier
-            .height(45.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp)
+            .height(50.dp)
 ) {
     Box(
         modifier = modifier

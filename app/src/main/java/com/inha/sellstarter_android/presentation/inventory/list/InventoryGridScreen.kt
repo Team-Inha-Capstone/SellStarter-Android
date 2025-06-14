@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.domain.model.InventoryListPage
+import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.presentation.common.component.LoadingItem
 import com.inha.sellstarter_android.presentation.common.screen.EmptyScreen
 import com.inha.sellstarter_android.presentation.common.screen.ErrorScreen
@@ -33,6 +34,7 @@ import com.inha.sellstarter_android.presentation.inventory.list.component.Search
 import com.inha.sellstarter_android.presentation.inventory.list.component.SoldOutFilterChips
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple50
+import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 import com.inha.sellstarter_android.util.base.UiState
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.mapNotNull
@@ -76,11 +78,14 @@ fun InventoryGridScreen(
             .fillMaxSize()
             .background(Grey0)
     ) {
-        TitleScreen(title = "스토어 재고 확인")
+        TitleScreen(
+            title = "스토어 재고 확인",
+            description = "스토어 내 재고를 한눈에 파악하세요."
+        )
 
         Spacer(
             modifier = Modifier
-                .size(12.dp)
+                .height(4.dp)
         )
 
         SearchBar(
@@ -93,7 +98,7 @@ fun InventoryGridScreen(
                 .height(50.dp)
         )
 
-        Spacer(modifier = Modifier.size(4.dp))
+        Spacer(modifier = Modifier.height(4.dp))
 
         SoldOutFilterChips(
             selectedIndex = selectedChipIndex,
@@ -128,7 +133,7 @@ fun InventoryGridScreen(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier
-                            .fillMaxSize()
+                            .weight(1f)
                             .padding(horizontal = 12.dp),
                         content = {
                             items(state.data.inventories, key = { it.id }) { item ->
@@ -152,6 +157,7 @@ fun InventoryGridScreen(
                             }
                         }
                     )
+                    Spacer(modifier = Modifier.height(12.dp))
                 }
             }
 
@@ -166,35 +172,45 @@ fun InventoryGridScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewInventoryGridScreen() {
-//    InventoryGridScreen(
-//        inventoryList = listOf(
-//            InventoryItem(
-//                id = "1",
-//                name = "사과",
-//                quantity = 10,
-//                isSoldOut = false,
-//                imageUrl = "aa"
-//            ),
-//    InventoryItem(
-//        id = "2",
-//        name = "바나나",
-//        quantity = 0,
-//        isSoldOut = true,
-//        imageUrl = "bb"
-//    ),
-//    InventoryItem(
-//        id = "3",
-//        name = "포도",
-//        quantity = 3,
-//        isSoldOut = false,
-//        imageUrl = "cc"
-//    ),
-//    InventoryItem(
-//        id = "4",
-//        name = "오렌지",
-//        quantity = 5,
-//        isSoldOut = false,
-//        imageUrl = "dd"
-//    )),
-//    modifier = Modifier.fillMaxSize())
+    val dummyInventories = listOf(
+        InventorySummary(
+            id = "1",
+            name = "상품 A",
+            quantity = 10,
+            isSoldOut = false,
+            option = "옵션 1",
+            imageUrl = null
+        ),
+        InventorySummary(
+            id = "2",
+            name = "상품 B",
+            quantity = 0,
+            isSoldOut = true,
+            option = "옵션 2",
+            imageUrl = null
+        )
+    )
+
+    SellStarterAndroidTheme {
+        InventoryGridScreen(
+            inventoryUiState = UiState.Success(
+                InventoryListPage(
+                    inventories = dummyInventories,
+                    page = 0,
+                    size = 2,
+                    totalElements = 2,
+                    totalPages = 1
+                )
+            ),
+            searchText = "상품",
+            selectedChipIndex = 0,
+            onSearchTextChanged = {},
+            onSearch = {},
+            onChipSelected = {},
+            onItemClick = {},
+            onLoadMore = {},
+            isLoadingMore = false,
+            hasNextPage = false
+        )
+    }
 }
