@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -21,6 +23,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -36,6 +39,13 @@ import com.inha.sellstarter_android.domain.model.ChatMessage
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Grey100
 import com.inha.sellstarter_android.ui.theme.AppTypography
+import com.inha.sellstarter_android.ui.theme.Grey10
+import com.inha.sellstarter_android.ui.theme.Grey20
+import com.inha.sellstarter_android.ui.theme.Grey50
+import com.inha.sellstarter_android.ui.theme.Purple100
+import com.inha.sellstarter_android.ui.theme.Purple50
+import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
+import java.time.LocalDate
 
 @Composable
 fun ChatbotScreen(
@@ -51,8 +61,18 @@ fun ChatbotScreen(
             .fillMaxSize()
             .background(color = Grey0)
     ) {
-        TitleScreen(title = "💬 채팅")
+        TitleScreen(
+            title = "💬 채팅",
+            description = "재고 및 주문 관련 궁금한 점을 챗봇에게 물어보세요.",
+        )
 
+        Text(
+            modifier = Modifier
+                .padding(vertical = 24.dp)
+                .align(Alignment.CenterHorizontally),
+            text = LocalDate.now().toString(),
+            color = Grey50
+        )
         LazyColumn(
             modifier = Modifier
                 .weight(1f)
@@ -78,19 +98,20 @@ fun ChatbotScreen(
                 .padding(12.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .background(Grey0)
-                .border(width = 1.dp, color = Grey100, shape = RoundedCornerShape(8.dp)),
+                .border(width = 1.dp, color = Grey20, shape = RoundedCornerShape(8.dp)),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             DefaultTextField(
                 value = messageText,
                 onValueChange = onMessageTextChange,
-                innerTextFieldStyle = AppTypography.bodyMedium,
+                innerTextFieldStyle = MaterialTheme.typography.bodyMedium,
                 singleLine = true,
+                placeholder = "챗봇에게 물어보세요.\nex) 스토어 내 재고 요약 정보 알려줘",
                 borderColor = Color.Transparent,
                 modifier = Modifier
                     .weight(1f)
                     .padding(top = 4.dp, bottom = 4.dp, start = 8.dp)
-                    .height(70.dp)
+                    .height(85.dp)
             )
 
             ImageIconButton(
@@ -104,6 +125,7 @@ fun ChatbotScreen(
                 height = 50,
                 modifier = Modifier
                     .padding(vertical = 12.dp, horizontal = 12.dp)
+                    .align(Alignment.CenterVertically)
             )
         }
     }
@@ -113,4 +135,20 @@ fun ChatbotScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewChatbotScreen() {
+    SellStarterAndroidTheme {
+        val dummyMessages = listOf(
+            ChatMessage("안녕하세요! 무엇을 도와드릴까요?", isUser = false),
+            ChatMessage("재고 확인하고 싶어요.", isUser = true),
+            ChatMessage("어떤 상품의 재고를 확인할까요?", isUser = false),
+        )
+
+        ChatbotScreen(
+            modifier = Modifier,
+            chatMessages = dummyMessages,
+            isTyping = true,
+            messageText = "샘플 입력 중",
+            onMessageTextChange = {},
+            onSendClick = {}
+        )
+    }
 }
