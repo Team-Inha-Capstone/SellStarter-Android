@@ -65,10 +65,9 @@ fun ChatbotScreen(
             title = "💬 채팅",
             description = "재고 및 주문 관련 궁금한 점을 챗봇에게 물어보세요.",
         )
-
         Text(
             modifier = Modifier
-                .padding(vertical = 24.dp)
+                .padding(vertical = 12.dp)
                 .align(Alignment.CenterHorizontally),
             text = LocalDate.now().toString(),
             color = Grey50
