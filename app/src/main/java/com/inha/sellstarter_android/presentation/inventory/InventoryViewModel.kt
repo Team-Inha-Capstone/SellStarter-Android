@@ -53,7 +53,7 @@ class InventoryViewModel @Inject constructor(
     private val _inventoryDetailState = MutableStateFlow<UiState<Inventory>>(UiState.Loading)
     val inventoryDetailState: StateFlow<UiState<Inventory>> = _inventoryDetailState
 
-    private val _inventoryGraphState = MutableStateFlow<String>("")
+    private val _inventoryGraphState = MutableStateFlow("")
     val inventoryGraphState: StateFlow<String> = _inventoryGraphState
 
     // 3. 수량 수정

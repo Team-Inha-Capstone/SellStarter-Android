@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,6 +29,7 @@ import com.inha.sellstarter_android.presentation.inventory.InventoryViewModel
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple200
 import com.inha.sellstarter_android.util.barcode.BarcodeUtils
+
 @Composable
 fun InventoryRegisterScreen(
     modifier: Modifier = Modifier,
@@ -39,15 +41,19 @@ fun InventoryRegisterScreen(
     var expiration by remember { mutableStateOf("") }
     var option by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
-
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
         onResult = { uri -> if (uri != null) imageUri = uri }
     )
 
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(modifier = modifier
+        .fillMaxSize()
+        .background(Grey0)) {
 
-        TitleScreen(title = "재고 등록하기")
+        TitleScreen(
+            title = "재고 등록하기",
+            description = "스토어 내 재고를 등록하세요."
+        )
 
         InventoryForm(
             name = name,

@@ -61,7 +61,8 @@ fun OrderPageContent(
             LazyColumn(
                 state = listState,
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.weight(0.9f)
             ) {
                 items(items = orders) { order ->
                     OrderListItem(
@@ -82,6 +83,7 @@ fun OrderPageContent(
             onPageSelected = onLoadPage,
             modifier = Modifier
                 .fillMaxWidth()
+                .weight(0.1f)
                 .padding(vertical = 8.dp)
         )
 

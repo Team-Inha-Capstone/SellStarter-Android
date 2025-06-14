@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,7 +28,6 @@ fun InventoryCountEditDialog(
     onDismiss: () -> Unit
 ) {
     var input by remember { mutableStateOf(currentCount.toString()) }
-
     val isValid = input.toIntOrNull() != null && input.toInt() >= 0
 
     TwoButtonDialog(
@@ -46,7 +45,7 @@ fun InventoryCountEditDialog(
             Column {
                 Text(
                     text = "수정할 재고 수량을 입력하세요.",
-                    style = AppTypography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))

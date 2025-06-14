@@ -1,5 +1,8 @@
 package com.inha.sellstarter_android.presentation.home
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -25,6 +28,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.inha.sellstarter_android.domain.model.HomeInfo
 import com.inha.sellstarter_android.domain.model.WeeklySales
 import com.inha.sellstarter_android.domain.model.YearlySales
@@ -150,3 +156,4 @@ fun HomeScreen(
         }
     }
 }
+
