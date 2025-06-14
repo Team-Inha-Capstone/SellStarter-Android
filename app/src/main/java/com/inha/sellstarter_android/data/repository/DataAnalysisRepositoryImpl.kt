@@ -12,6 +12,7 @@ class DataAnalysisRepositoryImpl @Inject constructor(
     override suspend fun getInventoryFlowGraph(inventoryFlowGraphRequestDto: InventoryFlowGraphRequestDto): Result<String> {
         return runCatching {
             dataAnalysisDataSource.getInventoryFlowGraph(inventoryFlowGraphRequestDto).data.url
+                ?: ""
         }
     }
 

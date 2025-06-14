@@ -40,7 +40,6 @@ fun EmptyScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-
         Image(
             painter = painterResource(emptyIcon),
             contentDescription = "empty_screen_icon",
