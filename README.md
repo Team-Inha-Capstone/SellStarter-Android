@@ -35,6 +35,15 @@
 <div id="3"></div>
 
 ## 주요 기능
+![image](https://github.com/user-attachments/assets/3e70ade3-ba4f-43c2-8c77-a91dd81b5759)
+<img width="1104" alt="스크린샷 2025-06-14 오후 11 07 03" src="https://github.com/user-attachments/assets/67520ddd-6ab8-44ba-a624-9c39e59439cd"/>
+
+![image](https://github.com/user-attachments/assets/cda5cb57-e936-4c31-97bd-0807d5595f93)
+![image](https://github.com/user-attachments/assets/bf5bae64-fcfc-4155-88df-4d192452a063)
+![image](https://github.com/user-attachments/assets/af4dccba-384f-4051-a67f-a9bc4b40bc44)
+![image](https://github.com/user-attachments/assets/0f9e38eb-04ca-48c2-82f9-622183f39031)
+![image](https://github.com/user-attachments/assets/a8de3990-5672-4e63-914c-b5f0fe191b70)
+![image](https://github.com/user-attachments/assets/880406a0-460f-4566-b376-72e60bcd0ad6)
 
 <div id="4"></div>
 
@@ -44,7 +53,6 @@
   src="https://github.com/user-attachments/assets/220ad188-99ee-48ff-88dc-9a604d947784"
   width="800"
 />
-
 
 ### 아키텍처
 <img
