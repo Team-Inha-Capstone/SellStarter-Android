@@ -49,7 +49,8 @@ fun OrderConfirmScreen(
             .fillMaxSize()
             .background(Grey0)
     ) {
-        TitleScreen(title = "주문 확인")
+        TitleScreen(title = "주문 확인",
+            description = "스토어에 들어온 주문을 확인할 수 있습니다.")
         Column(
             modifier = Modifier
                 .fillMaxSize()
