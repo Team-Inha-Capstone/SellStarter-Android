@@ -44,7 +44,7 @@ fun TitleScreen(
         Text(
             text = description,
             color = fontColor,
-            style = AppTypography.bodySmall,
+            style = MaterialTheme.typography.bodySmall,
         )
 
     }

@@ -71,7 +71,7 @@ fun InventoryDetailScreen(
                     contentDescription = "inventoryDetailImage",
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))
-                        .size(180.dp),
+                        .size(160.dp),
                     contentScale = ContentScale.Crop
                 )
 
@@ -79,7 +79,7 @@ fun InventoryDetailScreen(
                     modifier = Modifier
                         .weight(1f)
                         .align(Alignment.CenterVertically)
-                        .padding(horizontal = 8.dp),
+                        .padding(horizontal = 12.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
 
