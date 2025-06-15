@@ -34,10 +34,10 @@ class OrderConfirmViewModel @Inject constructor(
     val selectedTab: StateFlow<Int> = _selectedTab.asStateFlow()
 
     // 페이징 상태
-    private val _newPage = MutableStateFlow(1)
-    private val _newTotal = MutableStateFlow(1)
-    private val _donePage = MutableStateFlow(1)
-    private val _doneTotal = MutableStateFlow(1)
+    private val _newPage = MutableStateFlow(0)
+    private val _newTotal = MutableStateFlow(0)
+    private val _donePage = MutableStateFlow(0)
+    private val _doneTotal = MutableStateFlow(0)
     val newPage: StateFlow<Int> = _newPage.asStateFlow()
     val newTotalPages: StateFlow<Int> = _newTotal.asStateFlow()
     val donePage: StateFlow<Int> = _donePage.asStateFlow()
@@ -54,8 +54,8 @@ class OrderConfirmViewModel @Inject constructor(
     val selectedIds: StateFlow<Set<String>> = _selectedIds.asStateFlow()
 
     init {
-        loadNewOrders(1)
-        loadDoneOrders(1)
+        loadNewOrders(0)
+        loadDoneOrders(0)
     }
 
     fun onTabSelected(index: Int) {
