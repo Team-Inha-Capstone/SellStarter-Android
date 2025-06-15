@@ -27,10 +27,10 @@ fun PaginationBar(
         horizontalArrangement = Arrangement.Center
     ) {
         IconButton(
-            onClick = { onPageSelected((currentPage - 1).coerceAtLeast(1)) },
+            onClick = { onPageSelected((currentPage - 1).coerceAtLeast(0)) },
             enabled = currentPage > 1
         ) { Icon(Icons.Default.KeyboardArrowLeft, contentDescription = "이전") }
-        (1..totalPages).forEach { page ->
+        (0 until totalPages).forEach { page ->
             TextButton(onClick = { onPageSelected(page) }) {
                 Text(
                     text = page.toString(),
@@ -40,7 +40,7 @@ fun PaginationBar(
         }
         IconButton(
             onClick = { onPageSelected((currentPage + 1).coerceAtMost(totalPages)) },
-            enabled = currentPage < totalPages
+            enabled = currentPage < totalPages - 1
         ) { Icon(Icons.Default.KeyboardArrowRight, contentDescription = "다음") }
     }
 }
