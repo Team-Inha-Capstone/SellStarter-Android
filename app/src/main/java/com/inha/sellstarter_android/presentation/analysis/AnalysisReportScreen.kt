@@ -1,5 +1,6 @@
 package com.inha.sellstarter_android.presentation.analysis
 
+import android.webkit.WebView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,13 +10,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.presentation.common.component.OneButton
 import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple200
+import com.inha.sellstarter_android.util.extension.createWebViewPdf
 
 @Composable
 fun AnalysisReportScreen(
@@ -23,6 +30,9 @@ fun AnalysisReportScreen(
     onDownloadClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    var webView: WebView? by remember { mutableStateOf(null) }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -39,6 +49,9 @@ fun AnalysisReportScreen(
 
             HtmlReportWebView(
                 url = reportUrl,
+                webViewRef = {
+                    webView = it // 외부 remember { mutableStateOf<WebView?>() } 에 저장
+                },
                 modifier = Modifier
                     .padding(horizontal = 12.dp)
                     .fillMaxWidth()
@@ -50,7 +63,11 @@ fun AnalysisReportScreen(
 
         OneButton(
             text = "보고서(pdf) 다운로드",
-            onClick = onDownloadClicked,
+            onClick = {
+                webView?.let {
+                    createWebViewPdf(context, it, "analysis_report.pdf")
+                }
+            },
             buttonBackgroundColor = Purple200,
             enabled = true,
             modifier = Modifier
