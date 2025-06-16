@@ -43,7 +43,7 @@ fun WeeklySalesResponseDto.sum(): Int {
 
 fun YearlySalesResponseDto.currentMonthSum(): Int {
     val calendar = Calendar.getInstance()
-    val currentMonth = calendar.get(Calendar.MONTH)
+    val currentMonth = calendar.get(Calendar.MONTH) + 1
     return when (currentMonth) {
         1 -> jan
         2 -> feb
