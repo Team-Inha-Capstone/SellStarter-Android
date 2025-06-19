@@ -12,11 +12,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 
 @Composable
-fun HtmlReportWebView(url: String, modifier: Modifier = Modifier) {
-    AndroidView(
-        modifier = modifier
-            .clip(RoundedCornerShape(10.dp))
-            .height(1000.dp),
+fun HtmlReportWebView(
+    url: String,
+    webViewRef: (WebView) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    AndroidView(modifier = modifier
+        .clip(RoundedCornerShape(10.dp))
+        .height(1000.dp),
         factory = { context ->
             WebView(context).apply {
                 settings.apply {
@@ -30,10 +33,11 @@ fun HtmlReportWebView(url: String, modifier: Modifier = Modifier) {
                 }
                 settings.javaScriptEnabled = true
                 webViewClient = WebViewClient()
+                webViewRef(this)
             }
-        }, update = { webView ->
+        },
+        update = { webView ->
             // Compose 재구성 시 URL 갱신
             webView.loadUrl(url)
-        }
-    )
+        })
 }
