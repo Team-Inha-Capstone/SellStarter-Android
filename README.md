@@ -31,6 +31,7 @@
 | **DI & Serialization & State**           | Hilt, Kotlin Serialization, UiState                         |
 | **Concurrency & Streams**                | Coroutine, Flow                                             |
 | **Imaging, Barcode & Charting**          | Coil (Image), Zxing (Barcode), Vico (Graph)                 |
+| **Notification**          | FCM (Firebase Cloud Messaging)                 |
 
 <div id="3"></div>
 
