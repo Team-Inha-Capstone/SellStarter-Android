@@ -29,7 +29,6 @@ fun OrderListItem(
     order: OrderSummary,
     isSelected: Boolean,
     currentTabIndex: Int,
-    onCheckedChange: () -> Unit,
     onClick: () -> Unit
 ) {
     Row(

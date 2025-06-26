@@ -70,7 +70,6 @@ fun OrderPageContent(
                         order = order,
                         isSelected = selectedIds.contains(order.orderId),
                         currentTabIndex = currentTabIndex,
-                        onCheckedChange = { onItemSelect(order.orderId) },
                         onClick = { onOrderItemClick(order.orderId, currentTabIndex == 1) }
                     )
                 }
