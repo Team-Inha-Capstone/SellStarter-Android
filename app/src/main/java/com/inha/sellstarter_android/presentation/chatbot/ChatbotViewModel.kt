@@ -31,7 +31,7 @@ class ChatbotViewModel @Inject constructor(
                 onStart = {},
                 onError = { it.logHttpError("chatbotStart") },
                 apiCall = {
-                    chatbotUseCases.chatStartUseCase.invoke()
+                    chatbotUseCases.startChatSession()
                 }
             ).let { result ->
                 _isBotTyping.value = false
@@ -48,7 +48,7 @@ class ChatbotViewModel @Inject constructor(
                 onStart = {},
                 onError = { it.logHttpError("chatbotSend") },
                 apiCall = {
-                    chatbotUseCases.chatbotMessageUseCase.invoke(
+                    chatbotUseCases.sendChatMessage(
                         ChatbotMessageRequestDto(message = message)
                     )
                 }
@@ -61,7 +61,7 @@ class ChatbotViewModel @Inject constructor(
 
     fun endChatbot() {
         viewModelScope.launch {
-            chatbotUseCases.chatEndUseCase.invoke()
+            chatbotUseCases.endChatSession
             _chatMessages.value = emptyList() // 대화 종료 시 리스트 초기화
         }
     }

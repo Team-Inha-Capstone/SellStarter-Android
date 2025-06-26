@@ -66,9 +66,9 @@ object UseCaseModule {
         chatbotRepository: ChatbotRepository
     ): ChatbotUseCases {
         return ChatbotUseCases(
-            chatStartUseCase = ChatbotStartUseCase(chatbotRepository),
-            chatbotMessageUseCase = ChatbotMessageUseCase(chatbotRepository),
-            chatEndUseCase = ChatbotEndUseCase(chatbotRepository)
+            startChatSession = ChatbotStartUseCase(chatbotRepository),
+            sendChatMessage = ChatbotMessageUseCase(chatbotRepository),
+            endChatSession = ChatbotEndUseCase(chatbotRepository)
         )
     }
 
