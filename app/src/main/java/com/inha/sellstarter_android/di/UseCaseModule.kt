@@ -111,8 +111,8 @@ object UseCaseModule {
         dataAnalysisRepository: DataAnalysisRepository
     ): DataAnalysisUseCases {
         return DataAnalysisUseCases(
-            inventoryFlowGraphUseCase = InventoryFlowGraphUseCase(dataAnalysisRepository),
-            dataReportUseCase = DataReportUseCase(dataAnalysisRepository)
+            loadInventoryFlowGraph = InventoryFlowGraphUseCase(dataAnalysisRepository),
+            loadDataReport = DataReportUseCase(dataAnalysisRepository)
         )
     }
 

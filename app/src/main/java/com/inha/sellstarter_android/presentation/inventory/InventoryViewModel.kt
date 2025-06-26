@@ -145,7 +145,7 @@ class InventoryViewModel @Inject constructor(
 
     fun getInventoryFlowGraph(barcodeId: String) {
         viewModelScope.launch {
-            dataAnalysisUseCases.inventoryFlowGraphUseCase.invoke(
+            dataAnalysisUseCases.loadInventoryFlowGraph(
                 InventoryFlowGraphRequestDto(
                     barcodeId = barcodeId
                 )
