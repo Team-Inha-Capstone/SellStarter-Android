@@ -69,7 +69,7 @@ fun OrderConfirmRoute(
         onLoadNew = viewModel::loadNewOrders,
         onLoadDone = viewModel::loadDoneOrders,
         onItemSelect = viewModel::onItemSelect,
-        onSelectAll = {},
+        onSelectAll = viewModel::onSelectAll,
         onOrderItemClick = onNavigateToDetail,
         modifier = modifier
     )

@@ -28,7 +28,7 @@ fun PaginationBar(
     ) {
         IconButton(
             onClick = { onPageSelected((currentPage - 1).coerceAtLeast(0)) },
-            enabled = currentPage > 1
+            enabled = currentPage > 0
         ) { Icon(Icons.Default.KeyboardArrowLeft, contentDescription = "이전") }
         (0 until totalPages).forEach { page ->
             TextButton(onClick = { onPageSelected(page) }) {

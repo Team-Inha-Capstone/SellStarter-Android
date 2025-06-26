@@ -15,6 +15,7 @@ import com.inha.sellstarter_android.domain.model.OrderSummary
 fun OrderList(
     orders: List<OrderSummary>,
     selectedIds: Set<String>,
+    currentTabIndex: Int,
     onItemSelect: (String) -> Unit,
     onOrderItemClick: (String) -> Unit
 ) {
@@ -27,6 +28,7 @@ fun OrderList(
                 order = order,
                 isSelected = selectedIds.contains(order.orderId),
                 onCheckedChange = { onItemSelect(order.orderId) },
+                currentTabIndex = currentTabIndex,
                 onClick = { onOrderItemClick(order.orderId) }
             )
             Divider(color = Color.LightGray)

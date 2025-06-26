@@ -1,10 +1,14 @@
 package com.inha.sellstarter_android.presentation.order.confirm.component
 
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.inha.sellstarter_android.R
 import com.inha.sellstarter_android.domain.model.OrderListPage
@@ -52,24 +56,18 @@ fun OrderPager(
 
                     is UiState.Success ->
                         OrderPageContent(
-                        orders = state.data.orders,
-                        currentPage = newPage,
-                        totalPages = newTotalPages,
-                        onLoadPage = onLoadNew,
-                        currentTabIndex = 0,
-                        selectedIds = selectedIds,
-                        onItemSelect = onItemSelect,
-                        onSelectAll = { onSelectAll(state.data.orders) },
-                        onOrderItemClick = onOrderItemClick,
-                        extraBottomAction = {
-                            PickingActionButtons(
-                                isEnabled = selectedIds.isNotEmpty(),      // 하나라도 선택됐을 때만 활성화
-                                currentTabIndex = 0 ,                              // 0→피킹완료용 텍스트 변경
-                                onSelectAll = { onSelectAll(state.data.orders) },
-                                onSubmit = { }
-                            )
-                        }
-                    )
+                            orders = state.data.orders,
+                            currentPage = newPage,
+                            totalPages = newTotalPages,
+                            onLoadPage = onLoadNew,
+                            currentTabIndex = 0,
+                            selectedIds = selectedIds,
+                            onItemSelect = onItemSelect,
+                            onSelectAll = { onSelectAll(state.data.orders) },
+                            onOrderItemClick = onOrderItemClick,
+                            extraBottomAction = {
+                            }
+                        )
                 }
             }
 
@@ -95,12 +93,12 @@ fun OrderPager(
                         onSelectAll = { onSelectAll(state.data.orders) },
                         onOrderItemClick = onOrderItemClick,
                         extraBottomAction = {
-                            PickingActionButtons(
-                                isEnabled = selectedIds.isNotEmpty(),      // 하나라도 선택됐을 때만 활성화
-                                currentTabIndex = 1,                              // 0→피킹완료용 텍스트 변경
-                                onSelectAll = { onSelectAll(state.data.orders) },
-                                onSubmit = { }
-                            )
+//                            PickingActionButtons(
+//                                isEnabled = selectedIds.isNotEmpty(),      // 하나라도 선택됐을 때만 활성화
+//                                currentTabIndex = 1,                              // 0→피킹완료용 텍스트 변경
+//                                onSelectAll = { onSelectAll(state.data.orders) },
+//                                onSubmit = { }
+//                            )
                         }
                     )
                 }
