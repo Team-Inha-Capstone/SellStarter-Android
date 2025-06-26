@@ -84,7 +84,6 @@ class ChatbotViewModel @Inject constructor(
                     )
                 )
             }
-
             else -> Unit
         }
     }

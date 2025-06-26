@@ -4,7 +4,7 @@ import com.inha.sellstarter_android.data.model.request.order.OrderInventoryPicki
 import com.inha.sellstarter_android.domain.repository.OrderRepository
 import javax.inject.Inject
 
-class IsPickingAvailableUseCase @Inject constructor(
+class CheckPickingAvailableUseCase @Inject constructor(
     private val repository: OrderRepository
 ) {
     suspend operator fun invoke(orderId: String): Result<Boolean> =

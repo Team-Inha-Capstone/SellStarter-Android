@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
             _homeInfoState.value = safeApiCall(
                 onStart = { _homeInfoState.value = UiState.Loading },
                 onError = { it.logHttpError("getHomeInfo") },
-                apiCall = { homeUseCases.homeInfoUseCase.invoke() }
+                apiCall = { homeUseCases.loadHomeDashboard() }
             )
         }
     }
@@ -56,7 +56,7 @@ class HomeViewModel @Inject constructor(
                 onStart = { _weeklySalesState.value = UiState.Loading },
                 onError = { it.logHttpError("getWeeklySales") },
                 apiCall = {
-                    homeUseCases.weeklySalesUseCase.invoke(
+                    homeUseCases.loadWeeklySales(
                         currentDate = currentDate
                     )
                 }
@@ -72,7 +72,7 @@ class HomeViewModel @Inject constructor(
                 onStart = { _yearlySalesState.value = UiState.Loading },
                 onError = { it.logHttpError("getYearlySales") },
                 apiCall = {
-                    homeUseCases.yearlySalesUseCase.invoke(
+                    homeUseCases.loadAnnualSales(
                         currentDate = currentDate
                     )
                 }

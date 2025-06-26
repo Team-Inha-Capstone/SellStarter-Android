@@ -5,10 +5,10 @@ import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import javax.inject.Inject
 
-class InventoryEditCountUseCase @Inject constructor(
+class UpdateInventoryCountUseCase @Inject constructor(
     private val inventoryRepository: InventoryRepository
 ) {
-    suspend fun invoke(
+    suspend operator fun invoke(
         barcodeId : String,
         inventoryCountRequest: InventoryCountRequestDto
     ): Result<Inventory> {

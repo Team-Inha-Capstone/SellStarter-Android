@@ -4,7 +4,7 @@ import com.inha.sellstarter_android.data.model.request.inventory.InventoryFlowGr
 import com.inha.sellstarter_android.domain.repository.DataAnalysisRepository
 import javax.inject.Inject
 
-class InventoryFlowGraphUseCase @Inject constructor(
+class LoadInventoryFlowGraphUseCase @Inject constructor(
     private val dataAnalysisRepository: DataAnalysisRepository
 ) {
     suspend operator fun invoke(

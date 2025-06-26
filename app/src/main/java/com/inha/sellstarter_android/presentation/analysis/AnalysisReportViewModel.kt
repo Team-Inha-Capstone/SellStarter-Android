@@ -3,9 +3,7 @@ package com.inha.sellstarter_android.presentation.analysis
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.inha.sellstarter_android.domain.usecase.dataanalysis.DataReportUseCase
-import com.inha.sellstarter_android.util.base.UiState
-import com.inha.sellstarter_android.util.base.safeApiCall
+import com.inha.sellstarter_android.domain.usecase.dataanalysis.LoadDataReportUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AnalysisReportViewModel @Inject constructor(
-    private val dataReportUseCase: DataReportUseCase
+    private val dataReportUseCase: LoadDataReportUseCase
 ) : ViewModel() {
 
     private val _reportState = MutableStateFlow<String>("")

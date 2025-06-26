@@ -4,10 +4,10 @@ import com.inha.sellstarter_android.domain.model.YearlySales
 import com.inha.sellstarter_android.domain.repository.HomeRepository
 import javax.inject.Inject
 
-class YearlySalesUseCase @Inject constructor(
+class LoadYearlySalesUseCase @Inject constructor(
     private val homeRepository: HomeRepository
 ) {
-    suspend fun invoke(currentDate: String): Result<YearlySales> {
+    suspend operator fun invoke(currentDate: String): Result<YearlySales> {
         return homeRepository.loadYearlySalesInfo(currentDate = currentDate)
     }
 }

@@ -96,7 +96,7 @@ class InventoryViewModel @Inject constructor(
                 onStart = {},
                 onError = { it.logHttpError("loadMoreInventoryList") },
                 apiCall = {
-                    inventoryUseCases.inventoryListUseCase.invoke(
+                    inventoryUseCases.loadInventoryListUseCase(
                         search = currentSearch.ifBlank { null },
                         status = currentStatus,
                         page = paging.page,
@@ -137,7 +137,7 @@ class InventoryViewModel @Inject constructor(
                 onStart = { _inventoryDetailState.value = UiState.Loading },
                 onError = { it.logHttpError("getInventoryDetail") },
                 apiCall = {
-                    inventoryUseCases.inventoryDetailUseCase.invoke(barcodeId)
+                    inventoryUseCases.loadInventoryDetailUseCase(barcodeId)
                 }
             )
         }
@@ -168,7 +168,7 @@ class InventoryViewModel @Inject constructor(
                 onStart = { _editCountState.value = UiState.Loading },
                 onError = { it.logHttpError("editInventoryCount") },
                 apiCall = {
-                    inventoryUseCases.inventoryEditCountUseCase.invoke(
+                    inventoryUseCases.updateInventoryCountUseCase(
                         barcodeId = barcodeId,
                         inventoryCountRequest = InventoryCountRequestDto(
                             currentCount = currentCount,
@@ -200,7 +200,7 @@ class InventoryViewModel @Inject constructor(
                 onStart = { _registerState.value = UiState.Loading },
                 onError = { it.logHttpError("registerInventory") },
                 apiCall = {
-                    inventoryUseCases.inventoryRegisterUseCase.invoke(
+                    inventoryUseCases.registerInventoryUseCase(
                         inventoryCreateRequest = inventoryCreateRequest,
                         image = imagePart
                     )

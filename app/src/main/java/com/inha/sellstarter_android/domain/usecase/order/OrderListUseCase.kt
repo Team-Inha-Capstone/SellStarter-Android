@@ -4,14 +4,14 @@ import com.inha.sellstarter_android.domain.model.OrderListPage
 import com.inha.sellstarter_android.domain.repository.OrderRepository
 import javax.inject.Inject
 
-class FetchOrderConfirmListUseCase @Inject constructor(
+class LoadOrderConfirmListUseCase @Inject constructor(
     private val repository: OrderRepository
 ) {
     suspend operator fun invoke(page: Int, size: Int): Result<OrderListPage> =
         repository.loadOrderConfirmList(page = page, size = size)
 }
 
-class FetchCompletedPickingListUseCase @Inject constructor(
+class LoadCompletedPickingListUseCase @Inject constructor(
     private val repository: OrderRepository
 ) {
     suspend operator fun invoke(page: Int, size: Int): Result<OrderListPage> =

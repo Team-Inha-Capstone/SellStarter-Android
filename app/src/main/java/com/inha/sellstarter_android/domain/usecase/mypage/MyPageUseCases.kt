@@ -1,8 +1,8 @@
 package com.inha.sellstarter_android.domain.usecase.mypage
 
 data class MyPageUseCases(
-    val userApiUseCase: UserApiUseCase,
-    val userApiUpdateUseCase: UserApiUpdateUseCase,
-    val userApiDeleteUseCase: UserApiDeleteUseCase,
-    val userInfoUseCase: MyPageUserInfoUseCase
+    val registerStoreApiKeyUseCase: RegisterStoreApiKeyUseCase,
+    val updateStoreApiKeyUseCase: UpdateStoreApiKeyUseCase,
+    val removeStoreApiKeyUseCase: RemoveStoreApiKeyUseCase,
+    val loadUserDetailUseCase: LoadUserDetailUseCase
 )

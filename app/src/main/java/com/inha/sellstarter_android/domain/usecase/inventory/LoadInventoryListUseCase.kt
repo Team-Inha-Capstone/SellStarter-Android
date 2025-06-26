@@ -4,20 +4,20 @@ import com.inha.sellstarter_android.domain.model.InventoryListPage
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import javax.inject.Inject
 
-class InventorySearchUseCase @Inject constructor(
+class LoadInventoryListUseCase @Inject constructor(
     private val inventoryRepository: InventoryRepository
 ) {
-    suspend fun invoke(
-        search: String,
-        status: Boolean,
+    suspend operator fun invoke(
+        search: String?,
+        status: Boolean = true,
         page: Int,
-        size: Int
+        size: Int,
     ): Result<InventoryListPage> {
-        return inventoryRepository.searchInventories(
-            search = search,
-            status = status,
-            page = page,
-            size = size
+        return inventoryRepository.loadInventoryList(
+            search,
+            status,
+            page,
+            size
         )
     }
 }

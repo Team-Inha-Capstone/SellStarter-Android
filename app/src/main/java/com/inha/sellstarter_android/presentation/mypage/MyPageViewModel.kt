@@ -46,7 +46,7 @@ class MyPageViewModel @Inject constructor(
             _userInfoState.value = safeApiCall(
                 onStart = { _userInfoState.value = UiState.Loading },
                 onError = { it.logHttpError("getUserInfo") },
-                apiCall = { myPageUseCases.userInfoUseCase.invoke() }
+                apiCall = { myPageUseCases.loadUserDetailUseCase()}
             )
         }
     }
@@ -57,7 +57,7 @@ class MyPageViewModel @Inject constructor(
                 onStart = { _createApiKeyState.value = UiState.Loading },
                 onError = { it.logHttpError("createApiKey") },
                 apiCall = {
-                    myPageUseCases.userApiUseCase.invoke(request).also { getUserInfo() }
+                    myPageUseCases.registerStoreApiKeyUseCase(request).also { getUserInfo() }
                 }
             )
         }
@@ -69,7 +69,7 @@ class MyPageViewModel @Inject constructor(
                 onStart = { _updateApiKeyState.value = UiState.Loading },
                 onError = { it.logHttpError("updateApiKey") },
                 apiCall = {
-                    myPageUseCases.userApiUpdateUseCase.invoke(request).also { getUserInfo() }
+                    myPageUseCases.updateStoreApiKeyUseCase(request).also { getUserInfo() }
                 }
             )
         }
@@ -81,7 +81,7 @@ class MyPageViewModel @Inject constructor(
                 onStart = { _deleteApiKeyState.value = UiState.Loading },
                 onError = { it.logHttpError("deleteApiKey") },
                 apiCall = {
-                    myPageUseCases.userApiDeleteUseCase.invoke(request).also { getUserInfo() }
+                    myPageUseCases.removeStoreApiKeyUseCase(request).also { getUserInfo() }
                 }
             )
         }
