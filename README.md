@@ -32,7 +32,7 @@
 | **Networking**                           | Retrofit, OkHttp                                            |
 | **DI & Serialization & State**           | Hilt, Kotlin Serialization, UiState                         |
 | **Concurrency & Streams**                | Coroutine, Flow                                             |
-| **Imaging, Barcode & Charting**          | Coil (Image), Zxing (Barcode), Vico (Graph)                 |
+| **Imaging, Barcode & Charting**          | Coil (Image), Zxing (Barcode), Vico (Graph), Lottie (Animation)   |
 | **Notification**          | FCM (Firebase Cloud Messaging)                 |
 
 <div id="3"></div>
