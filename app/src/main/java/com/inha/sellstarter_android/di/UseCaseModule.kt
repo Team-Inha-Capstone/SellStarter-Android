@@ -6,36 +6,36 @@ import com.inha.sellstarter_android.domain.repository.HomeRepository
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import com.inha.sellstarter_android.domain.repository.MyPageRepository
 import com.inha.sellstarter_android.domain.repository.OrderRepository
-import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotEndUseCase
+import com.inha.sellstarter_android.domain.usecase.chatbot.EndChatUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotMessageUseCase
-import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotStartUseCase
+import com.inha.sellstarter_android.domain.usecase.chatbot.StartChatUseCase
 import com.inha.sellstarter_android.domain.usecase.chatbot.ChatbotUseCases
 import com.inha.sellstarter_android.domain.usecase.dataanalysis.DataAnalysisUseCases
-import com.inha.sellstarter_android.domain.usecase.dataanalysis.DataReportUseCase
-import com.inha.sellstarter_android.domain.usecase.dataanalysis.InventoryFlowGraphUseCase
-import com.inha.sellstarter_android.domain.usecase.home.HomeInfoUseCase
+import com.inha.sellstarter_android.domain.usecase.dataanalysis.LoadDataReportUseCase
+import com.inha.sellstarter_android.domain.usecase.dataanalysis.LoadInventoryFlowGraphUseCase
+import com.inha.sellstarter_android.domain.usecase.home.LoadHomeDashboardUseCase
 import com.inha.sellstarter_android.domain.usecase.home.HomeUseCases
-import com.inha.sellstarter_android.domain.usecase.home.WeeklySalesUseCase
-import com.inha.sellstarter_android.domain.usecase.home.YearlySalesUseCase
-import com.inha.sellstarter_android.domain.usecase.inventory.InventoryDetailUseCase
-import com.inha.sellstarter_android.domain.usecase.inventory.InventoryEditCountUseCase
-import com.inha.sellstarter_android.domain.usecase.inventory.InventoryListUseCase
-import com.inha.sellstarter_android.domain.usecase.inventory.InventoryRegisterUseCase
-import com.inha.sellstarter_android.domain.usecase.inventory.InventorySearchUseCase
+import com.inha.sellstarter_android.domain.usecase.home.LoadWeeklySalesUseCase
+import com.inha.sellstarter_android.domain.usecase.home.LoadYearlySalesUseCase
+import com.inha.sellstarter_android.domain.usecase.inventory.LoadInventoryDetailUseCase
+import com.inha.sellstarter_android.domain.usecase.inventory.UpdateInventoryCountUseCase
+import com.inha.sellstarter_android.domain.usecase.inventory.LoadInventoryListUseCase
+import com.inha.sellstarter_android.domain.usecase.inventory.RegisterInventoryItemUseCase
+import com.inha.sellstarter_android.domain.usecase.inventory.SearchInventoriesUseCase
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryUseCases
 import com.inha.sellstarter_android.domain.usecase.mypage.MyPageUseCases
-import com.inha.sellstarter_android.domain.usecase.mypage.MyPageUserInfoUseCase
-import com.inha.sellstarter_android.domain.usecase.mypage.UserApiDeleteUseCase
-import com.inha.sellstarter_android.domain.usecase.mypage.UserApiUpdateUseCase
-import com.inha.sellstarter_android.domain.usecase.mypage.UserApiUseCase
+import com.inha.sellstarter_android.domain.usecase.mypage.LoadUserDetailUseCase
+import com.inha.sellstarter_android.domain.usecase.mypage.RegisterStoreApiKeyUseCase
+import com.inha.sellstarter_android.domain.usecase.mypage.RemoveStoreApiKeyUseCase
+import com.inha.sellstarter_android.domain.usecase.mypage.UpdateStoreApiKeyUseCase
 import com.inha.sellstarter_android.domain.usecase.order.CancelOrderUseCase
 import com.inha.sellstarter_android.domain.usecase.order.CompleteOrderPickingsUseCase
 import com.inha.sellstarter_android.domain.usecase.order.CompleteSinglePickingUseCase
-import com.inha.sellstarter_android.domain.usecase.order.ConfirmOrderShipmentUseCase
-import com.inha.sellstarter_android.domain.usecase.order.FetchCompletedPickingListUseCase
-import com.inha.sellstarter_android.domain.usecase.order.FetchOrderConfirmListUseCase
-import com.inha.sellstarter_android.domain.usecase.order.FetchOrderConfirmationDetailUseCase
-import com.inha.sellstarter_android.domain.usecase.order.IsPickingAvailableUseCase
+import com.inha.sellstarter_android.domain.usecase.order.ShipOrderUseCase
+import com.inha.sellstarter_android.domain.usecase.order.LoadCompletedPickingListUseCase
+import com.inha.sellstarter_android.domain.usecase.order.LoadOrderConfirmListUseCase
+import com.inha.sellstarter_android.domain.usecase.order.LoadOrderConfirmationDetailUseCase
+import com.inha.sellstarter_android.domain.usecase.order.CheckPickingAvailableUseCase
 import com.inha.sellstarter_android.domain.usecase.order.OrderUseCases
 import dagger.Module
 import dagger.Provides
@@ -53,10 +53,10 @@ object UseCaseModule {
         myPageRepository: MyPageRepository
     ): MyPageUseCases {
         return MyPageUseCases(
-            userApiUseCase = UserApiUseCase(myPageRepository),
-            userApiUpdateUseCase = UserApiUpdateUseCase(myPageRepository),
-            userApiDeleteUseCase = UserApiDeleteUseCase(myPageRepository),
-            userInfoUseCase = MyPageUserInfoUseCase(myPageRepository)
+            registerStoreApiKeyUseCase = RegisterStoreApiKeyUseCase(myPageRepository),
+            updateStoreApiKeyUseCase = UpdateStoreApiKeyUseCase(myPageRepository),
+            removeStoreApiKeyUseCase = RemoveStoreApiKeyUseCase(myPageRepository),
+            loadUserDetailUseCase = LoadUserDetailUseCase(myPageRepository)
         )
     }
 
@@ -66,9 +66,9 @@ object UseCaseModule {
         chatbotRepository: ChatbotRepository
     ): ChatbotUseCases {
         return ChatbotUseCases(
-            chatStartUseCase = ChatbotStartUseCase(chatbotRepository),
-            chatbotMessageUseCase = ChatbotMessageUseCase(chatbotRepository),
-            chatEndUseCase = ChatbotEndUseCase(chatbotRepository)
+            startChatSession = StartChatUseCase(chatbotRepository),
+            sendChatMessage = ChatbotMessageUseCase(chatbotRepository),
+            endChatSession = EndChatUseCase(chatbotRepository)
         )
     }
 
@@ -78,11 +78,11 @@ object UseCaseModule {
         inventoryRepository: InventoryRepository
     ): InventoryUseCases {
         return InventoryUseCases(
-            inventoryListUseCase = InventoryListUseCase(inventoryRepository),
-            inventoryDetailUseCase = InventoryDetailUseCase(inventoryRepository),
-            inventorySearchUseCase = InventorySearchUseCase(inventoryRepository),
-            inventoryEditCountUseCase = InventoryEditCountUseCase(inventoryRepository),
-            inventoryRegisterUseCase = InventoryRegisterUseCase(inventoryRepository),
+            loadInventoryListUseCase = LoadInventoryListUseCase(inventoryRepository),
+            loadInventoryDetailUseCase = LoadInventoryDetailUseCase(inventoryRepository),
+            searchInventoriesUseCase = SearchInventoriesUseCase(inventoryRepository),
+            updateInventoryCountUseCase = UpdateInventoryCountUseCase(inventoryRepository),
+            registerInventoryUseCase = RegisterInventoryItemUseCase(inventoryRepository),
         )
     }
 
@@ -92,15 +92,15 @@ object UseCaseModule {
         orderRepository: OrderRepository
     ): OrderUseCases {
         return OrderUseCases(
-            fetchOrderConfirmListUseCase = FetchOrderConfirmListUseCase(orderRepository),
-            fetchOrderConfirmationDetailUseCase = FetchOrderConfirmationDetailUseCase(
+            loadOrderConfirmListUseCase = LoadOrderConfirmListUseCase(orderRepository),
+            loadOrderConfirmationDetailUseCase = LoadOrderConfirmationDetailUseCase(
                 orderRepository
             ),
-            isPickingAvailableUseCase = IsPickingAvailableUseCase(orderRepository),
+            checkPickingAvailableUseCase = CheckPickingAvailableUseCase(orderRepository),
             completeOrderPickingsUseCase = CompleteOrderPickingsUseCase(orderRepository),
             completeSinglePickingUseCase = CompleteSinglePickingUseCase(orderRepository),
-            fetchCompletedPickingListUseCase = FetchCompletedPickingListUseCase(orderRepository),
-            confirmOrderShipmentUseCase = ConfirmOrderShipmentUseCase(orderRepository),
+            loadCompletedPickingListUseCase = LoadCompletedPickingListUseCase(orderRepository),
+            shipOrderUseCase = ShipOrderUseCase(orderRepository),
             cancelOrderUseCase = CancelOrderUseCase(orderRepository)
         )
     }
@@ -111,8 +111,8 @@ object UseCaseModule {
         dataAnalysisRepository: DataAnalysisRepository
     ): DataAnalysisUseCases {
         return DataAnalysisUseCases(
-            inventoryFlowGraphUseCase = InventoryFlowGraphUseCase(dataAnalysisRepository),
-            dataReportUseCase = DataReportUseCase(dataAnalysisRepository)
+            loadInventoryFlowGraph = LoadInventoryFlowGraphUseCase(dataAnalysisRepository),
+            loadDataReport = LoadDataReportUseCase(dataAnalysisRepository)
         )
     }
 
@@ -122,9 +122,9 @@ object UseCaseModule {
         homeRepository: HomeRepository
     ): HomeUseCases {
         return HomeUseCases(
-            homeInfoUseCase = HomeInfoUseCase(homeRepository),
-            weeklySalesUseCase = WeeklySalesUseCase(homeRepository),
-            yearlySalesUseCase = YearlySalesUseCase(homeRepository)
+            loadHomeDashboard =  LoadHomeDashboardUseCase(homeRepository),
+            loadWeeklySales = LoadWeeklySalesUseCase(homeRepository),
+            loadAnnualSales = LoadYearlySalesUseCase(homeRepository)
         )
     }
 

@@ -4,12 +4,12 @@ import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import javax.inject.Inject
 
-class InventoryDetailUseCase @Inject constructor(
+class LoadInventoryDetailUseCase @Inject constructor(
     private val inventoryRepository: InventoryRepository
 ) {
-    suspend fun invoke(
+    suspend operator fun invoke(
         barcodeId : String
     ) : Result<Inventory> {
-        return inventoryRepository.getInventoryDetail(barcodeId)
+        return inventoryRepository.loadInventoryDetail(barcodeId)
     }
 }

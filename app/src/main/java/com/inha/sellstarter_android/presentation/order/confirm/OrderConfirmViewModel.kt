@@ -1,14 +1,12 @@
 package com.inha.sellstarter_android.presentation.order.confirm
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.inha.sellstarter_android.domain.model.OrderListPage
 import com.inha.sellstarter_android.domain.model.OrderSummary
 import com.inha.sellstarter_android.domain.usecase.order.CompleteOrderPickingsUseCase
-import com.inha.sellstarter_android.domain.usecase.order.FetchCompletedPickingListUseCase
-import com.inha.sellstarter_android.domain.usecase.order.FetchOrderConfirmListUseCase
-import com.inha.sellstarter_android.domain.usecase.order.IsPickingAvailableUseCase
+import com.inha.sellstarter_android.domain.usecase.order.LoadCompletedPickingListUseCase
+import com.inha.sellstarter_android.domain.usecase.order.LoadOrderConfirmListUseCase
 import com.inha.sellstarter_android.util.base.UiState
 import com.inha.sellstarter_android.util.base.safeApiCall
 import com.inha.sellstarter_android.util.extension.logHttpError
@@ -21,8 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OrderConfirmViewModel @Inject constructor(
-    private val fetchNewOrders: FetchOrderConfirmListUseCase,
-    private val fetchDoneOrders: FetchCompletedPickingListUseCase,
+    private val fetchNewOrders: LoadOrderConfirmListUseCase,
+    private val fetchDoneOrders: LoadCompletedPickingListUseCase,
     private val completePickings: CompleteOrderPickingsUseCase
 ) : ViewModel() {
 

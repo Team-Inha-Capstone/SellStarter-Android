@@ -4,10 +4,10 @@ import com.inha.sellstarter_android.domain.repository.ChatbotRepository
 import com.inha.sellstarter_android.domain.model.ChatMessage
 import javax.inject.Inject
 
-class ChatbotEndUseCase @Inject constructor(
+class StartChatUseCase @Inject constructor(
     private val chatbotRepository: ChatbotRepository
 ) {
-    suspend fun invoke(): Result<ChatMessage> {
-        return chatbotRepository.postChatEnd()
+    suspend operator fun invoke(): Result<ChatMessage> {
+        return chatbotRepository.startChatSession()
     }
 }

@@ -8,8 +8,8 @@ import com.inha.sellstarter_android.domain.model.OrderDetailInfo
 import com.inha.sellstarter_android.domain.usecase.order.CancelOrderUseCase
 import com.inha.sellstarter_android.domain.usecase.order.CompleteOrderPickingsUseCase
 import com.inha.sellstarter_android.domain.usecase.order.CompleteSinglePickingUseCase
-import com.inha.sellstarter_android.domain.usecase.order.ConfirmOrderShipmentUseCase
-import com.inha.sellstarter_android.domain.usecase.order.FetchOrderConfirmationDetailUseCase
+import com.inha.sellstarter_android.domain.usecase.order.ShipOrderUseCase
+import com.inha.sellstarter_android.domain.usecase.order.LoadOrderConfirmationDetailUseCase
 import com.inha.sellstarter_android.util.base.UiState
 import com.inha.sellstarter_android.util.base.safeApiCall
 import com.inha.sellstarter_android.util.extension.logHttpError
@@ -21,10 +21,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OrderDetailViewModel @Inject constructor(
-    private val orderConfirmationDetailUseCase: FetchOrderConfirmationDetailUseCase,
+    private val orderConfirmationDetailUseCase: LoadOrderConfirmationDetailUseCase,
     private val cancelOrderUseCase: CancelOrderUseCase,
     private val singlePickingUseCase: CompleteSinglePickingUseCase,
-    private val confirmOrderShipmentUseCase: ConfirmOrderShipmentUseCase,
+    private val shipOrderUseCase: ShipOrderUseCase,
     private val completeOrderPickingsUseCase: CompleteOrderPickingsUseCase
 ) : ViewModel() {
 
@@ -86,7 +86,7 @@ class OrderDetailViewModel @Inject constructor(
             _confirmShipmentState.value = safeApiCall(
                 onStart = { _confirmShipmentState.value = UiState.Loading },
                 onError = { it.logHttpError("confirmOrderShipment") },
-                apiCall = { confirmOrderShipmentUseCase(orderId) }
+                apiCall = { shipOrderUseCase(orderId) }
             )
             Log.e("OrderDetailVM", "_confirmShipmentState = ${_confirmShipmentState.value}")
         }

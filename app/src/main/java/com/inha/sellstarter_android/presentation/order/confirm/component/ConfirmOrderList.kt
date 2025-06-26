@@ -27,7 +27,6 @@ fun OrderList(
             OrderListItem(
                 order = order,
                 isSelected = selectedIds.contains(order.orderId),
-                onCheckedChange = { onItemSelect(order.orderId) },
                 currentTabIndex = currentTabIndex,
                 onClick = { onOrderItemClick(order.orderId) }
             )

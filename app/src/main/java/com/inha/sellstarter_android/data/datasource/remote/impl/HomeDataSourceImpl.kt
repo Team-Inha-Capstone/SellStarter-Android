@@ -12,19 +12,19 @@ class HomeDataSourceImpl @Inject constructor(
     private val homeService: HomeService
 ) : HomeDataSource {
 
-    override suspend fun getHomeInfo(): BaseResponseDto<HomeInfoResponseDto> {
-        return homeService.getHomeInfo()
+    override suspend fun loadHomeDashboard(): BaseResponseDto<HomeInfoResponseDto> {
+        return homeService.loadHomeDashboard()
     }
 
-    override suspend fun getWeeklySalesInfo(
+    override suspend fun loadWeeklySalesInfo(
         currentDate: String
     ): BaseResponseDto<WeeklySalesResponseDto> {
-        return homeService.getWeeklySalesInfo(currentDate = currentDate)
+        return homeService.loadWeeklySalesInfo(currentDate = currentDate)
     }
 
-    override suspend fun getYearlySalesInfo(
+    override suspend fun loadYearlySalesInfo(
         currentDate: String
     ): BaseResponseDto<YearlySalesResponseDto> {
-        return homeService.getYearlySalesInfo(currentDate = currentDate)
+        return homeService.loadYearlySalesInfo(currentDate = currentDate)
     }
 }

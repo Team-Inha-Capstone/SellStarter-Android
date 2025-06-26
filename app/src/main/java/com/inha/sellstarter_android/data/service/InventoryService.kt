@@ -23,7 +23,7 @@ interface InventoryService {
 
     @Multipart
     @POST("$API/$CORE/$INVENTORY/{userId}")
-    suspend fun postInventoryCreate(
+    suspend fun registerInventoryItem(
         @Path("userId") userId: Int = 4,
         @Part("data") inventoryCreateRequest: InventoryCreateRequestDto,
         @Part image: MultipartBody.Part?,
@@ -31,7 +31,7 @@ interface InventoryService {
 
 
     @GET("$API/$CORE/$INVENTORY/{userId}/$LIST")
-    suspend fun getInventoryList(
+    suspend fun loadInventoryList(
         @Path("userId") userId: Int = 4,
         @Query("searchStr") search: String?,
         @Query("status") status: Boolean,
@@ -40,20 +40,20 @@ interface InventoryService {
     ): BaseResponseDto<InventoryListResponseDto>
 
     @GET("$API/$CORE/$INVENTORY/{userId}/{barcodeId}")
-    suspend fun getInventoryDetail(
+    suspend fun loadInventoryDetail(
         @Path("userId") userId: Int = 4,
         @Path("barcodeId") barcodeId: String,
     ): BaseResponseDto<InventoryDetailResponseDto>
 
     @POST("$API/$CORE/$INVENTORY/{userId}/{barcodeId}/$COUNT")
-    suspend fun postInventoryCount(
+    suspend fun updateInventoryCount(
         @Path("userId") userId: Int = 4,
         @Path("barcodeId") barcodeId: String,
         @Body inventoryCountRequest: InventoryCountRequestDto
     ): BaseResponseDto<InventoryDetailResponseDto>
 
     @GET("$API/$CORE/$INVENTORY/{userId}/$LIST")
-    suspend fun getInventorySearch(
+    suspend fun searchInventories(
         @Path("userId") userId: Int = 4,
         @Query("searchStr") search: String? = null,
         @Query("status") status: Boolean,

@@ -13,18 +13,18 @@ import retrofit2.http.Query
 
 interface HomeService {
     @GET("$API/$APP/$HOME/{userId}")
-    suspend fun getHomeInfo(
+    suspend fun loadHomeDashboard(
         @Path("userId") userId: Int = 4,
     ): BaseResponseDto<HomeInfoResponseDto>
 
     @GET("$API/$APP/$HOME/{userId}/weekly-sales")
-    suspend fun getWeeklySalesInfo(
+    suspend fun loadWeeklySalesInfo(
         @Path("userId") userId: Int = 4,
         @Query("currentDate") currentDate: String
     ): BaseResponseDto<WeeklySalesResponseDto>
 
     @GET("$API/$APP/$HOME/{userId}/yearly-sales")
-    suspend fun getYearlySalesInfo(
+    suspend fun loadYearlySalesInfo(
         @Path("userId") userId: Int = 4,
         @Query("currentDate") currentDate: String
     ): BaseResponseDto<YearlySalesResponseDto>

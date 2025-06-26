@@ -8,7 +8,7 @@ import javax.inject.Inject
 class ChatbotMessageUseCase @Inject constructor(
     private val chatbotRepository: ChatbotRepository
 ) {
-    suspend fun invoke(chatbotMessageRequestDto: ChatbotMessageRequestDto): Result<ChatMessage> {
-        return chatbotRepository.postChatMessage(chatbotMessageRequestDto)
+    suspend operator fun invoke(chatbotMessageRequestDto: ChatbotMessageRequestDto): Result<ChatMessage> {
+        return chatbotRepository.sendChatMessage(chatbotMessageRequestDto)
     }
 }

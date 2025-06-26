@@ -4,35 +4,34 @@ import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountR
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
 import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.domain.model.InventoryListPage
-import com.inha.sellstarter_android.domain.model.InventorySummary
 import okhttp3.MultipartBody
 
 interface InventoryRepository {
-    suspend fun getInventoryList(
+    suspend fun registerInventoryItem(
+        inventoryCreateRequest: InventoryCreateRequestDto,
+        image: MultipartBody.Part?
+    ): Result<Inventory>
+
+    suspend fun loadInventoryList(
         search: String?,
         status: Boolean,
         page: Int,
         size: Int
     ): Result<InventoryListPage>
 
-    suspend fun getInventoryDetail(
+    suspend fun loadInventoryDetail(
         barcodeId: String
     ): Result<Inventory>
 
-    suspend fun postInventoryCount(
+    suspend fun updateInventoryCount(
         barcodeId: String,
         inventoryCountRequest: InventoryCountRequestDto
     ): Result<Inventory>
 
-    suspend fun getInventorySearch(
+    suspend fun searchInventories(
         search: String,
         status: Boolean,
         page: Int,
         size: Int
     ): Result<InventoryListPage>
-
-    suspend fun postInventoryCreate(
-        inventoryCreateRequest: InventoryCreateRequestDto,
-        image: MultipartBody.Part?
-    ): Result<Inventory>
 }

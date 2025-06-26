@@ -13,27 +13,27 @@ class MyPageRepositoryImpl @Inject
 constructor(
     private val myPageDataSource: MyPageDataSource,
 ) : MyPageRepository {
-    override suspend fun getUserDetail(): Result<UserInfo> {
+    override suspend fun loadUserDetail(): Result<UserInfo> {
         return runCatching {
-            myPageDataSource.getUserDetail().data.toDomain()
+            myPageDataSource.loadUserDetail().data.toDomain()
         }
     }
 
-    override suspend fun deleteUserApi(userApiDeleteRequestDto: UserApiDeleteRequestDto): Result<UserInfo> {
+    override suspend fun removeStoreApiKey(userApiDeleteRequestDto: UserApiDeleteRequestDto): Result<UserInfo> {
         return runCatching {
-            myPageDataSource.deleteUserApi(userApiDeleteRequestDto).data.toDomain()
+            myPageDataSource.removeUserApi(userApiDeleteRequestDto).data.toDomain()
         }
     }
 
-    override suspend fun updateUserApi(userApiUpdateRequest: UserApiUpdateRequest): Result<UserInfo> {
+    override suspend fun updateStoreApiKey(userApiUpdateRequest: UserApiUpdateRequest): Result<UserInfo> {
         return runCatching {
             myPageDataSource.updateUserApi(userApiUpdateRequest).data.toDomain()
         }
     }
 
-    override suspend fun createUserApi(userApiRequestDto: UserApiRequestDto): Result<UserInfo> {
+    override suspend fun registerStoreApiKey(userApiRequestDto: UserApiRequestDto): Result<UserInfo> {
         return runCatching {
-            myPageDataSource.postUserApi(userApiRequestDto).data.toDomain()
+            myPageDataSource.registerUserApi(userApiRequestDto).data.toDomain()
         }
     }
 }

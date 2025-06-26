@@ -6,8 +6,8 @@ import com.inha.sellstarter_android.data.model.request.mypage.UserApiUpdateReque
 import com.inha.sellstarter_android.domain.model.UserInfo
 
 interface MyPageRepository {
-    suspend fun getUserDetail(): Result<UserInfo>
-    suspend fun deleteUserApi(userApiDeleteRequestDto: UserApiDeleteRequestDto): Result<UserInfo>
-    suspend fun updateUserApi(userApiUpdateRequest: UserApiUpdateRequest): Result<UserInfo>
-    suspend fun createUserApi(userApiRequestDto: UserApiRequestDto): Result<UserInfo>
+    suspend fun loadUserDetail(): Result<UserInfo>
+    suspend fun registerStoreApiKey(userApiRequestDto: UserApiRequestDto): Result<UserInfo>
+    suspend fun removeStoreApiKey(userApiDeleteRequestDto: UserApiDeleteRequestDto): Result<UserInfo>
+    suspend fun updateStoreApiKey(userApiUpdateRequest: UserApiUpdateRequest): Result<UserInfo>
 }

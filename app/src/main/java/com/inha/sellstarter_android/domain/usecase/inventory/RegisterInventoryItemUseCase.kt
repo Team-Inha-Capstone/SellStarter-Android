@@ -6,14 +6,14 @@ import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import okhttp3.MultipartBody
 import javax.inject.Inject
 
-class InventoryRegisterUseCase @Inject constructor(
+class RegisterInventoryItemUseCase @Inject constructor(
     private val inventoryRepository: InventoryRepository
 ) {
-    suspend fun invoke(
+    suspend operator fun invoke(
         image: MultipartBody.Part?,
         inventoryCreateRequest: InventoryCreateRequestDto
     ): Result<Inventory> {
-        return inventoryRepository.postInventoryCreate(
+        return inventoryRepository.registerInventoryItem(
             inventoryCreateRequest = inventoryCreateRequest,
             image = image
         )

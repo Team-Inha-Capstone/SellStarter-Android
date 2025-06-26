@@ -6,7 +6,6 @@ import com.inha.sellstarter_android.data.model.request.mypage.UserApiRequestDto
 import com.inha.sellstarter_android.data.model.request.mypage.UserApiUpdateRequest
 import com.inha.sellstarter_android.data.model.response.mypage.UserDetailResponseDto
 import com.inha.sellstarter_android.data.service.MyPageService
-import com.inha.sellstarter_android.domain.model.UserInfo
 import com.inha.sellstarter_android.util.base.BaseResponseDto
 import javax.inject.Inject
 
@@ -14,19 +13,19 @@ import javax.inject.Inject
 class MyPageDataSourceImpl @Inject constructor(
     private val myPageService: MyPageService,
 ) : MyPageDataSource {
-    override suspend fun getUserDetail(): BaseResponseDto<UserDetailResponseDto> {
-        return myPageService.getUserDetail(userId = 4)
+    override suspend fun loadUserDetail(): BaseResponseDto<UserDetailResponseDto> {
+        return myPageService.loadUserDetail(userId = 4)
     }
 
-    override suspend fun postUserApi(userApiRequestDto: UserApiRequestDto): BaseResponseDto<UserDetailResponseDto> {
-        return myPageService.createUserApi(userId = 4, userApiRequestDto)
+    override suspend fun registerUserApi(userApiRequestDto: UserApiRequestDto): BaseResponseDto<UserDetailResponseDto> {
+        return myPageService.registerStoreApiKey(userId = 4, userApiRequestDto)
     }
 
-    override suspend fun deleteUserApi(userApiDeleteRequestDto: UserApiDeleteRequestDto): BaseResponseDto<UserDetailResponseDto> {
-        return myPageService.deleteUserApi(userId = 4, userApiDeleteRequestDto)
+    override suspend fun removeUserApi(userApiDeleteRequestDto: UserApiDeleteRequestDto): BaseResponseDto<UserDetailResponseDto> {
+        return myPageService.removeStoreApiKey(userId = 4, userApiDeleteRequestDto)
     }
 
     override suspend fun updateUserApi(userApiUpdateRequest: UserApiUpdateRequest): BaseResponseDto<UserDetailResponseDto> {
-        return myPageService.updateUserApi(userId = 4, userApiUpdateRequest)
+        return myPageService.updateStoreApiKey(userId = 4, userApiUpdateRequest)
     }
 }

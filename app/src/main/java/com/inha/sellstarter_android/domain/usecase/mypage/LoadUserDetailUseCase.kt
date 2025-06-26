@@ -5,12 +5,10 @@ import com.inha.sellstarter_android.domain.repository.MyPageRepository
 import javax.inject.Inject
 
 // 하나의 비즈니스 목적을 위한 단위 동작
-class MyPageUserInfoUseCase @Inject constructor(
+class LoadUserDetailUseCase @Inject constructor(
     private val myPageRepository: MyPageRepository,
 ) {
-    suspend fun invoke(): Result<UserInfo> {
-        return myPageRepository.getUserDetail()
+    suspend operator fun invoke(): Result<UserInfo> {
+        return myPageRepository.loadUserDetail()
     }
 }
-
-//여러 유즈케이스를 하나로 묶은 유즈케이스 존재 -> 여러 유즈케이스 나눔.

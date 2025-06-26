@@ -4,7 +4,7 @@ import com.inha.sellstarter_android.data.model.request.chatbot.ChatbotMessageReq
 import com.inha.sellstarter_android.domain.model.ChatMessage
 
 interface ChatbotRepository {
-    suspend fun postChatStart(): Result<ChatMessage>
-    suspend fun postChatMessage(chatbotMessageRequestDto: ChatbotMessageRequestDto): Result<ChatMessage>
-    suspend fun postChatEnd(): Result<ChatMessage>
+    suspend fun startChatSession(): Result<ChatMessage>
+    suspend fun sendChatMessage(chatbotMessageRequestDto: ChatbotMessageRequestDto): Result<ChatMessage>
+    suspend fun endChatSession(): Result<ChatMessage>
 }

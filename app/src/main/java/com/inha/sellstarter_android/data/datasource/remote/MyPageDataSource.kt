@@ -7,8 +7,8 @@ import com.inha.sellstarter_android.data.model.response.mypage.UserDetailRespons
 import com.inha.sellstarter_android.util.base.BaseResponseDto
 
 interface MyPageDataSource {
-    suspend fun getUserDetail(): BaseResponseDto<UserDetailResponseDto>
-    suspend fun postUserApi(userApiRequestDto: UserApiRequestDto): BaseResponseDto<UserDetailResponseDto>
-    suspend fun deleteUserApi(userApiDeleteRequestDto: UserApiDeleteRequestDto): BaseResponseDto<UserDetailResponseDto>
+    suspend fun loadUserDetail(): BaseResponseDto<UserDetailResponseDto>
+    suspend fun registerUserApi(userApiRequestDto: UserApiRequestDto): BaseResponseDto<UserDetailResponseDto>
+    suspend fun removeUserApi(userApiDeleteRequestDto: UserApiDeleteRequestDto): BaseResponseDto<UserDetailResponseDto>
     suspend fun updateUserApi(userApiUpdateRequest: UserApiUpdateRequest): BaseResponseDto<UserDetailResponseDto>
 }

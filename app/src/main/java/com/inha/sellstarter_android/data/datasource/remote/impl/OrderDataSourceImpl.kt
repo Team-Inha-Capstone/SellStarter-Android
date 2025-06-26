@@ -12,24 +12,24 @@ class OrderDataSourceImpl @Inject constructor(
     private val orderService: OrderService
 ) : OrderDataSource {
 
-    override suspend fun fetchOrderConfirmList(
+    override suspend fun loadOrderConfirmList(
         page: Int,
         size: Int
     ): OrderListResponseDto {
-        return orderService.fetchOrderConfirmList(
+        return orderService.loadOrderConfirmList(
             page = page,
             size = size
         ).data
     }
 
-    override suspend fun fetchOrderConfirmationDetail(orderId: String): OrderDetailResponseDto {
-        return orderService.fetchOrderConfirmationDetail(orderId = orderId).data
+    override suspend fun loadOrderConfirmationDetail(orderId: String): OrderDetailResponseDto {
+        return orderService.loadOrderConfirmationDetail(orderId = orderId).data
     }
 
-    override suspend fun isPickingAvailable(
+    override suspend fun checkPickingAvailable(
         orderId: String
     ): PickingAvailableResponseDto {
-        return orderService.isPickingAvailable(orderId = orderId).data
+        return orderService.checkPickingAvailable(orderId = orderId).data
     }
 
     override suspend fun completeOrderPickings(orderId: String) {
@@ -43,18 +43,18 @@ class OrderDataSourceImpl @Inject constructor(
         orderService.completeSinglePicking(orderId = orderId, request = request)
     }
 
-    override suspend fun fetchCompletedPickingList(
+    override suspend fun loadCompletedPickingList(
         page: Int,
         size: Int
     ): OrderListResponseDto {
-        return orderService.fetchCompletedPickingList(
+        return orderService.loadCompletedPickingList(
             page = page,
             size = size
         ).data
     }
 
-    override suspend fun confirmOrderShipment(orderId: String) {
-        orderService.confirmOrderShipment(orderId = orderId)
+    override suspend fun shipOrder(orderId: String) {
+        orderService.shipOrder(orderId = orderId)
     }
 
     override suspend fun cancelOrder(orderId: String) {
