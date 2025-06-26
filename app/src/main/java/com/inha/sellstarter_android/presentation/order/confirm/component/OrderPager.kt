@@ -93,12 +93,7 @@ fun OrderPager(
                         onSelectAll = { onSelectAll(state.data.orders) },
                         onOrderItemClick = onOrderItemClick,
                         extraBottomAction = {
-//                            PickingActionButtons(
-//                                isEnabled = selectedIds.isNotEmpty(),      // 하나라도 선택됐을 때만 활성화
-//                                currentTabIndex = 1,                              // 0→피킹완료용 텍스트 변경
-//                                onSelectAll = { onSelectAll(state.data.orders) },
-//                                onSubmit = { }
-//                            )
+
                         }
                     )
                 }
