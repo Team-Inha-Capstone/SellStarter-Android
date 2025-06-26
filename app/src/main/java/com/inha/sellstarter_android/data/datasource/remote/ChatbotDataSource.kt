@@ -6,7 +6,7 @@ import com.inha.sellstarter_android.data.model.response.chatbot.ChatbotResponseD
 import com.inha.sellstarter_android.util.base.BaseResponseDto
 
 interface ChatbotDataSource {
-    suspend fun postChatStart(): BaseResponseDto<ChatbotResponseDto>
-    suspend fun postChatMessage(chatbotMessageRequestDto: ChatbotMessageRequestDto): BaseResponseDto<ChatbotResponseDto>
-    suspend fun postChatEnd(): ChatbotEndResponseDto
+    suspend fun startChatSession(): BaseResponseDto<ChatbotResponseDto>
+    suspend fun sendChatMessage(chatbotMessageRequestDto: ChatbotMessageRequestDto): BaseResponseDto<ChatbotResponseDto>
+    suspend fun endChatSession(): ChatbotEndResponseDto
 }

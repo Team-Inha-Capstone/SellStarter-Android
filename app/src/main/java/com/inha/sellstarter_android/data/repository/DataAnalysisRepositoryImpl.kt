@@ -1,6 +1,5 @@
 package com.inha.sellstarter_android.data.repository
 
-import android.util.Log
 import com.inha.sellstarter_android.data.datasource.remote.DataAnalysisDataSource
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryFlowGraphRequestDto
 import com.inha.sellstarter_android.domain.repository.DataAnalysisRepository
@@ -11,14 +10,14 @@ class DataAnalysisRepositoryImpl @Inject constructor(
 ) : DataAnalysisRepository {
     override suspend fun loadInventoryFlowGraph(inventoryFlowGraphRequestDto: InventoryFlowGraphRequestDto): Result<String> {
         return runCatching {
-            dataAnalysisDataSource.getInventoryFlowGraph(inventoryFlowGraphRequestDto).data.url
+            dataAnalysisDataSource.loadInventoryFlowGraph(inventoryFlowGraphRequestDto).data.url
                 ?: ""
         }
     }
 
     override suspend fun loadAnalysisReport(): Result<String> {
         return runCatching {
-            dataAnalysisDataSource.fetchAnalysisReport().data.url
+            dataAnalysisDataSource.loadAnalysisReport().data.url
         }
     }
 }

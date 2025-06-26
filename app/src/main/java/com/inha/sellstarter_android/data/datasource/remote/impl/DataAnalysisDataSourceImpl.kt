@@ -11,13 +11,13 @@ import javax.inject.Inject
 class DataAnalysisDataSourceImpl @Inject constructor(
     private val dataAnalysisService: DataAnalysisService
 ) : DataAnalysisDataSource {
-    override suspend fun getInventoryFlowGraph(inventoryFlowGraphRequestDto: InventoryFlowGraphRequestDto): BaseResponseDto<InventoryFlowGraphResponseDto> {
+    override suspend fun loadInventoryFlowGraph(inventoryFlowGraphRequestDto: InventoryFlowGraphRequestDto): BaseResponseDto<InventoryFlowGraphResponseDto> {
         return dataAnalysisService.loadInventoryFlowGraph(
             inventoryFlowGraphRequest = inventoryFlowGraphRequestDto
         )
     }
 
-    override suspend fun fetchAnalysisReport(): BaseResponseDto<AnalysisReportResponseDto> {
+    override suspend fun loadAnalysisReport(): BaseResponseDto<AnalysisReportResponseDto> {
         return dataAnalysisService.loadDataAnalysisReport()
     }
 }

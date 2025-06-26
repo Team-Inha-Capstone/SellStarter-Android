@@ -13,19 +13,19 @@ class HomeRepositoryImpl @Inject constructor(
 ) : HomeRepository {
     override suspend fun loadHomeDashboard(): Result<HomeInfo> {
         return runCatching {
-            homeDataSource.getHomeInfo().data.toDomain()
+            homeDataSource.loadHomeDashboard().data.toDomain()
         }
     }
 
     override suspend fun loadWeeklySalesInfo(currentDate: String): Result<WeeklySales> {
         return runCatching {
-            homeDataSource.getWeeklySalesInfo(currentDate).data.toDomain()
+            homeDataSource.loadWeeklySalesInfo(currentDate).data.toDomain()
         }
     }
 
     override suspend fun loadYearlySalesInfo(currentDate: String): Result<YearlySales> {
         return runCatching {
-            homeDataSource.getYearlySalesInfo(currentDate).data.toDomain()
+            homeDataSource.loadYearlySalesInfo(currentDate).data.toDomain()
         }
     }
 }

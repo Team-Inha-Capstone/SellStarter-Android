@@ -6,7 +6,6 @@ import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountR
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
 import com.inha.sellstarter_android.domain.model.Inventory
 import com.inha.sellstarter_android.domain.model.InventoryListPage
-import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import okhttp3.MultipartBody
 import javax.inject.Inject
@@ -21,7 +20,7 @@ class InventoryRepositoryImpl @Inject constructor(
         size: Int
     ): Result<InventoryListPage> {
         return runCatching {
-            inventoryDataSource.getInventoryList(
+            inventoryDataSource.loadInventoryList(
                 search = search, status = status, page = page, size = size
             ).data.toDomain()
         }
@@ -29,7 +28,7 @@ class InventoryRepositoryImpl @Inject constructor(
 
     override suspend fun loadInventoryDetail(barcodeId: String): Result<Inventory> {
         return runCatching {
-            inventoryDataSource.getInventoryDetail(barcodeId = barcodeId).data.toDomain()
+            inventoryDataSource.loadInventoryDetail(barcodeId = barcodeId).data.toDomain()
         }
     }
 
@@ -38,7 +37,7 @@ class InventoryRepositoryImpl @Inject constructor(
         inventoryCountRequest: InventoryCountRequestDto
     ): Result<Inventory> {
         return runCatching {
-            inventoryDataSource.postInventoryCount(
+            inventoryDataSource.updateInventoryCount(
                 barcodeId,
                 inventoryCountRequest
             ).data.toDomain()
@@ -52,7 +51,7 @@ class InventoryRepositoryImpl @Inject constructor(
         size: Int
     ): Result<InventoryListPage> {
         return runCatching {
-            inventoryDataSource.getInventorySearch(
+            inventoryDataSource.searchInventories(
                 search = search, status = status, page = page, size = size
             ).data.toDomain()
         }
@@ -64,7 +63,7 @@ class InventoryRepositoryImpl @Inject constructor(
     ): Result<Inventory> {
 
         return runCatching {
-            inventoryDataSource.postInventoryCreate(
+            inventoryDataSource.registerInventoryItem(
                 image = image,
                 inventoryCreateRequestDto = inventoryCreateRequest
             ).data.toDomain()

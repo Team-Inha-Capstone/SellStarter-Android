@@ -12,16 +12,16 @@ import javax.inject.Inject
 class ChatbotDataSourceImpl @Inject constructor(
     private val chatbotService: ChatbotService
 ) : ChatbotDataSource {
-    override suspend fun postChatStart(): BaseResponseDto<ChatbotResponseDto> {
+    override suspend fun startChatSession(): BaseResponseDto<ChatbotResponseDto> {
         Log.e("hyeon", chatbotService.startChatSession().toString());
         return chatbotService.startChatSession()
     }
 
-    override suspend fun postChatMessage(chatbotMessageRequestDto: ChatbotMessageRequestDto): BaseResponseDto<ChatbotResponseDto> {
+    override suspend fun sendChatMessage(chatbotMessageRequestDto: ChatbotMessageRequestDto): BaseResponseDto<ChatbotResponseDto> {
         return chatbotService.sendChatMessage(chatbotMessageRequestDto = chatbotMessageRequestDto)
     }
 
-    override suspend fun postChatEnd(): ChatbotEndResponseDto {
+    override suspend fun endChatSession(): ChatbotEndResponseDto {
         return chatbotService.endChatSession()
     }
 }

@@ -13,15 +13,15 @@ import javax.inject.Inject
 class MyPageDataSourceImpl @Inject constructor(
     private val myPageService: MyPageService,
 ) : MyPageDataSource {
-    override suspend fun getUserDetail(): BaseResponseDto<UserDetailResponseDto> {
+    override suspend fun loadUserDetail(): BaseResponseDto<UserDetailResponseDto> {
         return myPageService.loadUserDetail(userId = 4)
     }
 
-    override suspend fun postUserApi(userApiRequestDto: UserApiRequestDto): BaseResponseDto<UserDetailResponseDto> {
+    override suspend fun registerUserApi(userApiRequestDto: UserApiRequestDto): BaseResponseDto<UserDetailResponseDto> {
         return myPageService.registerStoreApiKey(userId = 4, userApiRequestDto)
     }
 
-    override suspend fun deleteUserApi(userApiDeleteRequestDto: UserApiDeleteRequestDto): BaseResponseDto<UserDetailResponseDto> {
+    override suspend fun removeUserApi(userApiDeleteRequestDto: UserApiDeleteRequestDto): BaseResponseDto<UserDetailResponseDto> {
         return myPageService.removeStoreApiKey(userId = 4, userApiDeleteRequestDto)
     }
 

@@ -15,13 +15,13 @@ constructor(
 ) : MyPageRepository {
     override suspend fun loadUserDetail(): Result<UserInfo> {
         return runCatching {
-            myPageDataSource.getUserDetail().data.toDomain()
+            myPageDataSource.loadUserDetail().data.toDomain()
         }
     }
 
     override suspend fun removeStoreApiKey(userApiDeleteRequestDto: UserApiDeleteRequestDto): Result<UserInfo> {
         return runCatching {
-            myPageDataSource.deleteUserApi(userApiDeleteRequestDto).data.toDomain()
+            myPageDataSource.removeUserApi(userApiDeleteRequestDto).data.toDomain()
         }
     }
 
@@ -33,7 +33,7 @@ constructor(
 
     override suspend fun registerStoreApiKey(userApiRequestDto: UserApiRequestDto): Result<UserInfo> {
         return runCatching {
-            myPageDataSource.postUserApi(userApiRequestDto).data.toDomain()
+            myPageDataSource.registerUserApi(userApiRequestDto).data.toDomain()
         }
     }
 }

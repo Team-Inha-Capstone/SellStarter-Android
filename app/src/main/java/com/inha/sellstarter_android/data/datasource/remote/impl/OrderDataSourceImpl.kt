@@ -12,7 +12,7 @@ class OrderDataSourceImpl @Inject constructor(
     private val orderService: OrderService
 ) : OrderDataSource {
 
-    override suspend fun fetchOrderConfirmList(
+    override suspend fun loadOrderConfirmList(
         page: Int,
         size: Int
     ): OrderListResponseDto {
@@ -22,11 +22,11 @@ class OrderDataSourceImpl @Inject constructor(
         ).data
     }
 
-    override suspend fun fetchOrderConfirmationDetail(orderId: String): OrderDetailResponseDto {
+    override suspend fun loadOrderConfirmationDetail(orderId: String): OrderDetailResponseDto {
         return orderService.loadOrderConfirmationDetail(orderId = orderId).data
     }
 
-    override suspend fun isPickingAvailable(
+    override suspend fun checkPickingAvailable(
         orderId: String
     ): PickingAvailableResponseDto {
         return orderService.checkPickingAvailable(orderId = orderId).data
@@ -43,7 +43,7 @@ class OrderDataSourceImpl @Inject constructor(
         orderService.completeSinglePicking(orderId = orderId, request = request)
     }
 
-    override suspend fun fetchCompletedPickingList(
+    override suspend fun loadCompletedPickingList(
         page: Int,
         size: Int
     ): OrderListResponseDto {
@@ -53,7 +53,7 @@ class OrderDataSourceImpl @Inject constructor(
         ).data
     }
 
-    override suspend fun confirmOrderShipment(orderId: String) {
+    override suspend fun shipOrder(orderId: String) {
         orderService.shipOrder(orderId = orderId)
     }
 

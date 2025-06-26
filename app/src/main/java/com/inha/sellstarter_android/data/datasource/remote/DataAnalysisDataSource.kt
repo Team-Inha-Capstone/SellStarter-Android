@@ -6,9 +6,9 @@ import com.inha.sellstarter_android.data.model.response.inventory.InventoryFlowG
 import com.inha.sellstarter_android.util.base.BaseResponseDto
 
 interface DataAnalysisDataSource {
-    suspend fun getInventoryFlowGraph(
+    suspend fun loadInventoryFlowGraph(
         inventoryFlowGraphRequestDto: InventoryFlowGraphRequestDto
     ): BaseResponseDto<InventoryFlowGraphResponseDto>
 
-    suspend fun fetchAnalysisReport(): BaseResponseDto<AnalysisReportResponseDto>
+    suspend fun loadAnalysisReport(): BaseResponseDto<AnalysisReportResponseDto>
 }

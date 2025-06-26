@@ -6,7 +6,7 @@ import com.inha.sellstarter_android.data.model.response.home.YearlySalesResponse
 import com.inha.sellstarter_android.util.base.BaseResponseDto
 
 interface HomeDataSource {
-    suspend fun getHomeInfo(): BaseResponseDto<HomeInfoResponseDto>
-    suspend fun getWeeklySalesInfo(currentDate : String): BaseResponseDto<WeeklySalesResponseDto>
-    suspend fun getYearlySalesInfo(currentDate: String): BaseResponseDto<YearlySalesResponseDto>
+    suspend fun loadHomeDashboard(): BaseResponseDto<HomeInfoResponseDto>
+    suspend fun loadWeeklySalesInfo(currentDate : String): BaseResponseDto<WeeklySalesResponseDto>
+    suspend fun loadYearlySalesInfo(currentDate: String): BaseResponseDto<YearlySalesResponseDto>
 }
