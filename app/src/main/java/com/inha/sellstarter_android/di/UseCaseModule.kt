@@ -25,6 +25,9 @@ import com.inha.sellstarter_android.domain.usecase.inventory.SearchInventoriesUs
 import com.inha.sellstarter_android.domain.usecase.inventory.InventoryUseCases
 import com.inha.sellstarter_android.domain.usecase.mypage.MyPageUseCases
 import com.inha.sellstarter_android.domain.usecase.mypage.LoadUserDetailUseCase
+import com.inha.sellstarter_android.domain.usecase.mypage.RegisterStoreApiKeyUseCase
+import com.inha.sellstarter_android.domain.usecase.mypage.RemoveStoreApiKeyUseCase
+import com.inha.sellstarter_android.domain.usecase.mypage.UpdateStoreApiKeyUseCase
 import com.inha.sellstarter_android.domain.usecase.order.CancelOrderUseCase
 import com.inha.sellstarter_android.domain.usecase.order.CompleteOrderPickingsUseCase
 import com.inha.sellstarter_android.domain.usecase.order.CompleteSinglePickingUseCase
@@ -119,9 +122,9 @@ object UseCaseModule {
         homeRepository: HomeRepository
     ): HomeUseCases {
         return HomeUseCases(
-            homeInfoUseCase = LoadHomeDashboardUseCase(homeRepository),
-            weeklySalesUseCase = LoadWeeklySalesUseCase(homeRepository),
-            yearlySalesUseCase = LoadYearlySalesUseCase(homeRepository)
+            loadHomeDashboard =  LoadHomeDashboardUseCase(homeRepository),
+            loadWeeklySales = LoadWeeklySalesUseCase(homeRepository),
+            loadAnnualSales = LoadYearlySalesUseCase(homeRepository)
         )
     }
 

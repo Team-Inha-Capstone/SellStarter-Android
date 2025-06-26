@@ -61,7 +61,7 @@ class ChatbotViewModel @Inject constructor(
 
     fun endChatbot() {
         viewModelScope.launch {
-            chatbotUseCases.endChatSession
+            chatbotUseCases.endChatSession()
             _chatMessages.value = emptyList() // 대화 종료 시 리스트 초기화
         }
     }
