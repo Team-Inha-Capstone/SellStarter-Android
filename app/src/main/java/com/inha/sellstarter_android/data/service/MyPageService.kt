@@ -18,24 +18,24 @@ import retrofit2.http.Path
 
 interface MyPageService {
     @GET("$API/$APP/$USER/{userId}")
-    suspend fun getUserDetail(
+    suspend fun loadUserDetail(
         @Path("userId") userId: Int
     ): BaseResponseDto<UserDetailResponseDto>
 
     @POST("$API/$APP/$USER/{userId}/$DELETE")
-    suspend fun deleteUserApi(
+    suspend fun removeStoreApiKey(
         @Path("userId") userId: Int,
         @Body userApiDeleteRequestDto: UserApiDeleteRequestDto
     ): BaseResponseDto<UserDetailResponseDto>
 
     @POST("$API/$APP/$USER/{userId}/$UPDATE")
-    suspend fun updateUserApi(
+    suspend fun updateStoreApiKey(
         @Path("userId") userId: Int,
         @Body userApiUpdateRequest: UserApiUpdateRequest
     ): BaseResponseDto<UserDetailResponseDto>
 
     @POST("$API/$APP/$USER/{userId}/$CREATE")
-    suspend fun createUserApi(
+    suspend fun registerStoreApiKey(
         @Path("userId") userId: Int,
         @Body userApiRequestDto: UserApiRequestDto
     ): BaseResponseDto<UserDetailResponseDto>

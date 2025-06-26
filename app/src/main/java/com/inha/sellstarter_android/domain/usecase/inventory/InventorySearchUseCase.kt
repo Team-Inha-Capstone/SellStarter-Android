@@ -1,7 +1,6 @@
 package com.inha.sellstarter_android.domain.usecase.inventory
 
 import com.inha.sellstarter_android.domain.model.InventoryListPage
-import com.inha.sellstarter_android.domain.model.InventorySummary
 import com.inha.sellstarter_android.domain.repository.InventoryRepository
 import javax.inject.Inject
 
@@ -14,7 +13,7 @@ class InventorySearchUseCase @Inject constructor(
         page: Int,
         size: Int
     ): Result<InventoryListPage> {
-        return inventoryRepository.getInventorySearch(
+        return inventoryRepository.searchInventories(
             search = search,
             status = status,
             page = page,

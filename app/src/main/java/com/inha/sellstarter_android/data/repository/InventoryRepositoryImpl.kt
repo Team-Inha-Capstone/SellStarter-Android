@@ -14,7 +14,7 @@ import javax.inject.Inject
 class InventoryRepositoryImpl @Inject constructor(
     private val inventoryDataSource: InventoryDataSource
 ) : InventoryRepository {
-    override suspend fun getInventoryList(
+    override suspend fun loadInventoryList(
         search: String?,
         status: Boolean,
         page: Int,
@@ -27,13 +27,13 @@ class InventoryRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getInventoryDetail(barcodeId: String): Result<Inventory> {
+    override suspend fun loadInventoryDetail(barcodeId: String): Result<Inventory> {
         return runCatching {
             inventoryDataSource.getInventoryDetail(barcodeId = barcodeId).data.toDomain()
         }
     }
 
-    override suspend fun postInventoryCount(
+    override suspend fun updateInventoryCount(
         barcodeId: String,
         inventoryCountRequest: InventoryCountRequestDto
     ): Result<Inventory> {
@@ -45,7 +45,7 @@ class InventoryRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getInventorySearch(
+    override suspend fun searchInventories(
         search: String,
         status: Boolean,
         page: Int,
@@ -58,7 +58,7 @@ class InventoryRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun postInventoryCreate(
+    override suspend fun registerInventoryItem(
         inventoryCreateRequest: InventoryCreateRequestDto,
         image: MultipartBody.Part?
     ): Result<Inventory> {

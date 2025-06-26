@@ -13,15 +13,15 @@ class ChatbotDataSourceImpl @Inject constructor(
     private val chatbotService: ChatbotService
 ) : ChatbotDataSource {
     override suspend fun postChatStart(): BaseResponseDto<ChatbotResponseDto> {
-        Log.e("hyeon", chatbotService.postChatStart().toString());
-        return chatbotService.postChatStart()
+        Log.e("hyeon", chatbotService.startChatSession().toString());
+        return chatbotService.startChatSession()
     }
 
     override suspend fun postChatMessage(chatbotMessageRequestDto: ChatbotMessageRequestDto): BaseResponseDto<ChatbotResponseDto> {
-        return chatbotService.postChatMessage(chatbotMessageRequestDto = chatbotMessageRequestDto)
+        return chatbotService.sendChatMessage(chatbotMessageRequestDto = chatbotMessageRequestDto)
     }
 
     override suspend fun postChatEnd(): ChatbotEndResponseDto {
-        return chatbotService.postChatEnd()
+        return chatbotService.endChatSession()
     }
 }

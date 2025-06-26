@@ -12,7 +12,7 @@ class InventoryEditCountUseCase @Inject constructor(
         barcodeId : String,
         inventoryCountRequest: InventoryCountRequestDto
     ): Result<Inventory> {
-        return inventoryRepository.postInventoryCount(
+        return inventoryRepository.updateInventoryCount(
             barcodeId,
             inventoryCountRequest
         )

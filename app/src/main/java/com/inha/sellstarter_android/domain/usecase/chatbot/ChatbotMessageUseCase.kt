@@ -9,6 +9,6 @@ class ChatbotMessageUseCase @Inject constructor(
     private val chatbotRepository: ChatbotRepository
 ) {
     suspend fun invoke(chatbotMessageRequestDto: ChatbotMessageRequestDto): Result<ChatMessage> {
-        return chatbotRepository.postChatMessage(chatbotMessageRequestDto)
+        return chatbotRepository.sendChatMessage(chatbotMessageRequestDto)
     }
 }

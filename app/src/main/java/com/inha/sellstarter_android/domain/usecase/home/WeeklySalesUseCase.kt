@@ -8,6 +8,6 @@ class WeeklySalesUseCase @Inject constructor(
     private val homeRepository: HomeRepository
 ) {
     suspend fun invoke(currentDate: String): Result<WeeklySales> {
-        return homeRepository.getWeeklySalesInfo(currentDate = currentDate)
+        return homeRepository.loadWeeklySalesInfo(currentDate = currentDate)
     }
 }

@@ -9,6 +9,6 @@ class UserApiUpdateUseCase @Inject constructor(
     private val myPageRepository: MyPageRepository,
 ) {
     suspend fun invoke(userApiUpdateRequestDto: UserApiUpdateRequest): Result<UserInfo> {
-        return myPageRepository.updateUserApi(userApiUpdateRequestDto)
+        return myPageRepository.updateStoreApiKey(userApiUpdateRequestDto)
     }
 }

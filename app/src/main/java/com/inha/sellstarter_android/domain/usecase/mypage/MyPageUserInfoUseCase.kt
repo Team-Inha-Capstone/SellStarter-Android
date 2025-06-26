@@ -9,7 +9,7 @@ class MyPageUserInfoUseCase @Inject constructor(
     private val myPageRepository: MyPageRepository,
 ) {
     suspend fun invoke(): Result<UserInfo> {
-        return myPageRepository.getUserDetail()
+        return myPageRepository.loadUserDetail()
     }
 }
 

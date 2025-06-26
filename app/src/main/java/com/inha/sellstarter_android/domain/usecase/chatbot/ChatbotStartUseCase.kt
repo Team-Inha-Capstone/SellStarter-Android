@@ -8,6 +8,6 @@ class ChatbotStartUseCase @Inject constructor(
     private val chatbotRepository: ChatbotRepository
 ) {
     suspend fun invoke(): Result<ChatMessage> {
-        return chatbotRepository.postChatStart()
+        return chatbotRepository.startChatSession()
     }
 }

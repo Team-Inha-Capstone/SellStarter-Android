@@ -14,7 +14,7 @@ class OrderRepositoryImpl @Inject constructor(
     private val dataSource: OrderDataSource
 ) : OrderRepository {
 
-    override suspend fun fetchOrderConfirmList(page: Int, size: Int): Result<OrderListPage> {
+    override suspend fun loadOrderConfirmList(page: Int, size: Int): Result<OrderListPage> {
         Log.e(
             "hyeon",
             dataSource.fetchOrderConfirmList(page = page, size = size).toDomain().toString()
@@ -24,14 +24,14 @@ class OrderRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun fetchOrderConfirmationDetail(orderId: String): Result<OrderDetailInfo> {
+    override suspend fun loadOrderConfirmationDetail(orderId: String): Result<OrderDetailInfo> {
         return runCatching {
             dataSource.fetchOrderConfirmationDetail(orderId)
                 .toDomain()
         }
     }
 
-    override suspend fun isPickingAvailable(orderId: String): Result<Boolean> {
+    override suspend fun checkPickingAvailable(orderId: String): Result<Boolean> {
         return runCatching {
             dataSource.isPickingAvailable(orderId)
                 .checkResult
@@ -53,7 +53,7 @@ class OrderRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun fetchCompletedPickingList(
+    override suspend fun loadCompletedPickingList(
         page: Int,
         size: Int
     ): Result<OrderListPage> {
@@ -63,7 +63,7 @@ class OrderRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun confirmOrderShipment(orderId: String): Result<Unit> {
+    override suspend fun shipOrder(orderId: String): Result<Unit> {
         return runCatching {
             dataSource.confirmOrderShipment(orderId)
         }

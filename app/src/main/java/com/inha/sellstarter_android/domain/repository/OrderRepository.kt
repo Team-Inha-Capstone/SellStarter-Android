@@ -3,15 +3,15 @@ package com.inha.sellstarter_android.domain.repository
 import com.inha.sellstarter_android.data.model.request.order.OrderInventoryPickingRequestDto
 import com.inha.sellstarter_android.domain.model.OrderDetailInfo
 import com.inha.sellstarter_android.domain.model.OrderListPage
-import com.inha.sellstarter_android.domain.model.OrderSummary
 
 interface OrderRepository {
-    suspend fun fetchOrderConfirmList(
+    suspend fun loadOrderConfirmList(
         page: Int, size: Int
     ): Result<OrderListPage>
 
-    suspend fun fetchOrderConfirmationDetail(orderId: String): Result<OrderDetailInfo>
-    suspend fun isPickingAvailable(orderId: String): Result<Boolean>
+    suspend fun loadOrderConfirmationDetail(orderId: String): Result<OrderDetailInfo>
+
+    suspend fun checkPickingAvailable(orderId: String): Result<Boolean>
 
     suspend fun completeOrderPickings(
         orderId: String
@@ -22,11 +22,11 @@ interface OrderRepository {
         request: OrderInventoryPickingRequestDto
     ): Result<Unit>
 
-    suspend fun fetchCompletedPickingList(
+    suspend fun loadCompletedPickingList(
         page: Int, size: Int
     ): Result<OrderListPage>
 
-    suspend fun confirmOrderShipment(orderId: String): Result<Unit>
+    suspend fun shipOrder(orderId: String): Result<Unit>
 
     suspend fun cancelOrder(orderId: String): Result<Unit>
 }

@@ -13,7 +13,7 @@ class InventoryRegisterUseCase @Inject constructor(
         image: MultipartBody.Part?,
         inventoryCreateRequest: InventoryCreateRequestDto
     ): Result<Inventory> {
-        return inventoryRepository.postInventoryCreate(
+        return inventoryRepository.registerInventoryItem(
             inventoryCreateRequest = inventoryCreateRequest,
             image = image
         )

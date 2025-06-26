@@ -9,6 +9,6 @@ class UserApiDeleteUseCase @Inject constructor(
     private val myPageRepository: MyPageRepository,
 ) {
     suspend fun invoke(userApiDeleteRequestDto: UserApiDeleteRequestDto): Result<UserInfo> {
-        return myPageRepository.deleteUserApi(userApiDeleteRequestDto)
+        return myPageRepository.removeStoreApiKey(userApiDeleteRequestDto)
     }
 }

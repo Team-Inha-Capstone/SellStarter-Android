@@ -8,14 +8,14 @@ class FetchOrderConfirmationDetailUseCase @Inject constructor(
     private val repository: OrderRepository
 ) {
     suspend operator fun invoke(orderId: String): Result<OrderDetailInfo> =
-        repository.fetchOrderConfirmationDetail(orderId)
+        repository.loadOrderConfirmationDetail(orderId)
 }
 
 class ConfirmOrderShipmentUseCase @Inject constructor(
     private val repository: OrderRepository
 ) {
     suspend operator fun invoke(orderId: String): Result<Unit> =
-        repository.confirmOrderShipment(orderId)
+        repository.shipOrder(orderId)
 }
 
 class CancelOrderUseCase @Inject constructor(

@@ -3,9 +3,7 @@ package com.inha.sellstarter_android.data.datasource.remote.impl
 import com.inha.sellstarter_android.data.datasource.remote.InventoryDataSource
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCountRequestDto
 import com.inha.sellstarter_android.data.model.request.inventory.InventoryCreateRequestDto
-import com.inha.sellstarter_android.data.model.request.inventory.InventoryFlowGraphRequestDto
 import com.inha.sellstarter_android.data.model.response.inventory.InventoryDetailResponseDto
-import com.inha.sellstarter_android.data.model.response.inventory.InventoryFlowGraphResponseDto
 import com.inha.sellstarter_android.data.model.response.inventory.InventoryListResponseDto
 import com.inha.sellstarter_android.data.service.InventoryService
 import com.inha.sellstarter_android.util.base.BaseResponseDto
@@ -21,14 +19,14 @@ class InventoryDataSourceImpl @Inject constructor(
         page: Int,
         size: Int
     ): BaseResponseDto<InventoryListResponseDto> {
-        return inventoryService.getInventoryList(
+        return inventoryService.loadInventoryList(
             search = search,
             status = status, page = page, size = size
         )
     }
 
     override suspend fun getInventoryDetail(barcodeId: String): BaseResponseDto<InventoryDetailResponseDto> {
-        return inventoryService.getInventoryDetail(
+        return inventoryService.loadInventoryDetail(
             barcodeId = barcodeId
         )
     }
@@ -37,7 +35,7 @@ class InventoryDataSourceImpl @Inject constructor(
         barcodeId: String,
         inventoryCountRequestDto: InventoryCountRequestDto
     ): BaseResponseDto<InventoryDetailResponseDto> {
-        return inventoryService.postInventoryCount(
+        return inventoryService.updateInventoryCount(
             barcodeId = barcodeId,
             inventoryCountRequest = inventoryCountRequestDto
         )
@@ -49,7 +47,7 @@ class InventoryDataSourceImpl @Inject constructor(
         page: Int,
         size: Int
     ): BaseResponseDto<InventoryListResponseDto> {
-        return inventoryService.getInventorySearch(
+        return inventoryService.searchInventories(
             search = search,
             status = status,
             page = page,
@@ -61,7 +59,7 @@ class InventoryDataSourceImpl @Inject constructor(
         image: MultipartBody.Part?,
         inventoryCreateRequestDto: InventoryCreateRequestDto
     ): BaseResponseDto<InventoryDetailResponseDto> {
-        return inventoryService.postInventoryCreate(
+        return inventoryService.registerInventoryItem(
             image = image,
             inventoryCreateRequest = inventoryCreateRequestDto,
         )

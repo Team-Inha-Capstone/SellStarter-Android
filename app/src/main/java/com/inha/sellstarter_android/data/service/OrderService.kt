@@ -17,7 +17,7 @@ import retrofit2.http.Query
 
 interface OrderService {
     @GET("$API/$CORE/$ORDER/{userId}")
-    suspend fun fetchOrderConfirmList(
+    suspend fun loadOrderConfirmList(
         @Path("userId") userId: Int = 4,
         @Query("status") status: String = "ORDER_COMPLETED",
         @Query("page") page: Int,
@@ -25,13 +25,13 @@ interface OrderService {
     ): BaseResponseDto<OrderListResponseDto>// 주문확인 리스트 조회
 
     @GET("$API/$CORE/$ORDER/{userId}/{orderId}")
-    suspend fun fetchOrderConfirmationDetail(
+    suspend fun loadOrderConfirmationDetail(
         @Path("userId") userId: Int = 4,
         @Path("orderId") orderId: String
     ): BaseResponseDto<OrderDetailResponseDto>// 주문 확인 상세
 
     @GET("$API/$CORE/$ORDER/{userId}/{orderId}/pick-check")
-    suspend fun isPickingAvailable(
+    suspend fun checkPickingAvailable(
         @Path("userId") userId: Int = 4,
         @Path("orderId") orderId: String,
         @Query("barcodeId") barcodeId: String? = null
@@ -51,7 +51,7 @@ interface OrderService {
     ): BaseResponseDto<OrderDetailResponseDto> // 단일 상품 피킹 완료
 
     @GET("$API/$CORE/$ORDER/{userId}")
-    suspend fun fetchCompletedPickingList(
+    suspend fun loadCompletedPickingList(
         @Path("userId") userId: Int = 4,
         @Query("status") status: String = "PICKING_COMPLETED",
         @Query("page") page: Int,
@@ -59,7 +59,7 @@ interface OrderService {
     ): BaseResponseDto<OrderListResponseDto> //피킹 완료 리스트 조회
 
     @POST("$API/$CORE/$ORDER/{userId}/{orderId}/ship")
-    suspend fun confirmOrderShipment(
+    suspend fun shipOrder(
         @Path("userId") userId: Int = 4,
         @Path("orderId") orderId: String,
     ): Response<Unit> // 출고완료
@@ -68,5 +68,5 @@ interface OrderService {
     suspend fun cancelOrder(
         @Path("userId") userId: Int = 4,
         @Path("orderId") orderId: String,
-    ): Response<Unit>
+    ): Response<Unit> //주문 취소
 }

@@ -10,6 +10,6 @@ class InventoryFlowGraphUseCase @Inject constructor(
     suspend operator fun invoke(
         inventoryFlowGraphRequestDto: InventoryFlowGraphRequestDto
     ): Result<String> {
-        return dataAnalysisRepository.getInventoryFlowGraph(inventoryFlowGraphRequestDto)
+        return dataAnalysisRepository.loadInventoryFlowGraph(inventoryFlowGraphRequestDto)
     }
 }

@@ -14,13 +14,13 @@ import retrofit2.http.Path
 
 interface DataAnalysisService {
     @POST("$INVENTORY/$CHART/{userId}")
-    suspend fun getInventoryFlowGraph(
+    suspend fun loadInventoryFlowGraph(
         @Path("userId") userId: Int = 4,
         @Body inventoryFlowGraphRequest: InventoryFlowGraphRequestDto
     ): BaseResponseDto<InventoryFlowGraphResponseDto>
 
     @POST("$ANALYSIS/$REPORT/{userId}")
-    suspend fun fetchDataAnalysisReport(
+    suspend fun loadDataAnalysisReport(
         @Path("userId") userId: Int = 4
     ): BaseResponseDto<AnalysisReportResponseDto>
 }

@@ -10,6 +10,6 @@ class InventoryDetailUseCase @Inject constructor(
     suspend fun invoke(
         barcodeId : String
     ) : Result<Inventory> {
-        return inventoryRepository.getInventoryDetail(barcodeId)
+        return inventoryRepository.loadInventoryDetail(barcodeId)
     }
 }

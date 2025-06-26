@@ -8,7 +8,7 @@ class IsPickingAvailableUseCase @Inject constructor(
     private val repository: OrderRepository
 ) {
     suspend operator fun invoke(orderId: String): Result<Boolean> =
-        repository.isPickingAvailable(orderId)
+        repository.checkPickingAvailable(orderId)
 }
 
 class CompleteOrderPickingsUseCase @Inject constructor(

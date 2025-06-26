@@ -8,6 +8,6 @@ class HomeInfoUseCase @Inject constructor(
     private val homeRepository: HomeRepository
 ) {
     suspend fun invoke() : Result<HomeInfo> {
-        return homeRepository.getHomeInfo()
+        return homeRepository.loadHomeDashboard()
     }
 }

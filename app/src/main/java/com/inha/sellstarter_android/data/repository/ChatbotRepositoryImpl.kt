@@ -11,19 +11,19 @@ import javax.inject.Inject
 class ChatbotRepositoryImpl @Inject constructor(
     private val chatbotDataSource: ChatbotDataSource
 ) : ChatbotRepository {
-    override suspend fun postChatStart(): Result<ChatMessage> {
+    override suspend fun startChatSession(): Result<ChatMessage> {
         return runCatching {
             chatbotDataSource.postChatStart().data.toDomain()
         }
     }
 
-    override suspend fun postChatMessage(chatbotMessageRequestDto: ChatbotMessageRequestDto): Result<ChatMessage> {
+    override suspend fun sendChatMessage(chatbotMessageRequestDto: ChatbotMessageRequestDto): Result<ChatMessage> {
         return runCatching {
             chatbotDataSource.postChatMessage(chatbotMessageRequestDto).data.toDomain()
         }
     }
 
-    override suspend fun postChatEnd(): Result<ChatMessage> {
+    override suspend fun endChatSession(): Result<ChatMessage> {
         return runCatching {
             chatbotDataSource.postChatEnd().toDomain()
         }

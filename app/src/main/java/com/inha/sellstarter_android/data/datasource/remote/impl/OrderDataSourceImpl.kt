@@ -16,20 +16,20 @@ class OrderDataSourceImpl @Inject constructor(
         page: Int,
         size: Int
     ): OrderListResponseDto {
-        return orderService.fetchOrderConfirmList(
+        return orderService.loadOrderConfirmList(
             page = page,
             size = size
         ).data
     }
 
     override suspend fun fetchOrderConfirmationDetail(orderId: String): OrderDetailResponseDto {
-        return orderService.fetchOrderConfirmationDetail(orderId = orderId).data
+        return orderService.loadOrderConfirmationDetail(orderId = orderId).data
     }
 
     override suspend fun isPickingAvailable(
         orderId: String
     ): PickingAvailableResponseDto {
-        return orderService.isPickingAvailable(orderId = orderId).data
+        return orderService.checkPickingAvailable(orderId = orderId).data
     }
 
     override suspend fun completeOrderPickings(orderId: String) {
@@ -47,14 +47,14 @@ class OrderDataSourceImpl @Inject constructor(
         page: Int,
         size: Int
     ): OrderListResponseDto {
-        return orderService.fetchCompletedPickingList(
+        return orderService.loadCompletedPickingList(
             page = page,
             size = size
         ).data
     }
 
     override suspend fun confirmOrderShipment(orderId: String) {
-        orderService.confirmOrderShipment(orderId = orderId)
+        orderService.shipOrder(orderId = orderId)
     }
 
     override suspend fun cancelOrder(orderId: String) {

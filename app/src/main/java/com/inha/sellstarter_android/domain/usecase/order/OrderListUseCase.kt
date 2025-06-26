@@ -8,12 +8,12 @@ class FetchOrderConfirmListUseCase @Inject constructor(
     private val repository: OrderRepository
 ) {
     suspend operator fun invoke(page: Int, size: Int): Result<OrderListPage> =
-        repository.fetchOrderConfirmList(page = page, size = size)
+        repository.loadOrderConfirmList(page = page, size = size)
 }
 
 class FetchCompletedPickingListUseCase @Inject constructor(
     private val repository: OrderRepository
 ) {
     suspend operator fun invoke(page: Int, size: Int): Result<OrderListPage> =
-        repository.fetchCompletedPickingList(page = page, size = size)
+        repository.loadCompletedPickingList(page = page, size = size)
 }

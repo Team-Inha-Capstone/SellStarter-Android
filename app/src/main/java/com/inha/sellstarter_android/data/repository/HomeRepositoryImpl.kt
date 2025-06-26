@@ -11,19 +11,19 @@ import javax.inject.Inject
 class HomeRepositoryImpl @Inject constructor(
     private val homeDataSource: HomeDataSource
 ) : HomeRepository {
-    override suspend fun getHomeInfo(): Result<HomeInfo> {
+    override suspend fun loadHomeDashboard(): Result<HomeInfo> {
         return runCatching {
             homeDataSource.getHomeInfo().data.toDomain()
         }
     }
 
-    override suspend fun getWeeklySalesInfo(currentDate: String): Result<WeeklySales> {
+    override suspend fun loadWeeklySalesInfo(currentDate: String): Result<WeeklySales> {
         return runCatching {
             homeDataSource.getWeeklySalesInfo(currentDate).data.toDomain()
         }
     }
 
-    override suspend fun getYearlySalesInfo(currentDate: String): Result<YearlySales> {
+    override suspend fun loadYearlySalesInfo(currentDate: String): Result<YearlySales> {
         return runCatching {
             homeDataSource.getYearlySalesInfo(currentDate).data.toDomain()
         }

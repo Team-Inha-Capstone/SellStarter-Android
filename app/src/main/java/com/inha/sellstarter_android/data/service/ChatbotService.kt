@@ -13,18 +13,18 @@ import retrofit2.http.Path
 
 interface ChatbotService {
     @POST("$CHAT_START/{userId}")
-    suspend fun postChatStart(
+    suspend fun startChatSession(
         @Path("userId") userId : Int = 4
     ): BaseResponseDto<ChatbotResponseDto>
 
     @POST("$CHAT/{userId}")
-    suspend fun postChatMessage(
+    suspend fun sendChatMessage(
         @Path("userId") userId : Int =4,
         @Body chatbotMessageRequestDto: ChatbotMessageRequestDto
     ): BaseResponseDto<ChatbotResponseDto>
 
     @POST("$CHAT_END/{userId}")
-    suspend fun postChatEnd(
+    suspend fun endChatSession(
         @Path("userId") userId : Int =4,
     ): ChatbotEndResponseDto
 
