@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.inha.sellstarter_android.domain.model.OrderListPage
+import com.inha.sellstarter_android.domain.model.OrderSummary
 import com.inha.sellstarter_android.domain.usecase.order.CompleteOrderPickingsUseCase
 import com.inha.sellstarter_android.domain.usecase.order.FetchCompletedPickingListUseCase
 import com.inha.sellstarter_android.domain.usecase.order.FetchOrderConfirmListUseCase
@@ -99,9 +100,11 @@ class OrderConfirmViewModel @Inject constructor(
         _selectedIds.value = set
     }
 
-    fun onSelectAll(summaries: OrderListPage) {
-        _selectedIds.value = summaries.orders.map { it.orderId }.toSet()
+    fun onSelectAll(orders: List<OrderSummary>) {
+        val allIds = orders.map { it.orderId }.toSet()
+        _selectedIds.value = if (_selectedIds.value == allIds) emptySet() else allIds
     }
+
 
 //
 //    fun onClickCompleteSelected() = viewModelScope.launch {

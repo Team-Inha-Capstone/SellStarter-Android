@@ -28,7 +28,7 @@ import com.inha.sellstarter_android.ui.theme.Grey100
 fun OrderListItem(
     order: OrderSummary,
     isSelected: Boolean,
-    onCheckedChange: () -> Unit,
+    currentTabIndex: Int,
     onClick: () -> Unit
 ) {
     Row(
@@ -39,10 +39,8 @@ fun OrderListItem(
             .clickable(onClick = onClick)
             .padding(vertical = 12.dp)
     ) {
-        Checkbox(
-            checked = isSelected,
-            onCheckedChange = { onCheckedChange() }
-        )
+
+        Spacer(modifier = Modifier.size(12.dp))
 
         Image(
             painter = painterResource(id = order.channel.displayImage),
