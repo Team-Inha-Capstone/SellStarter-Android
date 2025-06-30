@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.assertThrows
 
-@DisplayName("🔍 RegisterInventoryItemUseCase 테스트")
+@DisplayName("RegisterInventoryItemUseCase 테스트")
 @ExtendWith(MockKExtension::class)
 class RegisterInventoryUseCaseTest {
 
