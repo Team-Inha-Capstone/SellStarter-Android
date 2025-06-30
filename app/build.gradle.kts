@@ -1,3 +1,4 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import java.util.Properties
 
 plugins {
@@ -80,6 +81,17 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    testOptions {
+        unitTests.all {
+            it.useJUnitPlatform()
+            it.testLogging {
+                events("passed", "skipped", "failed")
+                exceptionFormat = TestExceptionFormat.FULL
+                showStandardStreams = true
+            }
+        }
+    }
 }
 
 dependencies {
@@ -99,6 +111,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(libs.bundles.junit5)
 
     implementation(libs.viewmodel.compose)
     implementation(libs.androidx.navigation.navigation.compose)
@@ -141,6 +154,13 @@ dependencies {
 
     // FCM
     implementation("com.google.firebase:firebase-messaging:23.1.2")
+
+    testImplementation(libs.bundles.test)
+    kaptTest           (libs.dagger.hilt.compiler)
+
+    androidTestImplementation(libs.bundles.android.test)
+    kaptTest           (libs.dagger.hilt.compiler)
+    debugImplementation      (libs.androidx.ui.test.manifest)
 
 
     // implementation("com.google.android.filament:filament-android:1.33.1")

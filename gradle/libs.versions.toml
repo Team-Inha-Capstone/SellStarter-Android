@@ -27,6 +27,12 @@ zxingCore = "3.5.3"
 moshi = "1.15.2"
 vicoChart = "1.12.0"
 lottie = "6.3.0"
+mockk = "1.13.5"
+truth = "1.1.3"
+coroutines-test = "1.5.2"
+mockwebserver = "4.11.0"
+junitJupiter = "5.9.3"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -88,6 +94,22 @@ vico-views = { group = "com.patrykandpatrick.vico", name = "views", version.ref 
 #Lottie
 lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
 
+#Unit Test
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
+
+#Integration Test
+mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockwebserver" }
+
+dagger-hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
+dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+
+# Junit5
+junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitJupiter" }
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junitJupiter" }
+junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junitJupiter" }
+
 [bundles]
 coroutines = ["coroutines-android", "coroutines-core"]
 okhttp = ["squareup-okhttp3-okhttp", "squareup-okhttp3-logging-interceptor"]
@@ -97,6 +119,27 @@ paging = ["paging-runtime", "paging-compose"]
 vico = ["vico-compose", "vico-compose-m3", "vico-core", "vico-views"]
 zxing = ["zxing-core", "zxing-android-embedded"]
 moshi = ["squareup-moshi", "squareup-moshi-kotlin"]
+junit5 = [
+    "junit-jupiter-api",
+    "junit-jupiter-params"
+]
+
+android-test = [
+    "androidx-junit",
+    "androidx-espresso-core",
+    "androidx-ui-test-junit4",
+    "dagger-hilt-android-testing"
+]
+
+test = [
+    "junit",
+    "androidx-junit",
+    "coroutines-test",
+    "mockk",
+    "mockwebserver",
+    "truth",
+    "dagger-hilt-android-testing"
+]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
