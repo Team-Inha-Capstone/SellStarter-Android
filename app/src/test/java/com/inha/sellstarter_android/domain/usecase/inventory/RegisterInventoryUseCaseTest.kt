@@ -10,7 +10,6 @@ import io.mockk.junit5.MockKExtension
 import kotlinx.coroutines.test.runTest
 import okhttp3.MultipartBody
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
