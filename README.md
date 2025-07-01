@@ -28,7 +28,7 @@
 |------------------------------------------|-------------------------------------------------------------|
 | **UI**                                   | Jetpack Compose                                             |
 | **Architecture**                         | MVVM, Clean Architecture, Single-Activity Architecture      |
-| **Android Jetpack**       | ViewModel, Navigation, WebView       |
+| **Android Jetpack**       | ViewModel, Navigation, WebView, DataStore       |
 | **Networking**                           | Retrofit, OkHttp                                            |
 | **DI & Serialization & State**           | Hilt, Kotlin Serialization, UiState                         |
 | **Test**          | Junit5, MockK             |
