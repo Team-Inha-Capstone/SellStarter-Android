@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.domain.model.InventoryListPage
@@ -69,7 +70,6 @@ fun InventoryGridScreen(
                 if (lastVisible >= totalItems - 2) {
                     onLoadMore()
                 }
-                //     Log.e("ScrollDebug", "lastVisible: $lastVisible / total: $totalItems")
             }
     }
 
@@ -77,10 +77,12 @@ fun InventoryGridScreen(
         modifier = modifier
             .fillMaxSize()
             .background(Grey0)
+            .testTag("InventoryGridRoot")
     ) {
         TitleScreen(
             title = "스토어 재고 확인",
-            description = "스토어 내 재고를 한눈에 파악하세요."
+            description = "스토어 내 재고를 한눈에 파악하세요.",
+            modifier = Modifier.testTag("Title")
         )
 
         Spacer(
@@ -96,6 +98,7 @@ fun InventoryGridScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp)
                 .height(50.dp)
+                .testTag("SearchBar")
         )
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -108,6 +111,7 @@ fun InventoryGridScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp)
+                .testTag("SoldOutFilterChips")
         )
 
         Spacer(modifier = Modifier.size(8.dp))
@@ -116,7 +120,9 @@ fun InventoryGridScreen(
             is UiState.Loading -> {
                 LoadingLottieScreen(
                     loadingText = "재고 정보를 가져오고 있습니다.",
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .testTag("Loading")
                 )
             }
 
@@ -124,7 +130,9 @@ fun InventoryGridScreen(
                 if (state.data.inventories.isEmpty()) {
                     EmptyScreen(
                         emptyText = "검색한 재고가 없습니다.",
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .testTag("Empty")
                     )
                 } else {
                     LazyVerticalGrid(
@@ -134,7 +142,8 @@ fun InventoryGridScreen(
                         verticalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier
                             .weight(1f)
-                            .padding(horizontal = 12.dp),
+                            .padding(horizontal = 12.dp)
+                            .testTag("InventoryGrid"),
                         content = {
                             items(state.data.inventories, key = { it.id }) { item ->
                                 InventoryItem(
@@ -144,13 +153,16 @@ fun InventoryGridScreen(
                                         .clickable {
                                             onItemClick(item.id)
                                         }
+                                        .testTag("Item_${item.id}")
                                 )
                             }
                             if (isLoadingMore && hasNextPage) {
                                 item(span = { GridItemSpan(2) }) {
                                     Spacer(modifier = Modifier.height(12.dp))
                                     LoadingItem(
-                                        modifier = Modifier.size(24.dp)
+                                        modifier = Modifier
+                                            .size(24.dp)
+                                            .testTag("LoadMoreIndicator")
                                     )
                                     Spacer(modifier = Modifier.height(12.dp))
                                 }
@@ -162,7 +174,10 @@ fun InventoryGridScreen(
             }
 
             is UiState.Failure -> {
-                ErrorScreen(errorText = "재고 정보를 가져오는 데 실패했습니다.")
+                ErrorScreen(
+                    errorText = "재고 정보를 가져오는 데 실패했습니다.",
+                    modifier = Modifier.testTag("Error")
+                )
             }
         }
     }
