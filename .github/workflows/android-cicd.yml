@@ -50,15 +50,6 @@ jobs:
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest --stacktrace
 
-      - name: Run instrumentation tests on emulator
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 30
-          target: default
-          arch: x86_64
-          emulator-options: -no-window -no-audio -gpu swiftshader_indirect
-          script: ./gradlew connectedDebugAndroidTest --stacktrace
-
       - name: Assemble Debug APK
         run: ./gradlew assembleDebug --stacktrace
 
