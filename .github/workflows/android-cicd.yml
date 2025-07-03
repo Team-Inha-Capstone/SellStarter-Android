@@ -38,6 +38,10 @@ jobs:
       - name: Accept Android SDK licenses
         run: yes | sdkmanager --licenses
 
+      - name: Generate local.properties
+        run: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest --stacktrace
 
