@@ -31,7 +31,7 @@
 | **Android Jetpack**       | ViewModel, Navigation, WebView, DataStore       |
 | **Networking**                           | Retrofit, OkHttp                                            |
 | **DI & Serialization & State**           | Hilt, Kotlin Serialization, UiState                         |
-| **Test**          | Junit5, MockK             |
+| **Test**          | Junit5, MockK, Compose UI Test            |
 | **Concurrency & Streams**                | Coroutine, Flow                                             |
 | **Imaging, Barcode & Charting**          | Coil (Image), Zxing (Barcode), Vico (Graph), Lottie (Animation)   |
 | **Notification**          | FCM (Firebase Cloud Messaging)                 |
