@@ -32,8 +32,8 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
         with:
-          api-level: 30        # 필요에 따라 변경
-          build-tools: 30.0.3  # 필요에 따라 변경
+          api-level: 30
+          build-tools: 30.0.3
 
       - name: Accept Android SDK licenses
         run: yes | sdkmanager --licenses
@@ -50,16 +50,14 @@ jobs:
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest --stacktrace
 
-      - name: Start Android emulator
+      - name: Run instrumentation tests on emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
           target: default
           arch: x86_64
           emulator-options: -no-window -no-audio -gpu swiftshader_indirect
-
-      - name: Run instrumentation tests
-        run: ./gradlew connectedDebugAndroidTest --stacktrace
+          script: ./gradlew connectedDebugAndroidTest --stacktrace
 
       - name: Assemble Debug APK
         run: ./gradlew assembleDebug --stacktrace
@@ -69,3 +67,4 @@ jobs:
         with:
           name: app-debug.apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
