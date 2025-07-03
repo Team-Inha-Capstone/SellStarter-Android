@@ -18,10 +18,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.inha.sellstarter_android.presentation.common.component.TitleAndPurplelinedTextField
-import com.inha.sellstarter_android.presentation.inventory.register.component.InventoryExpirationDateContent
+import com.inha.sellstarter_android.presentation.common.component.TitleAndPurpleLinedTextField
 import com.inha.sellstarter_android.ui.theme.Grey50
 import com.inha.sellstarter_android.ui.theme.Grey900
 
@@ -54,6 +55,7 @@ fun InventoryForm(
                 .height(200.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .background(Grey50)
+                .testTag("ImagePicker")
                 .clickable { onImageClick() },
             contentAlignment = Alignment.Center
         ) {
@@ -70,26 +72,37 @@ fun InventoryForm(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        TitleAndPurplelinedTextField(value = name, onValueChange = onNameChange, titleText = "상품명")
-        TitleAndPurplelinedTextField(
+        TitleAndPurpleLinedTextField(
+            value = name,
+            onValueChange = onNameChange,
+            titleText = "상품명",
+            modifier = Modifier.testTag("InventoryNameInput")
+        )
+        TitleAndPurpleLinedTextField(
             value = count,
             onValueChange = onCountChange,
-            titleText = "재고수량"
+            titleText = "재고수량",
+            keyboardType = KeyboardType.Number,
+            filter = { input -> input.filter(Char::isDigit) },
+            modifier = Modifier.testTag("InventoryCountInput")
         )
-        TitleAndPurplelinedTextField(
+        TitleAndPurpleLinedTextField(
             value = location,
             onValueChange = onLocationChange,
-            titleText = "재고위치"
+            titleText = "재고위치",
+            modifier = Modifier.testTag("InventoryLocationInput")
         )
-        TitleAndPurplelinedTextField(
+        TitleAndPurpleLinedTextField(
             value = option,
             onValueChange = onOptionChange,
-            titleText = "옵션"
+            titleText = "옵션",
+            modifier = Modifier.testTag("InventoryOptionInput")
         )
-        TitleAndPurplelinedTextField(
+        TitleAndPurpleLinedTextField(
             value = expiration,
             onValueChange = onExpirationChange,
-            titleText = "유통기한 (예: 2025-06-01)"
+            titleText = "유통기한 (예: 2025-06-01)",
+            modifier = Modifier.testTag("InventoryExpirationInput")
         )
     }
 }

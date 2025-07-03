@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.presentation.common.component.DefaultTextField
@@ -48,6 +49,7 @@ fun SearchBar(
                 shape = RoundedCornerShape(10.dp)
             )
             .padding(horizontal = 8.dp)
+            .testTag("SearchBar")
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -62,6 +64,7 @@ fun SearchBar(
                     .clickable {
                         onSearch()
                     }
+                    .testTag("SearchIcon")
             )
 
             Box(
@@ -72,19 +75,30 @@ fun SearchBar(
 
                 DefaultTextField(
                     value = value,
-                    onValueChange = onValueChange,
+                    onValueChange = { new ->
+                        val isEnter = new.endsWith("\n")
+                        val filtered = new
+                            .trimEnd('\n')
+                            .take(50)         //최대 50자
+                        if (isEnter) {
+                            onSearch()
+                        }
+                        onValueChange(filtered)
+                    },
                     innerTextFieldStyle = MaterialTheme.typography.bodyMedium.copy(color = Grey900),
                     singleLine = true,
                     borderColor = Color.Transparent,
                     modifier = Modifier
+                        .testTag("SearchInput")
                         .wrapContentSize()
                         .onKeyEvent { event ->
                             if (event.nativeKeyEvent.keyCode == android.view.KeyEvent.KEYCODE_ENTER) {
                                 onSearch()
                                 true
                             } else false
-                        }
-                )
+                        },
+
+                    )
 
             }
 
@@ -92,6 +106,7 @@ fun SearchBar(
                 IconButton(onClick = { onValueChange("") }
                 ) {
                     Icon(
+                        modifier = Modifier.testTag("ClearButton"),
                         imageVector = Icons.Default.Close,
                         contentDescription = "Clear",
                         tint = Grey100

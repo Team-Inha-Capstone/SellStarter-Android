@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.presentation.common.component.chip.ChipGroup
 import com.inha.sellstarter_android.presentation.model.ChipState
@@ -46,7 +47,9 @@ fun SoldOutFilterChips(
                 colors = FilterChipDefaults.filterChipColors(
                     selectedContainerColor = selectedColor,
                     containerColor = unSelectedColor
-                )
+                ),
+                modifier = Modifier
+                    .testTag("FilterChip_$index")
             )
         }
     }

@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,12 +32,12 @@ fun EmptyScreen(
     emptyTextColor: Color = Grey100,
     @DrawableRes
     emptyIcon: Int = R.drawable.ic_empty_box,
-    modifier: Modifier = Modifier.fillMaxSize(),
+    modifier: Modifier = Modifier
+        .fillMaxSize(),
 ) {
-
-
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .testTag("Empty"),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
