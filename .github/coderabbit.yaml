@@ -1,0 +1,30 @@
+reviewer: "code-review-bot"
+language: "ko-KR"
+frameworks:
+  - "Android"
+  - "Jetpack Compose"
+rules:
+    - name: "Android Best Practices"
+    - name: "Jetpack Compose Guidelines"
+    - name: "Avoid Hardcoded Strings"
+    - name: "Use State Hoisting"
+    - name: "Proper UI recomposition handling"
+    - name: "Use Material3 Components"
+    - name: "Use ViewModel for State Management"
+    - name: "Separation of Concerns"
+    - name: "Use Clean Architecture Principles"
+    - name: "Favor Dependency Injection (e.g., Hilt)"
+    - name: "Write Testable Composables"
+    - name: "Avoid Logic in UI Layer"
+    - name: "Use Fake/Mockable Interfaces for Testing"
+    - name: "Use Repository Pattern"
+    - name: "Use Unidirectional Data Flow"
+style: "concise"
+reviews:
+  review_status: true
+  profile: "chill"
+  auto_review:
+    enabled: true
+    drafts: false
+chat:
+  auto_reply: true
