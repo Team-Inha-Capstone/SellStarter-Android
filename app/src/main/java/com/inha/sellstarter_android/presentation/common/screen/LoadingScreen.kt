@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.ui.theme.AppTypography
@@ -28,7 +29,9 @@ fun LoadingScreen(
 ) {
 
     Column(
-        modifier = modifier.background(Grey0),
+        modifier = modifier
+            .background(Grey0)
+            .testTag("Loading"),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

@@ -7,12 +7,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation.Companion.keyboardOptions
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter_android.ui.theme.Grey100
@@ -28,11 +32,16 @@ fun DefaultTextField(
     singleLine: Boolean,
     borderColor: Color,
     placeholder: String = "",
+    keyboardType: KeyboardType = KeyboardType.Text,
+    filter: (String) -> String = { it },
     modifier: Modifier
 ) {
     BasicTextField(
         value = value,
-        onValueChange = onValueChange,
+        onValueChange = { new ->
+            val filtered = filter(new)
+            onValueChange(filtered)
+        },
         textStyle = innerTextFieldStyle,
         singleLine = singleLine,
         decorationBox = { innerTextField ->
@@ -50,6 +59,9 @@ fun DefaultTextField(
                 innerTextField()
             }
         },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType,
+        ),
         modifier = modifier
             .border(
                 width = 1.dp,

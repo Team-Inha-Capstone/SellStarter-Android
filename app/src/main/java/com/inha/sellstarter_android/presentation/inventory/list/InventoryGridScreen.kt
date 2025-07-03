@@ -82,7 +82,6 @@ fun InventoryGridScreen(
         TitleScreen(
             title = "스토어 재고 확인",
             description = "스토어 내 재고를 한눈에 파악하세요.",
-            modifier = Modifier.testTag("Title")
         )
 
         Spacer(
@@ -122,17 +121,15 @@ fun InventoryGridScreen(
                     loadingText = "재고 정보를 가져오고 있습니다.",
                     modifier = Modifier
                         .fillMaxSize()
-                        .testTag("Loading")
                 )
             }
 
             is UiState.Success -> {
                 if (state.data.inventories.isEmpty()) {
                     EmptyScreen(
-                        emptyText = "검색한 재고가 없습니다.",
+                        emptyText = "재고가 존재하지 않습니다.",
                         modifier = Modifier
                             .fillMaxSize()
-                            .testTag("Empty")
                     )
                 } else {
                     LazyVerticalGrid(

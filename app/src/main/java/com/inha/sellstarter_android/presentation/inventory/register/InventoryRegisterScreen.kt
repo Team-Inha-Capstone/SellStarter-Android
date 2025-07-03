@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -28,6 +29,7 @@ import com.inha.sellstarter_android.presentation.common.screen.TitleScreen
 import com.inha.sellstarter_android.presentation.inventory.InventoryViewModel
 import com.inha.sellstarter_android.ui.theme.Grey0
 import com.inha.sellstarter_android.ui.theme.Purple200
+import com.inha.sellstarter_android.ui.theme.SellStarterAndroidTheme
 import com.inha.sellstarter_android.util.barcode.BarcodeUtils
 
 @Composable
@@ -46,9 +48,11 @@ fun InventoryRegisterScreen(
         onResult = { uri -> if (uri != null) imageUri = uri }
     )
 
-    Column(modifier = modifier
-        .fillMaxSize()
-        .background(Grey0)) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Grey0)
+    ) {
 
         TitleScreen(
             title = "재고 등록하기",
@@ -91,6 +95,7 @@ fun InventoryRegisterScreen(
                 .fillMaxWidth()
                 .padding(24.dp)
                 .height(55.dp)
+                .testTag("RegisterButton")
         )
     }
 }
@@ -98,6 +103,10 @@ fun InventoryRegisterScreen(
 @Preview(showBackground = true)
 @Composable
 fun PreviewInventoryRegisterScreen() {
-
-
+    SellStarterAndroidTheme {
+        InventoryRegisterScreen(
+            onRegister = { dto, uri ->
+            }
+        )
+    }
 }
