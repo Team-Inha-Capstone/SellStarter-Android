@@ -1,4 +1,4 @@
-package com.inha.sellstarter.ui.inventory
+package com.inha.sellstarter.ui.inventory.data
 
 import android.net.Uri
 import androidx.compose.ui.Modifier
@@ -35,9 +35,6 @@ object InventoryRegisterTestData {
         }
     }
 
-    /**
-     * InventoryForm 만 단독으로 세팅하는 헬퍼
-     */
     fun setInventoryForm(
         rule: ComposeContentTestRule,
         name: String = "",

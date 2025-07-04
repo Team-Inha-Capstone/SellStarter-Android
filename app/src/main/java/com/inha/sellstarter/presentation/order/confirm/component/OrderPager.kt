@@ -5,6 +5,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import com.inha.sellstarter.domain.model.OrderListPage
 import com.inha.sellstarter.domain.model.OrderSummary
 import com.inha.sellstarter.presentation.common.screen.ErrorScreen
@@ -31,7 +32,9 @@ fun OrderPager(
 ) {
     HorizontalPager(
         state = pagerState,
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag("OrderPager"),
     ) { page ->
         when (page) {
             0 -> { // 신규 주문
@@ -58,8 +61,6 @@ fun OrderPager(
                             onItemSelect = onItemSelect,
                             onSelectAll = { onSelectAll(state.data.orders) },
                             onOrderItemClick = onOrderItemClick,
-                            extraBottomAction = {
-                            },
                         )
                 }
             }
@@ -88,8 +89,6 @@ fun OrderPager(
                             onItemSelect = onItemSelect,
                             onSelectAll = { onSelectAll(state.data.orders) },
                             onOrderItemClick = onOrderItemClick,
-                            extraBottomAction = {
-                            },
                         )
                 }
             }

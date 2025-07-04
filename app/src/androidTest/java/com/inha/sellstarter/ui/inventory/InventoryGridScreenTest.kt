@@ -14,6 +14,7 @@ import androidx.compose.ui.test.performTextInput
 import com.inha.sellstarter.domain.model.InventoryListPage
 import com.inha.sellstarter.domain.model.InventorySummary
 import com.inha.sellstarter.ui.CommonTestData
+import com.inha.sellstarter.ui.inventory.data.InventoryGridTestData
 import com.inha.sellstarter.util.base.UiState
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue

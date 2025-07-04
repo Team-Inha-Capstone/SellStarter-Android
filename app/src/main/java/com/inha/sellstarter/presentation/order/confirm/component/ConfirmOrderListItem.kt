@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter.domain.model.OrderSummary
@@ -31,11 +32,12 @@ fun OrderListItem(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .clickable(onClick = onClick)
-                .padding(vertical = 12.dp),
+        Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .clickable(onClick = onClick)
+            .padding(vertical = 12.dp)
+            .testTag("OrderItem_${order.orderId}")
     ) {
         Spacer(modifier = Modifier.size(12.dp))
 
@@ -49,9 +51,9 @@ fun OrderListItem(
 
         Column(
             modifier =
-                Modifier
-                    .weight(1f)
-                    .padding(end = 8.dp),
+            Modifier
+                .weight(1f)
+                .padding(end = 8.dp),
         ) {
             Text(
                 text = order.inventoryItem ?: "",

@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter.R
 import com.inha.sellstarter.domain.model.OrderSummary
@@ -34,17 +35,13 @@ fun OrderPageContent(
     onItemSelect: (String) -> Unit,
     onSelectAll: () -> Unit,
     onOrderItemClick: (String, Boolean) -> Unit,
-    extraBottomAction: @Composable () -> Unit = {},
 ) {
     Column(
         modifier =
-            Modifier
-                .fillMaxSize(),
+        Modifier
+            .fillMaxSize()
+            .testTag("OrderPageContent"),
     ) {
-        // 전체 선택 및 액션 버튼
-
-        extraBottomAction()
-
         val listState = rememberLazyListState()
 
         if (orders.isEmpty()) {
@@ -76,11 +73,11 @@ fun OrderPageContent(
             totalPages = totalPages,
             onPageSelected = onLoadPage,
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .weight(0.1f)
-                    .padding(vertical = 4.dp),
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .weight(0.1f)
+                .padding(vertical = 4.dp),
         )
 
         Spacer(modifier = Modifier.height(16.dp))

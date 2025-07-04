@@ -1,4 +1,4 @@
-package com.inha.sellstarter.ui.inventory
+package com.inha.sellstarter.ui.inventory.data
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
@@ -8,7 +8,6 @@ import com.inha.sellstarter.presentation.inventory.list.InventoryGridScreen
 import com.inha.sellstarter.util.base.UiState
 
 object InventoryGridTestData {
-    // — 테스트용 태그 상수
     const val TAG_ROOT = "InventoryGridRoot"
     const val TAG_SEARCH_BAR = "SearchBar"
     const val TAG_SEARCH_INPUT = "SearchInput"
@@ -18,7 +17,6 @@ object InventoryGridTestData {
 
     fun itemTag(id: String) = "Item_$id"
 
-    // — 더미 데이터 리스트
     val dummyList =
         listOf(
             InventorySummary("1", "상품 A", 10, false, "옵션 1", null),
@@ -26,7 +24,6 @@ object InventoryGridTestData {
             InventorySummary("3", "상품 C", 5, false, "옵션 3", null),
         )
 
-    // — 더미 페이징 페이지
     val dummyPage =
         InventoryListPage(
             inventories = dummyList,
