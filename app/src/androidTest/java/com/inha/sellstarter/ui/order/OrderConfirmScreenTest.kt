@@ -6,6 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.inha.sellstarter.domain.model.OrderListPage
 import com.inha.sellstarter.ui.order.data.OrderConfirmTestData
 import com.inha.sellstarter.util.base.UiState
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,10 +31,8 @@ class OrderConfirmScreenTest {
 
     @Test
     fun 신규_주문_탭이_기본_선택되어_있음이_표시된다() {
-        // given
         OrderConfirmTestData.setOrderConfirmScreen(composeTestRule)
 
-        // then
         composeTestRule
             .onNodeWithTag(OrderConfirmTestData.TAG_NEW_TAB)
             .assertIsSelected()
@@ -45,30 +44,23 @@ class OrderConfirmScreenTest {
 
     @Test
     fun 피킹_완료_탭_클릭시_onTabSelected_호출된다() {
-        // given
         var clickedIndex = -1
         OrderConfirmTestData.setOrderConfirmScreen(
             composeTestRule,
             onTabSelected = { clickedIndex = it }
         )
 
-        // when
         composeTestRule
             .onNodeWithTag(OrderConfirmTestData.TAG_DONE_TAB)
             .performClick()
 
-        // then
-        assert(clickedIndex == 1) {
-            "expected onTabSelected(1), clicked $clickedIndex"
-        }
+        assertEquals(1, clickedIndex)
     }
 
     @Test
     fun 주문_목록이_정상적으로_표시된다() {
-        // given
         OrderConfirmTestData.setOrderConfirmScreen(composeTestRule)
 
-        // then
         OrderConfirmTestData.dummyOrders.forEach { order ->
             composeTestRule
                 .onNodeWithTag(OrderConfirmTestData.itemTag(order.orderId))
@@ -79,7 +71,6 @@ class OrderConfirmScreenTest {
 
     @Test
     fun 주문_아이템_클릭시_onOrderItemClick_호출된다() {
-        // given
         var clickedId: String? = null
         OrderConfirmTestData.setOrderConfirmScreen(
             composeTestRule,
@@ -87,61 +78,57 @@ class OrderConfirmScreenTest {
         )
         val targetId = OrderConfirmTestData.dummyOrders.first().orderId
 
-        // when
         composeTestRule
             .onNodeWithTag(OrderConfirmTestData.itemTag(targetId))
             .performClick()
 
-        // then
-        assert(clickedId == targetId) {
-            "expected click id=$targetId, clicked $clickedId"
-        }
+        assertEquals(targetId, clickedId)
     }
 
     @Test
     fun 주문목록_없을_때_빈화면이_표시된다() {
-        // given
         val emptyPage = OrderListPage(
-            orders = emptyList(),
-            page = 1,
-            size = 0,
+            orders        = emptyList(),
+            page          = 1,
+            size          = 0,
             totalElements = 0,
-            totalPages = 1
+            totalPages    = 1
         )
 
-        // when
         OrderConfirmTestData.setOrderConfirmScreen(
             composeTestRule,
-            newOrdersState = UiState.Success(emptyPage),
-            completedPickingsState = UiState.Success(emptyPage)
+            newOrdersState          = UiState.Success(emptyPage),
+            completedPickingsState  = UiState.Success(emptyPage)
         )
 
-        // then
         composeTestRule
             .onNodeWithText("처리할 주문이 존재하지 않습니다.")
             .assertExists()
     }
+
     @Test
     fun 페이지네이션_숫자_버튼_클릭시_onLoadNew_호출된다() {
         // given
         var selectedPage = -1
         OrderConfirmTestData.setOrderConfirmScreen(
             composeTestRule,
-            newPage       = 1,
+            newPage = 1,
             newTotalPages = 3,
-            onLoadNew     = { selectedPage = it }
+            onLoadNew = { selectedPage = it }
         )
+
         // when: 0번째 페이지 버튼 클릭
-        composeTestRule.onNodeWithTag(OrderConfirmTestData.pageTag(0))
+        composeTestRule
+            .onNodeWithTag(OrderConfirmTestData.pageTag(0))
             .performClick()
         // then
-        assert(selectedPage == 0) { "expected load page=0, but was $selectedPage" }
+        assertEquals(0, selectedPage)
 
         // when: 1번째 페이지 버튼 클릭
-        composeTestRule.onNodeWithTag(OrderConfirmTestData.pageTag(1))
+        composeTestRule
+            .onNodeWithTag(OrderConfirmTestData.pageTag(1))
             .performClick()
         // then
-        assert(selectedPage == 1) { "expected load page=1, but was $selectedPage" }
+        assertEquals(1, selectedPage)
     }
-
 }
