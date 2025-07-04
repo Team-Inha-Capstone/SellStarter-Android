@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.inha.sellstarter.domain.model.OrderListPage
@@ -41,7 +42,8 @@ fun OrderConfirmScreen(
         modifier =
             modifier
                 .fillMaxSize()
-                .background(Grey0),
+                .background(Grey0)
+                .testTag("OrderConfirmRoot"),
     ) {
         TitleScreen(
             title = "주문 확인",
@@ -82,5 +84,6 @@ fun OrderConfirmScreen(
 @Composable
 fun PreviewOrderConfirmScreen() {
     SellStarterAndroidTheme {
+
     }
 }

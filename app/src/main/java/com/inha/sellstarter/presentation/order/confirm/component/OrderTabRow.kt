@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import com.inha.sellstarter.ui.theme.Grey0
 import com.inha.sellstarter.ui.theme.Grey100
 import com.inha.sellstarter.ui.theme.Purple200
@@ -34,6 +35,13 @@ fun OrderTabRow(
                         color = if (selectedIndex == index) Purple200 else Grey100,
                     )
                 },
+                modifier = Modifier.testTag(
+                    if (index == 0)
+                        "NewOrderTab"
+                    else
+                        "DoneOrderTab"
+                )
+
             )
         }
     }
