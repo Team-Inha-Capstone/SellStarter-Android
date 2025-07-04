@@ -1,0 +1,40 @@
+package com.inha.sellstarter.data.repository
+
+import com.inha.sellstarter.data.datasource.remote.MyPageDataSource
+import com.inha.sellstarter.data.mapper.toDomain
+import com.inha.sellstarter.data.model.request.mypage.UserApiDeleteRequestDto
+import com.inha.sellstarter.data.model.request.mypage.UserApiRequestDto
+import com.inha.sellstarter.data.model.request.mypage.UserApiUpdateRequest
+import com.inha.sellstarter.domain.model.UserInfo
+import com.inha.sellstarter.domain.repository.MyPageRepository
+import javax.inject.Inject
+
+class MyPageRepositoryImpl
+    @Inject
+    constructor(
+        private val myPageDataSource: MyPageDataSource,
+    ) : MyPageRepository {
+        override suspend fun loadUserDetail(): Result<UserInfo> {
+            return runCatching {
+                myPageDataSource.loadUserDetail().data.toDomain()
+            }
+        }
+
+        override suspend fun removeStoreApiKey(userApiDeleteRequestDto: UserApiDeleteRequestDto): Result<UserInfo> {
+            return runCatching {
+                myPageDataSource.removeUserApi(userApiDeleteRequestDto).data.toDomain()
+            }
+        }
+
+        override suspend fun updateStoreApiKey(userApiUpdateRequest: UserApiUpdateRequest): Result<UserInfo> {
+            return runCatching {
+                myPageDataSource.updateUserApi(userApiUpdateRequest).data.toDomain()
+            }
+        }
+
+        override suspend fun registerStoreApiKey(userApiRequestDto: UserApiRequestDto): Result<UserInfo> {
+            return runCatching {
+                myPageDataSource.registerUserApi(userApiRequestDto).data.toDomain()
+            }
+        }
+    }

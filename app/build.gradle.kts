@@ -9,24 +9,24 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
     id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
-val localProperties = Properties().apply {
-    load(rootProject.file("local.properties").inputStream())
-}
-
+val localProperties =
+    Properties().apply {
+        load(rootProject.file("local.properties").inputStream())
+    }
 
 android {
-    namespace = "com.inha.sellstarter_android"
+    namespace = "com.inha.sellstarter"
     compileSdk = 35
 
     buildFeatures {
         buildConfig = true
     }
 
-
     defaultConfig {
-        applicationId = "com.inha.sellstarter_android"
+        applicationId = "com.inha.sellstarter"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -35,14 +35,13 @@ android {
         buildConfigField(
             "String",
             "SPRING_API_BASE_URL",
-            "\"${localProperties.getProperty("SPRING_API_BASE_URL")}\""
+            "\"${localProperties.getProperty("SPRING_API_BASE_URL")}\"",
         )
         buildConfigField(
             "String",
             "SUBSCRIPTION_WEB_URL",
-            "\"${localProperties.getProperty("SUBSCRIPTION_WEB_URL")}\""
+            "\"${localProperties.getProperty("SUBSCRIPTION_WEB_URL")}\"",
         )
-
 
         ndk {
             abiFilters += listOf("armeabi-v7a", "arm64-v8a")
@@ -58,7 +57,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -138,10 +137,10 @@ dependencies {
     // coil
     implementation(libs.coil.compose)
 
-    //zxing
+    // zxing
     implementation(libs.bundles.zxing)
 
-    //DataStore
+    // DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // moshi
@@ -150,20 +149,27 @@ dependencies {
     // vico
     implementation(libs.bundles.vico)
 
-    //lottie
+    // lottie
     implementation(libs.lottie)
 
     // FCM
     implementation("com.google.firebase:firebase-messaging:23.1.2")
 
     testImplementation(libs.bundles.test)
-    kaptTest           (libs.dagger.hilt.compiler)
+    kaptTest(libs.dagger.hilt.compiler)
 
     androidTestImplementation(libs.bundles.android.test)
-    kaptTest           (libs.dagger.hilt.compiler)
-    debugImplementation      (libs.androidx.ui.test.manifest)
-
+    kaptTest(libs.dagger.hilt.compiler)
+    debugImplementation(libs.androidx.ui.test.manifest)
 
     // implementation("com.google.android.filament:filament-android:1.33.1")
     // implementation("com.google.android.filament:gltfio-android:1.33.1")
+}
+
+ktlint {
+    android = true
+    debug = true
+    coloredOutput = true
+    verbose = true
+    outputToConsole = true
 }
