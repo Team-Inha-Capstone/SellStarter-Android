@@ -13,7 +13,7 @@ import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performTextInput
 import com.inha.sellstarter.domain.model.InventoryListPage
 import com.inha.sellstarter.domain.model.InventorySummary
-import com.inha.sellstarter.ui.order.data.CommonTestData
+import com.inha.sellstarter.ui.CommonTestData
 import com.inha.sellstarter.ui.inventory.data.InventoryGridTestData
 import com.inha.sellstarter.util.base.UiState
 import junit.framework.TestCase.assertEquals
