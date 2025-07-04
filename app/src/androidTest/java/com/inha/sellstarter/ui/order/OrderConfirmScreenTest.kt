@@ -22,6 +22,7 @@ class OrderConfirmScreenTest {
      * 5. 주문목록이 없을 때 빈 화면이 표시되는지 검증
      * 6. Loading 상태일 때 로딩 UI가 표시되는지 검증
      * 7. Failure 상태일 때 에러 UI가 표시되는지 검증
+     * 8. 각 페이지에 맞는 페이지 나오는지 검증
      */
 
     @get:Rule
@@ -120,4 +121,27 @@ class OrderConfirmScreenTest {
             .onNodeWithText("처리할 주문이 존재하지 않습니다.")
             .assertExists()
     }
+    @Test
+    fun 페이지네이션_숫자_버튼_클릭시_onLoadNew_호출된다() {
+        // given
+        var selectedPage = -1
+        OrderConfirmTestData.setOrderConfirmScreen(
+            composeTestRule,
+            newPage       = 1,
+            newTotalPages = 3,
+            onLoadNew     = { selectedPage = it }
+        )
+        // when: 0번째 페이지 버튼 클릭
+        composeTestRule.onNodeWithTag(OrderConfirmTestData.pageTag(0))
+            .performClick()
+        // then
+        assert(selectedPage == 0) { "expected load page=0, but was $selectedPage" }
+
+        // when: 1번째 페이지 버튼 클릭
+        composeTestRule.onNodeWithTag(OrderConfirmTestData.pageTag(1))
+            .performClick()
+        // then
+        assert(selectedPage == 1) { "expected load page=1, but was $selectedPage" }
+    }
+
 }

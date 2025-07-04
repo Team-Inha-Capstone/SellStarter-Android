@@ -26,6 +26,11 @@ object OrderConfirmTestData {
 
     fun itemTag(orderId: String) = "OrderItem_$orderId"
 
+    const val TAG_PAGINATION_BAR = "PaginationBar"
+    const val TAG_PREV_PAGE      = "PrevPageButton"
+    const val TAG_NEXT_PAGE      = "NextPageButton"
+    fun pageTag(page: Int) = "Page_$page"
+
     private val testChannel = ChannelPlatform.NAVER
 
     val dummyOrders = listOf(
