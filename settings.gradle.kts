@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "SellStarter-Android"
 include(":app")
- 
