@@ -24,7 +24,7 @@ reviews:
   review_status: true
   profile: "chill"
   auto_review:
-    enabled: true
-    drafts: false
+    enabled: true    # 자동 리뷰 기능 켬
+    drafts: false    # 초안(PR draft)은 제외
 chat:
   auto_reply: true
