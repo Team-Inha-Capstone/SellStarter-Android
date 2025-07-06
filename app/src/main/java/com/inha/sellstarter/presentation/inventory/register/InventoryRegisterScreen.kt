@@ -28,26 +28,25 @@ import com.inha.sellstarter.util.barcode.BarcodeUtils
 
 @Composable
 fun InventoryRegisterScreen(
+    name: String,
+    onNameChange: (String) -> Unit,
+    count: String,
+    onCountChange: (String) -> Unit,
+    location: String,
+    onLocationChange: (String) -> Unit,
+    expiration: String,
+    onExpirationChange: (String) -> Unit,
+    option: String,
+    onOptionChange: (String) -> Unit,
+    imageUri: Uri?,
+    onImageClick: () -> Unit,
+    onRegister: () -> Unit,
     modifier: Modifier = Modifier,
-    onRegister: (InventoryCreateRequestDto, Uri?) -> Unit,
 ) {
-    var name by remember { mutableStateOf("") }
-    var count by remember { mutableStateOf("") }
-    var location by remember { mutableStateOf("") }
-    var expiration by remember { mutableStateOf("") }
-    var option by remember { mutableStateOf("") }
-    var imageUri by remember { mutableStateOf<Uri?>(null) }
-    val launcher =
-        rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.GetContent(),
-            onResult = { uri -> if (uri != null) imageUri = uri },
-        )
-
     Column(
-        modifier =
-            modifier
-                .fillMaxSize()
-                .background(Grey0),
+        modifier = modifier
+            .fillMaxSize()
+            .background(Grey0)
     ) {
         TitleScreen(
             title = "재고 등록하기",
@@ -56,17 +55,17 @@ fun InventoryRegisterScreen(
 
         InventoryForm(
             name = name,
-            onNameChange = { name = it },
+            onNameChange = onNameChange,
             count = count,
-            onCountChange = { count = it },
+            onCountChange = onCountChange,
             location = location,
-            onLocationChange = { location = it },
+            onLocationChange = onLocationChange,
             option = option,
-            onOptionChange = { option = it },
+            onOptionChange = onOptionChange,
             expiration = expiration,
-            onExpirationChange = { expiration = it },
+            onExpirationChange = onExpirationChange,
             imageUri = imageUri,
-            onImageClick = { launcher.launch("image/*") },
+            onImageClick = onImageClick,
             modifier = Modifier.weight(1f),
         )
 
@@ -75,24 +74,11 @@ fun InventoryRegisterScreen(
             buttonBackgroundColor = Purple200,
             fontColor = Grey0,
             enabled = name.isNotBlank() && count.isNotBlank() && location.isNotBlank(),
-            onClick = {
-                val dto =
-                    InventoryCreateRequestDto(
-                        inventoryName = name,
-                        inventoryCount = count.toIntOrNull() ?: 0,
-                        inventoryLocation = location,
-                        expiration = expiration,
-                        inventoryOption = option,
-                        barcodeId = BarcodeUtils.generateBarcodeId(),
-                    )
-                onRegister(dto, imageUri)
-            },
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp)
-                    .height(55.dp)
-                    .testTag("RegisterButton"),
+            onClick = onRegister,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp)
+                .height(55.dp)
         )
     }
 }
@@ -102,8 +88,20 @@ fun InventoryRegisterScreen(
 fun PreviewInventoryRegisterScreen() {
     SellStarterAndroidTheme {
         InventoryRegisterScreen(
-            onRegister = { dto, uri ->
-            },
+            name = "사과",
+            onNameChange = {},
+            count = "10",
+            onCountChange = {},
+            location = "냉장고",
+            onLocationChange = {},
+            expiration = "2025-12-31",
+            onExpirationChange = {},
+            option = "유기농",
+            onOptionChange = {},
+            imageUri = null,
+            onImageClick = {},
+            onRegister = {},
+            modifier = Modifier
         )
     }
 }

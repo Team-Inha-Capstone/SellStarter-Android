@@ -85,9 +85,9 @@ class InventoryRegisterScreenTest {
     fun 이미지_선택_클릭_시_onImageClick_호출된다() {
         var clicked = false
 
-        InventoryRegisterTestData.setInventoryForm(
+        InventoryRegisterTestData.setInventoryRegisterScreen(
             rule = composeTestRule,
-            onImageClick = { clicked = true },
+            onImageClick = { clicked = true }
         )
 
         composeTestRule
