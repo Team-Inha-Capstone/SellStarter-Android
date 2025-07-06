@@ -25,25 +25,7 @@ object InventoryRegisterTestData {
         expiration: String = "",
         imageUri: Uri? = null,
         onImageClick: () -> Unit = {},
-        onRegister: (InventoryCreateRequestDto, Uri?) -> Unit = { _, _ -> },
-    ) {
-        rule.setContent {
-            InventoryRegisterScreen(
-                modifier = Modifier,
-                onRegister = onRegister,
-            )
-        }
-    }
-
-    fun setInventoryForm(
-        rule: ComposeContentTestRule,
-        name: String = "",
-        count: String = "",
-        location: String = "",
-        option: String = "",
-        expiration: String = "",
-        imageUri: Uri? = null,
-        onImageClick: () -> Unit = {},
+        onRegister: () -> Unit = {},
         onNameChange: (String) -> Unit = {},
         onCountChange: (String) -> Unit = {},
         onLocationChange: (String) -> Unit = {},
@@ -51,7 +33,7 @@ object InventoryRegisterTestData {
         onExpirationChange: (String) -> Unit = {},
     ) {
         rule.setContent {
-            InventoryForm(
+            InventoryRegisterScreen(
                 name = name,
                 onNameChange = onNameChange,
                 count = count,
@@ -64,6 +46,7 @@ object InventoryRegisterTestData {
                 onExpirationChange = onExpirationChange,
                 imageUri = imageUri,
                 onImageClick = onImageClick,
+                onRegister = onRegister,
                 modifier = Modifier,
             )
         }
