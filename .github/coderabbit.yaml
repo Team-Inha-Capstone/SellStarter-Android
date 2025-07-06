@@ -4,27 +4,47 @@ frameworks:
   - "Android"
   - "Jetpack Compose"
 rules:
-    - name: "Android Best Practices"
-    - name: "Jetpack Compose Guidelines"
-    - name: "Avoid Hardcoded Strings"
-    - name: "Use State Hoisting"
-    - name: "Proper UI recomposition handling"
-    - name: "Use Material3 Components"
-    - name: "Use ViewModel for State Management"
-    - name: "Separation of Concerns"
-    - name: "Use Clean Architecture Principles"
-    - name: "Favor Dependency Injection (e.g., Hilt)"
-    - name: "Write Testable Composables"
-    - name: "Avoid Logic in UI Layer"
-    - name: "Use Fake/Mockable Interfaces for Testing"
-    - name: "Use Repository Pattern"
-    - name: "Use Unidirectional Data Flow"
+  - name: "Android Best Practices"
+    description: "안드로이드 개발 모범 사례 준수"
+  - name: "Jetpack Compose Guidelines"
+    description: "Compose UI 가이드라인 및 성능 최적화"
+  - name: "Avoid Hardcoded Strings"
+    description: "하드코딩된 문자열 사용 금지, strings.xml 사용 권장"
+  - name: "State Hoisting"
+    description: "상태 끌어올리기 패턴 사용"
+  - name: "Proper UI recomposition handling"
+    description: "불필요한 리컴포지션 방지 및 성능 최적화"
+  - name: "Material3 Components"
+    description: "Material Design 3 컴포넌트 사용"
+  - name: "ViewModel for State Management"
+    description: "UI 상태 관리를 위한 ViewModel 사용"
+  - name: "Separation of Concerns"
+    description: "관심사 분리 원칙 준수"
+  - name: "Clean Architecture Principles"
+    description: "클린 아키텍처 원칙 적용"
+  - name: "Dependency Injection"
+    description: "의존성 주입 사용 (Hilt 권장)"
+  - name: "Testable Composables"
+    description: "테스트 가능한 컴포넌트 작성"
+  - name: "Logic Separation"
+    description: "UI 레이어에서 비즈니스 로직 분리"
+  - name: "Repository Pattern"
+    description: "레포지토리 패턴 사용"
+  - name: "Unidirectional Data Flow"
+    description: "단방향 데이터 플로우 패턴 준수"
+
 style: "concise"
+tone: "constructive"
+
 reviews:
   review_status: true
   profile: "chill"
+  request_changes: "auto"
+  provide_feedback: true
   auto_review:
-    enabled: true    # 자동 리뷰 기능 켬
-    drafts: false    # 초안(PR draft)은 제외
+    enabled: true
+    drafts: false
+    ignore_keyword: "ignore-review"
+  
 chat:
   auto_reply: true
