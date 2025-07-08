@@ -69,7 +69,7 @@
 - `JUnit5`과 `MockK`로 재고·주문 UseCase 레이어의 핵심 비즈니스 로직 및 예외 시나리오를 단위 테스트로 검증하고, CI 파이프라인 내 테스트 자동화 환경 구축하여 배포 안정성 갖추고자 함.
 - `ComposeTestRule`을 통해 재고 등록·리스트 조회·상세 진입 등 주요 UI 시나리오를 테스트하고, QA 검증으로 사용자 경험 안정성 확보
 
-### 🔗[리팩토링을 위한 MVI 패턴 학습]("https://hyeonlog-developer.tistory.com/217")
+### [🔗리팩토링을 위한 MVI 패턴 학습](https://hyeonlog-developer.tistory.com/217)
 
 <div id="5"></div>
 
