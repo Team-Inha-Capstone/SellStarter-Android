@@ -76,13 +76,13 @@
 ## 안드로이드 아키텍처 설계
 ### 디자인 시스템
 <img
-  src="https://github.com/user-attachments/assets/220ad188-99ee-48ff-88dc-9a604d947784"
+  src="https://github.com/user-attachments/assets/be37ca26-67f6-411f-bcfb-fe57b46ae31d"
   width="800"
 />
 
 ### 아키텍처
 <img
-  src="https://github.com/user-attachments/assets/43d59802-3b81-4aec-855e-f08be1dad0fe"
+  src="https://github.com/user-attachments/assets/15fecd5b-2963-41bf-bf56-b157ca338170"
   width="800"
 />
 
