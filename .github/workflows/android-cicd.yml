@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - develop
+    paths:
+      - 'app/**'
+      - 'src/**'
+      - 'build.gradle'
+      - 'settings.gradle'
+      - 'gradle/**'
 
 jobs:
   build-and-test:
