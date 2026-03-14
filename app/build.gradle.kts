@@ -141,7 +141,7 @@ dependencies {
     implementation(libs.bundles.zxing)
 
     // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.2.1")
 
     // moshi
     implementation(libs.bundles.moshi)
